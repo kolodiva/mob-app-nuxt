@@ -9,7 +9,7 @@
 <script>
 export default {
   beforeCreate() {
-    this.$store.commit('setHeaderName', 'Наши Герои')
+    this.$store.commit('setHeaderName', 'Герои нашего двора.')
   },
 }
 </script>
