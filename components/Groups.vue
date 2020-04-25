@@ -1,0 +1,75 @@
+<template>
+  <div class="mt-5">
+    <v-row>
+      <v-col cols="12" sm="6" offset-sm="3">
+        <v-card>
+          <v-container fluid style="height: 100vh;">
+            <v-row>
+              <v-col
+                v-for="pos of nomenklators"
+                :key="pos.id"
+                class="d-flex child-flex"
+                cols="4"
+              >
+                <n-link
+                  :to="`${
+                    pos.itgroup
+                      ? pos.guid
+                      : pos.parentguid + '?itemcard=' + pos.synonym
+                  }`"
+                >
+                  <v-card flat tile class="d-flex">
+                    <v-img
+                      :src="pos.guid_picture"
+                      :lazy-src="`https://picsum.photos/10/6?image=${
+                        1 * 5 + 10
+                      }`"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    >
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="fill-height ma-0"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                  </v-card>
+                </n-link>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <!-- <winOverlay /> -->
+  </div>
+</template>
+<script>
+// const consola = require('consola')
+// import winOverlay from '@/components/overlay.vue'
+export default {
+  props: {
+    nomenklators: {
+      type: Array,
+      default: () => {
+        return []
+      },
+    },
+  },
+  // components: {
+  //   winOverlay,
+  // },
+  data: () => ({}),
+  beforeCreate() {
+    this.$store.commit('setHeaderName', 'Комплект')
+  },
+}
+</script>
