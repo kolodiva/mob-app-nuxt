@@ -12,7 +12,7 @@ async function start() {
   const nuxt = new Nuxt(config)
 
   if (process.env.NODE_ENV == 'production') {
-    host = 'localhost'; port = 4000;
+    host = 'localhost'; port = 6000;
   } else {
     //const { host, port } = nuxt.options.server;
     host = 'localhost'; port = 3000;
