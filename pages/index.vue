@@ -18,9 +18,7 @@
                   <v-card>
                     <v-img
                       :src="pos.guid_picture"
-                      :lazy-src="`https://picsum.photos/10/6?image=${
-                        1 * 5 + 10
-                      }`"
+                      :lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                       aspect-ratio="1"
                       class="grey lighten-2"
                     >

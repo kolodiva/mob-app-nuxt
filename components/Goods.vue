@@ -16,7 +16,7 @@
             <v-avatar class="ma-3" size="100">
               <v-img
                 :src="pos.guid_picture"
-                lazy-src="https://picsum.photos/10/6?image=15"
+                lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
               ></v-img>
             </v-avatar>
           </div>
