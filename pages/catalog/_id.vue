@@ -42,9 +42,11 @@ export default {
       url = `/api/db/${params.id}`
     }
     try {
-      const row = await app.$axios.$get(url)
+      // consola.log(url)
+      let row = await app.$axios.$get(url)
 
       if (row.length === 0) {
+        row = []
         row.push({ id: 1, itgroup: false, name: 'The streets have no name.' })
       }
 

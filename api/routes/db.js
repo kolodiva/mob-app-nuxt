@@ -39,8 +39,94 @@ const { Router } = require('express')
 
   router.get('/db/:id', function(req, res, next) {
     let id = req.params.id
+    //create extension if not exists tablefunc;
+    let sql = `
+    		with price_list_total as (
+
+    			with price_list_with_compl as (
+
+    			select *
+    			from crosstab(
+    			$$select nomenklator_id::text, price_type_id, round(price*coalesce(currencies.value, 1), 2)
+    			from prices
+    			left join currencies on prices.currency_id = currencies.code
+
+    			where nomenklator_id in (
+
+    			select distinct
+    					coalesce(complects.guid_complect, nomenklators.guid) as guid
+
+    				from nomenklators
+
+    			           left join complects on complects.nomenklator_id = nomenklators.guid
+
+    			           where nomenklators.parentguid='${id}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
+
+    			)
+
+    			order by 1$$,
+    			$$ SELECT '000000004' UNION ALL SELECT '000000003' UNION ALL SELECT '000000005'$$
+    			)
+
+    			AS (guid text, price1 numeric, price2 numeric, price3 numeric)
+    			)
+
+    		select
+    			nomenklators.guid,
+
+    			sum(round(coalesce(complects.qty, 1) * pl.price1, 2)) as price1,
+    			sum(round(coalesce(complects.qty, 1) * pl.price2, 2)) as price2,
+    			sum(round(coalesce(complects.qty, 1) * pl.price3, 2)) as price3
+
+    			from nomenklators
+
+    			   left join complects on complects.nomenklator_id = nomenklators.guid
+    		   	   join price_list_with_compl as pl on pl.guid = nomenklators.guid or pl.guid = complects.guid_complect
+
+    		   	   group by nomenklators.guid)
+
+    		select 	nomenklators.guid,
+    		 		nomenklators.parentguid,
+    		        nomenklators.artikul,
+    		        nomenklators.artikul_new,
+    		        nomenklators.name,
+    		        nomenklators.synonym,
+    		        nomenklators.itgroup,
+    		        nomenklators.guid_picture,
+    		        nomenklators.sort_field,
+    		        nomenklators.describe,
+    		        nomenklators.is_complect,
+    		        case when nomenklators.itgroup then '' else coalesce( case when nomenklators.is_complect > 0 then 'компл.' else unit_types.name end, 'нет ед.изм.') end as unit_name,
+
+    			COALESCE(price_list_total.price1, 0.00) as price1,
+    			COALESCE(price_list_total.price2, 0.00) as price2,
+    			COALESCE(price_list_total.price3, 0.00) as price3,
+
+    		    nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title, parentNomenklator.name pName
+
+    			from nomenklators
+           inner join nomenklators parentNomenklator on nomenklators.parentguid = parentNomenklator.guid
+
+    			left join price_list_total on nomenklators.guid = price_list_total.guid
+
+    			left join unit_types on nomenklators.unit_type_id = unit_types.code
+
+    			where nomenklators.parentguid='${id}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
+
+    			ORDER BY  nomenklators.itgroup desc, nomenklators.sort_field, nomenklators.name, nomenklators.artikul
+          `
+    //consola.log( sql );
+    dbpg.query(
+            sql
+        )
+        .then((res1) => {
+          res.json( res1.rows )
+        });
+  })
+  router.get('/db_old1/:id', function(req, res, next) {
+    let id = req.params.id
     let sql = `select t1.*, t2.name pName from nomenklators t1 inner join nomenklators t2 on t1.parentguid=t2.guid where t1.parentguid='${id}' and t1.guid not in ('yandexpagesecret', 'sekretnaya_papka') order by t1.artikul`
-    //console.log( sql );
+  //  console.log( sql );
     dbpg.query(
             sql
         )

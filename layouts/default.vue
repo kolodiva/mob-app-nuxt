@@ -32,8 +32,8 @@
       <v-list nav dense>
         <v-list-item-group active-class="blue--text text--accent-4">
           <n-link
-            v-for="pos of filteredItems"
-            :key="pos.id"
+            v-for="(pos, i) of filteredItems"
+            :key="i"
             :to="pos.path"
             prefetch
             style="text-decoration: none;"
@@ -77,11 +77,11 @@ export default {
     drawer: false,
     offsetTop: 0,
     items: [
-      { id: 1, name: 'Домой', path: '/', show: 1 },
-      { id: 2, name: 'О компании', path: '/about_company', show: 1 },
-      { id: 3, name: 'Контакты', path: '/contacts', show: 1 },
-      { id: 4, name: 'Доска почета', path: '/heroes', show: 0 },
-      { id: 5, name: 'Ком.пред', path: '/compred', show: 0 },
+      { name: 'Домой', path: '/', show: 1 },
+      { name: 'О компании', path: '/about_company', show: 1 },
+      { name: 'Контакты', path: '/contacts', show: 1 },
+      { name: 'Доска почета', path: '/heroes', show: 0 },
+      { name: 'Ком.пред', path: '/compred', show: 0 },
     ],
   }),
   computed: {
