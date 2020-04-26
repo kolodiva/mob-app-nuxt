@@ -21,7 +21,7 @@
                   <v-card>
                     <v-img
                       :src="pos.guid_picture"
-                      :lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
+                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                       aspect-ratio="1"
                       class="grey lighten-2"
                     >
