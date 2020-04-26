@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card>
-          <v-container fluid style="height: 100vh;">
+          <v-container fluid style="min-height: 100vh;">
             <v-row>
               <v-col
                 v-for="pos of nomenklators"
@@ -20,10 +20,11 @@
                 >
                   <v-card>
                     <v-img
+                      eager
                       :src="pos.guid_picture"
-                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                       aspect-ratio="1"
                       class="grey lighten-2"
+                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                     >
                       <template v-slot:placeholder>
                         <v-row

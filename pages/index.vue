@@ -17,10 +17,11 @@
                 >
                   <v-card>
                     <v-img
+                      eager
                       :src="pos.guid_picture"
-                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                       aspect-ratio="1"
                       class="grey lighten-2"
+                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                     >
                       <template v-slot:placeholder>
                         <v-row

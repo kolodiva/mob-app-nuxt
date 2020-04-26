@@ -15,7 +15,10 @@
 
             <v-avatar class="ma-3" size="100">
               <v-img
+                eager
                 :src="pos.guid_picture"
+                aspect-ratio="1"
+                class="grey lighten-2"
                 lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
               ></v-img>
             </v-avatar>
