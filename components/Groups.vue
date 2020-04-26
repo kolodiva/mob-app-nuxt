@@ -9,7 +9,7 @@
                 v-for="pos of nomenklators"
                 :key="pos.id"
                 class="d-flex child-flex"
-                cols="4"
+                cols="6"
               >
                 <n-link
                   :to="`${
@@ -18,7 +18,7 @@
                       : pos.parentguid + '?itemcard=' + pos.synonym
                   }`"
                 >
-                  <v-card flat tile class="d-flex">
+                  <v-card>
                     <v-img
                       :src="pos.guid_picture"
                       :lazy-src="`https://picsum.photos/10/6?image=${
@@ -40,6 +40,14 @@
                         </v-row>
                       </template>
                     </v-img>
+                    <v-card-text class="text--primary pa-2">
+                      <div
+                        class="text-center"
+                        style="height: 45px; overflow: hidden;"
+                      >
+                        {{ pos.name }}
+                      </div>
+                    </v-card-text>
                   </v-card>
                 </n-link>
               </v-col>

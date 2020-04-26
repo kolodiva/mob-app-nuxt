@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-scroll="onScroll">
     <v-app-bar color="blue" dense dark hide-on-scroll fixed>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
@@ -21,7 +21,7 @@
         </template>
 
         <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
+          <v-list-item v-for="n in 0" :key="n" @click="() => {}">
             <v-list-item-title>Option 1{{ n }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -31,58 +31,73 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list nav dense>
         <v-list-item-group active-class="blue--text text--accent-4">
-          <n-link to="/" exact prefetch>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon medium>mdi-home</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title class="title">Домой</v-list-item-title>
-            </v-list-item>
-          </n-link>
-
-          <n-link to="/about_company" prefetch>
+          <n-link
+            v-for="pos of filteredItems"
+            :key="pos.id"
+            :to="pos.path"
+            prefetch
+            style="text-decoration: none;"
+          >
             <v-list-item>
               <v-list-item-icon>
                 <v-icon medium>mdi-account</v-icon>
               </v-list-item-icon>
-              <v-list-item-title class="title">О компании</v-list-item-title>
-            </v-list-item>
-          </n-link>
-          <n-link to="/contacts" prefetch>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon medium>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title class="title">Контакты</v-list-item-title>
-            </v-list-item>
-          </n-link>
-          <n-link to="/heroes" prefetch>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon medium>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title class="title">Доска почета</v-list-item-title>
-            </v-list-item>
-          </n-link>
-          <n-link to="/compred" prefetch>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon medium>mdi-account</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title class="title">Компред</v-list-item-title>
+              <v-list-item-title class="title" style="height: 20;">{{
+                pos.name
+              }}</v-list-item-title>
             </v-list-item>
           </n-link>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <nuxt /> </v-app
-></template>
+    <nuxt />
+
+    <v-fab-transition>
+      <v-btn
+        v-show="showFab"
+        color="blue"
+        ripple
+        dark
+        fab
+        fixed
+        bottom
+        x-small
+        right
+        @click="$vuetify.goTo('#app', { duration: 500, offset: 0 })"
+      >
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
+  </v-app></template
+>
 
 <script>
 export default {
   data: () => ({
     drawer: false,
+    offsetTop: 0,
+    items: [
+      { id: 1, name: 'Домой', path: '/', show: 1 },
+      { id: 2, name: 'О компании', path: '/about_company', show: 1 },
+      { id: 3, name: 'Контакты', path: '/contacts', show: 1 },
+      { id: 4, name: 'Доска почета', path: '/heroes', show: 0 },
+      { id: 5, name: 'Ком.пред', path: '/compred', show: 0 },
+    ],
   }),
+  computed: {
+    filteredItems() {
+      return this.items.filter((pos) => pos.show === 1)
+    },
+    showFab() {
+      return this.offsetTop > 180
+    },
+  },
+  methods: {
+    onScroll() {
+      this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
+      // consola.log(this.offsetTop)
+    },
+  },
   head() {
     return {
       title: 'dottore Vittorio.',
