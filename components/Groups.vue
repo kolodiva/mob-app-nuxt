@@ -19,11 +19,9 @@
                   }`"
                 >
                   <v-card>
+                    <no-ssr>
                     <v-img
-                      :src="`${pos.guid_picture.replace(
-                        'https://newfurnitura.ru/upload/',
-                        ''
-                      )}`"
+                      :src="`${pos.guid_picture.trim()}`"
                       aspect-ratio="1"
                       class="grey lighten-2"
                       contain
@@ -41,6 +39,7 @@
                         </v-row>
                       </template>
                     </v-img>
+                  </no-ssr>
                     <v-card-text class="text--primary pa-2">
                       <div
                         class="text-center"
