@@ -100,7 +100,7 @@ export default {
   },
   head() {
     return {
-      title: 'dottore Vittorio.',
+      title: 'МФ-Комплект',
     }
   },
 }
