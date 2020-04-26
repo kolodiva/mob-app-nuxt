@@ -3,7 +3,13 @@
     <v-app-bar color="blue" dense dark hide-on-scroll fixed>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>МФ {{ $store.state.headerName }}</v-toolbar-title>
+      <v-toolbar-title
+        ><n-link to="/" exact prefetch style="text-decoration: none;"
+          ><span style="color: white;"
+            >МФ {{ $store.state.headerName }}</span
+          ></n-link
+        ></v-toolbar-title
+      >
 
       <v-spacer></v-spacer>
 
@@ -16,7 +22,7 @@
 
         <v-list>
           <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option 111111{{ n }}</v-list-item-title>
+            <v-list-item-title>Option 1{{ n }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -56,6 +62,14 @@
                 <v-icon medium>mdi-account</v-icon>
               </v-list-item-icon>
               <v-list-item-title class="title">Доска почета</v-list-item-title>
+            </v-list-item>
+          </n-link>
+          <n-link to="/compred" prefetch>
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon medium>mdi-account</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title class="title">Компред</v-list-item-title>
             </v-list-item>
           </n-link>
         </v-list-item-group>
