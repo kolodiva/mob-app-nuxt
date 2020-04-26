@@ -18,7 +18,7 @@
                   <v-card>
                     <no-ssr>
                       <v-img
-                        :src="pos.guid_picture"
+                        :src="`${pos.guid_picture.trim()}`"
                         aspect-ratio="1"
                         class="grey lighten-2"
                         contain

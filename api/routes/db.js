@@ -28,7 +28,6 @@ const { Router } = require('express')
 
   router.get('/db', function(req, res, next) {
       //res.json({foo: 1})
-      //replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,
 
       dbpg.query(
             "select * from nomenklators where itgroup and parentguid is null and guid not in ('yandexpagesecret', 'sekretnaya_papka') order by name"
@@ -42,6 +41,7 @@ const { Router } = require('express')
   router.get('/db/:id', function(req, res, next) {
     let id = req.params.id
     //create extension if not exists tablefunc;
+    //replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,      ?qry=123
     let sql = `
     		with price_list_total as (
 
