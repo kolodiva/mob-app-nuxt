@@ -14,13 +14,27 @@
             </div>
 
             <v-avatar class="ma-3" size="100">
-              <v-img
-                eager
-                :src="pos.guid_picture"
-                aspect-ratio="1"
-                class="grey lighten-2"
-                lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
-              ></v-img>
+              <no-ssr>
+                <v-img
+                  :src="pos.guid_picture"
+                  aspect-ratio="1"
+                  class="grey lighten-2"
+                  contain
+                >
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </no-ssr>
             </v-avatar>
           </div>
           <v-data-table
