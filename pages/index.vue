@@ -16,27 +16,28 @@
                   style="text-decoration: none;"
                 >
                   <v-card>
-                    <no-ssr>
-                      <v-img
-                        :src="`${pos.guid_picture.trim()}`"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                        contain
-                      >
-                        <template v-slot:placeholder>
-                          <v-row
-                            class="fill-height ma-0"
-                            align="center"
-                            justify="center"
-                          >
-                            <v-progress-circular
-                              indeterminate
-                              color="grey lighten-5"
-                            ></v-progress-circular>
-                          </v-row>
-                        </template>
-                      </v-img>
-                    </no-ssr>
+                    <v-img
+                      :src="`${pos.guid_picture.replace(
+                        'https://newfurnitura.ru/upload/',
+                        ''
+                      )}`"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                      contain
+                    >
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="fill-height ma-0"
+                          align="center"
+                          justify="center"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
                     <v-card-text class="text--primary pa-2">
                       <div
                         class="text-center"
