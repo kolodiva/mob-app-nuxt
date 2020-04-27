@@ -17,6 +17,7 @@
                       ? pos.guid
                       : pos.parentguid + '?itemcard=' + pos.synonym
                   }`"
+                  style="text-decoration: none;"
                 >
                   <v-card>
                     <v-img
