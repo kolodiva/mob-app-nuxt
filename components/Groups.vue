@@ -25,7 +25,9 @@
                       :src="pos.guid_picture"
                       aspect-ratio="1"
                       class="grey lighten-2"
-                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
+                      lazy-src="https://picsum.photos/500/300?image=15"
+                      contain
+                      height="140"
                     >
                       <template v-slot:placeholder>
                         <v-row
