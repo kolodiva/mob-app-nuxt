@@ -17,7 +17,6 @@
                 >
                   <v-card>
                     <v-img
-                      eager
                       :src="pos.guid_picture"
                       aspect-ratio="1"
                       class="grey lighten-2"
