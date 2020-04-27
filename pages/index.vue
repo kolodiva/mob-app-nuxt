@@ -18,10 +18,9 @@
                   <v-card>
                     <client-only>
                       <v-img
-                        :src="`${pos.guid_picture.trim()}`"
-                        aspect-ratio="1"
+                        :src="pos.guid_picture"
                         class="grey lighten-2"
-                        contain
+                        alt=""
                       >
                         <template v-slot:placeholder>
                           <v-row
@@ -35,8 +34,8 @@
                             ></v-progress-circular>
                           </v-row>
                         </template>
-                      </client-only>
-                    </no-ssr>
+                      </v-img>
+                    </client-only>
                     <v-card-text class="text--primary pa-2">
                       <div
                         class="text-center"
