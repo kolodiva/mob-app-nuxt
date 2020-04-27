@@ -6,8 +6,8 @@
           <v-container fluid>
             <v-row>
               <v-col
-                v-for="pos of nomenklators"
-                :key="pos.id"
+                v-for="(pos, i) of nomenklators"
+                :key="i"
                 class="d-flex child-flex"
                 cols="6"
               >
@@ -77,7 +77,73 @@ export default {
     }
   },
   data: () => ({
-    nomenklators: [],
+    nomenklators: [
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+      {
+        guid: 123456,
+        guid_picture: 'https://picsum.photos/500/300?image=15',
+        name: 'Загружаются данные',
+      },
+    ],
   }),
   beforeCreate() {
     this.$store.commit('setHeaderName', 'Комплект')

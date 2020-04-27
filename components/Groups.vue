@@ -70,7 +70,73 @@ export default {
     nomenklators: {
       type: Array,
       default: () => {
-        return []
+        return [
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+          {
+            guid: 123456,
+            guid_picture: 'https://picsum.photos/500/300?image=15',
+            name: 'Загружаются данные',
+          },
+        ]
       },
     },
   },
