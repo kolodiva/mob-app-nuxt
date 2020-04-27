@@ -16,7 +16,7 @@
                   style="text-decoration: none;"
                 >
                   <v-card>
-                    <no-ssr>
+                    <client-only>
                       <v-img
                         :src="`${pos.guid_picture.trim()}`"
                         aspect-ratio="1"
@@ -35,7 +35,7 @@
                             ></v-progress-circular>
                           </v-row>
                         </template>
-                      </v-img>
+                      </client-only>
                     </no-ssr>
                     <v-card-text class="text--primary pa-2">
                       <div

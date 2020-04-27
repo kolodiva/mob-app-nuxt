@@ -14,7 +14,7 @@
             </div>
 
             <v-avatar class="ma-3" size="100">
-              <no-ssr>
+              <client-only>
                 <v-img
                   :src="`${pos.guid_picture.trim()}`"
                   aspect-ratio="1"
@@ -34,7 +34,7 @@
                     </v-row>
                   </template>
                 </v-img>
-              </no-ssr>
+              </client-only>
             </v-avatar>
           </div>
           <v-data-table

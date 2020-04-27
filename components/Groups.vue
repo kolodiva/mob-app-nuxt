@@ -19,7 +19,7 @@
                   }`"
                 >
                   <v-card>
-                    <no-ssr>
+                    <client-only>
                     <v-img
                       :src="`${pos.guid_picture.trim()}`"
                       aspect-ratio="1"
@@ -39,7 +39,7 @@
                         </v-row>
                       </template>
                     </v-img>
-                  </no-ssr>
+                  </client-only>
                     <v-card-text class="text--primary pa-2">
                       <div
                         class="text-center"
