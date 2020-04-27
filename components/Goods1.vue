@@ -2,31 +2,29 @@
   <div class="mt-5">
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
-        <v-container fluid style="min-height: 100vh;">
-          <v-row>
-            <v-col v-for="pos of nomenklators" :key="pos.id" cols="12">
-              <v-card elevation="3" outlined>
-                <v-list-item three-line>
-                  <v-list-item-content>
-                    <div class="overline mb-4">
-                      <span class="body-2">{{ pos.pname }}</span>
-                    </div>
-                    <v-list-item-title class="headline mb-1"
-                      >Хороший товар
-                    </v-list-item-title>
-                    <v-list-item-subtitle
-                      >{{ '(' + pos.artikul + ') ' + pos.name }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-
-                  <v-list-item-avatar tile size="80" color="grey">
+        <v-card>
+          <v-container fluid style="min-height: 100vh;">
+            <v-row>
+              <v-col
+                v-for="pos of nomenklators"
+                :key="pos.id"
+                class="d-flex child-flex"
+                cols="6"
+              >
+                <n-link
+                  :to="`${
+                    pos.itgroup
+                      ? pos.guid
+                      : pos.parentguid + '?itemcard=' + pos.synonym
+                  }`"
+                >
+                  <v-card>
                     <v-img
+                      eager
                       :src="pos.guid_picture"
-                      :lazy-src="`https://picsum.photos/10/6?image=${
-                        1 * 5 + 10
-                      }`"
                       aspect-ratio="1"
                       class="grey lighten-2"
+                      lazy-src="https://www.newfurnitura.ru/upload/noFoto.jpg"
                     >
                       <template v-slot:placeholder>
                         <v-row
@@ -41,23 +39,20 @@
                         </v-row>
                       </template>
                     </v-img>
-                  </v-list-item-avatar>
-                </v-list-item>
-                <v-card-actions>
-                  <v-btn text>
-                    <a
-                      :href="`/catalog/${
-                        pos.itgroup ? pos.guid : pos.parentguid
-                      }?itemcard=${pos.synonym}`"
-                    >
-                      Узри его скорее...</a
-                    ></v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
+                    <v-card-text class="text--primary pa-2">
+                      <div
+                        class="text-center"
+                        style="height: 45px; overflow: hidden;"
+                      >
+                        {{ pos.name }}
+                      </div>
+                    </v-card-text>
+                  </v-card>
+                </n-link>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
       </v-col>
     </v-row>
 

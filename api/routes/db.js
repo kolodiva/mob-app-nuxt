@@ -41,7 +41,7 @@ const { Router } = require('express')
   router.get('/db/:id', function(req, res, next) {
     let id = req.params.id
     //create extension if not exists tablefunc;
-    //replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,      ?qry=123
+    //replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,
     let sql = `
     		with price_list_total as (
 
@@ -94,7 +94,7 @@ const { Router } = require('express')
     		        nomenklators.name,
     		        nomenklators.synonym,
     		        nomenklators.itgroup,
-    		        nomenklators.guid_picture,
+    		        replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,      
     		        nomenklators.sort_field,
     		        nomenklators.describe,
     		        nomenklators.is_complect,
