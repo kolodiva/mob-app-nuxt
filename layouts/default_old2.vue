@@ -68,24 +68,12 @@
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
     </v-fab-transition>
-    <winOverlay v-if="showOverlay" /> </v-app
-></template>
+  </v-app></template
+>
 
 <script>
-import winOverlay from '@/components/overlay.vue'
-const Cookie = process.client ? require('js-cookie') : undefined
-const inFifteenMinutes = new Date(new Date().getTime() + 50 * 1000)
-Cookie &&
-  Cookie.set('auth', '111111111111111111', { expires: inFifteenMinutes })
-
 export default {
-  components: {
-    winOverlay,
-  },
-  // async asyncData() {},
-
   data: () => ({
-    showOverlay: false,
     drawer: false,
     offsetTop: 0,
     items: [
@@ -107,6 +95,7 @@ export default {
   methods: {
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
+      // consola.log(this.offsetTop)
     },
   },
   head() {

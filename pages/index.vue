@@ -54,16 +54,12 @@
         </v-card>
       </v-col>
     </v-row>
-    <!-- <winOverlay /> -->
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 const consola = require('consola')
-// import winOverlay from '@/components/overlay.vue'
 export default {
-  // components: {
-  //   winOverlay,
-  // },
   async asyncData({ app, params }) {
     // let url = `/api/db/${params.id}`
     const url = '/api/db'
@@ -76,74 +72,9 @@ export default {
     } finally {
     }
   },
+
   data: () => ({
-    nomenklators: [
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-      {
-        guid: 123456,
-        guid_picture: 'https://picsum.photos/500/300?image=15',
-        name: 'Загружаются данные',
-      },
-    ],
+    nomenklators: mapState(['nomenklators']),
   }),
   beforeCreate() {
     this.$store.commit('setHeaderName', 'Комплект')

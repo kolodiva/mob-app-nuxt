@@ -58,11 +58,10 @@
         </v-card>
       </v-col>
     </v-row>
-
-    <!-- <winOverlay /> -->
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 // const consola = require('consola')
 // import winOverlay from '@/components/overlay.vue'
 export default {
@@ -70,73 +69,7 @@ export default {
     nomenklators: {
       type: Array,
       default: () => {
-        return [
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-          {
-            guid: 123456,
-            guid_picture: 'https://picsum.photos/500/300?image=15',
-            name: 'Загружаются данные',
-          },
-        ]
+        return mapState(['nomenklators'])
       },
     },
   },

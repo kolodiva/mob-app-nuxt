@@ -10,7 +10,7 @@ const store = () =>
         {
           id: 1,
           city: 'Москва',
-          phone: '+7 (495) 149-00-02 (многокан.)',
+          phone: '+7 (495) 149-00-02',
           phone_call: '+74951490002',
         },
         {
@@ -51,6 +51,73 @@ const store = () =>
         },
       ],
       headerName: 'Комплект',
+      nomenklators: [
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+        {
+          guid: 123456,
+          guid_picture: 'https://picsum.photos/500/300?image=15',
+          name: 'Загружаются данные',
+        },
+      ],
     },
     mutations: {
       setHeaderName(state, value) {
