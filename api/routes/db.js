@@ -6,7 +6,9 @@ const consola = require('consola')
   let conn_param  = {};
 
   if (process.env.NODE_ENV == 'production') {
-    conn_param = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
+    //conn_param = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
+    conn_param = {'host':'172.17.0.3', 'password':'c2ec57df699966b3afef779a16fa5fff', 'port':'5432'};
+
   } else {
     conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
   }
