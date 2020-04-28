@@ -118,10 +118,14 @@ const store = () =>
           name: 'Загружаются данные',
         },
       ],
+      showOverlay: false,
     },
     mutations: {
       setHeaderName(state, value) {
         state.headerName = value
+      },
+      switchShowOverlay(state) {
+        state.showOverlay = !state.showOverlay
       },
     },
   })

@@ -21,7 +21,7 @@
         </template>
 
         <v-list>
-          <v-list-item @click="showOverlay = !showOverlay">
+          <v-list-item @click="$store.commit('switchShowOverlay')">
             <v-list-item-title>Новости</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -68,7 +68,7 @@
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
     </v-fab-transition>
-    <winOverlay v-if="showOverlay" /> </v-app
+    <winOverlay v-if="$store.state.showOverlay" /> </v-app
 ></template>
 
 <script>
@@ -85,7 +85,6 @@ export default {
   // async asyncData() {},
 
   data: () => ({
-    showOverlay: false,
     drawer: false,
     offsetTop: 0,
     items: [
