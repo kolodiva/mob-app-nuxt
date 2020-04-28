@@ -1,6 +1,6 @@
 <template>
   <v-app v-scroll="onScroll">
-    <v-app-bar color="blue" dense dark hide-on-scroll fixed>
+    <v-app-bar color="blue" dense dark fixed>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title
