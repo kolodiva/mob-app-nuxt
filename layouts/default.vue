@@ -12,6 +12,20 @@
       >
 
       <v-spacer></v-spacer>
+
+      <v-menu right top>
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item @click="$store.commit('switchShowOverlay')">
+            <v-list-item-title>Новости</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" fixed temporary>
