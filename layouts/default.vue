@@ -85,7 +85,7 @@ export default {
   // async asyncData() {},
 
   data: () => ({
-    showOverlay: false,
+    showOverlay: true,
     drawer: false,
     offsetTop: 0,
     items: [
