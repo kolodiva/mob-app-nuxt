@@ -17,19 +17,23 @@
               <v-card-title v-text="address.phone"></v-card-title>
             </div>
 
-            <v-avatar class="ma-3" size="125" tile>
+            <v-avatar class="ma-5" tile>
               <a
                 :href="`callto:${address.phone_call}`"
                 style="color: white; text-decoration: none;"
-                ><v-icon x-large>mdi-phone-forward</v-icon></a
+                ><v-icon large>mdi-phone-forward</v-icon></a
               >
             </v-avatar>
           </div>
           <v-expansion-panels>
             <v-expansion-panel>
               <v-expansion-panel-header
-                >Добавьте деталей</v-expansion-panel-header
-              >
+                >Добавьте деталей
+
+                <template v-slot:actions>
+                  <v-icon>$expand</v-icon>
+                </template>
+              </v-expansion-panel-header>
               <v-expansion-panel-content>
                 Some content
               </v-expansion-panel-content>
