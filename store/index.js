@@ -118,7 +118,7 @@ const store = () =>
           name: 'Загружаются данные',
         },
       ],
-      showOverlay: false,
+      showOverlay: true,
     },
     mutations: {
       setHeaderName(state, value) {
