@@ -119,6 +119,7 @@ const store = () =>
         },
       ],
       showOverlay: false,
+      pdfFile: '/mf_komplekt_osoby_rezim_raboty.pdf',
     },
     mutations: {
       setHeaderName(state, value) {
@@ -126,6 +127,9 @@ const store = () =>
       },
       switchShowOverlay(state) {
         state.showOverlay = !state.showOverlay
+      },
+      setPdfFilePath(state, fileName) {
+        state.pdfFile = fileName
       },
     },
   })

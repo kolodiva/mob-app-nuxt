@@ -7,6 +7,7 @@
         contain
         @click="
           $store.commit('switchShowOverlay')
+          $store.commit('setPdfFilePath', '/mf_komplekt_osoby_rezim_raboty.pdf')
           $router.push('/view_pdf')
         "
       ></v-img>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="mt-12">
     <client-only>
       <vue-pdf
-        src="/mf_komplekt_osoby_rezim_raboty.pdf"
+        :src="$store.state.pdfFile"
         @num-pages="pdfPageCount = $event"
       ></vue-pdf>
     </client-only>
