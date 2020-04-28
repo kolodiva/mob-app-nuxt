@@ -21,8 +21,8 @@
         </template>
 
         <v-list>
-          <v-list-item v-for="n in 0" :key="n" @click="() => {}">
-            <v-list-item-title>Option 1{{ n }}</v-list-item-title>
+          <v-list-item @click="showOverlay = !showOverlay">
+            <v-list-item-title>Новости</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -85,7 +85,7 @@ export default {
   // async asyncData() {},
 
   data: () => ({
-    showOverlay: true,
+    showOverlay: false,
     drawer: false,
     offsetTop: 0,
     items: [

@@ -29,7 +29,6 @@
             <v-expansion-panel>
               <v-expansion-panel-header hide-actions
                 >Коллектив
-
                 <template v-slot:actions left>
                   <v-icon>$expand</v-icon>
                 </template>
