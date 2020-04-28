@@ -2,7 +2,7 @@
   <v-container class="mt-10">
     <v-row dense>
       <v-col
-        v-for="address in $store.state.addresses"
+        v-for="(address, indaddress) in $store.state.addresses"
         :key="address.id"
         cols="12"
       >
@@ -35,7 +35,47 @@
                 </template>
               </v-expansion-panel-header>
               <v-expansion-panel-content>
-                Some content
+                <v-list two-line>
+                  <v-list-item-group>
+                    <template
+                      v-for="(item, index) in filteredItems(indaddress)"
+                    >
+                      <v-list-item :key="index" class="px-0">
+                        <template>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              v-html="item.name"
+                            ></v-list-item-title>
+                            <v-list-item-subtitle
+                              class="text-wrap"
+                              v-html="item.position"
+                            ></v-list-item-subtitle>
+                          </v-list-item-content>
+
+                          <v-list-item-action class="justify-start">
+                            <v-list-item-action-text
+                              v-text="`моб. ${item.tel_mob}`"
+                            ></v-list-item-action-text>
+                            <v-list-item-action-text
+                              v-text="`доб. ${item.tel_add}`"
+                            ></v-list-item-action-text>
+                            <v-list-item-action-text
+                              v-text="item.email"
+                            ></v-list-item-action-text>
+                            <v-list-item-action-text
+                              v-text="item.skype"
+                            ></v-list-item-action-text>
+                          </v-list-item-action>
+                        </template>
+                      </v-list-item>
+
+                      <v-divider
+                        v-if="index + 1 < managers.length"
+                        :key="index"
+                      ></v-divider>
+                    </template>
+                  </v-list-item-group>
+                </v-list>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -46,10 +86,34 @@
 </template>
 
 <script>
+const consola = require('consola')
+
 export default {
   layout: 'default',
+  async asyncData({ app, params }) {
+    // const url = `/api/db_manegers/${params.id}`
+    // const url = '/api/db'
+    const url = '/api/db_manegers/1000000'
+
+    try {
+      const row = await app.$axios.$get(url)
+
+      return { managers: row }
+    } catch (e) {
+      consola.log(e)
+    } finally {
+    }
+  },
   data() {
-    return {}
+    return { managers: [{ filial: -1 }] }
+  },
+  computed: {
+    filteredItems() {
+      // const vm = this
+      return function (filial) {
+        return this.managers.filter((pos) => pos.filial === filial)
+      }
+    },
   },
   beforeCreate() {
     this.$store.commit('setHeaderName', 'Контакты')
@@ -59,6 +123,6 @@ export default {
 
 <style scoped>
 .v-card {
-  border-radius: 20px !important;
+  border-radius: 5px !important;
 }
 </style>

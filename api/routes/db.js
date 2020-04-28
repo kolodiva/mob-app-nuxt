@@ -19,6 +19,14 @@ const consola = require('consola')
     port: conn_param.port,
   })
 
+  const dbpg_stat = new Pool({
+    database: 'statistica',
+    user: 'postgres',
+    host: conn_param.host,
+    password: conn_param.password,
+    port: conn_param.port,
+  })
+
 const { Router } = require('express')
 
   const router = Router()
@@ -94,7 +102,7 @@ const { Router } = require('express')
     		        nomenklators.name,
     		        nomenklators.synonym,
     		        nomenklators.itgroup,
-    		        replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,      
+    		        replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,
     		        nomenklators.sort_field,
     		        nomenklators.describe,
     		        nomenklators.is_complect,
@@ -130,6 +138,53 @@ const { Router } = require('express')
     let sql = `select t1.*, t2.name pName from nomenklators t1 inner join nomenklators t2 on t1.parentguid=t2.guid where t1.parentguid='${id}' and t1.guid not in ('yandexpagesecret', 'sekretnaya_papka') order by t1.artikul`
   //  console.log( sql );
     dbpg.query(
+            sql
+        )
+        .then((res1) => {
+          res.json( res1.rows )
+        });
+  })
+  //statistica
+  router.get('/db_manegers/:id', function(req, res, next) {
+    let id = req.params.id
+    //create extension if not exists tablefunc;
+    //replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,
+    let sql = `
+          select tmp.* from (
+
+          select 0 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 0 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{1000000}'
+          union all
+          select 1 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 1 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{0000010}'
+          union all
+          select 5 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 5 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{0010000}'
+          union all
+          select 4 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 4 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{0000001}'
+          union all
+          select 3 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 3 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{0000100}'
+          union all
+          select 6 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 6 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{0100000}'
+          union all
+          select 2 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, 0 rozn from managers_site where position like '%Директор по продажам%'
+          union all
+          select 2 filial, order_by, filials, name, tel_add, tel_mob, email, skype, region, position, case when lower(region) like '%розница%' then 1 else 0 end from managers_site where filials='{0001000}'
+
+        ) as tmp
+          order by tmp.filial, tmp.rozn, tmp.order_by, tmp.name
+          `
+    //consola.log( sql );
+    dbpg_stat.query(
             sql
         )
         .then((res1) => {
