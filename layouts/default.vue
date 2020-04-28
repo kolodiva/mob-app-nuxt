@@ -12,20 +12,6 @@
       >
 
       <v-spacer></v-spacer>
-
-      <v-menu right top>
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item @click="$store.commit('switchShowOverlay')">
-            <v-list-item-title>Новости</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" fixed temporary>
@@ -89,6 +75,7 @@ export default {
     offsetTop: 0,
     items: [
       { name: 'Домой', path: '/', show: 1 },
+      { name: 'Новоcти', path: '/view_pdf', show: 1 },
       { name: 'О компании', path: '/about_company', show: 1 },
       { name: 'Контакты', path: '/contacts', show: 1 },
       { name: 'Доска почета', path: '/heroes', show: 0 },

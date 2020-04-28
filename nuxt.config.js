@@ -42,7 +42,9 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [/*'~plugins/vuetify.js'*/],
+  plugins: [/*'~plugins/vuetify.js'*/
+    {src: '~/plugins/vue-pdf.js', mode: 'client'}
+  ],
   /*
    ** Nuxt.js dev-modules
    */

@@ -1,14 +1,21 @@
 <template>
-  <pdf class="mt-10" src="mf_komplekt_osoby_rezim_raboty.pdf"></pdf>
+  <div>
+    <client-only>
+      <vue-pdf
+        src="/mf_komplekt_osoby_rezim_raboty.pdf"
+        @num-pages="pdfPageCount = $event"
+      ></vue-pdf>
+    </client-only>
+  </div>
 </template>
 
 <script>
-import pdf from 'vue-pdf'
+// import pdf from 'vue-pdf'
 
 export default {
-  components: {
-    pdf,
-  },
+  // components: {
+  //   pdf,
+  // },
   head() {
     return {
       meta: [
