@@ -27,10 +27,10 @@
           </div>
           <v-expansion-panels>
             <v-expansion-panel>
-              <v-expansion-panel-header
-                >Добавьте деталей
+              <v-expansion-panel-header hide-actions
+                >Коллектив
 
-                <template v-slot:actions>
+                <template v-slot:actions left>
                   <v-icon>$expand</v-icon>
                 </template>
               </v-expansion-panel-header>
