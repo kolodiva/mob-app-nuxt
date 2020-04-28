@@ -4,13 +4,16 @@ const consola = require('consola')
   const { Pool } = require('pg')
 
   let conn_param  = {};
+  let conn_param_statistica  = {};
 
   if (process.env.NODE_ENV == 'production') {
     //conn_param = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
     conn_param = {'host':'172.17.0.3', 'password':'c2ec57df699966b3afef779a16fa5fff', 'port':'5432'};
+    conn_param_statistica = {'host':'172.17.0.2', 'password':'27ac4a1dd6873624b7535fe5660740d6', 'port':'5432'};
 
   } else {
     conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
+    conn_param_statistica = {'host':'localhost', 'password':'123456', 'port':'5433'};
   }
 
   const dbpg = new Pool({
@@ -24,9 +27,9 @@ const consola = require('consola')
   const dbpg_stat = new Pool({
     database: 'statistica',
     user: 'postgres',
-    host: conn_param.host,
-    password: conn_param.password,
-    port: conn_param.port,
+    host: conn_param_statistica.host,
+    password: conn_param_statistica.password,
+    port: conn_param_statistica.port,
   })
 
 const { Router } = require('express')
