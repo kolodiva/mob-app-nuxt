@@ -261,16 +261,16 @@ export default {
   async asyncData({ store, app, params }) {
     // consola.info('44444444444444444444444444444444')
     let url = ''
-    if (store.state.showOverlay) {
-      url = '/api/db_news'
-      try {
-        const rows = await app.$axios.$get(url)
-        store.commit('setNewsRows', rows)
-      } catch (e) {
-        consola.info(e)
-      } finally {
-      }
-    }
+    // if (store.state.showOverlay) {
+    //   url = '/api/db_news'
+    //   try {
+    //     const rows = await app.$axios.$get(url)
+    //     store.commit('setNewsRows', rows)
+    //   } catch (e) {
+    //     consola.info(e)
+    //   } finally {
+    //   }
+    // }
     url = '/api/db'
     try {
       const row = await app.$axios.$get(url)
