@@ -7,7 +7,7 @@ const store = () =>
   new Vuex.Store({
     state: {
       headerName: 'Комплект',
-      showOverlay: flase,
+      showOverlay: false,
       pdfFile: '/mf_komplekt_osoby_rezim_raboty.pdf',
       addresses: [
         {
