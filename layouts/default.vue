@@ -20,11 +20,11 @@
           </v-btn>
         </template>
 
-        <v-list>
+        <!-- <v-list>
           <v-list-item @click="$store.commit('switchShowOverlay')">
             <v-list-item-title>Новости</v-list-item-title>
           </v-list-item>
-        </v-list>
+        </v-list> -->
       </v-menu>
     </v-app-bar>
 
