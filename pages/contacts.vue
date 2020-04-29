@@ -15,6 +15,8 @@
               ></v-card-title>
 
               <v-card-title v-text="address.phone"></v-card-title>
+
+              <v-card-subtitle v-text="address.address"></v-card-subtitle>
             </div>
 
             <v-avatar class="ma-5" tile>

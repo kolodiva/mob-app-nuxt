@@ -1,23 +1,14 @@
 <template>
-  <div class="text-center">
-    <v-overlay>
-      <v-img
-        src="baner_korona_mob.jpg"
-        width="80vw"
-        contain
-        @click="
-          $store.commit('switchShowOverlay')
-          $store.commit('setPdfFilePath', '/mf_komplekt_osoby_rezim_raboty.pdf')
-          $router.push('/view_pdf')
-        "
-      ></v-img>
-      <v-btn icon @click="$store.commit('switchShowOverlay')">
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-overlay>
-  </div>
+  <v-overlay opacity="2">
+    <News />
+  </v-overlay>
 </template>
 
 <script>
-export default {}
+import News from '@/components/News.vue'
+export default {
+  components: {
+    News,
+  },
+}
 </script>

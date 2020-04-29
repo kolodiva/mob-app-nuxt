@@ -73,6 +73,7 @@
 
 <script>
 import winOverlay from '@/components/overlay.vue'
+// const consola = require('consola')
 const Cookie = process.client ? require('js-cookie') : undefined
 const inFifteenMinutes = new Date(new Date().getTime() + 50 * 1000)
 Cookie &&
@@ -82,7 +83,6 @@ export default {
   components: {
     winOverlay,
   },
-  // async asyncData() {},
 
   data: () => ({
     drawer: false,

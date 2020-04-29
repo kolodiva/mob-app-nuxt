@@ -202,7 +202,7 @@ const { Router } = require('express')
 
       dbpg.query(
             `with t1 as (
-              select 1000000 id, '/baner_korona_mob.jpg' pic, '/mf_komplekt_osoby_rezim_raboty.pdf' pdf, '80%' height
+              select 1000000 id, '/baner_korona_mob.jpg' pic, '/mf_komplekt_osoby_rezim_raboty.pdf' pdf, '60%' height
               union all
               select id, concat('https://www.newfurnitura.ru/news/', path_pic2) pic, concat('https://www.newfurnitura.ru/news/', path_pdf) pdf, '100%' height  from new_blocks where on_slider)
               select * from t1  order by id desc`

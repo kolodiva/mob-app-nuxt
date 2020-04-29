@@ -60,15 +60,25 @@
 import { mapState } from 'vuex'
 const consola = require('consola')
 export default {
-  async asyncData({ app, params }) {
-    // let url = `/api/db/${params.id}`
-    const url = '/api/db'
+  async asyncData({ store, app, params }) {
+    // consola.info('44444444444444444444444444444444')
+    let url = ''
+    if (store.state.showOverlay) {
+      url = '/api/db_news'
+      try {
+        const rows = await app.$axios.$get(url)
+        store.commit('setNewsRows', rows)
+      } catch (e) {
+        consola.info(e)
+      } finally {
+      }
+    }
+    url = '/api/db'
     try {
       const row = await app.$axios.$get(url)
-
       return { nomenklators: row }
     } catch (e) {
-      consola.log(e)
+      consola.info(e)
     } finally {
     }
   },
