@@ -197,4 +197,19 @@ const { Router } = require('express')
         });
   })
 
+  router.get('/db_news', function(req, res, next) {
+      //res.json({foo: 1})
+
+      dbpg.query(
+            `with t1 as (
+              select 1000000 id, '/baner_korona_mob.jpg' pic, '/mf_komplekt_osoby_rezim_raboty.pdf' pdf, '80%' height
+              union all
+              select id, concat('https://www.newfurnitura.ru/news/', path_pic2) pic, concat('https://www.newfurnitura.ru/news/', path_pdf) pdf, '100%' height  from new_blocks where on_slider)
+              select * from t1  order by id desc`
+          )
+          .then((res1) => {
+            res.json( res1.rows )
+          });
+
+  })
   module.exports = router

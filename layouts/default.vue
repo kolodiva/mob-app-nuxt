@@ -89,7 +89,7 @@ export default {
     offsetTop: 0,
     items: [
       { name: 'Домой', path: '/', show: 1 },
-      { name: 'Новоcти', path: '/view_pdf', show: 1 },
+      { name: 'Новоcти', path: '/news', show: 1 },
       { name: 'О компании', path: '/about_company', show: 1 },
       { name: 'Контакты', path: '/contacts', show: 1 },
       { name: 'Доска почета', path: '/heroes', show: 0 },
