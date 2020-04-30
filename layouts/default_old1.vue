@@ -1,6 +1,6 @@
 <template>
   <v-app v-scroll="onScroll">
-    <v-app-bar color="blue" dense dark fixed>
+    <v-app-bar color="blue" dense dark hide-on-scroll fixed>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title
@@ -20,11 +20,11 @@
           </v-btn>
         </template>
 
-        <!-- <v-list>
-          <v-list-item @click="$store.commit('switchShowOverlay')">
-            <v-list-item-title>Новости</v-list-item-title>
+        <v-list>
+          <v-list-item v-for="n in 0" :key="n" @click="() => {}">
+            <v-list-item-title>Option 1{{ n }}</v-list-item-title>
           </v-list-item>
-        </v-list> -->
+        </v-list>
       </v-menu>
     </v-app-bar>
 
@@ -68,28 +68,16 @@
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
     </v-fab-transition>
-    <winOverlay v-if="$store.state.showOverlay" /> </v-app
-></template>
+  </v-app></template
+>
 
 <script>
-import winOverlay from '@/components/overlay.vue'
-// const consola = require('consola')
-const Cookie = process.client ? require('js-cookie') : undefined
-const inFifteenMinutes = new Date(new Date().getTime() + 50 * 1000)
-Cookie &&
-  Cookie.set('auth', '111111111111111111', { expires: inFifteenMinutes })
-
 export default {
-  components: {
-    winOverlay,
-  },
-
   data: () => ({
     drawer: false,
     offsetTop: 0,
     items: [
       { name: 'Домой', path: '/', show: 1 },
-      { name: 'Новоcти', path: '/news', show: 1 },
       { name: 'О компании', path: '/about_company', show: 1 },
       { name: 'Контакты', path: '/contacts', show: 1 },
       { name: 'Доска почета', path: '/heroes', show: 0 },
@@ -107,6 +95,7 @@ export default {
   methods: {
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
+      // consola.log(this.offsetTop)
     },
   },
   head() {
