@@ -1,8 +1,8 @@
 // import RSVP from 'rsvp'
-// const consola = require('consola')
+const consola = require('consola')
 
 export default async function ({ store, from }) {
-  // consola.info((req && req.url) || 'no data')
+  consola.info(store.state)
   if (!store.state.isLoaded) {
     await store.dispatch('nomenklator/loadAll')
     store.commit('FINISH_LOADING')

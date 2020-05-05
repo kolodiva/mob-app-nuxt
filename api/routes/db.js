@@ -229,7 +229,7 @@ const { Router } = require('express')
         )
         .then((res1) => {
           if (res1.rows.length === 0) {
-            return res.send(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
+            return res.status(401).body('Пользователь с таким адресом НЕ найден - на регистрацию.');
           } else {
             return res.json({token: '1324567891234567890'});
           }
