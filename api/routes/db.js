@@ -47,12 +47,12 @@ const { Router } = require('express')
 
   router.get('/db', function(req, res, next) {
       //res.json({foo: 1})
+      consola.info('11111111111111111111111111111111111111111');
 
       dbpg.query(
             "select * from nomenklators where itgroup and parentguid is null and guid not in ('yandexpagesecret', 'sekretnaya_papka') order by name"
           )
           .then((res1) => {
-            consola.info(res1);
             res.json( {data: res1.rows} )
           });
 
@@ -222,12 +222,14 @@ const { Router } = require('express')
 
   router.post('/session', function(req, res, next) {
 
+    consola.info('22222222222222222222222222222222222222');
+
     dbpg.query(
           `select password_digest from users where email='${req.body.email}'`
         )
         .then((res1) => {
           if (res1.rows.length === 0) {
-            return res.send(401, 'Пользователь с таким адресом НЕ найден - на регистрацию.');
+            return res.send(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
           } else {
             return res.json({token: '1324567891234567890'});
           }
