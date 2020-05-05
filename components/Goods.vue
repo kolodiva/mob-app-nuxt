@@ -1,7 +1,12 @@
 <template>
-  <div style="margin-top: 50px;">
-    <v-row dense>
-      <v-col v-for="(pos, i) in nomenklators" :key="i" cols="12">
+  <v-row dense>
+    <v-col v-for="(pos, i) in nomenklators" :key="i" cols="12">
+      <n-link
+        :to="`${
+          pos.itgroup ? pos.guid : pos.parentguid + '?itemcard=' + pos.synonym
+        }`"
+        style="text-decoration: none;"
+      >
         <v-card color="#1F7087" dark>
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
@@ -19,7 +24,6 @@
                 :src="pos.guid_picture"
                 aspect-ratio="1"
                 class="grey lighten-2"
-                lazy-src="https://picsum.photos/500/300?image=15"
                 contain
                 height="140"
               >
@@ -51,26 +55,15 @@
           >
           </v-data-table>
         </v-card>
-      </v-col>
-    </v-row>
-  </div>
+      </n-link>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 // const consola = require('consola')
 // import winOverlay from '@/components/overlay.vue'
 export default {
-  props: {
-    nomenklators: {
-      type: Array,
-      default: () => {
-        return []
-      },
-    },
-  },
-  // components: {
-  //   winOverlay,
-  // },
   data() {
     return {
       headers: [
@@ -89,8 +82,13 @@ export default {
       ],
     }
   },
+  computed: {
+    nomenklators() {
+      return this.$store.getters['nomenklator/getSubNomenklator']
+    },
+  },
   beforeCreate() {
-    this.$store.commit('setHeaderName', 'Комплект')
+    this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
 }
 </script>

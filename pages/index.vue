@@ -1,57 +1,57 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-row
-          :align="alignment"
-          :justify="justify"
-          class="grey lighten-5"
-          style="height: 300px;"
-        >
-          <v-card v-for="n in 3" :key="n" class="ma-3 pa-6" outlined tile>
-            Column
-          </v-card>
-        </v-row>
-      </v-col>
-      <v-col cols="12">
-        <v-row justify="center">
-          <v-col cols="6" md="2">
-            <v-select
-              v-model="alignment"
-              :items="alignmentsAvailable"
-              label="Align"
-            ></v-select>
-          </v-col>
-
-          <v-col cols="6" md="2">
-            <v-select
-              v-model="justify"
-              :items="justifyAvailable"
-              label="Justify"
-            ></v-select>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row>
+    <v-col
+      v-for="pos of nomenklators"
+      :key="pos.id"
+      class="d-flex child-flex"
+      cols="6"
+    >
+      <n-link
+        :to="`catalog/${
+          pos.itgroup ? pos.guid : pos.parentguid + '?itemcard=' + pos.synonym
+        }`"
+        style="text-decoration: none;"
+      >
+        <v-card>
+          <v-img
+            eager
+            :src="pos.guid_picture"
+            aspect-ratio="1"
+            class="grey lighten-2"
+            lazy-src="https://picsum.photos/500/300?image=15"
+            contain
+            height="140"
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+          <v-card-text class="text--primary pa-2">
+            <div class="text-center" style="height: 45px; overflow: hidden;">
+              {{ pos.name }}
+            </div>
+          </v-card-text>
+        </v-card>
+      </n-link>
+    </v-col>
+  </v-row>
 </template>
-
 <script>
 export default {
-  data() {
-    return {
-      alignmentsAvailable: ['start', 'center', 'end', 'baseline', 'stretch'],
-      alignment: 'center',
-      dense: false,
-      justifyAvailable: [
-        'start',
-        'center',
-        'end',
-        'space-around',
-        'space-between',
-      ],
-      justify: 'center',
-    }
+  middleware: 'load-nomenklator',
+  data: () => ({}),
+  computed: {
+    nomenklators() {
+      return this.$store.getters['nomenklator/getNomenklator']
+    },
+  },
+  beforeCreate() {
+    this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
 }
 </script>

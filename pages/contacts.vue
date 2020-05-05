@@ -1,8 +1,8 @@
 <template>
-  <v-container class="mt-10">
+  <v-container class="">
     <v-row dense>
       <v-col
-        v-for="(address, indaddress) in $store.state.addresses"
+        v-for="(address, indaddress) in $store.state.addresses.address"
         :key="address.id"
         cols="12"
       >
@@ -117,7 +117,7 @@ export default {
     },
   },
   beforeCreate() {
-    this.$store.commit('setHeaderName', 'Контакты')
+    this.$store.commit('SET_HEADER_NAME', 'Контакты')
   },
 }
 </script>

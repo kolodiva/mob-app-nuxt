@@ -18,7 +18,7 @@ module.exports = {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { name: 'description', content: 'Мебельная фурнитура. Наша складская программа, насчитывающая более 5000 наименований продукции, постоянно пополняется с учетом ваших потребностей.' },
       {
         hid: 'description',
@@ -43,7 +43,8 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [/*'~plugins/vuetify.js'*/
-    {src: '~/plugins/vue-pdf.js', mode: 'client'}
+    {src: '~/plugins/vue-pdf.js', mode: 'client'},
+    {src: '~/plugins/vue-inject.js', mode: 'client'},
   ],
   /*
    ** Nuxt.js dev-modules
@@ -60,6 +61,8 @@ module.exports = {
    */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    //'@nuxtjs/auth',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],
   /*
@@ -69,7 +72,58 @@ module.exports = {
   axios: {
     // proxyHeaders: false
     proxy: true,
+     //baseURL: 'http://127.0.0.1:3000/api'
   },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/session', method: 'post', propertyName: 'data.token'  },
+          user: { url: '/api/user', method: 'get', propertyName: 'data'  },
+          logout: false
+        },
+        // tokenRequired: true,
+        tokenType: '',
+      },
+    },
+    redirect: {
+      home: false,
+      callback: false,
+      logout: false
+    }
+  },
+
+  // auth: {
+  //     strategies: {
+  //       local: {
+  //         endpoints: {
+  //           login: { url: 'login', method: 'post', propertyName: 'data.token'  },
+  //           user: { url: 'user', method: 'get', propertyName: 'data'  },
+  //           logout: false
+  //         },
+  //       },
+  //     },
+  //   },
+
+  // auth: {
+  //     strategies: {
+  //       local: {
+  //         endpoints: {
+  //           login: { url: '/api/sessions', method: 'post', propertyName: 'token' },
+  //            logout: false,
+  //            user: { url: '/sessions/user', method: 'get', propertyName: 'data.attributes' }
+  //         },
+  //         // tokenRequired: true,
+  //         tokenType: '',
+  //       },
+  //     },
+  //     redirect: {
+  //       home: false,
+  //       callback: false,
+  //       logout: false
+  //     }
+  //   },
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
