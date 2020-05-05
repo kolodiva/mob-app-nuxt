@@ -52,6 +52,7 @@ const { Router } = require('express')
             "select * from nomenklators where itgroup and parentguid is null and guid not in ('yandexpagesecret', 'sekretnaya_papka') order by name"
           )
           .then((res1) => {
+            consola.info(res1);
             res.json( {data: res1.rows} )
           });
 
