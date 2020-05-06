@@ -21,7 +21,7 @@ export const getters = {
       (state.subNomenklator &&
         state.subNomenklator.length > 0 &&
         state.subNomenklator[0].itgroup) ||
-      true
+      false
     )
   },
   getNomenklator: (state) => {
