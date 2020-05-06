@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col
-      v-for="pos in dataNum"
+      v-for="pos in nomenklators"
       :key="pos.id"
       class="d-flex child-flex"
       cols="6"
@@ -42,25 +42,40 @@
   </v-row>
 </template>
 <script>
-//import { getData } from '@/utils/store-utils'
+import { getData } from '@/utils/store-utils'
 const consola = require('consola')
 
 export default {
   // middleware: 'load-nomenklator',
-  async asyncData({ app, params, query, store }) {
-    //const { data } = await getData('/api/db', app.$axios)
-    const { data } = await app.$axios.$get('/api/db')
-    consola.info(data)
-    // await store.dispatch('nomenklator/loadAll')
-    return { dataNum: data }
+  async asyncData({ app, params, query }) {
+    // const url = '/api/db'
+    // consola.info(app.store.state.user)
+    try {
+      //
+      const res = await getData('/api/db', app.$axios)
+      // consola.log(res.data)
+
+      // if (res.data.length === 0) {
+      //   const row = []
+      //   row.push({ id: 1, itgroup: false, name: 'The streets have no name.' })
+      // }
+
+      // consola.log(resCase)
+      return {
+        dataNomenklator: res.data,
+      }
+    } catch (e) {
+      consola.log(e)
+    } finally {
+    }
   },
 
-  data: () => ({ dataNum: [] }),
+  data: () => ({ dataNomenklator: [] }),
   computed: {
-    // nomenklators() {
-    //   // return this.$store.getters['nomenklator/getNomenklator']
-    //   return this.dataNum
-    // },
+    nomenklators() {
+      // return this.$store.getters['nomenklator/getNomenklator']
+      return this.dataNomenklator
+    },
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
