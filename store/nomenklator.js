@@ -18,10 +18,9 @@ export const mutations = {
 export const getters = {
   isGroup: (state) => {
     return (
-      (state.subNomenklator &&
-        state.subNomenklator.length > 0 &&
-        state.subNomenklator[0].itgroup) ||
-      false
+      state.subNomenklator &&
+      state.subNomenklator.length > 0 &&
+      state.subNomenklator[0].itgroup
     )
   },
   getNomenklator: (state) => {
