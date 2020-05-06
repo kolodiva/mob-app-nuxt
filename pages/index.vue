@@ -55,7 +55,7 @@ export default {
       //const res = await getData('/api/db', app.$axios)
       //const res = await app.$axiosgetData('/api/db', app.$axios)
       const res = await app.$axios.$get('/api/db');
-      consola.log(res)
+      consola.info(res)
 
       // if (res.data.length === 0) {
       //   const row = []
