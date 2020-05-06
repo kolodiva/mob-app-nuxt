@@ -18,7 +18,6 @@
             :src="pos.guid_picture"
             aspect-ratio="1"
             class="grey lighten-2"
-            lazy-src="https://picsum.photos/500/300?image=15"
             contain
             height="140"
           >
