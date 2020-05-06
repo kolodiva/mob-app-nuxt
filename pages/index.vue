@@ -48,7 +48,8 @@ const consola = require('consola')
 export default {
   // middleware: 'load-nomenklator',
   async asyncData({ app, params, query, store }) {
-    const { data } = await getData('/api/db', app.$axios)
+    //const { data } = await getData('/api/db', app.$axios)
+    const { data } = await app.$axios.$get('/api/db')
     consola.info(data)
     // await store.dispatch('nomenklator/loadAll')
     return { dataNum: data }
