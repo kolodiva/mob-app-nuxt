@@ -42,16 +42,23 @@
   </v-row>
 </template>
 <script>
+import { getData } from '@/utils/store-utils'
+// const consola = require('consola')
+
 export default {
   // middleware: 'load-nomenklator',
   async asyncData({ app, params, query, store }) {
-    await store.dispatch('nomenklator/loadAll')
+    const { data } = await getData('/api/db', app.$axios)
+    // consola.info(data[0])
+    // await store.dispatch('nomenklator/loadAll')
+    return { dataNum: data }
   },
 
-  data: () => ({}),
+  data: () => ({ dataNum: [] }),
   computed: {
     nomenklators() {
-      return this.$store.getters['nomenklator/getNomenklator']
+      // return this.$store.getters['nomenklator/getNomenklator']
+      return this.dataNum
     },
   },
   beforeCreate() {
