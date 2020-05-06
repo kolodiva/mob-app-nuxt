@@ -43,7 +43,11 @@
 </template>
 <script>
 export default {
-  middleware: 'load-nomenklator',
+  // middleware: 'load-nomenklator',
+  async asyncData({ app, params, query, store }) {
+    await store.dispatch('nomenklator/loadAll')
+  },
+
   data: () => ({}),
   computed: {
     nomenklators() {

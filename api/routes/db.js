@@ -47,7 +47,7 @@ const { Router } = require('express')
 
   router.get('/db', function(req, res, next) {
       //res.json({foo: 1})
-      consola.info('11111111111111111111111111111111111111111');
+      //consola.info('11111111111111111111111111111111111111111');
 
       dbpg.query(
             "select * from nomenklators where itgroup and parentguid is null and guid not in ('yandexpagesecret', 'sekretnaya_papka') order by name"

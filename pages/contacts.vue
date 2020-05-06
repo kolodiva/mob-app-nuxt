@@ -90,7 +90,6 @@
 const consola = require('consola')
 
 export default {
-  layout: 'default',
   async asyncData({ app, params }) {
     // const url = `/api/db_manegers/${params.id}`
     // const url = '/api/db'
@@ -112,7 +111,11 @@ export default {
     filteredItems() {
       // const vm = this
       return function (filial) {
-        return this.managers.filter((pos) => pos.filial === filial)
+        return (
+          (this.managers &&
+            this.managers.filter((pos) => pos.filial === filial)) ||
+          []
+        )
       }
     },
   },
