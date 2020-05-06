@@ -45,6 +45,7 @@ module.exports = {
   plugins: [/*'~plugins/vuetify.js'*/
     {src: '~/plugins/vue-pdf.js', mode: 'client'},
     {src: '~/plugins/vue-inject.js', mode: 'client'},
+    {src: '~/plugins/crypto-js.js'},
   ],
   /*
    ** Nuxt.js dev-modules
@@ -62,6 +63,8 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    'cookie-universal-nuxt',
+
     //'@nuxtjs/auth',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],
@@ -94,39 +97,8 @@ module.exports = {
     }
   },
 
-  // auth: {
-  //     strategies: {
-  //       local: {
-  //         endpoints: {
-  //           login: { url: 'login', method: 'post', propertyName: 'data.token'  },
-  //           user: { url: 'user', method: 'get', propertyName: 'data'  },
-  //           logout: false
-  //         },
-  //       },
-  //     },
-  //   },
-
-  // auth: {
-  //     strategies: {
-  //       local: {
-  //         endpoints: {
-  //           login: { url: '/api/sessions', method: 'post', propertyName: 'token' },
-  //            logout: false,
-  //            user: { url: '/sessions/user', method: 'get', propertyName: 'data.attributes' }
-  //         },
-  //         // tokenRequired: true,
-  //         tokenType: '',
-  //       },
-  //     },
-  //     redirect: {
-  //       home: false,
-  //       callback: false,
-  //       logout: false
-  //     }
-  //   },
-
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    // customVariables: ['~/assets/variables.scss'],
     // theme: {
     //   dark: true,
     //   themes: {

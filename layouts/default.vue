@@ -7,7 +7,8 @@
     >
       <v-list dense>
         <p class="ml-4 pt-2">
-          Вы {{ $auth && $auth.user ? $auth.user.username : 'Anonimus' }}
+          Приветствуем,
+          {{ $auth && $auth.user ? $auth.user.username : 'Anonimus' }}
         </p>
         <template v-for="item in items">
           <v-row v-if="item.heading" :key="item.heading" align="center">

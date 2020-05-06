@@ -41,41 +41,12 @@
   </v-row>
 </template>
 <script>
-// import { getData } from '@/utils/store-utils'
-// const consola = require('consola')
-
 export default {
   middleware: 'load-nomenklator',
-  // async asyncData({ app, params, query }) {
-  //   // const url = '/api/db'
-  //   // consola.info(app.store.state.user)
-  //   try {
-  //     //
-  //     // const res = await getData('/api/db', app.$axios)
-  //     // const res = await app.$axiosgetData('/api/db', app.$axios)
-  //     const resp = await app.$axios.$get('/api/db')
-  //     consola.info(resp)
-  //
-  //     // if (res.data.length === 0) {
-  //     //   const row = []
-  //     //   row.push({ id: 1, itgroup: false, name: 'The streets have no name.' })
-  //     // }
-  //
-  //     // consola.log(resCase)
-  //     return {
-  //       dataNomenklator: resp.data,
-  //     }
-  //   } catch (e) {
-  //     consola.info(e)
-  //   } finally {
-  //   }
-  // },
-
-  data: () => ({ dataNomenklator: [] }),
+  data: () => ({}),
   computed: {
     nomenklators() {
       return this.$store.getters['nomenklator/getNomenklator']
-      // return this.dataNomenklator
     },
   },
   beforeCreate() {

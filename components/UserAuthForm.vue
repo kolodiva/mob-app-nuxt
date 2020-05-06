@@ -29,8 +29,8 @@ export default {
     valid: false,
     showPassword: false,
     userInfo: {
-      email: 'kolodiva@mail.ru',
-      password: '123456',
+      email: 'afmc@mail.ru',
+      password: 'Pp123456',
       name: 'Vittorio',
     },
   }),

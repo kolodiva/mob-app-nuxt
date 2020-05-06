@@ -1,4 +1,11 @@
 import express from 'express'
+import AES from 'crypto-js/aes';
+import SHA256 from 'crypto-js/sha256';
+import SHA1 from 'crypto-js/sha1';
+import encUtf8 from 'crypto-js/enc-utf8';
+
+const bcrypt = require('bcrypt');
+
 const consola = require('consola')
 
   const { Pool } = require('pg')
@@ -218,36 +225,41 @@ const { Router } = require('express')
 
   })
 
-  router.post('/session', function(req, res, next) {
+  router.post('/session', async function(req, res, next, Vue) {
 
-    consola.info('22222222222222222222222222222222222222');
+    let key = req.cookies._keyUser
+    if (!key) {
+      return res.status(401).send('Ваш запрос какой-то подозрительный.');
+    }
+
+    res.clearCookie("_keyUser");
+
+    key = await SHA256(key + '118540800').toString()
+
+    const bytes = AES.decrypt(req.body.password, key)
+    const originalText = SHA256(SHA256(bytes.toString(encUtf8)).toString()).toString()
 
     dbpg.query(
           `select password_digest from users where email='${req.body.email}'`
         )
         .then((res1) => {
-          if (res1.rows.length === 0) {
+        if (res1.rows.length === 0) {
             return res.status(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
           } else {
-            return res.json({token: '1324567891234567890'});
+            const match = bcrypt.compareSync(originalText, res1.rows[0].password_digest);
+            if (match) {
+                return res.json({token: res1.rows[0].password_digest});
+            } else {
+              return res.status(401).send('Введен неверный пароль, покрутите еще.');
+            }
+            }
           }
-        });
-
-
-
-      // if (req.body.email != 'kolodiva@mail.ru') {
-      //   return res.send(401, ' Invalid token for: ' + req.body.email);
-      // }
-
-
-
-            //return
-
-            //res.json('{}', 404);
-
+        )
   })
+
   router.get('/user', function(req, res, next) {
       //res.json({foo: 1})
+      consola.info(req.params)
       res.json( {user: {id:15, username: 'Peter', user: 'Peter', name: 'Vittorio'}} )
 
   })
