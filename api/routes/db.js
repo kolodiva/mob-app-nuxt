@@ -16,8 +16,8 @@ const consola = require('consola')
     conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
 
   } else {
-    conn_param = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
-    conn_param_statistica = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
+    conn_param = {'host':'127.0.0.1', 'password':'123', 'port':'5432'};
+    conn_param_statistica = {'host':'127.0.0.1', 'password':'123', 'port':'5432'};
     // conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
     // conn_param_statistica = {'host':'localhost', 'password':'123456', 'port':'5433'};
   }

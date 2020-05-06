@@ -42,7 +42,7 @@
   </v-row>
 </template>
 <script>
-//import { getData } from '@/utils/store-utils'
+// import { getData } from '@/utils/store-utils'
 const consola = require('consola')
 
 export default {
@@ -52,9 +52,9 @@ export default {
     // consola.info(app.store.state.user)
     try {
       //
-      //const res = await getData('/api/db', app.$axios)
-      //const res = await app.$axiosgetData('/api/db', app.$axios)
-      const resp = await app.$axios.$get('/api/db');
+      // const res = await getData('/api/db', app.$axios)
+      // const res = await app.$axiosgetData('/api/db', app.$axios)
+      const resp = await app.$axios.$get('/api/db')
       consola.info(resp)
 
       // if (res.data.length === 0) {
