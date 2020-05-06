@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col
-      v-for="pos of nomenklators"
+      v-for="pos in dataNum"
       :key="pos.id"
       class="d-flex child-flex"
       cols="6"
@@ -43,23 +43,23 @@
 </template>
 <script>
 import { getData } from '@/utils/store-utils'
-// const consola = require('consola')
+const consola = require('consola')
 
 export default {
   // middleware: 'load-nomenklator',
   async asyncData({ app, params, query, store }) {
     const { data } = await getData('/api/db', app.$axios)
-    // consola.info(data[0])
+    consola.info(data)
     // await store.dispatch('nomenklator/loadAll')
     return { dataNum: data }
   },
 
   data: () => ({ dataNum: [] }),
   computed: {
-    nomenklators() {
-      // return this.$store.getters['nomenklator/getNomenklator']
-      return this.dataNum
-    },
+    // nomenklators() {
+    //   // return this.$store.getters['nomenklator/getNomenklator']
+    //   return this.dataNum
+    // },
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
