@@ -42,7 +42,7 @@
   </v-row>
 </template>
 <script>
-import { getData } from '@/utils/store-utils'
+//import { getData } from '@/utils/store-utils'
 const consola = require('consola')
 
 export default {
