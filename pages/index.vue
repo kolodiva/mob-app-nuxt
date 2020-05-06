@@ -54,8 +54,8 @@ export default {
       //
       //const res = await getData('/api/db', app.$axios)
       //const res = await app.$axiosgetData('/api/db', app.$axios)
-      const res = await app.$axios.$get('/api/db');
-      consola.info(res)
+      const resp = await app.$axios.$get('/api/db');
+      consola.info(resp)
 
       // if (res.data.length === 0) {
       //   const row = []
@@ -64,7 +64,7 @@ export default {
 
       // consola.log(resCase)
       return {
-        dataNomenklator: res.data,
+        dataNomenklator: resp.data,
       }
     } catch (e) {
       consola.info(e)
