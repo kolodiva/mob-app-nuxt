@@ -1,12 +1,9 @@
 import express from 'express'
-import AES from 'crypto-js/aes';
-import SHA256 from 'crypto-js/sha256';
-import SHA1 from 'crypto-js/sha1';
-import encUtf8 from 'crypto-js/enc-utf8';
-
+const {matchPass} = require('../crypto')
+import * as CryptoJS from 'crypto-js';
 const bcrypt = require('bcrypt');
 
-const consola = require('consola')
+//const consola = require('consola')
 
   const { Pool } = require('pg')
 
@@ -234,21 +231,24 @@ const { Router } = require('express')
 
     res.clearCookie("_keyUser");
 
-    key = await SHA256(key + '118540800').toString()
-
-    const bytes = AES.decrypt(req.body.password, key)
-    const originalText = SHA256(SHA256(bytes.toString(encUtf8)).toString()).toString()
-
     dbpg.query(
           `select password_digest from users where email='${req.body.email}'`
         )
-        .then((res1) => {
-        if (res1.rows.length === 0) {
+        .then((resp) => {
+
+        if (resp.rows.length === 0) {
+
             return res.status(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
+
           } else {
-            const match = bcrypt.compareSync(originalText, res1.rows[0].password_digest);
+
+            const match = matchPass(req.cookies._keyUser, req.body.password, resp.rows[0].password_digest)
+
+            //console.log(match)
+
+            //const match = bcrypt.compareSync(originalText, res1.rows[0].password_digest);
             if (match) {
-                return res.json({token: res1.rows[0].password_digest});
+                return res.json({token: resp.rows[0].password_digest});
             } else {
               return res.status(401).send('Введен неверный пароль, покрутите еще.');
             }
@@ -265,3 +265,25 @@ const { Router } = require('express')
   })
 
   module.exports = router
+
+  // key = CryptoJS.SHA256(key + '118540800').toString()
+  //
+  // const bytes = CryptoJS.AES.decrypt(req.body.password, key)
+  // const originalText = CryptoJS.SHA256(CryptoJS.SHA256(bytes.toString(CryptoJS.enc.Utf8)).toString()).toString()
+  //
+  // dbpg.query(
+  //       `select password_digest from users where email='${req.body.email}'`
+  //     )
+  //     .then((res1) => {
+  //     if (res1.rows.length === 0) {
+  //         return res.status(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
+  //       } else {
+  //         const match = bcrypt.compareSync(originalText, res1.rows[0].password_digest);
+  //         if (match) {
+  //             return res.json({token: res1.rows[0].password_digest});
+  //         } else {
+  //           return res.status(401).send('Введен неверный пароль, покрутите еще.');
+  //         }
+  //         }
+  //       }
+  //     )
