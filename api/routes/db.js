@@ -18,8 +18,10 @@ const {matchPass} = require('../crypto')
     conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
 
   } else {
-    conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
-    conn_param_statistica = {'host':'localhost', 'password':'123456', 'port':'5433'};
+    conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
+    conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
+    // conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
+    // conn_param_statistica = {'host':'localhost', 'password':'123456', 'port':'5433'};
   }
 
   const dbpg = new Pool({

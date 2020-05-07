@@ -1,4 +1,4 @@
-import RSVP from 'rsvp'
+import * as RSVP from 'rsvp'
 // const consola = require('consola')
 
 export default async function ({ store, from }) {

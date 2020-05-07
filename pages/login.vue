@@ -7,13 +7,6 @@
 </template>
 
 <script>
-// import sha256 from 'crypto-js/sha256'
-// // import Base64 from 'crypto-js/enc-base64'
-// // import Base64 from 'crypto-js/enc-base64'
-// // import Hex64 from 'crypto-js/enc-hex'
-// import AES from 'crypto-js/aes'
-// import encUtf8 from 'crypto-js/enc-utf8'
-
 import UserAuthForm from '@/components/UserAuthForm'
 // const consola = require('consola')
 export default {
@@ -26,6 +19,7 @@ export default {
   },
   methods: {
     async loginUser(loginInfo) {
+      const userInfo = loginInfo
       const keys = this.$getCryptoKey(this.$CryptoJS)
       this.$cookies.set('_keyUser', keys.key1)
 
@@ -34,14 +28,10 @@ export default {
         keys.key2
       ).toString()
 
-      // const bytes = this.$CryptoJS.AES.decrypt(ciphertext, keys.key2)
-      // const originalText = bytes.toString(this.$CryptoJS.enc.Utf8)
-      // consola.info(originalText)
-      // loginInfo.email = keys.key2
-      loginInfo.password = ciphertext
+      userInfo.password = ciphertext
       try {
         await this.$auth.loginWith('local', {
-          data: loginInfo,
+          data: userInfo,
         })
         // consola.info('test LOGIN 222')
 
