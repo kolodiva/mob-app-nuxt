@@ -2,17 +2,16 @@ const required = (propertyType, customErrorMessage) => {
   return (v) =>
     (v && v.length > 0) ||
     customErrorMessage ||
-    `You must input a ${propertyType}`
+    `Вам необходимо внести ${propertyType}`
 }
 const minLength = (propertyType, minLength) => {
   return (v) => {
     if (!v) {
       return true
     }
-
     return (
       v.length >= minLength ||
-      `${propertyType} must be at least ${minLength} characters`
+      `Длина его должна быть как минимум ${minLength} символов.`
     )
   }
 }
@@ -23,8 +22,13 @@ const maxLength = (propertyType, maxLength) => {
 }
 
 const emailFormat = () => {
-  const regex = '/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,24})+$/'
-  return (v) => (v && regex.test(v)) || 'Must be a valid email'
+  // const regex = new RegExp('/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,24})+$/')
+
+  const regex = new RegExp(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  )
+
+  return (v) => (v && regex.test(v)) || 'Формат адреса должен быть правильным.'
 }
 
 export default {
@@ -32,5 +36,4 @@ export default {
   minLength,
   maxLength,
   emailFormat,
-  CryptoJS,
 }

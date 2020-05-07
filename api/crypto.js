@@ -11,5 +11,13 @@ module.exports = {
     const originalText = CryptoJS.SHA256(CryptoJS.SHA256(bytes.toString(CryptoJS.enc.Utf8)).toString()).toString()
 
     return bcrypt.compareSync(originalText, hash);
+  },
+
+  genPass: (pass) => {
+
+    //const originalText = CryptoJS.SHA256(CryptoJS.SHA256(bytes.toString(CryptoJS.enc.Utf8)).toString()).toString()
+    const originalText = CryptoJS.SHA256(pass).toString()
+    //const originalText = CryptoJS.SHA256(CryptoJS.SHA256('Pp1234567').toString()).toString()
+    return bcrypt.hashSync(originalText, 10);
   }
 }

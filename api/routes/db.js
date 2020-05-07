@@ -1,7 +1,7 @@
 import express from 'express'
-const {matchPass} = require('../crypto')
+const {matchPass, genPass} = require('../crypto')
 
-//const consola = require('consola')
+const consola = require('consola')
 
   const { Pool } = require('pg')
 
@@ -18,10 +18,10 @@ const {matchPass} = require('../crypto')
     conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
 
   } else {
-    conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
-    conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
-    // conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
-    // conn_param_statistica = {'host':'localhost', 'password':'123456', 'port':'5433'};
+    // conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
+    // conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
+    conn_param = {'host':'localhost', 'password':'123456', 'port':'5433'};
+    conn_param_statistica = {'host':'localhost', 'password':'123456', 'port':'5433'};
   }
 
   const dbpg = new Pool({
@@ -147,18 +147,7 @@ const { Router } = require('express')
           res.json( {data: res1.rows} )
         });
   })
-  router.get('/db_old1/:id', function(req, res, next) {
-    let id = req.params.id
-    let sql = `select t1.*, t2.name pName from nomenklators t1 inner join nomenklators t2 on t1.parentguid=t2.guid where t1.parentguid='${id}' and t1.guid not in ('yandexpagesecret', 'sekretnaya_papka') order by t1.artikul`
-  //  console.log( sql );
-    dbpg.query(
-            sql
-        )
-        .then((res1) => {
-          res.json( res1.rows )
-        });
-  })
-  //statistica
+
   router.get('/db_manegers/:id', function(req, res, next) {
     let id = req.params.id
     //create extension if not exists tablefunc;
@@ -226,7 +215,7 @@ const { Router } = require('express')
 
     const key = req.cookies._keyUser
     if (!key) {
-      return res.status(401).send('Ваш запрос какой-то подозрительный.');
+      return res.status(403).send('Ваш запрос какой-то подозрительный.');
     }
 
     res.clearCookie("_keyUser");
@@ -238,7 +227,7 @@ const { Router } = require('express')
 
         if (resp.rows.length === 0) {
 
-            return res.status(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
+            return res.status(404).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
 
           } else {
 
@@ -269,39 +258,31 @@ const { Router } = require('express')
           .then((resp) => {
 
             if (resp.rows.length === 0) {
-                return res.json( {user: {id:1, username: 'Anonimus'}} )
+                return res.json( {user: {id:1, username: 'Anonimus', name: 'Anonimus'}} )
             } else {
-              return res.json( {user: {id:resp.rows[0].id, username: resp.rows[0].email}} )
+              return res.json( {user: {id:resp.rows[0].id, username: resp.rows[0].email, name: resp.rows[0].email}} )
             }
           })
     } catch (e) {
-        return res.json( {user: {id:1, username: 'Anonimus'}} )
+        return res.json( {user: {id:1, username: 'Anonimus', name: 'Anonimus'}} )
     } finally {
 
     }
 
   })
 
-  module.exports = router
+  router.post('/userNew', async function(req, res, next) {
 
-  // key = CryptoJS.SHA256(key + '118540800').toString()
-  //
-  // const bytes = CryptoJS.AES.decrypt(req.body.password, key)
-  // const originalText = CryptoJS.SHA256(CryptoJS.SHA256(bytes.toString(CryptoJS.enc.Utf8)).toString()).toString()
-  //
-  // dbpg.query(
-  //       `select password_digest from users where email='${req.body.email}'`
-  //     )
-  //     .then((res1) => {
-  //     if (res1.rows.length === 0) {
-  //         return res.status(401).send('Пользователь с таким адресом НЕ найден - на регистрацию.');
-  //       } else {
-  //         const match = bcrypt.compareSync(originalText, res1.rows[0].password_digest);
-  //         if (match) {
-  //             return res.json({token: res1.rows[0].password_digest});
-  //         } else {
-  //           return res.status(401).send('Введен неверный пароль, покрутите еще.');
-  //         }
-  //         }
-  //       }
-  //     )
+    const pass_digest = genPass(req.body.password)
+
+    dbpg.query(
+            `insert into users(email, name, phone, password_digest, updated_at, created_at) values( 'afmc2@mail.ru', 'afmc2@mail.ru', '1234567890', '${pass_digest}',now(), now())`
+          ).then(resp => {
+              return res.status(200).send( 'ok' )
+          }).catch((err) => {
+              //console.log(err.detail)
+              return res.status(404).send(err.detail);
+    })
+  })
+
+  module.exports = router

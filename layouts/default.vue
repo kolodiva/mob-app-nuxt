@@ -10,6 +10,9 @@
           Приветствуем,
           {{ $auth && $auth.user ? $auth.user.username : 'Anonimus' }}
         </p>
+        <v-btn v-if="$auth.loggedIn" class="mt-5" @click.prevent="$auth.logout"
+          >ВЫЙТИ</v-btn
+        >
         <template v-for="item in items">
           <v-row v-if="item.heading" :key="item.heading" align="center">
             <v-col cols="6">

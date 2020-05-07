@@ -7,7 +7,7 @@ export default function ({ $auth, route, redirect, store }) {
     // await store.dispatch('setSnackbar', {
     //   text: 'You are logged yet.',
     // })
-    // redirect('/')
+    redirect('/')
     // await store.commit('SET_SNACKBAR', {
     //   text: 'You are logged yet.',
     //   color: 'success',
