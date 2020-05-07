@@ -83,7 +83,7 @@ module.exports = {
       local: {
         endpoints: {
           login: { url: '/api/session', method: 'post', propertyName: 'data.token'  },
-          user: { url: '/api/user', method: 'get', propertyName: 'data'  },
+          user: { url: '/api/userAuth', method: 'get', propertyName: 'data'  },
           logout: false
         },
         // tokenRequired: true,

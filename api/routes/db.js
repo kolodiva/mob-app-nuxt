@@ -222,7 +222,7 @@ const { Router } = require('express')
 
   router.post('/session', async function(req, res, next) {
 
-    let key = req.cookies._keyUser
+    const key = req.cookies._keyUser
     if (!key) {
       return res.status(401).send('Ваш запрос какой-то подозрительный.');
     }
@@ -255,10 +255,28 @@ const { Router } = require('express')
         )
   })
 
-  router.get('/user', function(req, res, next) {
-      //res.json({foo: 1})
-      consola.info(req.params)
-      res.json( {user: {id:15, username: 'Peter', user: 'Peter', name: 'Vittorio'}} )
+  router.get('/userAuth', async function(req, res, next) {
+
+    try {
+
+      const key = req.cookies['auth._token.local'].split(' ')[1];
+
+      dbpg.query(
+            `select id, email from users where password_digest='${key}'`
+          )
+          .then((resp) => {
+
+            if (resp.rows.length === 0) {
+                return res.json( {user: {id:1, username: 'Anonimus'}} )
+            } else {
+              return res.json( {user: {id:resp.rows[0].id, username: resp.rows[0].email}} )
+            }
+          })
+    } catch (e) {
+        return res.json( {user: {id:1, username: 'Anonimus'}} )
+    } finally {
+
+    }
 
   })
 
