@@ -111,11 +111,14 @@ export default {
     filteredItems() {
       // const vm = this
       return function (filial) {
-        return (
-          (this.managers &&
-            this.managers.filter((pos) => pos.filial === filial)) ||
-          []
-        )
+        try {
+          return (
+            this.managers &&
+            this.managers.filter((pos) => pos.filial === filial)
+          )
+        } catch (e) {
+          return []
+        }
       }
     },
   },
