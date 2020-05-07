@@ -42,9 +42,9 @@ export default {
     showPassword: false,
     userInfo: {
       phone: '',
-      email: 'afmc2@mail.ru',
-      password: 'Pp1234567',
-      name: 'Vittorio',
+      email: '',
+      password: '',
+      name: '',
     },
     ...validations,
   }),
