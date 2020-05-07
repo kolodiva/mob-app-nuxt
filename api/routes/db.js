@@ -1,7 +1,5 @@
 import express from 'express'
 const {matchPass} = require('../crypto')
-import * as CryptoJS from 'crypto-js';
-const bcrypt = require('bcrypt');
 
 //const consola = require('consola')
 
