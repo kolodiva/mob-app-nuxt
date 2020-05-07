@@ -225,7 +225,7 @@ const { Router } = require('express')
 
   })
 
-  router.post('/session', async function(req, res, next, Vue) {
+  router.post('/session', async function(req, res, next) {
 
     let key = req.cookies._keyUser
     if (!key) {
