@@ -1,12 +1,13 @@
 <template>
-  <v-form v-model="valid">
+  <v-form v-model="valid" transition="scale-transition">
     <v-text-field
       v-model="userInfo.email"
-      autocapitalize="off"
       label="Email"
       clear-icon="mdi-close-circle"
       clearable
       :rules="[required('email'), emailFormat()]"
+      type="email"
+      autocapitalize="simon"
     />
     <v-text-field
       v-model="userInfo.password"

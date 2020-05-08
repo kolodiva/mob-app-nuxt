@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    fill-height
-    class="pa-5 mt-10 font-weight-light headline text-justify"
-  >
+  <v-container fill-height class="font-weight-light headline text-justify">
     <content>
       «МЕБЕЛЬНАЯ ФУРНИТУРА» - компания с многолетним стажем работы на рынке.
       Клиенты доверяют нам с 1994 года. За это время у нас сложились партнерские
