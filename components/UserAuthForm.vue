@@ -2,7 +2,10 @@
   <v-form v-model="valid">
     <v-text-field
       v-model="userInfo.email"
+      autocapitalize="off"
       label="Email"
+      clear-icon="mdi-close-circle"
+      clearable
       :rules="[required('email'), emailFormat()]"
     />
     <v-text-field
@@ -12,6 +15,8 @@
       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
       counter="true"
       :rules="[required('пароль'), minLength('Пароль очень нужен', 6)]"
+      clear-icon="mdi-close-circle"
+      clearable
       @click:append="showPassword = !showPassword"
     />
     <v-text-field
