@@ -6,12 +6,12 @@
 // import { mapState } from 'vuex'
 import Groups from '@/components/Groups.vue'
 import Goods from '@/components/Goods.vue'
-const consola = require('consola')
+// const consola = require('consola')
 export default {
   components: { Groups, Goods },
   async asyncData({ app, params, query, store }) {
     if (params && params.id) {
-      consola.info(query)
+      // consola.info(query)
       await store.dispatch('nomenklator/loadSubNumenklator', params)
     }
   },

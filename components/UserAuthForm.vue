@@ -51,12 +51,9 @@
       messages="Ваш телефон будет использован исключительно для связи с Вами. Если телефон не указан то связь с Вами будет производиться через электронную почту."
       :rules="[]"
     />
-    <v-btn
-      class="mt-8"
-      :disabled="!valid"
-      @click="submitForm(userInfo)"
-      >{{ buttonText }}</v-btn
-    >
+    <v-btn class="mt-8" :disabled="!valid" @click="submitForm(userInfo)">{{
+      buttonText
+    }}</v-btn>
   </v-form>
 </template>
 

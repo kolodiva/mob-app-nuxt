@@ -1,6 +1,8 @@
 export const strict = false
+// const consola = require('consola')
 
 export const state = () => ({
+  showBackSpace: false,
   isLoaded: false,
   user: undefined,
   headerName: 'МФ Комплект',
@@ -14,6 +16,9 @@ export const mutations = {
   },
   SET_HEADER_NAME(state, value) {
     state.headerName = value
+  },
+  SET_BACKSPACE_BTN(state, value) {
+    state.showBackSpace = value
   },
 }
 

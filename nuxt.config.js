@@ -6,9 +6,10 @@ module.exports = {
   /*
    ** Headers of the page
    */
-  // router: {
+   router: {
   //   base: '/'
-  // },
+    middleware: 'stats'
+  },
   head: {
     // titleTemplate: '%s - ' + process.env.npm_package_name,
     titleTemplate: '%s',
@@ -35,7 +36,9 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+     'assets/main.css'
+  ],
 
   serverMiddleware: ['~/api/index.js'],
 
@@ -45,7 +48,7 @@ module.exports = {
   plugins: [/*'~plugins/vuetify.js'*/
     {src: '~/plugins/vue-pdf.js', mode: 'client'},
     {src: '~/plugins/vue-inject.js', mode: 'client'},
-    {src: '~/plugins/crypto-js.js'},
+    {src: '~/plugins/crypto-js.js'}
   ],
   /*
    ** Nuxt.js dev-modules

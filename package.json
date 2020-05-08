@@ -43,7 +43,8 @@
     "rsvp": "^4.8.5",
     "tls": "0.0.1",
     "vue-cryptojs": "^2.1.4",
-    "vue-pdf": "^4.0.8"
+    "vue-pdf": "^4.0.8",
+    "vue-router-back-button": "^1.2.3"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

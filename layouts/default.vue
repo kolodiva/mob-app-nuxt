@@ -100,6 +100,9 @@
       color="blue darken-3"
       dark
     >
+      <v-icon v-if="$store.state.showBackSpace" class="mr-2" @click.prevent="to"
+        >mdi-arrow-left-circle</v-icon
+      >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title style="" class="ml-0 pl-1">
         <v-btn href="/" class="">{{ $store.state.headerName }}</v-btn>
@@ -137,6 +140,7 @@
 
 <script>
 import TheSnackbar from '@/components/TheSnackbar.vue'
+// const consola = require('consola')
 export default {
   components: {
     TheSnackbar,
@@ -145,6 +149,7 @@ export default {
     offsetTop: 0,
     dialog: false,
     drawer: null,
+    showBtn: false,
     items: [
       {
         icon: 'mdi-contacts',
@@ -175,9 +180,15 @@ export default {
       return this.offsetTop > 180
     },
   },
+  mounted() {
+    // consola.log(this.$store.showBackSpace)
+  },
   methods: {
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
+    },
+    to() {
+      this.$router.back()
     },
   },
 }
@@ -185,7 +196,6 @@ export default {
 
 <style lang="scss">
 $font: Roboto, sans-serif;
-
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -197,40 +207,32 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   margin: 0;
 }
-
 .clickable {
   cursor: pointer;
 }
-
 body .v-application a {
   color: #276e2b;
 }
-
 .v-input--checkbox {
   margin: 0 !important;
-
   .v-input__control {
     label {
       color: black !important;
     }
-
     .v-input__slot {
       margin-bottom: 0 !important;
     }
-
     a {
       margin: 0 5px;
     }
   }
 }
-
 .paper-container {
   max-width: 960px;
   margin-left: auto;
@@ -238,25 +240,20 @@ body .v-application a {
   padding-left: 15px;
   padding-right: 15px;
 }
-
 .paper-container-large {
   @extend .paper-container;
   max-width: 1200px;
 }
-
 .img-responsive {
   max-width: 100%;
 }
-
 .section-title {
   font: 400 32px/40px $font;
   margin-bottom: 30px;
 }
-
 .section-subtitle {
   font: 400 24px/32px $font;
 }
-
 .section {
   background-color: #ffffff;
   padding: 60px 0;
@@ -264,7 +261,6 @@ body .v-application a {
     font: 400 32px/40px $font;
     margin-bottom: 30px;
   }
-
   ul {
     margin: 0;
   }
