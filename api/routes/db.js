@@ -11,11 +11,11 @@ const consola = require('consola')
   if (process.env.NODE_ENV == 'production') {
     //conn_param = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
     //Не забудь зольДат поменять при размещении на RF
-    // conn_param = {'host':'172.17.0.2', 'password':'c2ec57df699966b3afef779a16fa5fff', 'port':'5432'};
-    // conn_param_statistica = {'host':'172.17.0.3', 'password':'27ac4a1dd6873624b7535fe5660740d6', 'port':'5432'};
+    conn_param = {'host':'172.17.0.2', 'password':'c2ec57df699966b3afef779a16fa5fff', 'port':'5432'};
+    conn_param_statistica = {'host':'172.17.0.3', 'password':'27ac4a1dd6873624b7535fe5660740d6', 'port':'5432'};
     //размещение DO
-    conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
-    conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
+    // conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
+    // conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
 
   } else {
     // conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
