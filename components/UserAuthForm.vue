@@ -15,7 +15,25 @@
       :type="showPassword ? 'text' : 'password'"
       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
       counter="true"
-      :rules="[required('пароль'), minLength('Пароль очень нужен', 6)]"
+      :rules="[
+        required('пароль'),
+        minLength('Пароль очень нужен', `${hasName ? 6 : 3}`),
+      ]"
+      clear-icon="mdi-close-circle"
+      clearable
+      @click:append="showPassword = !showPassword"
+    />
+    <v-text-field
+      v-if="hasName"
+      v-model="userInfo.password1"
+      label="Проверка пароля"
+      :type="showPassword ? 'text' : 'password'"
+      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      counter="true"
+      :rules="[
+        required('Проверка пароля'),
+        eqPass('Указанный пароль', userInfo.password, userInfo.password1),
+      ]"
       clear-icon="mdi-close-circle"
       clearable
       @click:append="showPassword = !showPassword"
@@ -33,9 +51,12 @@
       messages="Ваш телефон будет использован исключительно для связи с Вами. Если телефон не указан то связь с Вами будет производиться через электронную почту."
       :rules="[]"
     />
-    <v-btn class="mt-8" :disabled="!valid" @click="submitForm(userInfo)">{{
-      buttonText
-    }}</v-btn>
+    <v-btn
+      class="mt-8"
+      :disabled="!valid"
+      @click="submitForm(userInfo)"
+      >{{ buttonText }}</v-btn
+    >
   </v-form>
 </template>
 
@@ -50,6 +71,7 @@ export default {
       phone: '',
       email: '',
       password: '',
+      password1: '',
       name: '',
     },
     ...validations,

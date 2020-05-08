@@ -38,6 +38,8 @@ export default {
 
       userInfo.email = loginInfo.email
 
+      userInfo.phone = loginInfo.phone
+
       userInfo.password = ciphertext
 
       try {

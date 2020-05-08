@@ -1,8 +1,10 @@
+// const consola = require('consola')
+
 const required = (propertyType, customErrorMessage) => {
   return (v) =>
     (v && v.length > 0) ||
     customErrorMessage ||
-    `Вам необходимо внести ${propertyType}`
+    `Вам необходимо заполнить ${propertyType}`
 }
 const minLength = (propertyType, minLength) => {
   return (v) => {
@@ -21,6 +23,11 @@ const maxLength = (propertyType, maxLength) => {
     `${propertyType} must be less than ${maxLength} characters`
 }
 
+const eqPass = (propertyType, pass, pass1) => {
+  return (v) =>
+    pass === pass1 || `${propertyType} не совпадает с основным паролем.`
+}
+
 const emailFormat = () => {
   // const regex = new RegExp('/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,24})+$/')
 
@@ -36,4 +43,5 @@ export default {
   minLength,
   maxLength,
   emailFormat,
+  eqPass,
 }

@@ -276,7 +276,7 @@ const { Router } = require('express')
     const pass_digest = genPass(req.body.password)
 
     dbpg.query(
-            `insert into users(email, name, phone, password_digest, updated_at, created_at) values( '${req.body.email}', '${req.body.email}', '${req.body.password}', '${pass_digest}',now(), now())`
+            `insert into users(email, name, phone, password_digest, updated_at, created_at) values( '${req.body.email}', '${req.body.email}', '${req.body.phone}', '${pass_digest}',now(), now())`
           ).then(resp => {
               return res.status(200).send( 'ok' )
           }).catch((err) => {
