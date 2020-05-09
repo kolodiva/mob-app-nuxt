@@ -250,7 +250,7 @@ const { Router } = require('express')
 
     try {
 
-      const key = req.cookies['auth._token.local'].split(' ')[1];
+      const key = req.cookies['auth._token.local'];
 
       dbpg.query(
             `select id, email from users where password_digest='${key}'`

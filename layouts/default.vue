@@ -191,6 +191,11 @@ export default {
       this.$router.back()
     },
   },
+  head() {
+    return {
+      title: 'МФ-Комплект',
+    }
+  },
 }
 </script>
 

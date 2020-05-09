@@ -1,21 +1,25 @@
 <template>
   <v-row>
     <v-col
-      v-for="pos in $store.state.addresses.mainPicture"
+      v-for="pos in nomenklators"
       :key="pos.id"
       class="d-flex child-flex"
       cols="6"
     >
-      <n-link :to="`catalog/${pos.file_name}`" style="text-decoration: none;">
+      <n-link
+        :to="`catalog/${
+          pos.itgroup ? pos.guid : pos.parentguid + '?itemcard=' + pos.synonym
+        }`"
+        style="text-decoration: none;"
+      >
         <v-card>
           <v-img
             eager
-            :src="`/index_pic/${pos.file_name}.jpg`"
+            src="/index_pic/zamky.jpg"
             aspect-ratio="1"
             class="grey lighten-2"
             contain
             height="120"
-            :alt="`${pos.name}`"
           >
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">

@@ -84,19 +84,22 @@ module.exports = {
   auth: {
     strategies: {
       local: {
+        token: {
+          required: true,
+          type: false,
+          maxAge: 604800
+         },
         endpoints: {
           login: { url: '/api/session', method: 'post', propertyName: 'data.token'  },
           user: { url: '/api/userAuth', method: 'get', propertyName: 'data'  },
           logout: false
         },
-        // tokenRequired: true,
-        tokenType: '',
       },
     },
     redirect: {
-      home: false,
-      callback: false,
-      logout: false
+    home: false,
+    callback: false,
+    logout: false
     }
   },
 
