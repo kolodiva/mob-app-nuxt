@@ -67,7 +67,15 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
-
+    '@nuxtjs/component-cache',
+    ['@nuxtjs/yandex-metrika',
+      {
+        id: '51108848',
+        webvisor: true,
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+      }],
     //'@nuxtjs/auth',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],

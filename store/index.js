@@ -1,5 +1,5 @@
-export const strict = false
 // const consola = require('consola')
+export const strict = false
 
 export const state = () => ({
   showBackSpace: false,

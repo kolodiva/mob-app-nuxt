@@ -1,4 +1,6 @@
+import { getField, updateField } from 'vuex-map-fields'
 import { getData } from '@/utils/store-utils'
+
 // import _ from 'lodash'
 
 export const state = () => ({
@@ -13,6 +15,7 @@ export const mutations = {
   SET_SUB_NOMENKLATOR(state, rows) {
     state.subNomenklator = rows
   },
+  updateField,
 }
 
 export const getters = {
@@ -29,6 +32,7 @@ export const getters = {
   getSubNomenklator: (state) => {
     return state.subNomenklator
   },
+  getField,
 }
 
 export const actions = {
