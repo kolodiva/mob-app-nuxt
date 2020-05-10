@@ -1,17 +1,14 @@
 <template>
   <v-row dense>
     <v-col v-for="(pos, i) in nomenklators" :key="i" cols="12">
-      <v-card color="#1F7087" dark>
-        <div class="d-flex flex-no-wrap justify-space-between">
-          <div>
-            <v-card-title
-              class="headline"
-              v-text="`${pos.artikul + ', ' + pos.artikul_new}`"
-            ></v-card-title>
+      <v-card color="" light>
+        <v-card-title
+          class="headline"
+          v-text="`${pos.artikul + ', ' + pos.artikul_new}`"
+        ></v-card-title>
 
-            <v-card-subtitle v-text="pos.name"></v-card-subtitle>
-          </div>
-
+        <v-card-subtitle class="pb-0" v-text="pos.name"></v-card-subtitle>
+        <v-row justify="end" class="mx-2">
           <v-avatar class="ma-3" size="100">
             <v-img
               eager
@@ -19,7 +16,6 @@
               aspect-ratio="1"
               class="grey lighten-2"
               contain
-              height="140"
             >
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
@@ -31,15 +27,20 @@
               </template>
             </v-img>
           </v-avatar>
-        </div>
-        <v-row class="mx-4">
-          <v-col cols="8">
+        </v-row>
+        <v-row class="mx-2">
+          <v-col cols="6">
+            <v-subheader>Сумма<br />{{ pos.total }} ₽</v-subheader>
+          </v-col>
+          <v-col cols="6">
             <v-text-field
-              value="0"
+              v-model="pos.qty"
               type="number"
               label="Количество"
               :suffix="pos.unit_name"
-            ></v-text-field>
+              @input="onInput(pos, $event)"
+              ><v-icon slot="append" color="red">mdi-cart</v-icon>
+            </v-text-field>
           </v-col>
         </v-row>
         <v-data-table
@@ -90,9 +91,14 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   methods: {
-    // onEnter(guid, e) {
-    //   consola.info(guid, e.target.value)
-    // },
+    onEnter(obj, e) {
+      // consola.info(obj, e.target.value)
+      // obj.total = obj.price1 * e.target.value
+    },
+    onInput(obj, val) {
+      // consola.info(e)
+      obj.total = (obj.price1 * val).toFixed(2)
+    },
   },
 }
 </script>
