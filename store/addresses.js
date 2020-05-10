@@ -12,7 +12,13 @@ export const getters = {
     return _.filter(state.address, (v) => v.city === city)
   },
   getAllSortCity: (state) => {
-    return _.sortBy(state.address, 'city')
+    const list = _.sortBy(state.address, 'id')
+
+    _.forEach(list, (v) => {
+      v.phone_call = v.phone.replace(/[^0-9||+]/g, '')
+    })
+
+    return list
   },
   getAllMainPic: (state) => {
     return _.sortBy(state.mainPicture, 'id')

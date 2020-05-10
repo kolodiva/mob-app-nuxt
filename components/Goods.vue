@@ -12,7 +12,7 @@
             <div>
               <v-card-title
                 class="headline"
-                v-text="pos.artikul"
+                v-text="`${pos.artikul + ', ' + pos.artikul_new}`"
               ></v-card-title>
 
               <v-card-subtitle v-text="pos.name"></v-card-subtitle>
@@ -42,6 +42,18 @@
               </v-img>
             </v-avatar>
           </div>
+          <v-row class="mx-4">
+            <v-col cols="4">
+              <v-subheader>Сумма ₽</v-subheader>
+            </v-col>
+            <v-col cols="8">
+              <v-text-field
+                label="Количество"
+                :value="pos.qty"
+                :suffix="pos.unit_name"
+              ></v-text-field>
+            </v-col>
+          </v-row>
           <v-data-table
             dense
             :headers="headers"

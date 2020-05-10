@@ -125,6 +125,7 @@ const { Router } = require('express')
     			COALESCE(price_list_total.price1, 0.00) as price1,
     			COALESCE(price_list_total.price2, 0.00) as price2,
     			COALESCE(price_list_total.price3, 0.00) as price3,
+          0.0000 qty,
 
     		    nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title, parentNomenklator.name pName
 
