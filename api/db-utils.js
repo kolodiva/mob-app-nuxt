@@ -5,7 +5,7 @@ module.exports = {
   getOrderIdByConnectionId: async (dbpg, req, errList) => {
 
     let connectionid = req.cookies.connectionid
-    let orderInfo    = {order_id: undefined, count_goods: 0}
+    let orderInfo    = {order_id: 0, count_goods: 0}
 
     if (connectionid) {
 
