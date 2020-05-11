@@ -2,14 +2,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 module.exports = {
 
-  getOrderIdByConnectionId: (dbpg, req, errList) => {
+  getOrderIdByConnectionId: async (dbpg, req, errList) => {
 
     let connectionid = req.cookies.connectionid
     let orderInfo    = {order_id: 0, count_goods: 0}
 
     if (connectionid) {
 
-      dbpg.query(`
+      await dbpg.query(`
         select t2.id order_id, count(t3.id) count_goods
         from connections t1
         left join orders t2 on t1.id=t2.connection_id and t1.remember_token='${connectionid}' and t2.status = 0

@@ -72,7 +72,7 @@ const { Router } = require('express')
 
     const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
 
-    consola.info(req.cookies.connectionid, orderInfo);
+    consola.info(orderInfo);
 
     //'${id}'
     //create extension if not exists tablefunc;
