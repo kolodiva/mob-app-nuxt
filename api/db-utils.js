@@ -5,7 +5,7 @@ module.exports = {
   getOrderIdByConnectionId: async (dbpg, req, errList) => {
 
     let connectionid = req.cookies.connectionid
-    let orderInfo    = {order_id: 0, count_goods: 0}
+    let orderInfo    = undefined
 
     if (connectionid) {
 
@@ -16,7 +16,9 @@ module.exports = {
         left join order_goods t3 on t2.id=t3.order_id
         group by t2.id`
         ).then(resp => {
-          if (resp.rowCount > 0) {
+          if (resp.rowCount === 0) {
+            orderInfo = {order_id: 0, count_goods: 0}
+          } else {
             orderInfo = resp.rows[0]
           }
         }).catch(err => {
