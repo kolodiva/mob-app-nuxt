@@ -74,7 +74,7 @@ const { Router } = require('express')
 
     //'${id}'
     let sql = `
-    --create extension if not exists tablefunc;
+    create extension if not exists tablefunc;
 
 		with price_list_total as (
 
