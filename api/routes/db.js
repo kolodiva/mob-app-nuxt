@@ -73,8 +73,8 @@ const { Router } = require('express')
     const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
 
     //'${id}'
+    //create extension if not exists tablefunc;
     let sql = `
-    create extension if not exists tablefunc;
 
 		with price_list_total as (
 
