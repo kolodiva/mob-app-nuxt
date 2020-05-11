@@ -108,12 +108,17 @@
         <v-btn href="/" class="">{{ $store.state.headerName }}</v-btn>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn icon>
+      <v-btn icon @click="test">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
+      <TheCart />
     </v-app-bar>
     <v-content>
       <v-container class="fill-height" fluid>
+        <h3 color--text="red">
+          Данный сайт начнет работу через неделю. Сейчас заказ Вы можете сделать
+          толькj с большого сайта.
+        </h3>
         <Nuxt />
       </v-container>
     </v-content>
@@ -140,10 +145,12 @@
 
 <script>
 import TheSnackbar from '@/components/TheSnackbar.vue'
+import TheCart from '@/components/TheCart.vue'
 // const consola = require('consola')
 export default {
   components: {
     TheSnackbar,
+    TheCart,
   },
   data: () => ({
     offsetTop: 0,
@@ -184,6 +191,10 @@ export default {
     // consola.log(this.$store.showBackSpace)
   },
   methods: {
+    test() {
+      // this.$store.commit('nomenklator/SET_COUNT_CART', 10)
+      // consola.info(this.$store.state.nomenklator.countCart)
+    },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
     },

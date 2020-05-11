@@ -7,15 +7,20 @@ import { getData } from '@/utils/store-utils'
 export const state = () => ({
   nomenklator: [],
   subNomenklator: [],
-  cur_pos: -1,
+  countCart: 0,
 })
 
 export const mutations = {
-  SET_NOMENKLATOR(state, rows) {
-    state.nomenklator = rows
+  SET_NOMENKLATOR(state, data) {
+    state.nomenklator = data.recs
+    state.countCart = data.countCart
   },
-  SET_SUB_NOMENKLATOR(state, rows) {
-    state.subNomenklator = rows
+  SET_SUB_NOMENKLATOR(state, data) {
+    state.subNomenklator = data.recs
+    state.countCart = data.countCart
+  },
+  SET_COUNT_CART(state, countCart) {
+    state.countCart = countCart
   },
 }
 
@@ -37,15 +42,12 @@ export const getters = {
 
 export const actions = {
   async loadAll({ commit, dispatch }) {
-    const { data: nomenklator } = await getData('/api/db', this.$axios)
-    commit('SET_NOMENKLATOR', nomenklator)
+    const data = await getData('/api/db', this.$axios)
+    commit('SET_NOMENKLATOR', data)
   },
   async loadSubNumenklator({ commit, dispatch }, params) {
-    const { data: nomenklator } = await getData(
-      `/api/db/${params.id}`,
-      this.$axios
-    )
-    commit('SET_SUB_NOMENKLATOR', nomenklator)
+    const data = await getData(`/api/db/${params.id}`, this.$axios)
+    commit('SET_SUB_NOMENKLATOR', data)
   },
   async chngeCart({ commit, dispatch }, ind) {
     const obj = this.state.nomenklator.subNomenklator[ind]
@@ -56,6 +58,10 @@ export const actions = {
     }
 
     const { data } = await this.$axios.post('/api/chngeCart', info)
+
+    // consola.info(data)
+
+    // this.state.nomenklator.countCart = data.countCart
 
     if (data.err.length === 0) {
       obj.qty1 = obj.qty2
@@ -74,5 +80,7 @@ export const actions = {
         timeout: 5000,
       })
     }
+
+    commit('SET_COUNT_CART', data.countCart)
   },
 }

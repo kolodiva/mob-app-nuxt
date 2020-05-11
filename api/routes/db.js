@@ -1,8 +1,8 @@
 import express from 'express'
 const {matchPass, genPass} = require('../crypto')
-const {getConnOrder, chngOrder} = require('../db-utils')
+const {getConnOrder, chngOrder, getOrderIdByConnectionId} = require('../db-utils')
 
-//const consola = require('consola')
+const consola = require('consola')
 
   const { Pool } = require('pg')
 
@@ -12,8 +12,8 @@ const {getConnOrder, chngOrder} = require('../db-utils')
   if (process.env.NODE_ENV == 'production') {
     //conn_param = {'host':'134.209.232.17', 'password':'123', 'port':'5432'};
     //Не забудь зольДат поменять при размещении на RF
-    // conn_param = {'host':'172.17.0.2', 'password':'c2ec57df699966b3afef779a16fa5fff', 'port':'5432'};
-    // conn_param_statistica = {'host':'172.17.0.3', 'password':'27ac4a1dd6873624b7535fe5660740d6', 'port':'5432'};
+    // conn_param = {'host':'172.17.0.3', 'password':'c2ec57df699966b3afef779a16fa5fff', 'port':'5432'};
+    // conn_param_statistica = {'host':'172.17.0.2', 'password':'27ac4a1dd6873624b7535fe5660740d6', 'port':'5432'};
     //размещение DO
     conn_param = {'host':'localhost', 'password':'123', 'port':'5432'};
     conn_param_statistica = {'host':'localhost', 'password':'123', 'port':'5432'};
@@ -48,20 +48,130 @@ const { Router } = require('express')
   router.use(express.json())
 
 
-  router.get('/db', function(req, res, next) {
+  router.get('/db', async function(req, res, next) {
       //res.json({foo: 1})
       //consola.info('11111111111111111111111111111111111111111');
+      let errList = []
+
+      const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
 
       dbpg.query(
             "select * from nomenklators where itgroup and parentguid is null and guid not in ('yandexpagesecret', 'sekretnaya_papka') order by name"
           )
           .then((res1) => {
-            res.json( {data: res1.rows} )
+            res.json( {recs: res1.rows, countCart: orderInfo.count_goods} )
           });
 
   })
 
-  router.get('/db/:id', function(req, res, next) {
+  router.get('/db/:id', async function(req, res, next) {
+
+    let id = req.params.id
+    let errList = []
+    let rec = []
+
+    const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
+
+    //'${id}'
+    let sql = `
+    --create extension if not exists tablefunc;
+
+		with price_list_total as (
+
+			with price_list_with_compl as (
+
+			select *
+			from crosstab(
+			$$select nomenklator_id::text, price_type_id, round(price*coalesce(currencies.value, 1), 2)
+			from prices
+			left join currencies on prices.currency_id = currencies.code
+
+			where nomenklator_id in (
+
+			select distinct
+					coalesce(complects.guid_complect, nomenklators.guid) as guid
+
+				from nomenklators
+
+			           left join complects on complects.nomenklator_id = nomenklators.guid
+
+			           where nomenklators.parentguid='${id}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
+
+			)
+
+			order by 1$$,
+			$$ SELECT '000000004' UNION ALL SELECT '000000003' UNION ALL SELECT '000000005'$$
+			)
+
+			AS (guid text, price1 numeric, price2 numeric, price3 numeric)
+			)
+
+		select
+			nomenklators.guid,
+
+			sum(round(coalesce(complects.qty, 1) * pl.price1, 2)) as price1,
+			sum(round(coalesce(complects.qty, 1) * pl.price2, 2)) as price2,
+			sum(round(coalesce(complects.qty, 1) * pl.price3, 2)) as price3
+
+			from nomenklators
+
+			   left join complects on complects.nomenklator_id = nomenklators.guid
+		   	   join price_list_with_compl as pl on pl.guid = nomenklators.guid or pl.guid = complects.guid_complect
+
+		   	   group by nomenklators.guid)
+
+		select
+    --nomenklators.weight,
+				nomenklators.guid,
+		 		nomenklators.parentguid,
+		        nomenklators.artikul,
+		        nomenklators.artikul_new,
+		        nomenklators.name,
+		        nomenklators.synonym,
+		        nomenklators.itgroup,
+		        nomenklators.guid_picture,
+		        nomenklators.sort_field,
+		        nomenklators.describe,
+		        nomenklators.is_complect,
+		        case when nomenklators.itgroup then '' else coalesce( case when nomenklators.is_complect > 0 then 'компл.' else unit_types.name end, 'нет ед.изм.') end as unit_name,
+
+			COALESCE(price_list_total.price1, 0.00) as price1,
+			COALESCE(price_list_total.price2, 0.00) as price2,
+			COALESCE(price_list_total.price3, 0.00) as price3,
+
+			COALESCE(order_goods.qty, 0) as qty1,
+      COALESCE(order_goods.qty, 0) as qty2,
+
+			round(COALESCE(order_goods.price, 0.00), 2) as price_order,
+
+      round(COALESCE(price_list_total.price1, 0.00)*COALESCE(order_goods.qty, 0.0000), 2) as total,
+
+		    nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title
+
+			from nomenklators
+
+			left join price_list_total on nomenklators.guid = price_list_total.guid
+
+			left join orders on orders.id = ${orderInfo.order_id} and orders.status = 0
+			left join order_goods on order_goods.order_id = ${orderInfo.order_id} and price_list_total.guid = order_goods.nomenklator_id
+
+			left join unit_types on nomenklators.unit_type_id = unit_types.code
+
+			where nomenklators.parentguid='${id}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
+
+			ORDER BY  nomenklators.itgroup desc, nomenklators.sort_field, nomenklators.name, nomenklators.artikul
+      `
+    //consola.log( sql );
+
+    await dbpg.query(
+            sql
+        )
+        .then((res1) => {
+          res.json( {recs: res1.rows, countCart: orderInfo.count_goods} )
+        });
+  })
+
+  router.get('/db_old/:id', function(req, res, next) {
     let id = req.params.id
     //create extension if not exists tablefunc;
     //replace(nomenklators.guid_picture, '_250x250', '_82x82') guid_picture,
@@ -151,6 +261,7 @@ const { Router } = require('express')
           res.json( {data: res1.rows} )
         });
   })
+
 
   router.get('/db_manegers/:id', function(req, res, next) {
     let id = req.params.id
@@ -304,7 +415,9 @@ const { Router } = require('express')
       })
     }
 
-    return res.status(200).json( {rows: rec, err: errList} )
+    const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
+
+    return res.status(200).json( {rows: rec, err: errList, countCart: orderInfo.count_goods} )
   })
 
   module.exports = router
