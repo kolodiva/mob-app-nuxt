@@ -12,22 +12,21 @@ module.exports = {
       await dbpg.query(`
         select t2.id order_id, count(t3.id) count_goods
         from connections t1
-        left join orders t2 on t1.id=t2.connection_id and t1.remember_token='${connectionid}' and t2.status = 0
+        left join orders t2 on t1.id=t2.connection_id and t2.status = 0
         left join order_goods t3 on t2.id=t3.order_id
+        where t1.remember_token='${connectionid}'
         group by t2.id`
         ).then(resp => {
-          console.log(resp);
           if (resp.rowCount > 0) {
-            orderInfo.order_id    = resp.rows[0].order_id
-            orderInfo.count_goods = resp.rows[0].count_goods
-            return orderInfo;
+            orderInfo = resp.rows[0].order_id
           }
         }).catch(err => {
           errList.push(err.message)
-          return orderInfo;
         })
     }
-  },
+
+    return orderInfo;
+},
 
   getConnOrder: async (dbpg, req, res, errList) => {
 
