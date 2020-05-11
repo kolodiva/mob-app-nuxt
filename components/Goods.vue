@@ -28,18 +28,23 @@
             </v-img>
           </v-avatar>
         </v-row>
-        <v-row class="mx-2">
-          <v-col cols="6">
+        <v-row class="mx-2 px-0">
+          <v-col cols="6" class="px-0">
             <v-subheader>Сумма<br />{{ pos.total }} ₽</v-subheader>
           </v-col>
           <v-col cols="6">
             <v-text-field
-              v-model="pos.qty"
+              v-model="pos.qty2"
               type="number"
-              label="Количество"
+              min="0"
+              label="Кол-во"
               :suffix="pos.unit_name"
+              clearable
+              @keyup.enter.prevent="onEnter(pos, i, $event)"
               @input="onInput(pos, $event)"
-              ><v-icon slot="append" color="red">mdi-cart</v-icon>
+              ><v-icon v-if="pos.qty1 != pos.qty2" slot="append" color="red"
+                >mdi-cart</v-icon
+              >
             </v-text-field>
           </v-col>
         </v-row>
@@ -91,9 +96,17 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   methods: {
-    onEnter(obj, e) {
+    onEnter(obj, i, e) {
       // consola.info(obj, e.target.value)
       // obj.total = obj.price1 * e.target.value
+      const info = {
+        guid: obj.guid,
+        qty: e.target.value,
+        idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
+        ind: i,
+      }
+
+      this.$store.dispatch('nomenklator/chngeCart', { info })
     },
     onInput(obj, val) {
       // consola.info(e)

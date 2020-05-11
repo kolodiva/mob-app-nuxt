@@ -3,6 +3,7 @@ import SHA256 from 'crypto-js/sha256';
 import AES from 'crypto-js/aes';
 import encUtf8 from 'crypto-js/enc-utf8';
 const bcrypt = require('bcrypt');
+import { v4 as uuidv4 } from 'uuid';
 
 module.exports = {
   matchPass: (key, pass, hash) => {
@@ -22,5 +23,8 @@ module.exports = {
     const originalText = SHA256(pass).toString()
     //const originalText = CryptoJS.SHA256(CryptoJS.SHA256('Pp1234567').toString()).toString()
     return bcrypt.hashSync(originalText, 10);
-  }
+  },
+
+  genUuid: () => {return uuidv4()}
+
 }

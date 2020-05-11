@@ -1,5 +1,6 @@
 import express from 'express'
 const {matchPass, genPass} = require('../crypto')
+const {getConnOrder, chngOrder} = require('../db-utils')
 
 const consola = require('consola')
 
@@ -125,7 +126,8 @@ const { Router } = require('express')
     			COALESCE(price_list_total.price1, 0.00) as price1,
     			COALESCE(price_list_total.price2, 0.00) as price2,
     			COALESCE(price_list_total.price3, 0.00) as price3,
-          0 qty,
+          '' qty1,
+          '' qty2,
           0 total,
 
     		    nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title, parentNomenklator.name pName
@@ -285,6 +287,23 @@ const { Router } = require('express')
               //console.log(err.detail)
               return res.status(404).send(err.detail);
     })
+  })
+
+  router.post('/chngeCart', async function(req, res, next) {
+
+    const orderdata = await getConnOrder(dbpg, req, res);
+
+    if (orderdata.errdetail.length > 0) {
+      return res.status(404).json( {rows: [], err: orderdata.errdetail} );
+    }
+
+    const resp = await chngOrder(dbpg, orderdata.orderid, req)
+
+    if (resp.errdetail.length > 0) {
+      return res.status(404).json( {rows: [], err: orderdata.errdetail} );
+    }
+
+    return res.status(200).json( {rows: resp.rec, err: resp.errdetail} )
   })
 
   module.exports = router
