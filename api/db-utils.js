@@ -16,6 +16,7 @@ module.exports = {
         left join order_goods t3 on t2.id=t3.order_id
         group by t2.id`
         ).then(resp => {
+          console.log(resp);
           if (resp.rowCount > 0) {
             orderInfo.order_id    = resp.rows[0].order_id
             orderInfo.count_goods = resp.rows[0].count_goods
