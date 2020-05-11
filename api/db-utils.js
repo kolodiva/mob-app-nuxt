@@ -18,7 +18,7 @@ module.exports = {
         group by t2.id`
         ).then(resp => {
           if (resp.rowCount > 0) {
-            orderInfo = resp.rows[0].order_id
+            orderInfo = resp.rows[0]
           }
         }).catch(err => {
           errList.push(err.message)
