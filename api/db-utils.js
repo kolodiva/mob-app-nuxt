@@ -2,12 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 module.exports = {
 
-  getConnOrder: async (dbpg, req, res) => {
+  getConnOrder: async (dbpg, req, res, errList) => {
 
     let connectionid = req.cookies.connectionid
     let connid  = undefined
     let orderid = undefined
-    let errdetail = []
 
     const userid = req.body.idUser
 
@@ -17,11 +16,11 @@ module.exports = {
         ).then(resp => {
           connid = resp.rowCount > 0 ? resp.rows[0].id : undefined
         }).catch(err => {
-          errdetail.push(err.message)
+          errList.push(err.message)
         })
     }
 
-    if (!connid && errdetail.length === 0) {
+    if (!connid && errList.length === 0) {
 
       const remToken  = uuidv4();
       const ipAddress = req.ip;
@@ -34,17 +33,17 @@ module.exports = {
           connid = resp.rows[0].id
 
         }).catch(err => {
-          errdetail.push(err.message)
+          errList.push(err.message)
         })
     }
 
-    if (errdetail.length === 0) {
+    if (errList.length === 0) {
 
         await dbpg.query(`select id from orders where connection_id='${connid}' and status = 0`
           ).then(resp => {
             orderid = resp.rowCount > 0 ? resp.rows[0].id : undefined
           }).catch(err => {
-            errdetail.push(err.message)
+            errList.push(err.message)
           })
 
         if (!orderid) {
@@ -52,43 +51,41 @@ module.exports = {
             ).then(resp => {
               orderid = resp.rows[0].id
             }).catch(err => {
-              errdetail.push(err.message)
+              errList.push(err.message)
             })
         }
     }
 
-    return {connid: connid, orderid: orderid, errdetail: errdetail}
+    return {connid: connid, orderid: orderid}
   },
 
-  chngOrder: async (dbpg, orderid, req) => {
+  chngOrder: async (dbpg, orderData, req, errList) => {
 
     const guid  = req.body.guid
     const qty   = Number(req.body.qty)
-    let errdetail = []
     let rec = []
+    const orderid = orderData.orderid
 
     await dbpg.query(
       `with deleted as (delete from order_good_complects where order_good_id in
         ( select id from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}'))
 					delete from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}'`
       ).catch(err => {
-        errdetail.push(err.message)
+        errList.push(err.message)
       })
 
-    if (qty > 0 && errdetail.length === 0) {
+    if (qty > 0 && errList.length === 0) {
 
       await dbpg.query(
               `insert into order_goods(order_id, nomenklator_id, qty, price ) values(${orderid}, '${guid}', ${qty}, 123) RETURNING id, nomenklator_id, qty`
             ).then(resp => {
                 rec = resp.rows[0]
             }).catch((err) => {
-                errdetail.push(err.message)
+                errList.push(err.message)
       })
     }
 
-    //console.log(errdetail)
-
-    return {rec: rec, errdetail: errdetail}
+    return {rec: rec}
   },
 
 }

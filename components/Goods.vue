@@ -39,13 +39,13 @@
               min="0"
               label="Кол-во"
               :suffix="pos.unit_name"
-              @keyup.enter.prevent="onEnter(pos, i, $event)"
+              @keyup.enter.prevent="onEnter(i)"
               @input="onInput(pos, $event)"
               ><v-icon
                 v-if="pos.qty1 != pos.qty2"
                 slot="append"
                 color="red"
-                @click.prevent="onEnter1(pos, i)"
+                @click.prevent="onEnter(i)"
                 >mdi-cart</v-icon
               >
             </v-text-field>
@@ -99,28 +99,8 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   methods: {
-    onEnter(obj, i, e) {
-      // consola.info(obj, e.target.value)
-      // obj.total = obj.price1 * e.target.value
-      const info = {
-        guid: obj.guid,
-        qty: e.target.value,
-        idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
-        ind: i,
-      }
-
-      this.$store.dispatch('nomenklator/chngeCart', { info })
-    },
-    onEnter1(obj, i) {
-      // consola.info(obj)
-      const info = {
-        guid: obj.guid,
-        qty: obj.qty2,
-        idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
-        ind: i,
-      }
-
-      this.$store.dispatch('nomenklator/chngeCart', { info })
+    onEnter(i) {
+      this.$store.dispatch('nomenklator/chngeCart', i)
     },
     onInput(obj, val) {
       // consola.info(e)

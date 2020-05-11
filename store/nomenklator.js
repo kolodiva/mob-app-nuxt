@@ -7,7 +7,7 @@ import { getData } from '@/utils/store-utils'
 export const state = () => ({
   nomenklator: [],
   subNomenklator: [],
-  test: [],
+  cur_pos: -1,
 })
 
 export const mutations = {
@@ -16,15 +16,6 @@ export const mutations = {
   },
   SET_SUB_NOMENKLATOR(state, rows) {
     state.subNomenklator = rows
-  },
-  SET_SUB_NOMENKLATOR_QTY2(state, info) {
-    // consola.info(this)
-
-    if (info.qty2 === -1) {
-      state.subNomenklator[info.ind].qty2 = state.subNomenklator[info.ind].qty1
-    } else {
-      state.subNomenklator[info.ind].qty1 = state.subNomenklator[info.ind].qty2
-    }
   },
 }
 
@@ -56,26 +47,31 @@ export const actions = {
     )
     commit('SET_SUB_NOMENKLATOR', nomenklator)
   },
-  async chngeCart({ commit, dispatch }, { info }) {
-    // consola.info(info)
+  async chngeCart({ commit, dispatch }, ind) {
+    const obj = this.state.nomenklator.subNomenklator[ind]
+    const info = {
+      guid: obj.guid,
+      qty: obj.qty2,
+      idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
+    }
+
     const { data } = await this.$axios.post('/api/chngeCart', info)
 
-    if (data.err.length > 0) {
-      // consola.info(data.err)
-      commit('SET_SUB_NOMENKLATOR_QTY2', { qty2: -1, ind: info.ind })
-
-      await this.dispatch('snackbar/setSnackbar', {
-        color: 'red',
-        text: `Поз НЕ добавлена. Оибка: ${data.err.split(',')}`,
-        timeout: 5000,
-      })
-    } else {
-      commit('SET_SUB_NOMENKLATOR_QTY2', { qty2: data.rows.qty, ind: info.ind })
+    if (data.err.length === 0) {
+      obj.qty1 = obj.qty2
 
       await this.dispatch('snackbar/setSnackbar', {
         color: 'green',
-        text: `Поз добавлена`,
+        text: `Поз добавлена/изменена`,
         timeout: 2000,
+      })
+    } else {
+      obj.qty2 = obj.qty1
+
+      await this.dispatch('snackbar/setSnackbar', {
+        color: 'red',
+        text: `Поз НЕ добавлена. Ошибка: ${data.err.join()}`,
+        timeout: 5000,
       })
     }
   },

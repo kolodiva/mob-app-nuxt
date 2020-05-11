@@ -2,7 +2,7 @@ import express from 'express'
 const {matchPass, genPass} = require('../crypto')
 const {getConnOrder, chngOrder} = require('../db-utils')
 
-const consola = require('consola')
+//const consola = require('consola')
 
   const { Pool } = require('pg')
 
@@ -291,19 +291,20 @@ const { Router } = require('express')
 
   router.post('/chngeCart', async function(req, res, next) {
 
-    const orderdata = await getConnOrder(dbpg, req, res);
+    let errList = []
+    let rec = []
 
-    if (orderdata.errdetail.length > 0) {
-      return res.status(404).json( {rows: [], err: orderdata.errdetail} );
+    const orderdata = await getConnOrder(dbpg, req, res, errList);
+
+    if (errList.length === 0) {
+      await chngOrder(dbpg, orderdata, req, errList).then((resp) => {
+        if (errList.length === 0) {
+          rec = resp.rec
+        }
+      })
     }
 
-    const resp = await chngOrder(dbpg, orderdata.orderid, req)
-
-    if (resp.errdetail.length > 0) {
-      return res.status(404).json( {rows: [], err: orderdata.errdetail} );
-    }
-
-    return res.status(200).json( {rows: resp.rec, err: resp.errdetail} )
+    return res.status(200).json( {rows: rec, err: errList} )
   })
 
   module.exports = router
