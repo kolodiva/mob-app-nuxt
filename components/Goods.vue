@@ -39,10 +39,13 @@
               min="0"
               label="Кол-во"
               :suffix="pos.unit_name"
-              clearable
               @keyup.enter.prevent="onEnter(pos, i, $event)"
               @input="onInput(pos, $event)"
-              ><v-icon v-if="pos.qty1 != pos.qty2" slot="append" color="red"
+              ><v-icon
+                v-if="pos.qty1 != pos.qty2"
+                slot="append"
+                color="red"
+                @click.prevent="onEnter1(pos, i)"
                 >mdi-cart</v-icon
               >
             </v-text-field>
@@ -102,6 +105,17 @@ export default {
       const info = {
         guid: obj.guid,
         qty: e.target.value,
+        idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
+        ind: i,
+      }
+
+      this.$store.dispatch('nomenklator/chngeCart', { info })
+    },
+    onEnter1(obj, i) {
+      // consola.info(obj)
+      const info = {
+        guid: obj.guid,
+        qty: obj.qty2,
         idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
         ind: i,
       }
