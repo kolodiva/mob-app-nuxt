@@ -19,6 +19,14 @@ export const mutations = {
     state.subNomenklator = data.recs
     state.countCart = data.countCart
   },
+  SET_NEW_QTY(state, { ind, typeoper }) {
+    const obj = state.subNomenklator[ind]
+    if (typeoper === 1) {
+      obj.qty1 = obj.qty2
+    } else {
+      obj.qty2 = obj.qty1
+    }
+  },
   SET_COUNT_CART(state, countCart) {
     state.countCart = countCart
   },
@@ -49,8 +57,8 @@ export const actions = {
     const data = await getData(`/api/db/${params.id}`, this.$axios)
     commit('SET_SUB_NOMENKLATOR', data)
   },
-  async chngeCart({ commit, dispatch }, ind) {
-    const obj = this.state.nomenklator.subNomenklator[ind]
+  async chngeCart({ commit, dispatch, state }, ind) {
+    const obj = state.subNomenklator[ind]
     const info = {
       guid: obj.guid,
       qty: obj.qty2,
@@ -59,20 +67,16 @@ export const actions = {
 
     const { data } = await this.$axios.post('/api/chngeCart', info)
 
-    // consola.info(data)
-
-    // this.state.nomenklator.countCart = data.countCart
+    let typeoper = 1
 
     if (data.err.length === 0) {
-      obj.qty1 = obj.qty2
-
       await this.dispatch('snackbar/setSnackbar', {
         color: 'green',
         text: `Поз добавлена/изменена`,
         timeout: 2000,
       })
     } else {
-      obj.qty2 = obj.qty1
+      typeoper = 0
 
       await this.dispatch('snackbar/setSnackbar', {
         color: 'red',
@@ -81,6 +85,7 @@ export const actions = {
       })
     }
 
+    commit('SET_NEW_QTY', { ind, typeoper })
     commit('SET_COUNT_CART', data.countCart)
   },
 }
