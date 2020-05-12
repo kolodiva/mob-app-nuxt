@@ -49,13 +49,21 @@ export const getters = {
 }
 
 export const actions = {
+  async refreshCountCart({ commit, dispatch }) {
+    const userid = this.$auth.user ? this.$auth.user.id : 1
+    const url = `/api/order/${userid}`
+    const rows = await getData(url, this.$axios)
+    commit('SET_COUNT_CART', rows.length)
+  },
   async loadAll({ commit, dispatch }) {
+    this.dispatch('nomenklator/refreshCountCart')
     const data = await getData('/api/db', this.$axios)
     commit('SET_NOMENKLATOR', data)
   },
   async loadSubNumenklator({ commit, dispatch }, params) {
     const data = await getData(`/api/db/${params.id}`, this.$axios)
     commit('SET_SUB_NOMENKLATOR', data)
+    this.dispatch('nomenklator/refreshCountCart')
   },
   async chngeCart({ commit, dispatch, state }, ind) {
     const obj = state.subNomenklator[ind]
@@ -86,6 +94,6 @@ export const actions = {
     }
 
     commit('SET_NEW_QTY', { ind, typeoper })
-    commit('SET_COUNT_CART', data.countCart)
+    this.dispatch('nomenklator/refreshCountCart')
   },
 }

@@ -28,6 +28,32 @@ module.exports = {
     return orderInfo;
 },
 
+  getOrderIdByConnectionIdUserId: async (dbpg, req, userid, errList) => {
+
+  let connectionid = req.cookies.connectionid
+  let orderInfo    = {order_id: 0, count_goods: 0}
+
+  if (connectionid) {
+
+    await dbpg.query(`
+      select t2.id order_id, count(t3.id) count_goods
+      from connections t1
+      left join orders t2 on t1.id=t2.connection_id and t2.status = 0
+      left join order_goods t3 on t2.id=t3.order_id
+      where t1.remember_token='${connectionid}' and t1.user_id='${userid}'
+      group by t2.id`
+      ).then(resp => {
+        if (resp.rowCount > 0) {
+          orderInfo = resp.rows[0]
+        }
+      }).catch(err => {
+        errList.push(err.message)
+      })
+  }
+
+  return orderInfo;
+},
+
   getConnOrder: async (dbpg, req, res, errList) => {
 
     let connectionid = req.cookies.connectionid

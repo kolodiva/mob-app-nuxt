@@ -1,6 +1,6 @@
 import express from 'express'
 const {matchPass, genPass} = require('../crypto')
-const {getConnOrder, chngOrder, getOrderIdByConnectionId} = require('../db-utils')
+const {getConnOrder, chngOrder, getOrderIdByConnectionId, getOrderIdByConnectionIdUserId} = require('../db-utils')
 
 const consola = require('consola')
 
@@ -365,27 +365,83 @@ const { Router } = require('express')
 
   router.get('/userAuth', async function(req, res, next) {
 
-    try {
+      let user = {id:1, username: 'Anonimus', name: 'Anonimus'}
+
+      let errList = []
 
       const key = req.cookies['auth._token.local'];
 
-      dbpg.query(
+      const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
+      let connectionid = req.cookies.connectionid
+
+      await dbpg.query(
             `select id, email from users where password_digest='${key}'`
           )
-          .then((resp) => {
+          .then( async(resp) => {
 
-            if (resp.rows.length === 0) {
-                return res.json( {user: {id:1, username: 'Anonimus', name: 'Anonimus'}} )
-            } else {
-              return res.json( {user: {id:resp.rows[0].id, username: resp.rows[0].email, name: resp.rows[0].email}} )
+            if (resp.rows.length > 0) {
+
+              const rec = resp.rows[0]
+
+              user.id       = rec.id
+              user.username = rec.email
+              user.name     = rec.email
+
+              //переносим заказ с анонимуса на именного
+              await dbpg.query(`
+                select 1 curpos, t1.id user_id, t2.id conn_id, t2.remember_token, t3.id order_id
+                from users t1
+                left join connections t2 on t2.user_id = t1.id and t2.remember_token='${connectionid}'
+                left join orders t3 on t3.connection_id = t2.id and t3.status=0
+                where t1.id = 1
+
+                union all
+
+                select 2, t1.id user_id, t2.id conn_id, t2.remember_token, t3.id order_id
+                from users t1
+                left join connections t2 on t2.user_id = t1.id
+                left join orders t3 on t3.connection_id = t2.id and t3.status=0
+                where t1.id = ${rec.id}
+                `
+              ).then(async resp => {
+                  //consola.log( resp.rows );
+                  const recOld = resp.rows[0]
+                  const recNew = resp.rows[1]
+
+                  //если у авториз польз не было ничего кроме анонима то заказ анонима становится авториз польз.
+                  if (recNew && recNew.user_id && !recNew.conn_id) {
+                    await dbpg.query(`update connections set user_id=${recNew.user_id} where id=${recOld.conn_id}`)
+                  }
+
+                  //заходим с анонима БЕЗ товара в авторизованного где есть товар
+                  if (recNew && recNew.remember_token && recOld && !recOld.remember_token) {
+                    res.cookie("connectionid", recNew.remember_token);
+                  }
+
+                  //самый сложный вариант когда заказ анонима при авторизации объединяется с заказмо авторизованного.
+                  if (recOld.order_id && recNew.order_id) {
+
+                    await dbpg.query(`
+                      with del as (
+                        delete from order_goods where order_id in (${recOld.order_id}, ${recNew.order_id})
+                        returning nomenklator_id, unit_type_id, qty, price, qty1, price1)
+                        insert into order_goods(order_id, nomenklator_id, unit_type_id, qty, price, sum, qty1, price1, sum1)
+                        select ${recNew.order_id} ord_id, nomenklator_id, unit_type_id, sum(qty) qty, max(price) price, sum(qty)*max(price) sum, sum(qty1) qty1, max(price1) price1, sum(qty1)*max(price1) sum1
+                        from del
+                        group by ord_id, nomenklator_id, unit_type_id
+                      `)
+
+                    res.cookie("connectionid", recNew.remember_token);
+                  }
+
+              })
+
+              //////////////////////////////////////////////////
             }
+          }).catch( e => {
           })
-    } catch (e) {
-        return res.json( {user: {id:1, username: 'Anonimus', name: 'Anonimus'}} )
-    } finally {
 
-    }
-
+      return res.json( {user: user} )
   })
 
   router.post('/userNew', async function(req, res, next) {
@@ -422,4 +478,24 @@ const { Router } = require('express')
     return res.status(200).json( {rows: rec, err: errList, countCart: orderInfo.count_goods} )
   })
 
+  router.get('/order/:id', async function(req, res, next) {
+
+      let errList = []
+      let user_id = req.params.id
+
+      const orderInfo = await getOrderIdByConnectionIdUserId(dbpg, req, user_id, errList);
+
+      dbpg.query(
+            `
+            select t2.artikul, t2.name, t1.qty
+            from order_goods t1
+            inner join nomenklators t2 on t1.nomenklator_id=t2.guid
+            where order_id='${orderInfo.order_id}'
+            `
+          )
+          .then((res1) => {
+            res.json( res1.rows )
+          });
+
+  })
   module.exports = router

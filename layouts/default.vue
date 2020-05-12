@@ -55,7 +55,7 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item v-else @click.prevent="$auth.logout">
+          <v-list-item v-else @click.prevent="logout">
             <v-list-item-action>
               <v-icon>mdi-login</v-icon>
             </v-list-item-action>
@@ -115,11 +115,6 @@
     </v-app-bar>
     <v-content>
       <v-container class="fill-height" fluid>
-        <h3>
-          Уважаемые покупатели, корзина на мобильном сайте временно не работает.
-          Вы можете сделать заказ по
-          <a href="/contacts">следующим телефонам</a>.
-        </h3>
         <Nuxt />
       </v-container>
     </v-content>
@@ -188,6 +183,9 @@ export default {
       return this.offsetTop > 180
     },
   },
+  beforeCreate() {
+    this.$store.dispatch('nomenklator/refreshCountCart')
+  },
   mounted() {
     // consola.log(this.$store.showBackSpace)
   },
@@ -195,6 +193,13 @@ export default {
     test() {
       // this.$store.commit('nomenklator/SET_COUNT_CART', 10)
       // consola.info(this.$store.state.nomenklator.countCart)
+    },
+    logout() {
+      this.$auth.logout()
+      this.$cookies.remove('connectionid')
+      this.$store.dispatch('nomenklator/refreshCountCart')
+      // this.$router.push('/')
+      this.$router.replace({ path: '/' })
     },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop

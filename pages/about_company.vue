@@ -32,7 +32,7 @@
 <script>
 export default {
   beforeCreate() {
-    this.$store.commit('setHeaderName', 'О компании')
+    this.$store.commit('SET_HEADER_NAME', 'О компании')
   },
 }
 </script>
