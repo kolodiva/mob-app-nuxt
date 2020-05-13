@@ -1,33 +1,33 @@
 import { v4 as uuidv4 } from 'uuid';
 
+const getConnIdByUserId = async (dbpg, userId, errList) => {
+
+  let connId = 0
+  let orderId = 0
+  let rem_token = ''
+
+  await dbpg.query(`
+    select t1.id connid, t2.id orderid, t1.remember_token
+    from connections t1
+    inner join orders t2 on t2.connection_id=t1.id and t2.status=0
+    where t1.user_id=${userId}`
+    ).then(resp => {
+
+      if (resp.rowCount > 0) {
+
+        connId    = resp.rows[0].connid
+        orderId   = resp.rows[0].orderid
+        rem_token = resp.rows[0].remember_token
+      }
+
+    }).catch(err => {
+      errList.push(err.message)
+    })
+
+    return {connId, orderId, rem_token}
+}
+
 module.exports = {
-
-  getConnIdByUserId: async (userId, errList) => {
-
-    let connId = 0
-    let orderId = 0
-    let rem_token = ''
-
-    await dbpg.query(`
-      select t1.id connid, t2.id orderid, t1.remember_token
-      from connections t1
-      inner join orders t2 on t2.connection_id=t1.id and t2.status=0
-      where t1.user_id=${userid}`
-      ).then(resp => {
-
-        if (resp.rowCount > 0) {
-
-          connid    = resp.rows[0].connid
-          orderid   = resp.rows[0].orderid
-          rem_token = resp.rows[0].remember_token
-        }
-
-      }).catch(err => {
-        errList.push(err.message)
-      })
-
-      return {connId, orderid, rem_token}
-  },
 
   getOrderIdByConnectionId: async (dbpg, req, errList) => {
 
@@ -79,9 +79,9 @@ module.exports = {
 
     //если пр таком конни юсер ничего не найдено пытаемся найти по юсеру откр заказ
     if(userid > 1 && orderid === 0) {
-      const resp = await getConnIdByUserId(userid, errList);
+      const resp = await getConnIdByUserId(dbpg, userid, errList);
       if (resp.connId > 0) {
-        orderid = resp.orderid
+        orderid = resp.orderId
         res.cookie("connectionid", resp.rem_token, { maxAge: 31536000 });
       }
     }

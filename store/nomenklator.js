@@ -8,7 +8,7 @@ export const state = () => ({
   nomenklator: [],
   subNomenklator: [],
   countCart: 0,
-  cartList: []
+  cartList: [],
 })
 
 export const mutations = {
