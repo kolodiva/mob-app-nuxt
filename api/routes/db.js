@@ -483,14 +483,14 @@ const { Router } = require('express')
       let errList = []
       let user_id = req.params.id
 
-      const orderInfo = await getOrderIdByConnectionIdUserId(dbpg, req, user_id, errList);
+      const orderid = await getOrderIdByConnectionIdUserId(dbpg, req, res, user_id, errList);
 
       dbpg.query(
             `
             select t2.artikul, t2.name, t1.qty
             from order_goods t1
             inner join nomenklators t2 on t1.nomenklator_id=t2.guid
-            where order_id='${orderInfo.order_id}'
+            where order_id='${orderid}'
             `
           )
           .then((res1) => {
@@ -498,4 +498,5 @@ const { Router } = require('express')
           });
 
   })
+
   module.exports = router

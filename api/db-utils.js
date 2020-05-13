@@ -2,6 +2,33 @@ import { v4 as uuidv4 } from 'uuid';
 
 module.exports = {
 
+  getConnIdByUserId: async (userId, errList) => {
+
+    let connId = 0
+    let orderId = 0
+    let rem_token = ''
+
+    await dbpg.query(`
+      select t1.id connid, t2.id orderid, t1.remember_token
+      from connections t1
+      inner join orders t2 on t2.connection_id=t1.id and t2.status=0
+      where t1.user_id=${userid}`
+      ).then(resp => {
+
+        if (resp.rowCount > 0) {
+
+          connid    = resp.rows[0].connid
+          orderid   = resp.rows[0].orderid
+          rem_token = resp.rows[0].remember_token
+        }
+
+      }).catch(err => {
+        errList.push(err.message)
+      })
+
+      return {connId, orderid, rem_token}
+  },
+
   getOrderIdByConnectionId: async (dbpg, req, errList) => {
 
     let connectionid = req.cookies.connectionid
@@ -28,30 +55,38 @@ module.exports = {
     return orderInfo;
 },
 
-  getOrderIdByConnectionIdUserId: async (dbpg, req, userid, errList) => {
+  getOrderIdByConnectionIdUserId: async (dbpg, req, res, userid, errList) => {
 
-  let connectionid = req.cookies.connectionid
-  let orderInfo    = {order_id: 0, count_goods: 0}
+    let connectionid = req.cookies.connectionid
+    let orderid = 0
 
-  if (connectionid) {
+    if (connectionid) {
 
-    await dbpg.query(`
-      select t2.id order_id, count(t3.id) count_goods
-      from connections t1
-      left join orders t2 on t1.id=t2.connection_id and t2.status = 0
-      left join order_goods t3 on t2.id=t3.order_id
-      where t1.remember_token='${connectionid}' and t1.user_id='${userid}'
-      group by t2.id`
-      ).then(resp => {
-        if (resp.rowCount > 0) {
-          orderInfo = resp.rows[0]
-        }
-      }).catch(err => {
-        errList.push(err.message)
-      })
-  }
+      await dbpg.query(`
+        select t2.id order_id
+        from connections t1
+        inner join orders t2 on t1.id=t2.connection_id and t2.status = 0
+        where t1.remember_token='${connectionid}' and t1.user_id='${userid}'
+        `
+        ).then(resp => {
+          if (resp.rowCount > 0) {
+            orderid = resp.rows[0].order_id
+          }
+        }).catch(err => {
+          errList.push(err.message)
+        })
+    }
 
-  return orderInfo;
+    //если пр таком конни юсер ничего не найдено пытаемся найти по юсеру откр заказ
+    if(userid > 1 && orderid = 0) {
+      const resp = await getConnIdByUserId(userid, errList);
+      if (resp.connId > 0) {
+        orderid = resp.orderid
+        res.cookie("connectionid", resp.rem_token, { maxAge: 31536000 });
+      }
+    }
+
+  return orderid;
 },
 
   getConnOrder: async (dbpg, req, res, errList) => {

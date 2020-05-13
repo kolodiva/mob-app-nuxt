@@ -8,6 +8,7 @@ export const state = () => ({
   nomenklator: [],
   subNomenklator: [],
   countCart: 0,
+  cartList: []
 })
 
 export const mutations = {
@@ -27,8 +28,9 @@ export const mutations = {
       obj.qty2 = obj.qty1
     }
   },
-  SET_COUNT_CART(state, countCart) {
-    state.countCart = countCart
+  SET_COUNT_CART(state, rows) {
+    state.cartList = rows
+    state.countCart = rows.length
   },
 }
 
@@ -53,7 +55,7 @@ export const actions = {
     const userid = this.$auth.user ? this.$auth.user.id : 1
     const url = `/api/order/${userid}`
     const rows = await getData(url, this.$axios)
-    commit('SET_COUNT_CART', rows.length)
+    commit('SET_COUNT_CART', rows)
   },
   async loadAll({ commit, dispatch }) {
     this.dispatch('nomenklator/refreshCountCart')
