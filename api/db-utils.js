@@ -78,7 +78,7 @@ module.exports = {
     }
 
     //если пр таком конни юсер ничего не найдено пытаемся найти по юсеру откр заказ
-    if(userid > 1 && orderid = 0) {
+    if(userid > 1 && orderid === 0) {
       const resp = await getConnIdByUserId(userid, errList);
       if (resp.connId > 0) {
         orderid = resp.orderid
