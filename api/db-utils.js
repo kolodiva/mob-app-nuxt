@@ -72,15 +72,41 @@ module.exports = {
         })
     }
 
+    //когда по каким то причинам connectionid слетел
+    //или он не соовтетствует данным авторизации по userid НЕ аноним ищем активный Заказ и если он есть то уст кукис с этим коннекшеном
+    if (!connid && userid > 1) {
+
+      await dbpg.query(`
+        select t1.id connid, t2.id orderid, t1.remember_token
+        from connections t1
+        inner join orders t2 on t2.connection_id=t1.id and t2.status=0
+        where t1.user_id=${userid}`
+        ).then(resp => {
+
+          if (resp.row.length > 0) {
+
+            connid = resp.rows[0].connid
+            orderid = resp.rows[0].orderid
+
+            res.cookie("connectionid", resp.rows[0].remember_token, { maxAge: 31536000 });
+          }
+
+        }).catch(err => {
+          errList.push(err.message)
+        })
+    }
+
     if (!connid && errList.length === 0) {
 
       const remToken  = uuidv4();
       const ipAddress = req.ip;
 
-      await dbpg.query(`insert into connections(user_id, remember_token, updated_at, created_at, ipaddress) values( ${userid}, '${remToken}', now(), now(), '${ipAddress}') RETURNING id`
+      await dbpg.query(`
+        insert into connections(user_id, remember_token, updated_at, created_at, ipaddress) values( ${userid}, '${remToken}', now(), now(), '${ipAddress}')
+        RETURNING id`
         ).then(resp => {
 
-          res.cookie("connectionid", remToken, { expires: new Date(Date.now() + 604800) });
+          res.cookie("connectionid", remToken, { maxAge: 31536000 });
 
           connid = resp.rows[0].id
 
