@@ -80,7 +80,7 @@ module.exports = {
       await dbpg.query(`insert into connections(user_id, remember_token, updated_at, created_at, ipaddress) values( ${userid}, '${remToken}', now(), now(), '${ipAddress}') RETURNING id`
         ).then(resp => {
 
-          res.cookie("connectionid", remToken);
+          res.cookie("connectionid", remToken, { expires: new Date(Date.now() + 604800) });
 
           connid = resp.rows[0].id
 

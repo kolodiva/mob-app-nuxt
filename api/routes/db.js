@@ -415,7 +415,7 @@ const { Router } = require('express')
 
                   //заходим с анонима БЕЗ товара в авторизованного где есть товар
                   if (recNew && recNew.remember_token && recOld && !recOld.remember_token) {
-                    res.cookie("connectionid", recNew.remember_token);
+                    res.cookie("connectionid", recNew.remember_token, { expires: new Date(Date.now() + 604800) });
                   }
 
                   //самый сложный вариант когда заказ анонима при авторизации объединяется с заказмо авторизованного.
@@ -431,7 +431,7 @@ const { Router } = require('express')
                         group by ord_id, nomenklator_id, unit_type_id
                       `)
 
-                    res.cookie("connectionid", recNew.remember_token);
+                    res.cookie("connectionid", recNew.remember_token, { expires: new Date(Date.now() + 604800) });
                   }
 
               })
