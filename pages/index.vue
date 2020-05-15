@@ -42,8 +42,8 @@ export default {
   name: 'IndexPage',
   serverCacheKey() {
     // Will change every 10 secondes
-    return true
-    // Math.floor(Date.now() / 10000)
+    // return true
+    Math.floor(Date.now() / 10000)
   },
   middleware: 'load-nomenklator',
   data: () => ({ date: Date.now() }),
