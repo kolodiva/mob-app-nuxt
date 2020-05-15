@@ -137,7 +137,7 @@ module.exports = {
      ** You can extend webpack config here
      */
     // parallel: true,
-    // cache: true,
+    //cache: true,
     // hardSource: true,
     extend(config, ctx) {
 

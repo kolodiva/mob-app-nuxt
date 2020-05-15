@@ -59,13 +59,19 @@ export const actions = {
   },
   async loadAll({ commit, dispatch }) {
     this.dispatch('nomenklator/refreshCountCart')
-    const data = await getData('/api/db', this.$axios)
+    // const data = await getData('/api/db', this.$axios)
+    const data = await this.$axios.$get('/api/db', {
+      params: { userid: (this.$auth.user && this.$auth.user.id) || 1 },
+    })
     commit('SET_NOMENKLATOR', data)
   },
   async loadSubNumenklator({ commit, dispatch }, params) {
-    const data = await getData(`/api/db/${params.id}`, this.$axios)
-    commit('SET_SUB_NOMENKLATOR', data)
     this.dispatch('nomenklator/refreshCountCart')
+    // const data = await getData(`/api/db/${params.id}`, this.$axios)
+    const data = await this.$axios.$get(`/api/db/${params.id}`, {
+      params: { userid: (this.$auth.user && this.$auth.user.id) || 1 },
+    })
+    commit('SET_SUB_NOMENKLATOR', data)
   },
   async chngeCart({ commit, dispatch, state }, ind) {
     const obj = state.subNomenklator[ind]

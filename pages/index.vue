@@ -1,5 +1,6 @@
 <template>
   <v-row>
+    <h1>{{ date }}</h1>
     <v-col
       v-for="pos in $store.state.addresses.mainPicture"
       :key="pos.id"
@@ -10,11 +11,11 @@
         <v-card>
           <v-img
             eager
-            :src="`/index_pic/${pos.file_name}.jpg`"
+            :src="`/index_pic/${pos.file_name}.png`"
             aspect-ratio="1"
             class="grey lighten-2"
             contain
-            height="120"
+            height="140"
             :alt="`${pos.name}`"
           >
             <template v-slot:placeholder>
@@ -38,8 +39,14 @@
 </template>
 <script>
 export default {
+  name: 'IndexPage',
+  serverCacheKey() {
+    // Will change every 10 secondes
+    return true
+    // Math.floor(Date.now() / 10000)
+  },
   middleware: 'load-nomenklator',
-  data: () => ({}),
+  data: () => ({ date: Date.now() }),
   computed: {
     nomenklators() {
       return this.$store.getters['nomenklator/getNomenklator']

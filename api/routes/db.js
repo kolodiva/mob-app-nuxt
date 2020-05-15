@@ -41,7 +41,7 @@ const consola = require('consola')
     port: conn_param_statistica.port,
   })
 
-const { Router } = require('express')
+  const { Router } = require('express')
 
   const router = Router()
 
@@ -49,30 +49,31 @@ const { Router } = require('express')
 
 
   router.get('/db', async function(req, res, next) {
-      //res.json({foo: 1})
-      //consola.info('11111111111111111111111111111111111111111');
+      //console.log( req.query ); здесь могут быть параметры get запроса query
       let errList = []
-
-      const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
 
       dbpg.query(
             "select * from nomenklators where itgroup and parentguid is null and guid not in ('yandexpagesecret', 'sekretnaya_papka') order by name"
           )
           .then((res1) => {
-            res.json( {recs: res1.rows, countCart: orderInfo.count_goods} )
+            res.json( {recs: res1.rows} )
           });
 
   })
 
+  //треб данных об откртом заказе
   router.get('/db/:id', async function(req, res, next) {
 
-    let id = req.params.id
-    let errList = []
-    let rec = []
+    let orderId   = 0;
+    let parentid  = req.params.id
+    let errList   = []
+
+    const userId          = req.query.userid || 1;
+    const connectionToken = req.cookies.connectionid;
+
+    //console.log( userid );
 
     const orderInfo = await getOrderIdByConnectionId(dbpg, req, errList);
-
-    //consola.info(orderInfo);
 
     //'${id}'
     //create extension if not exists tablefunc;
@@ -97,7 +98,7 @@ const { Router } = require('express')
 
 			           left join complects on complects.nomenklator_id = nomenklators.guid
 
-			           where nomenklators.parentguid='${id}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
+			           where nomenklators.parentguid='${parentid}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
 
 			)
 
@@ -159,7 +160,7 @@ const { Router } = require('express')
 
 			left join unit_types on nomenklators.unit_type_id = unit_types.code
 
-			where nomenklators.parentguid='${id}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
+			where nomenklators.parentguid='${parentid}' and nomenklators.guid not in ('yandexpagesecret', 'sekretnaya_papka')
 
 			ORDER BY  nomenklators.itgroup desc, nomenklators.sort_field, nomenklators.name, nomenklators.artikul
       `
@@ -169,7 +170,7 @@ const { Router } = require('express')
             sql
         )
         .then((res1) => {
-          res.json( {recs: res1.rows, countCart: orderInfo.count_goods} )
+          res.json( {recs: res1.rows} )
         });
   })
 
@@ -263,7 +264,6 @@ const { Router } = require('express')
           res.json( {data: res1.rows} )
         });
   })
-
 
   router.get('/db_manegers/:id', function(req, res, next) {
     let id = req.params.id
@@ -363,6 +363,7 @@ const { Router } = require('express')
         )
   })
 
+  //треб данных об откртом заказе
   router.get('/userAuth', async function(req, res, next) {
 
       let user = {id:1, username: 'Anonimus', name: 'Anonimus'}
@@ -458,6 +459,7 @@ const { Router } = require('express')
     })
   })
 
+  //треб данных об откртом заказе
   router.post('/chngeCart', async function(req, res, next) {
 
     let errList = []
@@ -478,6 +480,7 @@ const { Router } = require('express')
     return res.status(200).json( {rows: rec, err: errList, countCart: orderInfo.count_goods} )
   })
 
+  //треб данных об откртом заказе
   router.get('/order/:id', async function(req, res, next) {
 
       let errList = []
