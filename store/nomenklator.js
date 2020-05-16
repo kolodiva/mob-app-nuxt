@@ -1,3 +1,6 @@
+// import _ from 'lodash'
+import nomenklTopLevel from '@/assets/nomenkl-top-level.json'
+
 // import { getData } from '@/utils/store-utils'
 
 // const consola = require('consola')
@@ -9,6 +12,7 @@ export const state = () => ({
   subNomenklator: [],
   countCart: 0,
   cartList: [],
+  nomenklTopLevel: nomenklTopLevel.rows,
 })
 
 export const mutations = {
@@ -16,9 +20,9 @@ export const mutations = {
     state.nomenklator = data.recs
     state.countCart = data.countCart
   },
-  SET_SUB_NOMENKLATOR(state, data) {
-    state.subNomenklator = data.recs
-    state.countCart = data.countCart
+  SET_SUB_NOMENKLATOR(state, rows) {
+    state.subNomenklator = rows
+    // state.countCart = data.countCart
   },
   SET_NEW_QTY(state, { ind, typeoper }) {
     const obj = state.subNomenklator[ind]
@@ -48,6 +52,10 @@ export const getters = {
   getSubNomenklator: (state) => {
     return state.subNomenklator
   },
+  getNomenklTopLevel: (state) => {
+    // return _.sortBy(state.nomenklTopLevel, 'id')
+    return state.nomenklTopLevel
+  },
 }
 
 export const actions = {
@@ -64,13 +72,19 @@ export const actions = {
     })
     commit('SET_NOMENKLATOR', data)
   },
-  async loadSubNumenklator({ commit, dispatch }, params) {
-    this.dispatch('nomenklator/refreshCountCart')
+  async loadSubNumenklator({ commit, dispatch }, { id }) {
+    // this.dispatch('nomenklator/refreshCountCart')
     // const data = await getData(`/api/db/${params.id}`, this.$axios)
-    const data = await this.$axios.$get(`/api/db/${params.id}`, {
-      params: { userid: (this.$auth.user && this.$auth.user.id) || 1 },
+    const userid = this.$auth.user ? this.$auth.user.id : 1
+    const rows = await this.$api('nomenklator', 'getSubNomenklator', {
+      id: userid,
+      parentguid: id,
     })
-    commit('SET_SUB_NOMENKLATOR', data)
+
+    // const data = await this.$axios.$get(`/api/db/${params.id}`, {
+    //   params: { userid: (this.$auth.user && this.$auth.user.id) || 1 },
+    // })
+    commit('SET_SUB_NOMENKLATOR', rows)
   },
   async chngeCart({ commit, dispatch, state }, ind) {
     const obj = state.subNomenklator[ind]

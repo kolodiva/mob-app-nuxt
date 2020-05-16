@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col
-      v-for="pos in $store.state.addresses.mainPicture"
+      v-for="pos in nomenklator"
       :key="pos.id"
       class="d-flex child-flex"
       cols="6"
@@ -37,19 +37,18 @@
   </v-row>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'IndexPage',
   serverCacheKey() {
-    // Will change every 10 secondes
     return true
-    // Math.floor(Date.now() / 10000)
   },
   // middleware: 'load-nomenklator',
   data: () => ({}),
   computed: {
-    nomenklators() {
-      return this.$store.getters['nomenklator/getNomenklator']
-    },
+    ...mapGetters({
+      nomenklator: 'nomenklator/getNomenklTopLevel',
+    }),
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')

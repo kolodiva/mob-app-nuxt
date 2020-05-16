@@ -1,7 +1,7 @@
 <template>
   <v-row style="align-self: start;">
     <v-col
-      v-for="pos of nomenklators"
+      v-for="pos in nomenklator"
       :key="pos.id"
       class="d-flex child-flex"
       cols="6"
@@ -41,15 +41,16 @@
   </v-row>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 // import { mapState } from 'vuex'
 // const consola = require('consola')
 // import winOverlay from '@/components/overlay.vue'
 export default {
   data: () => ({}),
   computed: {
-    nomenklators() {
-      return this.$store.getters['nomenklator/getSubNomenklator']
-    },
+    ...mapGetters({
+      nomenklator: 'nomenklator/getSubNomenklator',
+    }),
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')

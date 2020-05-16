@@ -31,8 +31,11 @@
 
 <script>
 // const consola = require('consola')
-
 export default {
+  name: 'ContactsPage',
+  serverCacheKey() {
+    return true
+  },
   async asyncData({ app, params }) {},
   data() {
     return {}

@@ -1,6 +1,6 @@
 <template>
   <v-row dense>
-    <v-col v-for="(pos, i) in nomenklators" :key="i" cols="12">
+    <v-col v-for="(pos, i) in nomenklator" :key="i" cols="12">
       <v-card color="" light>
         <v-card-title
           class="headline"
@@ -71,6 +71,8 @@
 <script>
 // const consola = require('consola')
 // import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -91,9 +93,9 @@ export default {
     }
   },
   computed: {
-    nomenklators() {
-      return this.$store.getters['nomenklator/getSubNomenklator']
-    },
+    ...mapGetters({
+      nomenklator: 'nomenklator/getSubNomenklator',
+    }),
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')

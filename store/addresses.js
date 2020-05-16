@@ -1,10 +1,8 @@
 import _ from 'lodash'
 import addresses from '@/assets/addresses.json'
-import mainPictures from '@/assets/main-pictures.json'
 
 export const state = () => ({
   address: addresses.address,
-  mainPicture: mainPictures.mainPicture,
 })
 
 export const getters = {
@@ -19,8 +17,5 @@ export const getters = {
     })
 
     return list
-  },
-  getAllMainPic: (state) => {
-    return _.sortBy(state.mainPicture, 'id')
   },
 }
