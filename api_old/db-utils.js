@@ -29,6 +29,8 @@ const getConnIdByUserId = async (dbpg, userId, errList) => {
 
 module.exports = {
 
+  get
+
   getOrderIdByConnectionId: async (dbpg, req, errList) => {
 
     let connectionid = req.cookies.connectionid

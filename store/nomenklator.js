@@ -1,4 +1,4 @@
-import { getData } from '@/utils/store-utils'
+// import { getData } from '@/utils/store-utils'
 
 // const consola = require('consola')
 
@@ -53,8 +53,7 @@ export const getters = {
 export const actions = {
   async refreshCountCart({ commit, dispatch }) {
     const userid = this.$auth.user ? this.$auth.user.id : 1
-    const url = `/api/order/${userid}`
-    const rows = await getData(url, this.$axios)
+    const rows = await this.$api('orders', 'getCart', { userid })
     commit('SET_COUNT_CART', rows)
   },
   async loadAll({ commit, dispatch }) {
@@ -81,7 +80,7 @@ export const actions = {
       idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
     }
 
-    const { data } = await this.$axios.post('/api/chngeCart', info)
+    const { data } = await this.$axios.$post('/api/chngeCart', info)
 
     let typeoper = 1
 

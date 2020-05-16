@@ -1,12 +1,15 @@
 //const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
+  env: {
+    // PGUSER: 'postgres',
+  },
   mode: 'universal',
   //mode: 'spa',
   /*
    ** Headers of the page
    */
-   router: {
+  router: {
   //   base: '/'
     middleware: 'stats'
   },
@@ -40,7 +43,20 @@ module.exports = {
      'assets/main.css'
   ],
 
-  serverMiddleware: ['~/api/index.js'],
+// '~/api/index.js'
+  serverMiddleware: [
+    { path: "/api", handler: require("body-parser").json() },
+        {
+          path: "/api",
+          handler: (req, res, next) => {
+            const url = require("url");
+            req.query = url.parse(req.url, true).query;
+            req.params = { ...req.query, ...req.body };
+            next();
+          }
+        },
+        { path: "/api", handler: "~/serverMiddleware/api-server.js" }
+  ],
 
   /*
    ** Plugins to load before mounting the App
@@ -48,7 +64,9 @@ module.exports = {
   plugins: [/*'~plugins/vuetify.js'*/
     {src: '~/plugins/vue-pdf.js', mode: 'client'},
     {src: '~/plugins/vue-inject.js', mode: 'client'},
-    {src: '~/plugins/crypto-js.js'}
+    {src: '~/plugins/crypto-js.js'},
+    "~/plugins/api-context.client.js",
+    "~/plugins/api-context.server.js",
   ],
   /*
    ** Nuxt.js dev-modules
@@ -136,9 +154,9 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    // parallel: true,
-    //cache: true,
-    // hardSource: true,
+    parallel: true,
+    cache: true,
+    hardSource: true,
     extend(config, ctx) {
 
       // Run ESLint on save

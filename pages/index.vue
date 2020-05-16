@@ -1,6 +1,5 @@
 <template>
   <v-row>
-    <h1>{{ date }}</h1>
     <v-col
       v-for="pos in $store.state.addresses.mainPicture"
       :key="pos.id"
@@ -42,11 +41,11 @@ export default {
   name: 'IndexPage',
   serverCacheKey() {
     // Will change every 10 secondes
-    // return true
-    Math.floor(Date.now() / 10000)
+    return true
+    // Math.floor(Date.now() / 10000)
   },
-  middleware: 'load-nomenklator',
-  data: () => ({ date: Date.now() }),
+  // middleware: 'load-nomenklator',
+  data: () => ({}),
   computed: {
     nomenklators() {
       return this.$store.getters['nomenklator/getNomenklator']
