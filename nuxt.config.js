@@ -65,8 +65,8 @@ module.exports = {
     {src: '~/plugins/vue-pdf.js', mode: 'client'},
     {src: '~/plugins/vue-inject.js', mode: 'client'},
     {src: '~/plugins/crypto-js.js'},
-    "~/plugins/api-context.client.js",
-    "~/plugins/api-context.server.js",
+    {src: '~/plugins/api-context.client.js', mode: 'client'},
+    {src: '~/plugins/api-context.server.js', mode: 'server'},
   ],
   /*
    ** Nuxt.js dev-modules
