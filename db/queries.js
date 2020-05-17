@@ -6,6 +6,7 @@ function getUsers(params) {
   }
 }
 
+//orders
 function getCart(params) {
   return {
     name: 'get-cart',
@@ -14,6 +15,7 @@ function getCart(params) {
   }
 }
 
+//nomenklator
 function getSubNomenklator(params) {
 
   const textqry=`
@@ -111,8 +113,37 @@ function getSubNomenklator(params) {
   }
 }
 
+//users
+function getUserByEmail({email}) {
+
+  return {
+    name: 'getUserByEmail',
+    text: "select password_digest from users where email=$1",
+    values: [email],
+  }
+}
+function addNewUser({email, name, phone, password_digest}) {
+
+  return {
+    name: 'addNewUser',
+    text: "insert into users(email, name, phone, password_digest, updated_at, created_at) values( $1, $2, $3, $4, now(), now())",
+    values: [email, name ? name : email, phone, password_digest],
+  }
+}
+function userAuth({keyUser}) {
+
+  return {
+    name: 'userAuth',
+    text: 'select id, email, name, phone from users where password_digest=$1',
+    values: [keyUser],
+  }
+}
+
 module.exports = {
   getUsers,
   getCart,
   getSubNomenklator,
+  getUserByEmail,
+  addNewUser,
+  userAuth,
  };

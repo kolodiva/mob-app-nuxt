@@ -77,7 +77,7 @@ const consola = require('consola')
 
     //'${id}'
     //create extension if not exists tablefunc;
-    let sql = `
+  let sql = `
 
 		with price_list_total as (
 

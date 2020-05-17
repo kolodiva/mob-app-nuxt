@@ -53,12 +53,12 @@ async function index() {
 
 async function show({ id }) {
 
-  const { rows } = await db.queryApp('getUser', [id])
-  console.log( rows );
+  //const { rows } = await db.queryApp('getUsers', [id])
+  //console.log( rows );
 
-  let res = await getDataFromDB();
+  let {data} = await getDataFromDB();
 
-  return res.data.filter(el => el.id == id)[0];
+  return data.filter(el => el.id == id)[0];
 }
 
 export { index, show };

@@ -40,6 +40,8 @@ export default {
 
       userInfo.phone = loginInfo.phone
 
+      userInfo.name = loginInfo.name
+
       userInfo.password = ciphertext
 
       try {
@@ -59,7 +61,8 @@ export default {
             userInfo.password = this.$CryptoJS
               .SHA256(loginInfo.password)
               .toString()
-            await this.$axios.post('/api/userNew', userInfo)
+            await this.$api('session', 'userNew', userInfo)
+            // await this.$axios.post('/api/userNew', userInfo)
             userInfo.password = ciphertext
             await this.$auth.loginWith('local', {
               data: userInfo,

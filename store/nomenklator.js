@@ -73,17 +73,12 @@ export const actions = {
     commit('SET_NOMENKLATOR', data)
   },
   async loadSubNumenklator({ commit, dispatch }, { id }) {
-    // this.dispatch('nomenklator/refreshCountCart')
-    // const data = await getData(`/api/db/${params.id}`, this.$axios)
     const userid = this.$auth.user ? this.$auth.user.id : 1
     const rows = await this.$api('nomenklator', 'getSubNomenklator', {
       id: userid,
       parentguid: id,
     })
 
-    // const data = await this.$axios.$get(`/api/db/${params.id}`, {
-    //   params: { userid: (this.$auth.user && this.$auth.user.id) || 1 },
-    // })
     commit('SET_SUB_NOMENKLATOR', rows)
   },
   async chngeCart({ commit, dispatch, state }, ind) {
