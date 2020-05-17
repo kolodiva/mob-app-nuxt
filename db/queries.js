@@ -14,6 +14,32 @@ function getCart(params) {
     values: params,
   }
 }
+function getConnOrder( strWhere ) {
+  return {
+    name: '',
+    text: `
+    select t1.id connid, t1.remember_token, t2.id orderid
+    from connections t1
+    inner join orders t2 on t2.connection_id = t1.id and t2.status=0
+    ${strWhere}
+    order by t1.id desc, t2.id desc
+    limit 1
+    `,
+    values: [],
+  }
+}
+function addNewConnOrder( userid ) {
+  return {
+    name: '',
+    text: `
+    with r1 as (insert into connections(user_id, remember_token, updated_at, created_at)
+      values( ${userid}, uuid_generate_v4(), now(), now() ) RETURNING id, remember_token)
+        insert into orders(connection_id, status, updated_at, created_at) values( (select id from r1), 0, now(), now())
+            RETURNING id orderid, (select id from r1) connid, (select remember_token from r1)
+    `,
+    values: [],
+  }
+}
 
 //nomenklator
 function getSubNomenklator(params) {
@@ -142,6 +168,10 @@ function userAuth({keyUser}) {
 module.exports = {
   getUsers,
   getCart,
+
+  getConnOrder,
+  addNewConnOrder,
+
   getSubNomenklator,
   getUserByEmail,
   addNewUser,

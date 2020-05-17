@@ -86,30 +86,33 @@ export const actions = {
     const info = {
       guid: obj.guid,
       qty: obj.qty2,
-      idUser: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
     }
 
-    const { data } = await this.$axios.$post('/api/chngeCart', info)
+    // const { data } = await this.$axios.$post('/api/chngeCart', info)
+    const rows = await this.$api('orders', 'chngeCart', info)
 
-    let typeoper = 1
+    return rows
 
-    if (data.err.length === 0) {
-      await this.dispatch('snackbar/setSnackbar', {
-        color: 'green',
-        text: `Поз добавлена/изменена`,
-        timeout: 2000,
-      })
-    } else {
-      typeoper = 0
-
-      await this.dispatch('snackbar/setSnackbar', {
-        color: 'red',
-        text: `Поз НЕ добавлена. Ошибка: ${data.err.join()}`,
-        timeout: 5000,
-      })
-    }
-
-    commit('SET_NEW_QTY', { ind, typeoper })
-    this.dispatch('nomenklator/refreshCountCart')
+    // let typeoper = 1
+    //
+    // if (data.err.length === 0) {
+    //   await this.dispatch('snackbar/setSnackbar', {
+    //     color: 'green',
+    //     text: `Поз добавлена/изменена`,
+    //     timeout: 2000,
+    //   })
+    // } else {
+    //   typeoper = 0
+    //
+    //   await this.dispatch('snackbar/setSnackbar', {
+    //     color: 'red',
+    //     text: `Поз НЕ добавлена. Ошибка: ${data.err.join()}`,
+    //     timeout: 5000,
+    //   })
+    // }
+    //
+    // commit('SET_NEW_QTY', { ind, typeoper })
+    // this.dispatch('nomenklator/refreshCountCart')
   },
 }

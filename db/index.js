@@ -29,7 +29,24 @@ const dbpgStat = new Pool({
   connectionString: connParam2,
 })
 
+async function getConnectionOrder( userid, connectionid ) {
+
+  const strWhere = userid === 1 ? `where t1.user_id = ${userid} and t1.remember_token = '${connectionid}'` : `where t1.user_id = ${userid}`
+
+  let {rows} = await dbpgApp1.query( queries['getConnOrder'](strWhere) )
+
+  if (rows.length === 0) {
+
+    const newconn = await dbpgApp1.query( queries['addNewConnOrder'](userid) )
+
+    rows = newconn.rows
+  }
+
+  return rows[0]
+}
+
 module.exports = {
   queryApp: (text, params) => dbpgApp1.query( queries[text](params) ),
   queryStat: (text, params) => dbpgStat.query(text, params),
+  getConnectionOrder,
 }
