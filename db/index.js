@@ -48,6 +48,7 @@ async function getConnectionOrder( userid, connectionid, createnewconn = true  )
 
   return rows[0]
 }
+
 async function chngOrder( orderid, guid, qty, price ) {
 
   const res = await dbpgApp1.query( queries['chngOrder'](  orderid, guid, qty, price ) )
