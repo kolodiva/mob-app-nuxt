@@ -22,8 +22,8 @@ export const mutations = {
     state.countCart = data.countCart
   },
   SET_SUB_NOMENKLATOR(state, rows) {
-    state.subNomenklator = rows,
-    state.connectionid: undefined,
+    state.subNomenklator = rows
+    state.connectionid = undefined
     // state.countCart = data.countCart
   },
   SET_NEW_QTY(state, { ind, typeoper }) {
