@@ -13,6 +13,7 @@ export const state = () => ({
   countCart: 0,
   cartList: [],
   nomenklTopLevel: nomenklTopLevel.rows,
+  connectionid: undefined,
 })
 
 export const mutations = {
@@ -21,7 +22,8 @@ export const mutations = {
     state.countCart = data.countCart
   },
   SET_SUB_NOMENKLATOR(state, rows) {
-    state.subNomenklator = rows
+    state.subNomenklator = rows,
+    state.connectionid: undefined,
     // state.countCart = data.countCart
   },
   SET_NEW_QTY(state, { ind, typeoper }) {
@@ -35,6 +37,9 @@ export const mutations = {
   SET_COUNT_CART(state, rows) {
     state.cartList = rows
     state.countCart = rows.length
+  },
+  SET_CONNECTION_ID(state, connid) {
+    state.connectionid = connid
   },
 }
 
@@ -72,11 +77,12 @@ export const actions = {
     })
     commit('SET_NOMENKLATOR', data)
   },
-  async loadSubNumenklator({ commit, dispatch }, { id }) {
+  async loadSubNumenklator({ commit, dispatch, state }, { id }) {
     const userid = this.$auth.user ? this.$auth.user.id : 1
     const rows = await this.$api('nomenklator', 'getSubNomenklator', {
-      id: userid,
+      userid,
       parentguid: id,
+      connectionid: state.connectionid,
     })
 
     commit('SET_SUB_NOMENKLATOR', rows)

@@ -29,13 +29,17 @@ const dbpgStat = new Pool({
   connectionString: connParam2,
 })
 
-async function getConnectionOrder( userid, connectionid ) {
+async function getConnectionOrder( userid, connectionid, createnewconn = true  ) {
 
   const strWhere = userid === 1 ? `where t1.user_id = ${userid} and t1.remember_token = '${connectionid}'` : `where t1.user_id = ${userid}`
 
   let {rows} = await dbpgApp1.query( queries['getConnOrder'](strWhere) )
 
-  if (rows.length === 0) {
+  if ( rows.length === 0 && !createnewconn ) {
+    return {connid: undefined, orderid: undefined, remember_token: undefined}
+  }
+
+  if ( rows.length === 0 ) {
 
     const newconn = await dbpgApp1.query( queries['addNewConnOrder'](userid) )
 
@@ -44,9 +48,16 @@ async function getConnectionOrder( userid, connectionid ) {
 
   return rows[0]
 }
+async function chngOrder( orderid, guid, qty, price ) {
+
+  const res = await dbpgApp1.query( queries['chngOrder'](  orderid, guid, qty, price ) )
+
+  return ( res[1].rowCount === 1 )
+}
 
 module.exports = {
   queryApp: (text, params) => dbpgApp1.query( queries[text](params) ),
   queryStat: (text, params) => dbpgStat.query(text, params),
   getConnectionOrder,
+  chngOrder
 }

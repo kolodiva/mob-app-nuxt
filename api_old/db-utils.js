@@ -93,9 +93,9 @@ module.exports = {
 
   getConnOrder: async (dbpg, req, res, errList) => {
 
-    let connectionid = req.cookies.connectionid
     let connid  = undefined
     let orderid = undefined
+    let connectionid = req.cookies.connectionid
 
     const userid = req.body.idUser
 

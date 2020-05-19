@@ -40,6 +40,20 @@ function addNewConnOrder( userid ) {
     values: [],
   }
 }
+function chngOrder( orderid, guid, qty, price ) {
+  return {
+    name: '',
+    text: `
+    with deleted as (delete from order_good_complects where order_good_id in
+      ( select id from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}'))
+        delete from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}';
+        insert into order_goods(order_id, nomenklator_id, qty, price )
+    		select ${orderid}, '${guid}', ${qty || 0}, ${price} where ${qty || 0} > 0
+    		RETURNING id, nomenklator_id, qty
+    `,
+    values: [],
+  }
+}
 
 //nomenklator
 function getSubNomenklator(params) {
@@ -122,8 +136,8 @@ function getSubNomenklator(params) {
 
     left join price_list_total on nomenklators.guid = price_list_total.guid
 
-    left join orders on orders.id = ${params.id} and orders.status = 0
-    left join order_goods on order_goods.order_id = ${params.id} and price_list_total.guid = order_goods.nomenklator_id
+    left join orders on orders.id = ${params.orderid || null} and orders.status = 0
+    left join order_goods on order_goods.order_id = ${params.orderid || null} and price_list_total.guid = order_goods.nomenklator_id
 
     left join unit_types on nomenklators.unit_type_id = unit_types.code
 
@@ -171,6 +185,7 @@ module.exports = {
 
   getConnOrder,
   addNewConnOrder,
+  chngOrder,
 
   getSubNomenklator,
   getUserByEmail,

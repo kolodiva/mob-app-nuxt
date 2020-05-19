@@ -23,7 +23,7 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit({ commit }, { req }) {
-    // commit('setUser', req.headers)
+  async nuxtServerInit({ commit }, { req }) {
+    await commit('nomenklator/SET_CONNECTION_ID', req.cookies.connectionid)
   },
 }

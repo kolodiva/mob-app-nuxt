@@ -5,17 +5,19 @@ async function getCart({ id }) {
   return [5];
 }
 
-async function chngeCart({ userid, guid, qty, connectionid }, res) {
+async function chngeCart( { userid, guid, qty, connectionid }, res) {
 
   // console.log( userid, guid, qty, connectionid )
 
   const {connid, orderid, remember_token}  = await db.getConnectionOrder( userid, connectionid );
 
-  // console.log( connid, orderid, remember_token ) 
+  // console.log( connid, orderid, remember_token )
 
   if (remember_token && remember_token != connectionid) {
       res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
   }
+
+  const resOk  = await db.chngOrder( orderid, guid, qty, 123 );
 
   return [];
 }
