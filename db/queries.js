@@ -54,6 +54,35 @@ function chngOrder( orderid, guid, qty, price ) {
     values: [],
   }
 }
+function unitOrders( params ) {
+  return {
+    name: '',
+    text: `
+    begin;
+    delete from order_good_complects where order_good_id in (select id from order_goods where order_id = ${params.orderidnew || null});
+    delete from order_goods where order_id = ${params.orderidnew || null};
+
+    with r1 as (
+    insert into order_goods(order_id, nomenklator_id, unit_type_id, qty, price, sum, qty1, price1, sum1)
+    SELECT ${params.orderidnew || null} order_id, nomenklator_id, unit_type_id, sum(qty) qty, max(price) price, sum(qty)*max(price) sum, sum(qty1) qty1, max(price1) price1, sum(qty1)*max(price1) sum1
+    FROM order_goods
+    where order_id in (${params.orderid1 || null}, ${params.orderid2 || null})
+    group by
+    nomenklator_id, unit_type_id
+    returning id, nomenklator_id)
+
+    insert into order_good_complects(order_good_id, complect_id, unit_type_id, qty, koeff, price, qty1, koeff1, price1)
+    select r1.id order_id, t1.complect_id, t1.unit_type_id, sum(t1.qty) qty, max(t1.koeff) koeff, max(t1.price) price, sum(t1.qty1) qty1, max(t1.koeff1) koeff1, max(t1.price1) price1
+    from order_good_complects t1
+    inner join order_goods t2 on t1.order_good_id = t2.id and t2.order_id in (${params.orderid1 || null}, ${params.orderid2 || null})
+    inner join r1 on r1.nomenklator_id = t2.nomenklator_id
+    group by
+    r1.id, t1.complect_id, t1.unit_type_id;
+    commit;
+    `,
+    values: [],
+  }
+}
 
 //nomenklator
 function getSubNomenklator(params) {
@@ -158,7 +187,7 @@ function getUserByEmail({email}) {
 
   return {
     name: 'getUserByEmail',
-    text: "select password_digest from users where email=$1",
+    text: "select id, password_digest from users where email=$1",
     values: [email],
   }
 }
@@ -186,6 +215,7 @@ module.exports = {
   getConnOrder,
   addNewConnOrder,
   chngOrder,
+  unitOrders,
 
   getSubNomenklator,
   getUserByEmail,
