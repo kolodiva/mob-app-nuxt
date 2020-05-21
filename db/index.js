@@ -96,7 +96,7 @@ async function unitOrders( { userid }, connectionid ) {
 
       await dbpgApp1.query( 'begin;' );
 
-      await dbpg.query(`update connections set user_id=${userid} where id=${orderid2.connid}`)
+      await dbpgApp1.query(`update connections set user_id=${userid} where id=${orderid2.connid}`)
 
       await dbpgApp1.query( 'commit;' );
 
