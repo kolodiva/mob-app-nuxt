@@ -196,10 +196,12 @@ export default {
     },
     logout() {
       this.$auth.logout()
+      // this.$cookies.remove('connectionid')
+      // this.$cookies.remove('connectionid', { httpOnly: true })
       this.$cookies.remove('connectionid')
+
       this.$store.dispatch('nomenklator/refreshCountCart')
-      // this.$router.push('/')
-      this.$router.replace({ path: '/' })
+      this.$router.push({ path: '/' })
     },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop

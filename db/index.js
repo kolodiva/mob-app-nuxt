@@ -56,9 +56,67 @@ async function chngOrder( orderid, guid, qty, price ) {
   return ( res[1].rowCount === 1 )
 }
 
+async function unitOrders( { userid }, connectionid ) {
+
+  //ищем сущ connection по анониму если он есть НЕ создавая нового
+  const orderid2 = await getConnectionOrder( 1, connectionid, false );
+  //ищем сущ connection по Авторизованномй пользователю если он есть НЕ создавая нового
+  const { connid, orderid} = await getConnectionOrder( userid, connectionid, false );
+
+  //console.log( userid, orderid, orderid2.orderid, connid, connectionid )
+
+  //объединяем ТОЛЬКО если существую заказы и по анониму и по авторизованному пользователю
+  if ( orderid && orderid2.orderid ) {
+    try {
+
+      await dbpgApp1.query( 'begin;' );
+
+      //Добавили новые Conn Order
+      const newconnorder = await dbpgApp1.query( queries['addNewConnOrder'](userid) )
+
+      const newrec = newconnorder.rows[0]
+
+      await dbpgApp1.query( queries['unitOrders']({ orderid1: orderid, orderid2: orderid2.orderid, orderidnew: newrec.orderid }) )
+
+      await dbpgApp1.query( 'commit;' );
+
+      return true;
+
+    } catch (e) {
+
+      await dbpgApp1.query( 'rollback;' );
+
+      throw e;
+    }
+  }
+
+  //если существует сщтт  только по анониму - заменяем userid авториз пользователя
+  if ( orderid2.connid ) {
+    try {
+
+      await dbpgApp1.query( 'begin;' );
+
+      await dbpg.query(`update connections set user_id=${userid} where id=${orderid2.connid}`)
+
+      await dbpgApp1.query( 'commit;' );
+
+      return true;
+
+    } catch (e) {
+
+      await dbpgApp1.query( 'rollback;' );
+
+      throw e;
+    }
+  }
+
+  return true
+}
+
 module.exports = {
   queryApp: (text, params) => dbpgApp1.query( queries[text](params) ),
   queryStat: (text, params) => dbpgStat.query(text, params),
   getConnectionOrder,
-  chngOrder
+  chngOrder,
+  unitOrders
 }

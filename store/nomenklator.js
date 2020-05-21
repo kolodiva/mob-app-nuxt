@@ -66,11 +66,13 @@ export const getters = {
 export const actions = {
   async refreshCountCart({ commit, dispatch }) {
     const userid = this.$auth.user ? this.$auth.user.id : 1
-    const rows = await this.$api('orders', 'getCart', { userid })
+    const conntoken = this.$cookies.connectionid
+    const rows = await this.$api('orders', 'getCart', { userid, conntoken })
+    // console.log(userid, conntoken)
     commit('SET_COUNT_CART', rows)
   },
   async loadAll({ commit, dispatch }) {
-    this.dispatch('nomenklator/refreshCountCart')
+    // this.dispatch('nomenklator/refreshCountCart')
     // const data = await getData('/api/db', this.$axios)
     const data = await this.$axios.$get('/api/db', {
       params: { userid: (this.$auth.user && this.$auth.user.id) || 1 },

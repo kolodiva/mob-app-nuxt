@@ -23,22 +23,11 @@ async function index( params, res ) {
     return {status: 401, msg: "Введен неверный пароль, покрутите еще."}
   }
 
-  console.log( params );
-
-  let result = undefined
-
-  result  = await db.getConnectionOrder( 1, connectionid, false );
-
-  const orderid1 = result.orderid
-
-  result  = await db.getConnectionOrder( rows[0].id,  connectionid, false );
-
-  const orderid2 = result.orderid
-
-  console.log( rows[0].id, connectionid );
-  console.log( orderid1, orderid2 );
-
-  await db.queryApp('unitOrders', { orderid1, orderid2, orderidnew: 9972 } )
+  try {
+    await db.unitOrders( rows[0], connectionid )
+  } catch (e) {
+    return {status: 403, msg: `Ошибка при оаботе с БД: ${e.message}`};
+  }
 
   return {token: rows[0].password_digest};
 }

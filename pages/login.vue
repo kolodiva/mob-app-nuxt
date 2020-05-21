@@ -55,7 +55,9 @@ export default {
             timeout: 5000,
           })
 
-          this.$router.push('/')
+          await this.$store.dispatch('nomenklator/refreshCountCart')
+
+          this.$router.replace('/')
         } else {
           try {
             userInfo.password = this.$CryptoJS
@@ -67,13 +69,16 @@ export default {
             await this.$auth.loginWith('local', {
               data: userInfo,
             })
+
             await this.$store.dispatch('snackbar/setSnackbar', {
               color: 'green',
               text: `Спасибо Вам за авторизацию, ${this.$auth.user.name}`,
               timeout: 5000,
             })
 
-            this.$router.push('/')
+            await this.$store.dispatch('nomenklator/refreshCountCart')
+
+            this.$router.replace('/')
           } catch (e) {
             // consola.info(e.response.data)
             await this.$store.dispatch('snackbar/setSnackbar', {

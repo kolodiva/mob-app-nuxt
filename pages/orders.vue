@@ -3,7 +3,9 @@
     <content>
       <ul>
         <li v-for="(pos, i) in $store.state.nomenklator.cartList" :key="i">
-          {{ pos.artikul }}, {{ pos.name }}, {{ pos.qty }}
+          <h6>
+            {{ pos.artikul }}, {{ pos.name }}, {{ pos.qty }} , ({{ pos.guid }})
+          </h6>
         </li>
       </ul>
     </content>
