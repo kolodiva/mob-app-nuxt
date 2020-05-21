@@ -5,7 +5,6 @@
       label="Email"
       clear-icon="mdi-close-circle"
       clearable
-      :rules="[required('email'), emailFormat()]"
       type="email"
     />
     <v-text-field
