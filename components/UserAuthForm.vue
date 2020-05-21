@@ -5,7 +5,6 @@
       label="Email"
       clear-icon="mdi-close-circle"
       clearable
-      type="email"
     />
     <v-text-field
       v-model="userInfo.password"
