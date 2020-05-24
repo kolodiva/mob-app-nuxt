@@ -20,7 +20,7 @@ const minLength = (propertyType, minLength) => {
 const maxLength = (propertyType, maxLength) => {
   return (v) =>
     (v && v.length <= maxLength) ||
-    `${propertyType} must be less than ${maxLength} characters`
+    `${propertyType} не длиннее ${maxLength} символов быс...`
 }
 
 const eqPass = (propertyType, pass, pass1) => {
@@ -28,14 +28,14 @@ const eqPass = (propertyType, pass, pass1) => {
     pass === pass1 || `${propertyType} не совпадает с основным паролем.`
 }
 
-const emailFormat = () => {
+const emailFormat = (v) => {
   // const regex = new RegExp('/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,24})+$/')
 
   const regex = new RegExp(
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   )
 
-  return (v) => (v && regex.test(v)) || 'Формат адреса должен быть правильным.'
+  return (v && regex.test(v)) || 'Формат адреса должен быть правильным.'
 }
 
 export default {

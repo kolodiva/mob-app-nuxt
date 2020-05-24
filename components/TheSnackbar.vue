@@ -7,6 +7,7 @@
       :timeout="snackbar.timeout"
       :color="snackbar.color"
       :style="`bottom: ${index * 60 + 8}px`"
+      class="body-2"
     >
       {{ snackbar.text }}
 

@@ -122,7 +122,7 @@
       <TheCart />
     </v-app-bar>
     <v-content>
-      <v-container class="fill-height" fluid>
+      <v-container class="px-0" fluid>
         <Nuxt />
       </v-container>
     </v-content>
@@ -215,6 +215,8 @@ export default {
 
       this.$store.dispatch('nomenklator/refreshCountCart')
       this.$router.push({ path: '/' })
+
+      this.drawer = null
     },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop

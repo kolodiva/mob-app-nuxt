@@ -3,23 +3,28 @@
     <v-text-field
       v-model="userInfo.email"
       label="Email"
-      clear-icon="mdi-close-circle"
       clearable
-      :rules="[required('email'), emailFormat()]"
-      type="email"
+      :type="showEmail ? 'email' : 'password'"
+      counter="true"
+      :rules="[
+        required('email'),
+        emailFormat(userInfo.email),
+        maxLength('Длинноватс.', 30),
+      ]"
     />
     <v-text-field
       v-model="userInfo.password"
       label="Пароль"
       :type="showPassword ? 'text' : 'password'"
       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      clearable
       counter="true"
       :rules="[
         required('пароль'),
         minLength('Пароль очень нужен', `${hasName ? 6 : 3}`),
+        maxLength('Длинноватс.', 30),
       ]"
       clear-icon="mdi-close-circle"
-      clearable
       @click:append="showPassword = !showPassword"
     />
     <v-text-field
@@ -40,15 +45,17 @@
     <v-text-field
       v-if="hasName"
       v-model="userInfo.name"
+      clearable
       label="Имя"
-      :rules="[]"
+      :rules="[maxLength('Длинноватс.', 30)]"
     />
     <v-text-field
       v-if="hasName"
       v-model="userInfo.phone"
+      clearable
       label="Телефон"
       messages="Ваш телефон будет использован исключительно для связи с Вами. Если телефон не указан то связь с Вами будет производиться через электронную почту."
-      :rules="[]"
+      :rules="[maxLength('Длинноватс.', 30)]"
     />
     <v-btn class="mt-8" :disabled="!valid" @click="submitForm(userInfo)">{{
       buttonText
@@ -63,6 +70,7 @@ export default {
   data: () => ({
     valid: false,
     showPassword: false,
+    showEmail: false,
     userInfo: {
       phone: '',
       email: '',
@@ -72,7 +80,14 @@ export default {
     },
     ...validations,
   }),
+  mounted() {
+    this.showEmail = true
+  },
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="scss" scoped>
+.v-input {
+  font-size: 1.3rem !important;
+}
+</style>

@@ -98,6 +98,7 @@ export default {
 
         if (e.response.status === 404) {
           this.isLogin = false
+          // this.$router.replace('/register')
         }
       }
     },
