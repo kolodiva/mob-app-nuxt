@@ -1,6 +1,6 @@
 <template lang="html">
   <v-container style="align-self: start;">
-    <h1>{{ isLogin ? 'Авторизация' : 'Регистрация' }}</h1>
+    <div class="headline">{{ isLogin ? 'Авторизация' : 'Регистрация' }}</div>
     <UserAuthForm
       :button-text="isLogin ? 'Войти' : 'Зарегистрироваться'"
       :submit-form="loginUser"

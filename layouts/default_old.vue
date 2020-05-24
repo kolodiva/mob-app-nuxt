@@ -4,8 +4,10 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
+      disable-route-watcher
+      bottom
     >
-      <v-list dense>
+      <v-list>
         <p class="ml-4 pt-2">
           Приветствуем,
           {{ $auth && $auth.user ? $auth.user.username : 'Anonimus' }}
@@ -196,10 +198,12 @@ export default {
     },
     logout() {
       this.$auth.logout()
+      // this.$cookies.remove('connectionid')
+      // this.$cookies.remove('connectionid', { httpOnly: true })
       this.$cookies.remove('connectionid')
+
       this.$store.dispatch('nomenklator/refreshCountCart')
-      // this.$router.push('/')
-      this.$router.replace({ path: '/' })
+      this.$router.push({ path: '/' })
     },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop

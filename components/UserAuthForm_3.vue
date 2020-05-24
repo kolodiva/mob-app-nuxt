@@ -6,7 +6,7 @@
       clear-icon="mdi-close-circle"
       clearable
       :rules="[required('email'), emailFormat()]"
-      type="email"
+      autocapitalize="simon"
     />
     <v-text-field
       v-model="userInfo.password"

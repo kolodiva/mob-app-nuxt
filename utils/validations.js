@@ -13,7 +13,7 @@ const minLength = (propertyType, minLength) => {
     }
     return (
       v.length >= minLength ||
-      `Длина его должна быть как минимум ${minLength} символов.`
+      `Длина его должна быть как минимум ${minLength} символа(ов).`
     )
   }
 }

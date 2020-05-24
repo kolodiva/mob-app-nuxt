@@ -25,6 +25,12 @@ const dbpgApp1 = new Pool({
   connectionString: connParam1,
 })
 
+dbpgApp1.connect( err => {
+  if (err) {
+  console.log(err.stack)
+  }
+})
+
 const dbpgStat = new Pool({
   connectionString: connParam2,
 })
