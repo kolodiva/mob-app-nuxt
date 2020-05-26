@@ -3,7 +3,6 @@
     <template v-for="(item, i) in nomenklator">
       <TheCardList :key="i" :item="item" />
     </template>
-    <TheCucumbers />
   </v-col>
 </template>
 
@@ -11,12 +10,10 @@
 // const consola = require('consola')
 // import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
-import TheCucumbers from '@/components/TheCucumbers.vue'
 import TheCardList from '@/components/TheCardList.vue'
 
 export default {
   components: {
-    TheCucumbers,
     TheCardList,
   },
   data() {

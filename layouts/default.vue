@@ -144,17 +144,21 @@
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
     </v-fab-transition>
+    <TheCucumbers />
   </v-app>
 </template>
 
 <script>
 import TheSnackbar from '@/components/TheSnackbar.vue'
 import TheCart from '@/components/TheCart.vue'
+import TheCucumbers from '@/components/TheCucumbers.vue'
+
 // const consola = require('consola')
 export default {
   components: {
     TheSnackbar,
     TheCart,
+    TheCucumbers,
   },
   data: () => ({
     offsetTop: 0,

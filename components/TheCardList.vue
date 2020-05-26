@@ -78,9 +78,13 @@
         </v-card>
       </v-window-item>
       <v-window-item v-if="item.describe" key="2">
-        <v-container style="height: 210px; margin-right: 0;">
+        <v-container style="margin-right: 0;">
           <v-row no-gutters>
-            <v-col cols="11" style="overflow: auto; height: 185px;">
+            <v-col
+              class="pl-2"
+              cols="11"
+              style="overflow: auto; height: 185px;"
+            >
               <span v-html="item.describe"></span>
             </v-col>
 
