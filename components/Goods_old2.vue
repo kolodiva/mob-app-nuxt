@@ -1,7 +1,7 @@
 <template>
   <v-col>
     <template v-for="(item, i) in nomenklator">
-      <TheCardList :key="i" :item="item" />
+      <TheCardList :item='item' :key='i' />
     </template>
     <TheCucumbers />
   </v-col>
