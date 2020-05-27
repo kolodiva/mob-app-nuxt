@@ -11,18 +11,43 @@
                 >
               </div>
               <v-list-item-title class="headline mb-1">
-                <v-chip
-                  class="my-3 title"
-                  color=""
-                  text-color="blue darken-4"
-                  ripple
-                  outlined
-                  style="border: 0.5px solid;"
-                  @click="$emit('ovr')"
-                >
-                  <v-icon left class="pl-2">mdi-cart-plus</v-icon>
-                  <span>{{ qty_t }}</span>
-                </v-chip>
+                <v-dialog v-model="calculator" persistent max-width="600px">
+                  <template v-slot:activator="{ on }">
+                    <v-chip
+                      class="my-3 title"
+                      color=""
+                      text-color="blue darken-4"
+                      ripple
+                      outlined
+                      style="border: 0.5px solid;"
+                      v-on="on"
+                    >
+                      <v-icon left class="pl-2">mdi-cart-plus</v-icon>
+                      <span>{{ qty_t }}</span>
+                    </v-chip>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="headline">User Profile</span>
+                    </v-card-title>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="calculator = false"
+                        >Close</v-btn
+                      >
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="calculator = false"
+                        >Save</v-btn
+                      >
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-list-item-title>
 
               <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>

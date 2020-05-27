@@ -1,9 +1,14 @@
 <template>
-  <v-col>
-    <template v-for="(item, i) in nomenklator">
-      <TheCardList :key="i" :item="item" />
-    </template>
-  </v-col>
+  <v-container class="pa-0">
+    <v-col cols="12">
+      <template v-for="(item, i) in nomenklator">
+        <TheCardList :key="i" :item="item" @ovr="overlay = !overlay" />
+      </template>
+    </v-col>
+    <v-dialog v-model="overlay">
+      <TheCalculator @ovr="overlay = !overlay" />
+    </v-dialog>
+  </v-container>
 </template>
 
 <script>
@@ -11,13 +16,16 @@
 // import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import TheCardList from '@/components/TheCardList.vue'
+import TheCalculator from '@/components/TheCalculator.vue'
 
 export default {
   components: {
     TheCardList,
+    TheCalculator,
   },
   data() {
     return {
+      overlay: false,
       lorem:
         'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
 
