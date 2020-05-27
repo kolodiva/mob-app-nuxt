@@ -2,11 +2,11 @@
   <v-container class="pa-0">
     <v-col cols="12">
       <template v-for="(item, i) in nomenklator">
-        <TheCardList :key="i" :item="item" @ovr="overlay = !overlay" />
+        <TheCardList :key="i" :item="item" @ovr="ovr" />
       </template>
     </v-col>
     <v-dialog v-model="overlay">
-      <TheCalculator @ovr="overlay = !overlay" />
+      <TheCalculator :art="art" @ovr="overlay = !overlay" />
     </v-dialog>
   </v-container>
 </template>
@@ -44,6 +44,7 @@ export default {
         },
       ],
       qty_t: 123,
+      art: '',
     }
   },
   computed: {
@@ -55,6 +56,10 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   methods: {
+    ovr(p1) {
+      this.art = p1
+      this.overlay = !this.overlay
+    },
     onEnter(i) {
       this.$store.dispatch('nomenklator/chngeCart', i)
     },
