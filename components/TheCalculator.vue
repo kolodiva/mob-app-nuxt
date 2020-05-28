@@ -4,6 +4,8 @@
       up: () => $emit('ovr'),
       down: () => $emit('ovr'),
     }"
+    max-width="390"
+    class="mx-auto"
   >
     <v-card-title class="pa-2">
       <v-chip outlined color="blue">артикул {{ art }}</v-chip>
