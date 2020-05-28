@@ -1,6 +1,14 @@
 //const colors = require('vuetify/es5/util/colors').default
+const path = require('path')
+const fs = require('fs')
 
 module.exports = {
+  server: {
+      https: {
+        key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+      }
+    },
   env: {
     // PGUSER: 'postgres',
   },
