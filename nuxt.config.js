@@ -5,8 +5,8 @@ const fs = require('fs')
 module.exports = {
   server: {
       https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+        key: fs.readFileSync(path.resolve(__dirname, 'privkey.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
       }
     },
   env: {
