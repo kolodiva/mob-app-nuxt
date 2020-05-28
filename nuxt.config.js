@@ -3,12 +3,12 @@ const path = require('path')
 const fs = require('fs')
 
 module.exports = {
-  server: {
-      https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'privkey.pem')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
-      }
-    },
+  // server: {
+  //     https: {
+  //       key: fs.readFileSync(path.resolve(__dirname, 'privkey.pem')),
+  //       cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
+  //     }
+  //   },
   env: {
     // PGUSER: 'postgres',
   },
