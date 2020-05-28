@@ -1,86 +1,68 @@
 <template>
   <v-card
     v-touch="{
-      up: () => $emit('ovr'),
-      down: () => $emit('ovr'),
+      up: () => $emit('cartcalc'),
+      down: () => $emit('cartcalc'),
     }"
     max-width="420"
     class="mx-auto"
   >
-    <v-card-title class="pa-2">
-      <v-chip outlined color="blue">артикул {{ art }}</v-chip>
+    <v-card-title class="pa-4">
+      <v-chip class="subtitle" dark color="blue"
+        >артикул {{ item.artikul }}</v-chip
+      >
       <v-spacer />
-      <v-chip outlined ripple color="blue" @click="$emit('ovr')">Отмена</v-chip>
+      <v-chip
+        class="subtitle"
+        dark
+        ripple
+        color="blue"
+        @click="$emit('cartcalc')"
+        >Отмена</v-chip
+      >
     </v-card-title>
-    <v-divider />
     <v-card-text>
       <v-text-field
-        label="ед изм. шт., в заказе было 123"
+        :label="qtyWas"
         readonly
-        :value="strQty"
-        class="headline"
+        :value="qtyCurr"
+        class="headline mt-2"
         outlined
         shaped
+        append-icon="mdi-arrow-left"
+        @click:append="optodo(0, 3, true)"
       ></v-text-field>
-      <v-container class="mt-n5">
-        <v-row class="mb-5">
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >7</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >8</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >9</v-btn
-          >
-          <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2" small>C</v-btn>
-        </v-row>
-        <v-row class="mb-5">
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >4</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >5</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >6</v-btn
-          >
-          <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2" small>x</v-btn>
-        </v-row>
-        <v-row class="mb-5">
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >1</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >2</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >3</v-btn
-          >
-          <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2" small>+</v-btn>
-        </v-row>
-        <v-row class="mb-5">
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >0</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >.</v-btn
-          >
-          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
-            >=</v-btn
-          >
-          <v-spacer />
-          <v-btn
-            outlined
-            color="blue"
-            small
-            class="title ml-2"
-            @click="$emit('ovr')"
-            ><v-icon>mdi-cart</v-icon></v-btn
-          >
+      <v-container class="mt-n2 pa-1">
+        <v-row v-for="(row, i) in btns" :key="i" class="mb-5">
+          <template v-for="(col, j) in row">
+            <v-spacer
+              v-if="(i * 10 + j).toString().slice(-1) === '3'"
+              :key="10 * (i * 10 + j)"
+            />
+            <v-btn
+              v-if="col === 'cart'"
+              v-show="q1 != q2"
+              :key="i * 10 + j"
+              fab
+              color="red darken-1"
+              dark
+              class="mx-2"
+              small
+              @click="$emit('cartcalc')"
+              ><v-icon>mdi-cart</v-icon></v-btn
+            >
+            <v-btn
+              v-else
+              :key="i * 10 + j"
+              fab
+              color="blue lighten-2"
+              dark
+              class="title mx-2"
+              small
+              @click="optodo(i, j)"
+              >{{ col }}</v-btn
+            >
+          </template>
         </v-row>
       </v-container>
     </v-card-text>
@@ -88,15 +70,118 @@
 </template>
 
 <script>
+const consola = require('consola')
 export default {
-  props: ['art'],
+  props: ['item'],
   data() {
     return {
       q1: 12480,
       q2: 12480,
       strQty: '12480',
       firstEnter: true,
+      btns: [
+        [7, 8, 9, 'C'],
+        [4, 5, 6, 'X'],
+        [1, 2, 3, '+'],
+        [0, '.', '=', 'cart'],
+      ],
     }
+  },
+  computed: {
+    qtyWas() {
+      return 'ед.изм шт., в заказе было ' + this.item.qty1
+    },
+    qtyCurr() {
+      return this.strQty
+    },
+  },
+  mounted() {
+    consola.log(this.item)
+  },
+  methods: {
+    optodo(i, j, bckspc = false) {
+      let lastElemNotDigit = !/^\d+$/.test(this.strQty.slice(-1))
+      const hasPoint = this.strQty.includes('.')
+      let hasNoDigits =
+        this.strQty.includes('X') ||
+        this.strQty.includes('+') ||
+        (this.strQty.includes('.') && lastElemNotDigit)
+      let divEl
+      let res
+      // debugger
+      switch (this.btns[i][j]) {
+        case 'C':
+          if (bckspc) {
+            if (this.strQty.length === 1) {
+              this.strQty = '0'
+              this.q2 = 0
+            } else {
+              this.strQty = this.strQty.substring(0, this.strQty.length - 1)
+              try {
+                this.q2 = parseFloat(this.strQty)
+              } catch (e) {}
+            }
+          } else {
+            this.strQty = '0'
+            this.q2 = 0
+          }
+          break
+        case 'X':
+          this.strQty = hasNoDigits ? this.strQty : this.strQty + 'X'
+          break
+        case '+':
+          this.strQty = hasNoDigits ? this.strQty : this.strQty + '+'
+          break
+        case '=':
+          if (this.strQty.includes('X')) {
+            divEl = 'X'
+          }
+          if (this.strQty.includes('+')) {
+            divEl = '+'
+          }
+
+          if (divEl) {
+            const aEls = this.strQty.split(divEl)
+
+            try {
+              if (divEl === 'X') {
+                res = (parseFloat(aEls[0]) * parseFloat(aEls[1])).toFixed(4)
+              } else {
+                res = parseFloat(aEls[0]) + parseFloat(aEls[1])
+              }
+            } catch (e) {}
+
+            if (res) {
+              this.strQty = parseFloat(res).toString()
+              this.q2 = parseFloat(res)
+            }
+          }
+          break
+        case '.':
+          if (this.firstEnter) {
+            this.strQty = '0.'
+          } else {
+            this.strQty = hasPoint ? this.strQty : this.strQty + '.'
+          }
+          break
+        default:
+          if (this.firstEnter || this.strQty === '0') {
+            this.strQty = ''
+          }
+          this.strQty += this.btns[i][j]
+          this.q2 = parseFloat(this.strQty)
+      }
+
+      this.firstEnter = this.firstEnter && false
+      lastElemNotDigit = !/^\d+$/.test(this.strQty.slice(-1))
+      hasNoDigits =
+        this.strQty.includes('X') ||
+        this.strQty.includes('+') ||
+        (this.strQty.includes('.') && lastElemNotDigit)
+      if (hasNoDigits) {
+        this.q2 = this.q1
+      }
+    },
   },
 }
 </script>

@@ -18,10 +18,10 @@
                   ripple
                   outlined
                   style="border: 0.5px solid;"
-                  @click="$emit('ovr', item.artikul)"
+                  @click="$emit('cartcalc', item)"
                 >
                   <v-icon left class="pl-2">mdi-cart-plus</v-icon>
-                  <span>{{ qty_t }}</span>
+                  <span>{{ item.qty2 }}</span>
                 </v-chip>
               </v-list-item-title>
 

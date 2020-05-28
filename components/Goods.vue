@@ -2,11 +2,14 @@
   <v-container class="pa-0">
     <v-col cols="12">
       <template v-for="(item, i) in nomenklator">
-        <TheCardList :key="i" :item="item" @ovr="ovr" />
+        <TheCardList :key="i" :item="item" @cartcalc="cartcalc" />
       </template>
     </v-col>
-    <v-dialog v-model="overlay">
-      <TheCalculator :art="art" @ovr="overlay = !overlay" />
+    <v-dialog v-model="cartCalculator">
+      <TheCalculator
+        :item="itemcalc"
+        @cartcalc="cartCalculator = !cartCalculator"
+      />
     </v-dialog>
   </v-container>
 </template>
@@ -25,7 +28,7 @@ export default {
   },
   data() {
     return {
-      overlay: false,
+      cartCalculator: false,
       lorem:
         'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
 
@@ -43,8 +46,7 @@ export default {
           value: 'price3',
         },
       ],
-      qty_t: 123,
-      art: '',
+      itemcalc: undefined,
     }
   },
   computed: {
@@ -56,9 +58,9 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   methods: {
-    ovr(p1) {
-      this.art = p1
-      this.overlay = !this.overlay
+    cartcalc(item) {
+      this.itemcalc = item
+      this.cartCalculator = !this.cartCalculator
     },
     onEnter(i) {
       this.$store.dispatch('nomenklator/chngeCart', i)
