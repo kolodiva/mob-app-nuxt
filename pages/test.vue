@@ -1,14 +1,21 @@
 <template>
-  <v-card>
+  <v-card
+    v-touch="{
+      up: () => $emit('ovr'),
+      down: () => $emit('ovr'),
+    }"
+  >
     <v-card-title class="pa-2">
-      <v-chip outlined color="blue">артикул 4700</v-chip>
+      <v-chip class="title" dark color="blue">артикул {{ art }}</v-chip>
       <v-spacer />
-      <v-chip outlined ripple color="blue">Отмена</v-chip>
+      <v-chip class="title" dark ripple color="blue" @click="$emit('ovr')"
+        >Отмена</v-chip
+      >
     </v-card-title>
     <v-divider />
     <v-card-text>
       <v-text-field
-        label="ед изм. шт."
+        label="ед изм. шт., в заказе было 123"
         readonly
         :value="strQty"
         class="headline"
@@ -17,32 +24,56 @@
       ></v-text-field>
       <v-container class="mt-n5">
         <v-row class="mb-5">
-          <v-btn color="blue lighten-2" dark class="title">7</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">8</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">9</v-btn>
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >7</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >8</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >9</v-btn
+          >
           <v-spacer />
           <v-btn outlined color="blue" class="title ml-2">C</v-btn>
         </v-row>
         <v-row class="mb-5">
-          <v-btn color="blue" dark class="title">4</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">5</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">6</v-btn>
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >4</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >5</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >6</v-btn
+          >
           <v-spacer />
           <v-btn outlined color="blue" class="title ml-2">x</v-btn>
         </v-row>
         <v-row class="mb-5">
-          <v-btn color="blue" dark class="title">1</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">2</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">3</v-btn>
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >1</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >2</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >3</v-btn
+          >
           <v-spacer />
           <v-btn outlined color="blue" class="title ml-2">+</v-btn>
         </v-row>
         <v-row class="mb-5">
-          <v-btn color="blue" dark class="title">0</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">.</v-btn>
-          <v-btn outlined color="blue" class="title ml-2">=</v-btn>
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >0</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >.</v-btn
+          >
+          <v-btn fab color="blue lighten-2" dark class="title mx-2" small
+            >=</v-btn
+          >
           <v-spacer />
-          <v-btn outlined disabled color="blue" class="title ml-2"
+          <v-btn outlined color="blue" class="title ml-2" @click="$emit('ovr')"
             ><v-icon>mdi-cart</v-icon></v-btn
           >
         </v-row>
@@ -53,6 +84,7 @@
 
 <script>
 export default {
+  props: ['art'],
   data() {
     return {
       q1: 12480,
