@@ -4,7 +4,7 @@
       up: () => $emit('ovr'),
       down: () => $emit('ovr'),
     }"
-    max-width="390"
+    max-width="420"
     class="mx-auto"
   >
     <v-card-title class="pa-2">
@@ -34,7 +34,7 @@
             >9</v-btn
           >
           <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2">C</v-btn>
+          <v-btn outlined color="blue" class="title ml-2" small>C</v-btn>
         </v-row>
         <v-row class="mb-5">
           <v-btn fab color="blue lighten-2" dark class="title mx-2" small
@@ -47,7 +47,7 @@
             >6</v-btn
           >
           <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2">x</v-btn>
+          <v-btn outlined color="blue" class="title ml-2" small>x</v-btn>
         </v-row>
         <v-row class="mb-5">
           <v-btn fab color="blue lighten-2" dark class="title mx-2" small
@@ -60,7 +60,7 @@
             >3</v-btn
           >
           <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2">+</v-btn>
+          <v-btn outlined color="blue" class="title ml-2" small>+</v-btn>
         </v-row>
         <v-row class="mb-5">
           <v-btn fab color="blue lighten-2" dark class="title mx-2" small
@@ -73,7 +73,12 @@
             >=</v-btn
           >
           <v-spacer />
-          <v-btn outlined color="blue" class="title ml-2" @click="$emit('ovr')"
+          <v-btn
+            outlined
+            color="blue"
+            small
+            class="title ml-2"
+            @click="$emit('ovr')"
             ><v-icon>mdi-cart</v-icon></v-btn
           >
         </v-row>
