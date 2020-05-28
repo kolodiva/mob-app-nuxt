@@ -1,15 +1,15 @@
 <template>
   <v-card
     v-touch="{
-      up: () => $emit('cartcalc'),
-      down: () => $emit('cartcalc'),
+      up: () => $emit('cartcalcpost'),
+      down: () => $emit('cartcalcpost'),
     }"
     max-width="420"
     class="mx-auto"
   >
     <v-card-title class="pa-4">
       <v-chip class="subtitle" dark color="blue"
-        >артикул {{ item.artikul }}</v-chip
+        >артикул {{ itemInfo.artikul }}</v-chip
       >
       <v-spacer />
       <v-chip
@@ -17,7 +17,7 @@
         dark
         ripple
         color="blue"
-        @click="$emit('cartcalc')"
+        @click="$emit('cartcalcpost', itemInfo)"
         >Отмена</v-chip
       >
     </v-card-title>
@@ -41,14 +41,14 @@
             />
             <v-btn
               v-if="col === 'cart'"
-              v-show="q1 != q2"
+              v-show="itemInfo.q1 != itemInfo.q2"
               :key="i * 10 + j"
               fab
               color="red darken-1"
               dark
               class="mx-2"
               small
-              @click="$emit('cartcalc')"
+              @click="$emit('cartcalcpost', itemInfo, true)"
               ><v-icon>mdi-cart</v-icon></v-btn
             >
             <v-btn
@@ -70,15 +70,10 @@
 </template>
 
 <script>
-const consola = require('consola')
 export default {
-  props: ['item'],
+  props: ['itemInfo'],
   data() {
     return {
-      q1: 12480,
-      q2: 12480,
-      strQty: '12480',
-      firstEnter: true,
       btns: [
         [7, 8, 9, 'C'],
         [4, 5, 6, 'X'],
@@ -89,59 +84,62 @@ export default {
   },
   computed: {
     qtyWas() {
-      return 'ед.изм шт., в заказе было ' + this.item.qty1
+      return 'ед.изм шт., в заказе было ' + this.itemInfo.q1
     },
     qtyCurr() {
-      return this.strQty
+      return this.itemInfo.strQty
     },
   },
-  mounted() {
-    consola.log(this.item)
-  },
+  mounted() {},
   methods: {
     optodo(i, j, bckspc = false) {
-      let lastElemNotDigit = !/^\d+$/.test(this.strQty.slice(-1))
-      const hasPoint = this.strQty.includes('.')
+      const cuppPos = this.itemInfo
+
+      let lastElemNotDigit = !/^\d+$/.test(cuppPos.strQty.slice(-1))
+      const hasPoint = cuppPos.strQty.includes('.')
       let hasNoDigits =
-        this.strQty.includes('X') ||
-        this.strQty.includes('+') ||
-        (this.strQty.includes('.') && lastElemNotDigit)
+        cuppPos.strQty.includes('X') ||
+        cuppPos.strQty.includes('+') ||
+        (cuppPos.strQty.includes('.') && lastElemNotDigit)
       let divEl
       let res
       // debugger
       switch (this.btns[i][j]) {
         case 'C':
           if (bckspc) {
-            if (this.strQty.length === 1) {
-              this.strQty = '0'
-              this.q2 = 0
+            if (cuppPos.strQty.length === 1) {
+              cuppPos.strQty = '0'
+              cuppPos.q2 = 0
             } else {
-              this.strQty = this.strQty.substring(0, this.strQty.length - 1)
+              cuppPos.strQty = cuppPos.strQty.substring(
+                0,
+                cuppPos.strQty.length - 1
+              )
               try {
-                this.q2 = parseFloat(this.strQty)
+                cuppPos.q2 = parseFloat(cuppPos.strQty)
               } catch (e) {}
             }
           } else {
-            this.strQty = '0'
-            this.q2 = 0
+            cuppPos.strQty = '0'
+            cuppPos.q2 = 0
           }
           break
         case 'X':
-          this.strQty = hasNoDigits ? this.strQty : this.strQty + 'X'
+          cuppPos.strQty = hasNoDigits ? cuppPos.strQty : cuppPos.strQty + 'X'
           break
         case '+':
-          this.strQty = hasNoDigits ? this.strQty : this.strQty + '+'
+          cuppPos.strQty = hasNoDigits ? cuppPos.strQty : cuppPos.strQty + '+'
           break
         case '=':
-          if (this.strQty.includes('X')) {
+          if (cuppPos.strQty.includes('X')) {
             divEl = 'X'
           }
-          if (this.strQty.includes('+')) {
+          if (cuppPos.strQty.includes('+')) {
             divEl = '+'
           }
 
           if (divEl) {
-            const aEls = this.strQty.split(divEl)
+            const aEls = cuppPos.strQty.split(divEl)
 
             try {
               if (divEl === 'X') {
@@ -152,34 +150,34 @@ export default {
             } catch (e) {}
 
             if (res) {
-              this.strQty = parseFloat(res).toString()
-              this.q2 = parseFloat(res)
+              cuppPos.strQty = parseFloat(res).toString()
+              cuppPos.q2 = parseFloat(res)
             }
           }
           break
         case '.':
-          if (this.firstEnter) {
-            this.strQty = '0.'
+          if (cuppPos.firstEnter) {
+            cuppPos.strQty = '0.'
           } else {
-            this.strQty = hasPoint ? this.strQty : this.strQty + '.'
+            cuppPos.strQty = hasPoint ? cuppPos.strQty : cuppPos.strQty + '.'
           }
           break
         default:
-          if (this.firstEnter || this.strQty === '0') {
-            this.strQty = ''
+          if (cuppPos.firstEnter || cuppPos.strQty === '0') {
+            cuppPos.strQty = ''
           }
-          this.strQty += this.btns[i][j]
-          this.q2 = parseFloat(this.strQty)
+          cuppPos.strQty += this.btns[i][j]
+          cuppPos.q2 = parseFloat(cuppPos.strQty)
       }
 
-      this.firstEnter = this.firstEnter && false
-      lastElemNotDigit = !/^\d+$/.test(this.strQty.slice(-1))
+      cuppPos.firstEnter = cuppPos.firstEnter && false
+      lastElemNotDigit = !/^\d+$/.test(cuppPos.strQty.slice(-1))
       hasNoDigits =
-        this.strQty.includes('X') ||
-        this.strQty.includes('+') ||
-        (this.strQty.includes('.') && lastElemNotDigit)
+        cuppPos.strQty.includes('X') ||
+        cuppPos.strQty.includes('+') ||
+        (cuppPos.strQty.includes('.') && lastElemNotDigit)
       if (hasNoDigits) {
-        this.q2 = this.q1
+        cuppPos.q2 = cuppPos.q1
       }
     },
   },

@@ -2,24 +2,21 @@
   <v-container class="pa-0">
     <v-col cols="12">
       <template v-for="(item, i) in nomenklator">
-        <TheCardList :key="i" :item="item" @cartcalc="cartcalc" />
+        <TheCardList :key="i" :item="item" :ind-pos="i" @cartcalc="cartcalc" />
       </template>
     </v-col>
     <v-dialog v-model="cartCalculator">
-      <TheCalculator
-        :item="itemcalc"
-        @cartcalc="cartCalculator = !cartCalculator"
-      />
+      <TheCalculator :item-info="itemInfo" @cartcalcpost="cartcalcpost" />
     </v-dialog>
   </v-container>
 </template>
 
 <script>
-// const consola = require('consola')
 // import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import TheCardList from '@/components/TheCardList.vue'
 import TheCalculator from '@/components/TheCalculator.vue'
+// const consola = require('consola')
 
 export default {
   components: {
@@ -28,10 +25,8 @@ export default {
   },
   data() {
     return {
+      itemInfo: undefined,
       cartCalculator: false,
-      lorem:
-        'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
-
       headers: [
         {
           text: 'розница',
@@ -46,7 +41,6 @@ export default {
           value: 'price3',
         },
       ],
-      itemcalc: undefined,
     }
   },
   computed: {
@@ -58,16 +52,31 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   methods: {
-    cartcalc(item) {
-      this.itemcalc = item
+    cartcalc(item, i) {
+      this.itemInfo = {
+        indPos: i,
+        guid: item.guid,
+        artikul: item.artikul,
+        describe: item.describe,
+        firstEnter: true,
+        q1: item.qty1,
+        q2: item.qty2,
+        strQty: parseFloat(item.qty2).toString(),
+      }
       this.cartCalculator = !this.cartCalculator
     },
-    onEnter(i) {
-      this.$store.dispatch('nomenklator/chngeCart', i)
-    },
-    onInput(obj, val) {
-      // consola.info(e)
-      obj.total = (obj.price1 * val).toFixed(2)
+    async cartcalcpost(item, post = false) {
+      this.cartCalculator = !this.cartCalculator
+      if (post === true) {
+        this.nomenklator[item.indPos].qty2 = item.q2
+        await this.$store.dispatch('nomenklator/chngeCart', item.indPos)
+        await this.$store.dispatch('nomenklator/refreshCountCart')
+        await this.$store.dispatch('snackbar/setSnackbar', {
+          color: 'green',
+          text: `Позиция, ${item.artikul} в кол-ве: ${item.q2} доб/изм.`,
+          timeout: 3000,
+        })
+      }
     },
   },
 }

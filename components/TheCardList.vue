@@ -18,10 +18,10 @@
                   ripple
                   outlined
                   style="border: 0.5px solid;"
-                  @click="$emit('cartcalc', item)"
+                  @click="$emit('cartcalc', item, indPos)"
                 >
                   <v-icon left class="pl-2">mdi-cart-plus</v-icon>
-                  <span>{{ item.qty2 }}</span>
+                  <span>{{ parseFloat(item.qty2) }}</span>
                 </v-chip>
               </v-list-item-title>
 
@@ -113,12 +113,9 @@
 
 <script>
 export default {
-  props: ['item'],
+  props: ['item', 'indPos'],
   data: () => ({
-    calculator: false,
-    length: 3,
     window: 0,
-    qty_t: 123,
   }),
 }
 </script>
