@@ -76,6 +76,7 @@ export default {
           text: `Позиция, ${item.artikul} в кол-ве: ${item.q2} доб/изм.`,
           timeout: 3000,
         })
+        this.nomenklator[item.indPos].qty1 = item.q2
       }
     },
   },
