@@ -33,9 +33,9 @@ async function start() {
   app.use(nuxt.render)
 
   // Listen the server
+  //https.createServer(nuxt.options.server.https, app).listen(port, host)
   if (process.env.NODE_ENV == 'production') {
     app.listen(port, host)
-    //https.createServer(nuxt.options.server.https, app).listen(port, host)
     consola.ready({
       message: `Server listening on https://${host}:${port}`,
       badge: true,
