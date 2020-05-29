@@ -2,7 +2,13 @@
   <v-container class="pa-0">
     <v-col cols="12">
       <template v-for="(item, i) in nomenklator">
-        <TheCardList :key="i" :item="item" :ind-pos="i" @cartcalc="cartcalc" />
+        <TheCardList
+          :key="i"
+          :item="item"
+          :ind-pos="i"
+          @cartcalc="cartcalc"
+          @opengoodcard="goToGoodCard"
+        />
       </template>
     </v-col>
     <v-dialog v-model="cartCalculator">
@@ -83,6 +89,14 @@ export default {
         })
         this.nomenklator[item.indPos].qty1 = item.q2
       }
+    },
+    goToGoodCard(parentguid, synonym) {
+      const path = `/catalog/${parentguid}?itemcard=${synonym}`
+      // this.$router.go({ path, force: true })
+      this.$router.push({ path })
+      // this.$forceUpdate()
+      // this.$router.replace(path)
+      this.$store.commit('nomenklator/SET_GOOD_CARD', synonym)
     },
   },
 }

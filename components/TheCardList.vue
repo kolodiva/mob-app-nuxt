@@ -79,7 +79,7 @@
               style="border: 0.5px solid;"
               right
               ripple
-              @click="goToGoodCard"
+              @click="$emit('opengoodcard', item.parentguid, item.synonym)"
             >
               <v-icon>mdi-arrow-right</v-icon>
             </v-chip>
@@ -125,15 +125,6 @@ export default {
     window: 0,
   }),
   computed: {},
-  methods: {
-    goToGoodCard() {
-      const path = `/catalog/${this.item.parentguid}?itemcard=${this.item.synonym}`
-      // this.$router.go({ path, force: true })
-      this.$router.push({ path, force: true })
-      // this.$forceUpdate()
-      // this.$router.replace(path)
-      // this.$store.commit('nomenklator/SET_GOOD_CARD', this.item.synonym)
-    },
-  },
+  methods: {},
 }
 </script>
