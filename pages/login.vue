@@ -1,12 +1,12 @@
 <template lang="html">
-  <v-container style="align-self: start;">
+  <v-card flat class="pa-5 mx-auto">
     <div class="headline">{{ isLogin ? 'Авторизация' : 'Регистрация' }}</div>
     <UserAuthForm
       :button-text="isLogin ? 'Войти' : 'Зарегистрироваться'"
       :submit-form="loginUser"
       :has-name="!isLogin"
     />
-  </v-container>
+  </v-card>
 </template>
 
 <script>

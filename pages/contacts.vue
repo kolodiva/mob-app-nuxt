@@ -1,36 +1,49 @@
 <template>
-  <v-container class="">
-    <v-row dense>
-      <v-col v-for="address in addressess" :key="address.id" cols="12">
-        <v-card dark color="blue darken-4">
-          <div class="d-flex flex-no-wrap justify-space-between">
-            <div>
-              <v-card-title
-                class="headline"
-                v-text="address.city"
-              ></v-card-title>
-
-              <v-card-title v-text="address.phone"></v-card-title>
-
-              <v-card-subtitle v-text="address.address"></v-card-subtitle>
-            </div>
-
-            <v-avatar class="ma-5" tile>
+  <v-row justify="center">
+    <v-expansion-panels inset focusable>
+      <v-expansion-panel v-for="address in addressess" :key="address.id">
+        <v-expansion-panel-header ripple>
+          <v-list-item>
+            <v-list-item-avatar @click.stop="">
               <a
                 :href="`callto:${address.phone_call}`"
-                style="color: white; text-decoration: none;"
+                style="text-decoration: none;"
                 ><v-icon large>mdi-phone-forward</v-icon></a
               >
-            </v-avatar>
-          </div>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="headline">
+                {{ address.city }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-phone</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="subtitle">{{
+              address.phone
+            }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-mail</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content class="subtitle">{{
+              address.address
+            }}</v-list-item-content>
+          </v-list-item>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+  </v-row>
 </template>
 
 <script>
 // const consola = require('consola')
+import { mapGetters } from 'vuex'
 export default {
   name: 'ContactsPage',
   serverCacheKey() {
@@ -41,10 +54,9 @@ export default {
     return {}
   },
   computed: {
-    addressess() {
-      const res = this.$store.getters['addresses/getAllSortCity']
-      return res
-    },
+    ...mapGetters({
+      addressess: 'addresses/getAllSortCity',
+    }),
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'Контакты')
