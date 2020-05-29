@@ -29,7 +29,7 @@
             </v-list-item-content>
             <div class="" style="position: relative;">
               <v-list-item-avatar size="95" style="border: 0.5px solid grey;">
-                <v-img :src="item.guid_picture" />
+                <v-img :src="item.guid_picture_small" />
               </v-list-item-avatar>
               <v-icon
                 v-if="item.describe"

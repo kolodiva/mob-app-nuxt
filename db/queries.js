@@ -154,6 +154,7 @@ function getSubNomenklator(params) {
           nomenklators.synonym,
           nomenklators.itgroup,
           nomenklators.guid_picture,
+          replace(nomenklators.guid_picture, '250x250', '82x82') guid_picture_small,
           nomenklators.sort_field,
           nomenklators.describe,
           nomenklators.is_complect,
