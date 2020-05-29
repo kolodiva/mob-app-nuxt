@@ -129,6 +129,7 @@ export default {
     goToGoodCard() {
       const path = `/catalog/${this.item.parentguid}?itemcard=${this.item.synonym}`
       this.$router.push({ path })
+      this.$store.commit('nomenklator/SET_GOOD_CARD', this.item.synonym)
     },
   },
 }
