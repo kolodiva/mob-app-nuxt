@@ -1,5 +1,6 @@
 <template>
   <v-container class="pa-0">
+    <nuxt ref="pageGoods" />
     <v-col cols="12">
       <template v-for="(item, i) in nomenklator">
         <TheCardList
@@ -94,9 +95,10 @@ export default {
       const path = `/catalog/${parentguid}?itemcard=${synonym}`
       // this.$router.go({ path, force: true })
       this.$router.push({ path })
+      this.$refs.pageGoods.$forceUpdate()
       // this.$forceUpdate()
       // this.$router.replace(path)
-      this.$store.commit('nomenklator/SET_GOOD_CARD', synonym)
+      // this.$store.commit('nomenklator/SET_GOOD_CARD', synonym)
     },
   },
 }
