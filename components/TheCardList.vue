@@ -27,11 +27,18 @@
 
               <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
             </v-list-item-content>
-            <v-badge large icon="mdi-magnify" offset-x="30" offset-y="20">
-              <v-avatar size="95" style="border: 0.5px solid grey;"
-                ><v-img :src="item.guid_picture"
-              /></v-avatar>
-            </v-badge>
+            <div class="" style="position: relative;">
+              <v-list-item-avatar size="95" style="border: 0.5px solid grey;">
+                <v-img :src="item.guid_picture" />
+              </v-list-item-avatar>
+              <v-icon
+                v-if="item.describe"
+                color="black"
+                style="position: absolute; right: 20px; top: 16px; z-index: 10;"
+                @click.stop="window = 1"
+                >mdi-magnify</v-icon
+              >
+            </div>
           </v-list-item>
 
           <v-card-actions>

@@ -39,10 +39,10 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  // name: 'IndexPage',
-  // serverCacheKey() {
-  //   return true
-  // },
+  name: 'IndexPage',
+  serverCacheKey() {
+    return true
+  },
   // middleware: 'load-nomenklator',
   data: () => ({}),
   computed: {

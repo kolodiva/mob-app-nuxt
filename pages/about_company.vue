@@ -40,7 +40,7 @@
         />
       </div>
     </div>
-    <div class="container" style="margin-top: 70px;">
+    <div class="container" style="">
       <img
         itemprop="image"
         src="https://newfurnitura.ru/upload/site_imgs/About2.jpg"
@@ -93,47 +93,35 @@
       </div>
 
       <div class="container">
+        <h2 class="" align="center">
+          ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС?
+        </h2>
         <div class="row">
-          <div class="col">
-            <h2 class="mb-4" align="center">
-              ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС?
-            </h2>
-          </div>
-          <div class="w-100"></div>
-          <div class="col">
-            <img
+          <v-col cols="6" justify="center">
+            <v-img
+              width="100"
               src="https://newfurnitura.ru/upload/site_imgs/about_icon_1.png"
-              align="center"
               alt="Значок Мобильность"
-              class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%;"
             />
-          </div>
-          <div class="col">
-            <img
-              src="https://newfurnitura.ru/upload/site_imgs/about_icon_2.png"
-              align="center"
-              alt="Значок Склад"
-              class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%;"
-            />
-          </div>
-          <div class="w-100"></div>
-          <div class="col-12 col-md-6">
-            <p align="left">
+            <p align="left" style="overflow-wrap: break-word;">
               <b>МОБИЛЬНОСТЬ, ОПЕРАТИВНОСТЬ И КЛИЕНТООРИЕНТИРОВАННОСТЬ</b><br />
               являются важнейшими приоритетами MF в процессе взаимодействия со
               своими заказчиками.
             </p>
-          </div>
-          <div class="col-12 col-md-6">
-            <p align="left">
+          </v-col>
+          <v-col cols="6">
+            <v-img
+              width="100"
+              src="https://newfurnitura.ru/upload/site_imgs/about_icon_2.png"
+              alt="Значок Склад"
+            />
+            <p align="left" style="overflow-wrap: break-word;">
               <b>СОВРЕМЕННЫЕ СКЛАДЫ</b><br />
               В центральном офисе, а также на территории филиалов функционируют
               высокотехнологичные складские комплексы компании. Мы обеспечиваем
               сохранность продукции и оперативность отгрузки товара.
             </p>
-          </div>
+          </v-col>
           <div class="w-100"></div>
           <div class="col">
             <img

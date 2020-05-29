@@ -98,7 +98,7 @@ export const actions = {
     })
 
     commit('SET_SUB_NOMENKLATOR', rows)
-    commit('SET_WAIT_LOAD_NOMENKLATOR', false)
+    // commit('SET_WAIT_LOAD_NOMENKLATOR', false)
   },
   async chngeCart({ commit, dispatch, state }, ind) {
     const obj = state.subNomenklator[ind]

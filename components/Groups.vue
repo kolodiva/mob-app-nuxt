@@ -55,5 +55,8 @@ export default {
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
+  mounted() {
+    this.$store.commit('nomenklator/SET_WAIT_LOAD_NOMENKLATOR', false)
+  },
 }
 </script>
