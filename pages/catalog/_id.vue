@@ -50,5 +50,6 @@ export default {
     await this.$store.commit('nomenklator/SET_WAIT_LOAD_NOMENKLATOR', false)
     // consola.log(this.$route)
   },
+  methods: {},
 }
 </script>

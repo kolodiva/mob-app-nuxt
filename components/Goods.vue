@@ -1,15 +1,8 @@
 <template>
   <v-container class="pa-0">
-    <nuxt ref="pageGoods" />
     <v-col cols="12">
       <template v-for="(item, i) in nomenklator">
-        <TheCardList
-          :key="i"
-          :item="item"
-          :ind-pos="i"
-          @cartcalc="cartcalc"
-          @opengoodcard="goToGoodCard"
-        />
+        <TheCardList :key="i" :item="item" :ind-pos="i" @cartcalc="cartcalc" />
       </template>
     </v-col>
     <v-dialog v-model="cartCalculator">
@@ -90,18 +83,6 @@ export default {
         })
         this.nomenklator[item.indPos].qty1 = item.q2
       }
-    },
-    goToGoodCard(parentguid, synonym) {
-      const path = `/catalog/${parentguid}?itemcard=${synonym}`
-      // this.$router.go({ path, force: true })
-      // this.$router.push({ path })
-
-      window.location.href = path
-      // this.$refs.pageGoods.$forceUpdate()
-      // this.$forceUpdate()
-      // this.$router.replace(path)
-      // location.reload(path)
-      // this.$store.commit('nomenklator/SET_GOOD_CARD', synonym)
     },
   },
 }
