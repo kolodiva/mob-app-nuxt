@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Groups v-if="isGroup" />
+    <GoodCard v-if="guidGoodCard" :guid="guidGoodCard" />
+    <Groups v-else-if="isGroup" />
     <Goods v-else />
     <TheCucumbers />
     <v-overlay :value="waitLoadNomenklator">
@@ -13,10 +14,20 @@
 import { mapGetters } from 'vuex'
 import Groups from '@/components/Groups.vue'
 import Goods from '@/components/Goods.vue'
+import GoodCard from '@/components/TheGoodCard.vue'
+
 import TheCucumbers from '@/components/TheCucumbers.vue'
+
 // const consola = require('consola')
 export default {
-  components: { Groups, Goods, TheCucumbers },
+  async validate({ params, store, query }) {
+    const guid = query && query.itemcard ? query.itemcard : ''
+    // consola.log(guid)
+    await store.commit('nomenklator/SET_GOOD_CARD', guid)
+    //   consola.log(store.getters('nomenklator/guidGoodCard'))
+    return true
+  },
+  components: { Groups, Goods, GoodCard, TheCucumbers },
   async asyncData({ app, params, query, store }) {
     if (params && params.id) {
       // consola.info(params)
@@ -29,13 +40,15 @@ export default {
     ...mapGetters({
       isGroup: 'nomenklator/isGroup',
       waitLoadNomenklator: 'nomenklator/getWaitLoadNomenklator',
+      guidGoodCard: 'nomenklator/guidGoodCard',
     }),
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
-  mounted() {
-    this.$store.commit('nomenklator/SET_WAIT_LOAD_NOMENKLATOR', false)
+  async mounted() {
+    await this.$store.commit('nomenklator/SET_WAIT_LOAD_NOMENKLATOR', false)
+    // consola.log(this.$route)
   },
 }
 </script>

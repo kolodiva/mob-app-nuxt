@@ -16,6 +16,7 @@ export const state = () => ({
   nomenklTopLevel: nomenklTopLevel.rows,
   connectionid: undefined,
   waitNomenklatorLoad: undefined,
+  thisGoodCard: '',
 })
 
 export const mutations = {
@@ -46,6 +47,9 @@ export const mutations = {
   SET_WAIT_LOAD_NOMENKLATOR(state, val) {
     state.waitNomenklatorLoad = val
   },
+  SET_GOOD_CARD(state, guid) {
+    state.guidGoodCard = guid
+  },
 }
 
 export const getters = {
@@ -55,6 +59,9 @@ export const getters = {
       state.subNomenklator.length > 0 &&
       state.subNomenklator[0].itgroup
     )
+  },
+  guidGoodCard: (state) => {
+    return state.guidGoodCard
   },
   getNomenklator: (state) => {
     return state.nomenklator

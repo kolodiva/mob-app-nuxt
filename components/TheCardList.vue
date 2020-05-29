@@ -33,8 +33,9 @@
               </v-list-item-avatar>
               <v-icon
                 v-if="item.describe"
-                color="black"
-                style="position: absolute; right: 20px; top: 16px; z-index: 10;"
+                color="blue darken-4"
+                large
+                style="position: absolute; right: 20px; top: 2px; z-index: 10;"
                 @click.stop="window = 1"
                 >mdi-magnify</v-icon
               >
@@ -71,7 +72,7 @@
             </v-chip>
             <v-spacer />
             <v-chip
-              v-if="item.describe"
+              nuxt
               class="ma-2"
               color=""
               text-color="blue darken-1"
@@ -79,7 +80,7 @@
               style="border: 0.5px solid;"
               right
               ripple
-              @click="window = 1"
+              :to="`${item.parentguid}?itemcard=${item.synonym}`"
             >
               <v-icon>mdi-arrow-right</v-icon>
             </v-chip>
@@ -124,5 +125,6 @@ export default {
   data: () => ({
     window: 0,
   }),
+  computed: {},
 }
 </script>
