@@ -48,6 +48,11 @@ export default {
       nomenklator: 'nomenklator/getSubNomenklator',
     }),
   },
+  watch: {
+    // nomenklator(newVal, oldVal) {
+    // consola.log(newVal)
+    // },
+  },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
