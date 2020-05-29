@@ -27,10 +27,10 @@
 
               <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
             </v-list-item-content>
-            <v-badge large icon="mdi-magnify" offset-x="40" offset-y="40">
-              <v-list-item-avatar size="95" style="border: 0.5px solid grey;"
+            <v-badge large icon="mdi-magnify" offset-x="30" offset-y="20">
+              <v-avatar size="95" style="border: 0.5px solid grey;"
                 ><v-img :src="item.guid_picture"
-              /></v-list-item-avatar>
+              /></v-avatar>
             </v-badge>
           </v-list-item>
 
