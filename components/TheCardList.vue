@@ -72,7 +72,6 @@
             </v-chip>
             <v-spacer />
             <v-chip
-              nuxt
               class="ma-2"
               color=""
               text-color="blue darken-1"
@@ -80,7 +79,7 @@
               style="border: 0.5px solid;"
               right
               ripple
-              :to="`${item.parentguid}?itemcard=${item.synonym}`"
+              @click="goToGoodCard"
             >
               <v-icon>mdi-arrow-right</v-icon>
             </v-chip>
@@ -126,5 +125,11 @@ export default {
     window: 0,
   }),
   computed: {},
+  methods: {
+    goToGoodCard() {
+      const path = `/catalog/${this.item.parentguid}?itemcard=${this.item.synonym}`
+      this.$router.push({ path })
+    },
+  },
 }
 </script>
