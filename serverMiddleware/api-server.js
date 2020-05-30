@@ -1,5 +1,7 @@
 export default async (req, res, next) => {
 
+  //console.log(req._parsedUrl.pathname)
+
   let url = req._parsedUrl.pathname.replace(/^\/+|\/+$|\.+/g, "");
 
   url = url.split("/");

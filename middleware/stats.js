@@ -1,5 +1,5 @@
 // const consola = require('consola')
-export default function ({ route, store }) {
+export default function ({ route, store, redirect }) {
   // return axios.post('http://my-stats-api.com', {
   //   url: route.fullPath,
   // })
@@ -8,4 +8,10 @@ export default function ({ route, store }) {
     'SET_BACKSPACE_BTN',
     !(route.path === undefined || route.path === '/')
   )
+
+  if (route && route.fullPath && route.fullPath.includes('?itemcard=')) {
+    const newPath = route.fullPath.replace('?itemcard=', '/')
+    // consola.info('1111111111111111111', newPath)
+    return redirect(newPath)
+  }
 }

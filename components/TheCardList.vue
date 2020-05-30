@@ -127,11 +127,11 @@ export default {
   computed: {},
   methods: {
     goToGoodCard() {
-      const path = `/catalog/${this.item.parentguid}?itemcard=${this.item.synonym}`
+      const path = `/catalog/${this.item.parentguid}/${this.item.synonym}`
       // this.$router.go({ path, force: true })
-      // this.$router.push({ path })
+      this.$router.push({ path })
 
-      window.location.href = path
+      // window.location.href = path
       // this.$refs.pageGoods.$forceUpdate()
       // this.$forceUpdate()
       // this.$router.replace(path)
