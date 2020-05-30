@@ -48,6 +48,12 @@ export default {
       res: 'nomenklator/getGoodCard',
     }),
   },
+  mounted() {
+    document.getElementsByClassName('v-window__prev')[0].style.top = '25px'
+    document.getElementsByClassName('v-window__next')[0].style.top = '25px'
+  },
   methods: {},
 }
 </script>
+
+<style lang="scss" scoped></style>
