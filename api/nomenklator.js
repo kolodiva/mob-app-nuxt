@@ -10,4 +10,15 @@ async function getSubNomenklator( { parentguid, userid, connectionid } ) {
   return rows;
 }
 
-export { getSubNomenklator };
+async function getGoodCard( { synonym, userid, connectionid } ) {
+
+  const { orderid }  = await db.getConnectionOrder( userid, connectionid, false );
+
+  const { rows } = await db.queryApp('getGoodCard', { synonym, orderid } )
+
+  const rowsPhotos250 = await db.queryApp('getPhotos250', { synonym } )
+
+  return { rows: rows, rowphoto: rowsPhotos250.rows };
+}
+
+export { getSubNomenklator, getGoodCard };

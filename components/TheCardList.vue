@@ -1,5 +1,5 @@
 <template>
-  <v-card shaped raised class="mb-3">
+  <v-card shaped raised class="mb-3" max-height="210" min-height="210">
     <v-window v-model="window">
       <v-window-item key="1">
         <v-card flat shaped>
@@ -128,15 +128,7 @@ export default {
   methods: {
     goToGoodCard() {
       const path = `/catalog/${this.item.parentguid}/${this.item.synonym}`
-      // this.$router.go({ path, force: true })
       this.$router.push({ path })
-
-      // window.location.href = path
-      // this.$refs.pageGoods.$forceUpdate()
-      // this.$forceUpdate()
-      // this.$router.replace(path)
-      // location.reload(path)
-      // this.$store.commit('nomenklator/SET_GOOD_CARD', synonym)
     },
   },
 }

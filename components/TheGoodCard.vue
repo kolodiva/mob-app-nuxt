@@ -1,12 +1,19 @@
 <template>
-  <v-card flat class="mx-auto pa-5">{{ guid }}</v-card>
+  <v-card flat class="mx-auto pa-5">{{
+    goodCard ? goodCard.describe : 'no data'
+  }}</v-card>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 // import { mapState } from 'vuex'
 // const consola = require('consola')
 export default {
-  props: ['guid'],
+  computed: {
+    ...mapGetters({
+      goodCard: 'nomenklator/getGoodCard',
+    }),
+  },
   // asyncData({ app, params, query }) {
   //   consola.log('2222222222222222222222', query)
   // },
