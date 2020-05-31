@@ -11,9 +11,12 @@ function getCart(params) {
   return {
     name: 'get-cart',
     text: `
-      SELECT t2.guid, t2.artikul, t2.name, t1.qty
+      SELECT t2.guid, t2.artikul, t2.name, replace(t2.guid_picture, '250x250', '82x82') guid_picture_small,
+      to_char(t4.created_at, 'DD/MM/YYYY') data_on, t4.sum sum_total, t2.parentguid, t2.synonym, t1.order_id, t1.qty, t1.price, t1.sum, t3.name unit_name
       FROM order_goods t1
+      inner join orders t4 on t4.id = t1.order_id
       inner join nomenklators t2 on t1.nomenklator_id = t2.guid
+      inner join unit_types t3 on t1.unit_type_id = t3.code
       where order_id = $1
       order by t2.artikul
     `,

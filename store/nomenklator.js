@@ -75,6 +75,9 @@ export const getters = {
   getGoodCard: (state) => {
     return state.goodCard
   },
+  getCartList: (state) => {
+    return state.cartList
+  },
   getBreadCrumb: (state) => {
     return state.breadCrumb
   },
