@@ -55,7 +55,17 @@ function chngOrder( orderid, guid, qty, price, unit_type_id ) {
         delete from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}';
         insert into order_goods(order_id, nomenklator_id, qty, price, unit_type_id, sum )
     		select ${orderid}, '${guid}', ${qty || 0}, ${price}, ${unit_type_id}, ${ qty*price } where ${qty || 0} > 0
-    		RETURNING id, nomenklator_id, qty
+    		RETURNING id, nomenklator_id, qty;
+
+    `,
+    values: [],
+  }
+}
+function chngSumOrder( orderid ) {
+  return {
+    name: '',
+    text: `
+    update orders t1 set sum=(select sum(t2.sum) from order_goods t2 where t2.order_id=${orderid}) where id=${orderid}
     `,
     values: [],
   }
@@ -384,6 +394,7 @@ module.exports = {
   getConnOrder,
   addNewConnOrder,
   chngOrder,
+  chngSumOrder,
   unitOrders,
 
   getSubNomenklator,
