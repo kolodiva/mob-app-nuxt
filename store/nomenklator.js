@@ -16,7 +16,8 @@ export const state = () => ({
   nomenklTopLevel: nomenklTopLevel.rows,
   connectionid: undefined,
   waitNomenklatorLoad: undefined,
-  goodCard: undefined,
+  goodCard: [],
+  breadCrumb: [],
 })
 
 export const mutations = {
@@ -50,6 +51,9 @@ export const mutations = {
   SET_GOOD_CARD(state, res) {
     state.goodCard = res
   },
+  SET_BREAD_CRUMB(state, rows) {
+    state.breadCrumb = rows
+  },
 }
 
 export const getters = {
@@ -68,6 +72,9 @@ export const getters = {
   },
   getGoodCard: (state) => {
     return state.goodCard
+  },
+  getBreadCrumb: (state) => {
+    return state.breadCrumb
   },
   getNomenklTopLevel: (state) => {
     // return _.sortBy(state.nomenklTopLevel, 'id')
@@ -98,14 +105,21 @@ export const actions = {
   async loadSubNumenklator({ commit, dispatch, state }, { id }) {
     commit('SET_WAIT_LOAD_NOMENKLATOR', true)
     const userid = this.$auth.user ? this.$auth.user.id : 1
-    const rows = await this.$api('nomenklator', 'getSubNomenklator', {
-      userid,
-      parentguid: id,
-      connectionid: state.connectionid,
-    })
+    const { rows, breadcrumb } = await this.$api(
+      'nomenklator',
+      'getSubNomenklator',
+      {
+        userid,
+        parentguid: id,
+        connectionid: state.connectionid,
+      }
+    )
 
     commit('SET_SUB_NOMENKLATOR', rows)
     // commit('SET_WAIT_LOAD_NOMENKLATOR', false)
+    commit('SET_BREAD_CRUMB', breadcrumb)
+
+    // consola.info(breadcrumb)
   },
   async loadGoodCard({ commit, dispatch, state }, { id2 }) {
     // commit('SET_WAIT_LOAD_NOMENKLATOR', true)

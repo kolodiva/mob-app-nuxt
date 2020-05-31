@@ -7,7 +7,11 @@ async function getSubNomenklator( { parentguid, userid, connectionid } ) {
 
   const { rows } = await db.queryApp('getSubNomenklator', { parentguid, orderid })
 
-  return rows;
+  const breadcrumb = await db.queryApp('getBreadCrumbs', { parentguid  })
+
+  //console.log(breadcrumb.rows)
+
+  return {rows, breadcrumb: breadcrumb.rows};
 }
 
 async function getGoodCard( { synonym, userid, connectionid } ) {

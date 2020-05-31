@@ -322,6 +322,32 @@ function getPhotos250(params) {
     values: [],
   }
 }
+function getBreadCrumbs(params) {
+
+  const textqry=`
+
+  WITH RECURSIVE r AS (
+
+						select id, level_group, guid, parentguid, name, intrnt_keyword, intrnt_title, intrnt_description, intrnt_og_title
+						from nomenklators where guid='${params.parentguid}'
+
+						union all
+
+						select nom.id, nom.level_group, nom.guid, nom.parentguid, nom.name, nom.intrnt_keyword, nom.intrnt_title, nom.intrnt_description, nom.intrnt_og_title from nomenklators as nom join r on nom.guid = r.parentguid
+					)
+
+					select 0 as id, 'Дом' as name, null as guid,  0  as level_group, '' as intrnt_keyword, '' as intrnt_title, '' as intrnt_description, '' as intrnt_og_title
+					 union
+					select id, name, guid, level_group, intrnt_keyword, intrnt_title, intrnt_description, intrnt_og_title from r order by level_group
+
+  `
+
+  return {
+    name: '',
+    text: textqry,
+    values: [],
+  }
+}
 
 //users
 function getUserByEmail({email}) {
@@ -361,6 +387,7 @@ module.exports = {
   getSubNomenklator,
   getGoodCard,
   getPhotos250,
+  getBreadCrumbs,
   getUserByEmail,
   addNewUser,
   userAuth,

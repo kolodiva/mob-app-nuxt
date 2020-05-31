@@ -3,28 +3,39 @@
     <template v-slot:activator>
       <v-btn v-model="fab" color="blue darken-2" dark fab small left>
         <v-icon v-if="fab">mdi-close</v-icon>
-        <v-icon v-else>mdi-account-circle</v-icon>
+        <v-icon v-else>mdi-home-circle</v-icon>
       </v-btn>
     </template>
-    <v-btn fab dark small color="green" left>
-      <v-icon>mdi-pencil</v-icon>
-    </v-btn>
-    <v-btn fab dark small color="indigo" left>
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
-    <v-btn fab dark small color="red" left>
-      <v-icon>mdi-delete</v-icon>
-    </v-btn>
+    <template v-for="(el, i) in breadcrumb">
+      <v-btn
+        :key="i"
+        :href="el.guid ? `/catalog/${el.guid}` : '/'"
+        fab
+        dark
+        small
+        color="green"
+        ripple
+        style="justify-content: start;"
+      >
+        <v-chip>{{ el.name }}</v-chip>
+      </v-btn>
+    </template>
   </v-speed-dial>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data: () => ({
     fab: false,
   }),
 
   computed: {
+    ...mapGetters({
+      breadcrumb: 'nomenklator/getBreadCrumb',
+    }),
+
     activeFab() {
       switch (this.tabs) {
         case 'one':
