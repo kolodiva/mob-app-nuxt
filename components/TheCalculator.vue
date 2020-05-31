@@ -84,7 +84,12 @@ export default {
   },
   computed: {
     qtyWas() {
-      return 'ед.изм шт., в заказе было ' + this.itemInfo.q1
+      return (
+        'ед.изм ' +
+        this.itemInfo.unitName +
+        '., в заказе было ' +
+        parseFloat(this.itemInfo.q1)
+      )
     },
     qtyCurr() {
       return this.itemInfo.strQty

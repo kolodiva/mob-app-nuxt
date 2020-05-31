@@ -16,8 +16,8 @@
 import { mapGetters } from 'vuex'
 import TheCardList from '@/components/TheCardList.vue'
 import TheCalculator from '@/components/TheCalculator.vue'
-// const consola = require('consola')
 
+// const consola = require('consola')
 export default {
   components: {
     TheCardList,
@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     cartcalc(item, i) {
+      // consola.info(item)
       this.itemInfo = {
         indPos: i,
         guid: item.guid,
@@ -67,6 +68,7 @@ export default {
         q1: item.qty1,
         q2: item.qty2,
         strQty: parseFloat(item.qty2).toString(),
+        unitName: item.unit_name,
       }
       this.cartCalculator = !this.cartCalculator
     },

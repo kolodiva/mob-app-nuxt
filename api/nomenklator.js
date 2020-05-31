@@ -22,7 +22,11 @@ async function getGoodCard( { synonym, userid, connectionid } ) {
 
   const rowsPhotos250 = await db.queryApp('getPhotos250', { synonym } )
 
-  return { rows: rows, rowphoto: rowsPhotos250.rows };
+  const parentguid = rows[0].parentguid
+
+  const breadcrumb = await db.queryApp('getBreadCrumbs', { parentguid  })
+
+  return { rows: rows, rowsphoto: rowsPhotos250.rows, breadcrumb: breadcrumb.rows  };
 }
 
 export { getSubNomenklator, getGoodCard };

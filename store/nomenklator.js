@@ -31,9 +31,10 @@ export const mutations = {
     // state.countCart = data.countCart
   },
   SET_NEW_QTY(state, { ind, typeoper }) {
-    const obj = state.subNomenklator[ind]
+    const obj = ind < 0 ? state.goodCard.rows[0] : state.subNomenklator[ind]
     if (typeoper === 1) {
       obj.qty1 = obj.qty2
+      obj.total = parseFloat(obj.qty1 * obj.price1).toFixed(2)
     } else {
       obj.qty2 = obj.qty1
     }
@@ -48,8 +49,9 @@ export const mutations = {
   SET_WAIT_LOAD_NOMENKLATOR(state, val) {
     state.waitNomenklatorLoad = val
   },
-  SET_GOOD_CARD(state, res) {
-    state.goodCard = res
+  SET_GOOD_CARD(state, { rows, rowsphoto, breadcrumb }) {
+    state.goodCard = { rows, rowsphoto }
+    state.breadCrumb = breadcrumb
   },
   SET_BREAD_CRUMB(state, rows) {
     state.breadCrumb = rows
@@ -124,20 +126,28 @@ export const actions = {
   async loadGoodCard({ commit, dispatch, state }, { id2 }) {
     // commit('SET_WAIT_LOAD_NOMENKLATOR', true)
     const userid = this.$auth.user ? this.$auth.user.id : 1
-    const res = await this.$api('nomenklator', 'getGoodCard', {
-      userid,
-      synonym: id2,
-      connectionid: state.connectionid,
-    })
+    const { rows, rowsphoto, breadcrumb } = await this.$api(
+      'nomenklator',
+      'getGoodCard',
+      {
+        userid,
+        synonym: id2,
+        connectionid: state.connectionid,
+      }
+    )
 
     // consola.info(res)
-    commit('SET_GOOD_CARD', res)
+    commit('SET_GOOD_CARD', { rows, rowsphoto, breadcrumb })
   },
   async chngeCart({ commit, dispatch, state }, ind) {
-    const obj = state.subNomenklator[ind]
+    // ind < 0 case chnge from cardGood
+    const obj = ind < 0 ? state.goodCard.rows[0] : state.subNomenklator[ind]
+    // consola.info(obj)
     const info = {
       guid: obj.guid,
       qty: obj.qty2,
+      price1: obj.price1,
+      unit_type_id: obj.unit_type_id,
       userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
     }
 

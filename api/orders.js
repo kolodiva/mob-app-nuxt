@@ -18,7 +18,7 @@ async function getCart( params ) {
   return [];
 }
 
-async function chngeCart( { userid, guid, qty, connectionid }, res) {
+async function chngeCart( { userid, guid, qty, connectionid, price1, unit_type_id }, res) {
 
   // console.log( userid, guid, qty, connectionid )
 
@@ -31,7 +31,7 @@ async function chngeCart( { userid, guid, qty, connectionid }, res) {
       res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000 });
   }
 
-  const resOk  = await db.chngOrder( orderid, guid, qty, 123 );
+  const resOk  = await db.chngOrder( orderid, guid, qty, price1, unit_type_id );
 
   return [];
 }

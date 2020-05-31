@@ -46,15 +46,15 @@ function addNewConnOrder( userid ) {
     values: [],
   }
 }
-function chngOrder( orderid, guid, qty, price ) {
+function chngOrder( orderid, guid, qty, price, unit_type_id ) {
   return {
     name: '',
     text: `
     with deleted as (delete from order_good_complects where order_good_id in
       ( select id from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}'))
         delete from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}';
-        insert into order_goods(order_id, nomenklator_id, qty, price )
-    		select ${orderid}, '${guid}', ${qty || 0}, ${price} where ${qty || 0} > 0
+        insert into order_goods(order_id, nomenklator_id, qty, price, unit_type_id, sum )
+    		select ${orderid}, '${guid}', ${qty || 0}, ${price}, ${unit_type_id}, ${ qty*price } where ${qty || 0} > 0
     		RETURNING id, nomenklator_id, qty
     `,
     values: [],
@@ -145,7 +145,7 @@ function getSubNomenklator(params) {
          group by nomenklators.guid)
 
   select
-  --nomenklators.weight,
+  COALESCE(nomenklators.weight, 0) as weight,
       nomenklators.guid,
       nomenklators.parentguid,
           nomenklators.artikul,
@@ -159,6 +159,7 @@ function getSubNomenklator(params) {
           nomenklators.describe,
           nomenklators.is_complect,
           case when nomenklators.itgroup then '' else coalesce( case when nomenklators.is_complect > 0 then 'компл.' else unit_types.name end, 'нет ед.изм.') end as unit_name,
+          nomenklators.unit_type_id unit_type_id,
 
     COALESCE(price_list_total.price1, 0.00) as price1,
     COALESCE(price_list_total.price2, 0.00) as price2,
@@ -242,7 +243,7 @@ function getGoodCard(params) {
          group by nomenklators.guid)
 
   select
-  --nomenklators.weight,
+  COALESCE(nomenklators.weight, 0) as weight,
       nomenklators.guid,
       nomenklators.parentguid,
           nomenklators.artikul,
@@ -256,6 +257,7 @@ function getGoodCard(params) {
           nomenklators.describe,
           nomenklators.is_complect,
           case when nomenklators.itgroup then '' else coalesce( case when nomenklators.is_complect > 0 then 'компл.' else unit_types.name end, 'нет ед.изм.') end as unit_name,
+          nomenklators.unit_type_id unit_type_id,
 
     COALESCE(price_list_total.price1, 0.00) as price1,
     COALESCE(price_list_total.price2, 0.00) as price2,

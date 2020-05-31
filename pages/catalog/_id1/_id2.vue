@@ -6,23 +6,51 @@
         >{{ res.rows[0].artikul }}, {{ res.rows[0].artikul_new }}
       </v-card-subtitle>
       <v-card-text>
-        <v-chip>кол-во: {{ parseFloat(res.rows[0].qty1) }}</v-chip>
+        <v-row>
+          <v-chip
+            class="my-3 subtitle"
+            color=""
+            text-color="blue darken-4"
+            ripple
+            outlined
+            style="border: 0.5px solid;"
+            @click="cartcalc(res.rows[0], -1)"
+          >
+            <v-icon left class="pl-2">mdi-cart-plus</v-icon>
+            <span
+              >{{ parseFloat(res.rows[0].qty2) }}, ед.изм:
+              {{ res.rows[0].unit_name }}</span
+            >
+          </v-chip>
+          <v-spacer />
+          <span class="title red--text mt-2"
+            >{{ parseFloat(res.rows[0].total) }}
+            <v-icon class="">mdi-currency-rub</v-icon>
+          </span>
+        </v-row>
       </v-card-text>
       <v-carousel
         hide-delimiters
         height="300"
         class="mb-3"
-        :show-arrows="res && res.rowphoto ? res.rowphoto.length > 1 : false"
+        :show-arrows="photoMoreOne"
       >
         <v-carousel-item
-          v-for="(photo, i) in res.rowphoto"
+          v-for="(photo, i) in res.rowsphoto"
           :key="i"
           :src="photo.pic_path"
         ></v-carousel-item>
       </v-carousel>
-      <v-card-text v-html="res.rows[0].describe"> </v-card-text>
+      <v-card-text class="title"
+        >Вес нетто: {{ parseFloat(res.rows[0].weight) }} кг. - 1
+        {{ res.rows[0].unit_name }}.
+      </v-card-text>
+      <v-card-text class="title" v-html="res.rows[0].describe"> </v-card-text>
     </v-card>
     <TheCucumbers />
+    <v-dialog v-model="cartCalculator">
+      <TheCalculator :item-info="itemInfo" @cartcalcpost="cartcalcpost" />
+    </v-dialog>
   </div>
 </template>
 
@@ -30,6 +58,7 @@
 // import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 import TheCucumbers from '@/components/TheCucumbers.vue'
+import TheCalculator from '@/components/TheCalculator.vue'
 
 // import Groups from '@/components/Groups.vue'
 // import GoodCard from '@/components/TheGoodCard.vue'
@@ -46,7 +75,7 @@ export default {
   //   //   consola.log(store.getters('nomenklator/guidGoodCard'))
   //   return true
   // },
-  components: { TheCucumbers },
+  components: { TheCucumbers, TheCalculator },
   async asyncData({ app, params, query, store }) {
     // consola.info(params)
     if (params && params.id2) {
@@ -55,11 +84,17 @@ export default {
     }
   },
 
-  data: () => ({}),
+  data: () => ({
+    cartCalculator: false,
+    itemInfo: undefined,
+  }),
   computed: {
     ...mapGetters({
       res: 'nomenklator/getGoodCard',
     }),
+    photoMoreOne() {
+      return this.res.rowsphoto.length > 1
+    },
   },
   mounted() {
     const el1 = document.getElementsByClassName('v-window__prev')[0]
@@ -70,7 +105,37 @@ export default {
       el2.style.top = '25px'
     }
   },
-  methods: {},
+  methods: {
+    cartcalc(item, i) {
+      // consola.info(item)
+      this.itemInfo = {
+        indPos: i,
+        guid: item.guid,
+        artikul: item.artikul,
+        describe: item.describe,
+        firstEnter: true,
+        q1: item.qty1,
+        q2: item.qty2,
+        strQty: parseFloat(item.qty2).toString(),
+        unitName: item.unit_name,
+      }
+      this.cartCalculator = !this.cartCalculator
+    },
+    async cartcalcpost(item, post = false) {
+      this.cartCalculator = !this.cartCalculator
+      if (post === true) {
+        this.res.rows[0].qty2 = item.q2
+        await this.$store.dispatch('nomenklator/chngeCart', item.indPos)
+        await this.$store.dispatch('nomenklator/refreshCountCart')
+        await this.$store.dispatch('snackbar/setSnackbar', {
+          color: 'green',
+          text: `Позиция, ${item.artikul} в кол-ве: ${item.q2} доб/изм.`,
+          timeout: 3000,
+        })
+        // this.nomenklator[item.indPos].qty1 = item.q2
+      }
+    },
+  },
 }
 </script>
 

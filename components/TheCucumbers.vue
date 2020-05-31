@@ -3,7 +3,7 @@
     <template v-slot:activator>
       <v-btn v-model="fab" color="blue darken-2" dark fab small left>
         <v-icon v-if="fab">mdi-close</v-icon>
-        <v-icon v-else>mdi-home-circle</v-icon>
+        <v-icon v-else>mdi-apps</v-icon>
       </v-btn>
     </template>
     <template v-for="(el, i) in breadcrumb">
