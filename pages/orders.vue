@@ -208,6 +208,9 @@ export default {
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'Заказы')
   },
+  mounted() {
+    this.showEmail = true
+  },
   methods: {
     getCoodCardPath(i) {
       return this.cartList && this.cartList.length > 0
