@@ -1,7 +1,6 @@
 <template>
   <div>
     <label>{{ label }}</label>
-    <p>
       <input
         :id="id"
         class="input"
@@ -10,6 +9,5 @@
         :value="value"
         :required="required"
       />
-    </p>
   </div>
 </template>

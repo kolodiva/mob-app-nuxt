@@ -6,7 +6,7 @@
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-2">
-                <span class="blue--text subtitle-2"
+                <span class="blue--text subtitle-2" style="white-space: nowrap;"
                   >{{ item.artikul }}, {{ item.artikul_new }}</span
                 >
               </div>

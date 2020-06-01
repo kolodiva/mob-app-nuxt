@@ -64,6 +64,15 @@ function chngOrder( orderid, guid, qty, price, unit_type_id ) {
     values: [],
   }
 }
+function procOrder( orderid, dbinfo, mastercard ) {
+  return {
+    name: '',
+    text: `
+      update orders set status = 1, info='${ dbinfo }', card_payment_order='${mastercard}' where id=${orderid}
+    `,
+    values: [],
+  }
+}
 function chngSumOrder( orderid ) {
   return {
     name: '',
@@ -397,6 +406,7 @@ module.exports = {
   getConnOrder,
   addNewConnOrder,
   chngOrder,
+  procOrder,
   chngSumOrder,
   unitOrders,
 

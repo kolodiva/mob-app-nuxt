@@ -63,6 +63,10 @@ async function chngOrder( orderid, guid, qty, price, unit_type_id ) {
   return ( res[1].rowCount === 1 )
 }
 
+async function procOrder( orderid, mister, filial,  email, phone, info ) {
+  const res = await dbpgApp1.query( queries['procOrder']( orderid, mister, filial, email, phone, info ) )
+}
+
 async function unitOrders( { userid }, connectionid ) {
 
   //ищем сущ connection по анониму если он есть НЕ создавая нового
@@ -125,5 +129,6 @@ module.exports = {
   queryStat: (text, params) => dbpgStat.query(text, params),
   getConnectionOrder,
   chngOrder,
+  procOrder,
   unitOrders
 }

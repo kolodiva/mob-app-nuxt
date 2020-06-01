@@ -94,8 +94,8 @@ export const getters = {
 export const actions = {
   async refreshCountCart({ commit, dispatch }) {
     const userid = this.$auth.user ? this.$auth.user.id : 1
-    const conntoken = this.$cookies.connectionid
-    const rows = await this.$api('orders', 'getCart', { userid, conntoken })
+    const connectionid = state.connectionid
+    const rows = await this.$api('orders', 'getCart', { userid, connectionid })
     // console.log(userid, conntoken)
     commit('SET_COUNT_CART', rows)
   },
@@ -146,17 +146,38 @@ export const actions = {
     // ind < 0 case chnge from cardGood
     const obj = ind < 0 ? state.goodCard.rows[0] : state.subNomenklator[ind]
     // consola.info(obj)
+
     const info = {
       guid: obj.guid,
       qty: obj.qty2,
       price1: obj.price1,
       unit_type_id: obj.unit_type_id,
       userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      connectionid: state.connectionid,
     }
 
     const rows = await this.$api('orders', 'chngeCart', info)
 
     commit('SET_NEW_QTY', { ind, typeoper: 1 })
+
+    return rows
+  },
+  async procOrder(
+    { commit, dispatch, state },
+    { mister, filial, email, phone, info, mastercard }
+  ) {
+    const infoOrder = {
+      mister,
+      filial,
+      email,
+      phone,
+      info: info + '_mob',
+      userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      connectionid: state.connectionid,
+      mastercard,
+    }
+
+    const rows = await this.$api('orders', 'procOrder', infoOrder)
 
     return rows
   },

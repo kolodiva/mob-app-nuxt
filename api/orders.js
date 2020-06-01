@@ -36,4 +36,23 @@ async function chngeCart( { userid, guid, qty, connectionid, price1, unit_type_i
   return [];
 }
 
-export { chngeCart, getCart };
+async function procOrder( { userid, connectionid, mister, filial,  email, phone, info, mastercard } ) {
+
+  let dbinfo
+
+  // console.log( userid, guid, qty, connectionid )
+  const {orderid} = await db.getConnectionOrder( userid, connectionid, false )
+
+  if (userid === 1) {
+
+    dbinfo = `Обращение: ${mister ? mister : '***'} / ${email ? email : '***'} / ${phone ? phone : '***'} / Предпочитаемый офис: ${filial ? filial : '***'} / Напутствие: ${info ? info : '***'}`
+  } else {
+    dbinfo = `- / Предпочитаемый офис: ${filial ? filial : '***'} / Напутствие: ${info ? info : '***'}`
+  }
+
+  const resOk  = await db.procOrder( orderid, dbinfo, mastercard );
+
+  return [];
+}
+
+export { chngeCart, getCart, procOrder };
