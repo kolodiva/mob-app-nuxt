@@ -76,21 +76,15 @@
                   <v-text-field
                     v-model="mister"
                     label="Обращение*"
-                    required
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4" class="pb-0">
-                  <v-text-field
-                    v-model="email"
-                    label="Email*"
-                    required
-                  ></v-text-field>
+                  <v-text-field v-model="email" label="Email*"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4" class="pb-0">
                   <v-text-field
                     v-model="phone"
                     label="Контактный телефон*"
-                    required
                   ></v-text-field>
                 </v-col>
               </template>
@@ -115,14 +109,12 @@
                     'Краснодар',
                   ]"
                   label="Филиал*"
-                  required
                 ></v-select>
               </v-col>
               <v-col v-if="this.$auth.loggedIn" cols="12" sm="6">
                 <v-checkbox
                   v-model="mastercard"
                   label="Хочу оплатить картой!"
-                  required
                 ></v-checkbox>
               </v-col>
             </v-row>
