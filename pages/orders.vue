@@ -75,21 +75,23 @@
                 <v-col cols="12" sm="6" md="4" class="py-0">
                   <v-text-field
                     v-model="mister"
-                    :type="showEmail ? 'text' : 'password'"
+                    clearable
+                    type="text"
                     label="Обращение*"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4" class="pb-0">
                   <v-text-field
                     v-model="email"
-                    :type="showEmail ? 'email' : 'password'"
+                    type="email"
                     label="Email*"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4" class="pb-0">
                   <v-text-field
                     v-model="phone"
-                    :type="showEmail ? 'text' : 'password'"
+                    clearable
+                    type="text"
                     label="Контактный телефон*"
                   ></v-text-field>
                 </v-col>
@@ -97,7 +99,8 @@
               <v-col cols="12" sm="6" md="4" class="pa-0">
                 <v-textarea
                   v-model="lastWord"
-                  :type="showEmail ? 'text' : 'password'"
+                  clearable
+                  type="text"
                   filled
                   label="Напутствие"
                   auto-grow
@@ -163,7 +166,7 @@
             </v-btn>
             <v-spacer />
             <v-btn
-              v-if="(this.notFullDataAnonim === true)"
+              v-if="(notFullDataAnonim === true)"
               color="primary"
               text
               @click="questAnonymus = false"
@@ -181,6 +184,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+// const consola = require('consola')
 
 export default {
   async asyncData({ app, params, query, store }) {
@@ -217,9 +221,13 @@ export default {
     this.$store.commit('SET_HEADER_NAME', 'Заказы')
   },
   mounted() {
-    this.showEmail = true
+    // this.showEmail = true
   },
   methods: {
+    testtxt(p1, $event) {
+      this[p1] = $event
+      // consola.info(p1, $event)
+    },
     getCoodCardPath(i) {
       return this.cartList && this.cartList.length > 0
         ? `/catalog/${this.cartList[i].parentguid}/${this.cartList[i].synonym}`
