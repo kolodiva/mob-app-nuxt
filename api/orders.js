@@ -55,4 +55,13 @@ async function procOrder( { userid, connectionid, mister, filial,  email, phone,
   return [];
 }
 
-export { chngeCart, getCart, procOrder };
+async function getOrdersList( { userid, connectionid } ) {
+
+  const { rows } = await db.queryApp('getOrdersList', userid )
+
+  //console.log(userid, rows)
+
+  return rows;
+}
+
+export { chngeCart, getCart, procOrder, getOrdersList };

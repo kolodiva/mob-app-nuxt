@@ -9,12 +9,16 @@
       <v-list nav class="py-0">
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img :src="userinfo.avatar" />
+            <v-img
+              :src="$auth.loggedIn ? 'avatar_user.jpg' : 'avatar_anonim.png'"
+            />
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title>Приветствуем Вас</v-list-item-title>
-            <v-list-item-subtitle>{{ userinfo.name }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{
+              $auth.loggedIn ? $auth.user.name : 'Anonimus'
+            }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -53,25 +57,17 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item v-if="!$auth.loggedIn" link href="/login">
+
+        <v-list-item @click.prevent="logInOut">
           <v-list-item-action>
-            <v-icon>mdi-login</v-icon>
+            <v-icon>{{
+              this.$auth.loggedIn ? 'mdi-logout' : 'mdi-login'
+            }}</v-icon>
           </v-list-item-action>
 
           <v-list-item-content>
             <v-list-item-title>
-              Войти
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item v-else @click.prevent="logout">
-          <v-list-item-action>
-            <v-icon>mdi-login</v-icon>
-          </v-list-item-action>
-
-          <v-list-item-content>
-            <v-list-item-title>
-              Выйти
+              {{ this.$auth.loggedIn ? 'Выйти' : 'Войти' }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -96,6 +92,17 @@
           <v-list-item-content>
             <v-list-item-title>
               Успехи
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item :disabled="!$auth.loggedIn" link href="/orderslist">
+          <v-list-item-action>
+            <v-icon>mdi-contacts</v-icon>
+          </v-list-item-action>
+
+          <v-list-item-content>
+            <v-list-item-title>
+              Архив заказов
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -163,39 +170,10 @@ export default {
     dialog: false,
     drawer: null,
     showBtn: false,
-    items: [
-      {
-        icon: 'mdi-contacts',
-        text: 'Контакты',
-        href: '/contacts',
-        heading: '11111111',
-      },
-      { icon: 'mdi-login', text: 'Войти', href: '/login' },
-      { icon: 'mdi-logout', text: 'Выйти', code: 1 },
-      { icon: 'mdi-content-copy', text: 'Дубли-бубли' },
-      {
-        icon: 'mdi-chevron-up',
-        'icon-alt': 'mdi-chevron-down',
-        text: 'Дополнительно',
-        model: false,
-        children: [
-          { text: 'Пункт 1' },
-          { text: 'Пункт 2' },
-          { text: 'Пункт 3' },
-          { text: 'Пункт 4' },
-          { text: 'Пункт 5' },
-        ],
-      },
-    ],
   }),
   computed: {
     showFab() {
       return this.offsetTop > 180
-    },
-    userinfo() {
-      return this.$auth && this.$auth.loggedIn
-        ? { name: this.$auth.user.username, avatar: 'avatar_user.jpg' }
-        : { name: 'Anonimus', avatar: 'avatar_anonim.png' }
     },
   },
   beforeCreate() {
@@ -209,16 +187,25 @@ export default {
       // this.$store.commit('nomenklator/SET_COUNT_CART', 10)
       // consola.info(this.$store.state.nomenklator.countCart)
     },
-    logout() {
-      this.$auth.logout()
-      // this.$cookies.remove('connectionid')
-      // this.$cookies.remove('connectionid', { httpOnly: true })
-      this.$cookies.remove('connectionid')
+    async logInOut() {
+      if (this.$auth.loggedIn) {
+        await this.$auth.logout()
 
-      this.$store.dispatch('nomenklator/refreshCountCart')
-      this.$router.push({ path: '/' })
+        this.$cookies.remove('connectionid')
 
-      this.drawer = null
+        this.$store.dispatch('nomenklator/refreshCountCart')
+
+        this.$store.dispatch('snackbar/setSnackbar', {
+          color: 'green',
+          text: `До свидания`,
+          timeout: 5000,
+        })
+        this.$router.push({ path: '/' })
+      } else {
+        this.$router.push({ path: '/login' })
+      }
+
+      this.drawer = !this.drawer
     },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop

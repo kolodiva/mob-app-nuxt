@@ -116,6 +116,20 @@ function unitOrders( params ) {
     values: [],
   }
 }
+function getOrdersList( userid ) {
+  return {
+    name: '',
+    text: `
+    select distinct t1.id, t1.status, to_char(t1.created_at, 'DD/MM/YYYY') data_on, t1.sum, t1.sum_for_payment, t1.sum_paid, t1.data_paid, t1.card_payment_order
+    from orders t1
+    inner join connections t2 on t1.connection_id=t2.id
+    where t1.status>0 and t2.user_id=${userid}
+    order by t1.id desc
+    `,
+    values: [],
+  }
+}
+
 
 //nomenklator
 function getSubNomenklator(params) {
@@ -409,6 +423,7 @@ module.exports = {
   procOrder,
   chngSumOrder,
   unitOrders,
+  getOrdersList,
 
   getSubNomenklator,
   getGoodCard,

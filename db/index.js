@@ -89,6 +89,8 @@ async function unitOrders( { userid }, connectionid ) {
 
       await dbpgApp1.query( queries['unitOrders']({ orderid1: orderid, orderid2: orderid2.orderid, orderidnew: newrec.orderid }) )
 
+      await dbpgApp1.query( queries['chngSumOrder'](  newrec.orderid ) )
+
       await dbpgApp1.query( 'commit;' );
 
       return true;

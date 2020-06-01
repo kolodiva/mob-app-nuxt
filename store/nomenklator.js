@@ -18,6 +18,7 @@ export const state = () => ({
   waitNomenklatorLoad: undefined,
   goodCard: [],
   breadCrumb: [],
+  ordersList: [],
 })
 
 export const mutations = {
@@ -56,6 +57,9 @@ export const mutations = {
   SET_BREAD_CRUMB(state, rows) {
     state.breadCrumb = rows
   },
+  SET_ORDERS_LIST(state, rows) {
+    state.ordersList = rows
+  },
 }
 
 export const getters = {
@@ -88,6 +92,9 @@ export const getters = {
   getWaitLoadNomenklator: (state) => {
     // return _.sortBy(state.nomenklTopLevel, 'id')
     return state.waitNomenklatorLoad ? state.waitNomenklatorLoad : false
+  },
+  getOrdersList: (state) => {
+    return state.ordersList
   },
 }
 
@@ -180,5 +187,23 @@ export const actions = {
     const rows = await this.$api('orders', 'procOrder', infoOrder)
 
     return rows
+  },
+
+  async getOrdersList({ commit, dispatch, state }) {
+    // consola.info(this.$auth.user)
+    if (!this.$auth.loggedIn) {
+      commit('SET_ORDERS_LIST', [])
+      return
+    }
+    const info = {
+      userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      connectionid: state.connectionid,
+    }
+
+    const rows = await this.$api('orders', 'getOrdersList', info)
+
+    commit('SET_ORDERS_LIST', rows)
+
+    // return rows
   },
 }
