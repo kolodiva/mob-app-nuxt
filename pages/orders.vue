@@ -189,6 +189,7 @@ export default {
     phone: '',
     lastWord: '',
     mastercard: false,
+    showEmail: false,
   }),
   computed: {
     ...mapGetters({
@@ -237,6 +238,7 @@ export default {
             phone: this.phone,
             info: this.lastWord,
             mastercard: this.mastercard,
+            showEmail: false,
           })
           await this.$store.dispatch('snackbar/setSnackbar', {
             color: 'green',
