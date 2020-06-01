@@ -58,7 +58,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click.prevent="logInOut">
+        <v-list-item @click="logInOut">
           <v-list-item-action>
             <v-icon>{{
               this.$auth.loggedIn ? 'mdi-logout' : 'mdi-login'
