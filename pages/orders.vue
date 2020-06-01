@@ -75,15 +75,21 @@
                 <v-col cols="12" sm="6" md="4" class="py-0">
                   <v-text-field
                     v-model="mister"
+                    :type="showEmail ? 'text' : 'password'"
                     label="Обращение*"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4" class="pb-0">
-                  <v-text-field v-model="email" label="Email*"></v-text-field>
+                  <v-text-field
+                    v-model="email"
+                    :type="showEmail ? 'email' : 'password'"
+                    label="Email*"
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4" class="pb-0">
                   <v-text-field
                     v-model="phone"
+                    :type="showEmail ? 'text' : 'password'"
                     label="Контактный телефон*"
                   ></v-text-field>
                 </v-col>
@@ -91,6 +97,7 @@
               <v-col cols="12" sm="6" md="4" class="pa-0">
                 <v-textarea
                   v-model="lastWord"
+                  :type="showEmail ? 'text' : 'password'"
                   filled
                   label="Напутствие"
                   auto-grow
