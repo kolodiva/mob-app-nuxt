@@ -32,12 +32,16 @@
                 <v-img :src="item.guid_picture_small" />
               </v-list-item-avatar>
               <v-icon
-                v-if="item.describe"
                 color="blue darken-4"
-                large
-                style="position: absolute; right: 20px; top: 2px; z-index: 10;"
+                style="position: absolute; right: 24px; top: 7px; z-index: 10;"
                 @click.stop="window = 1"
-                >mdi-magnify</v-icon
+                >mdi-information</v-icon
+              >
+              <v-chip
+                v-if="item.is_complect"
+                ripple
+                style="position: absolute; right: -4px; bottom: -7px;"
+                >Компл.</v-chip
               >
             </div>
           </v-list-item>
