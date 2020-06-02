@@ -182,6 +182,7 @@ function getSubNomenklator(params) {
 
   select
   COALESCE(nomenklators.weight, 0) as weight,
+  nomenklators.packing as packing,
       nomenklators.guid,
       nomenklators.parentguid,
           nomenklators.artikul,
@@ -280,6 +281,7 @@ function getGoodCard(params) {
 
   select
   COALESCE(nomenklators.weight, 0) as weight,
+  nomenklators.packing as packing,
       nomenklators.guid,
       nomenklators.parentguid,
           nomenklators.artikul,

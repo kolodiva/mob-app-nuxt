@@ -5,6 +5,60 @@
       <v-card-subtitle
         >{{ res.rows[0].artikul }}, {{ res.rows[0].artikul_new }}
       </v-card-subtitle>
+      <v-card-actions style="justify-content: space-between;">
+        <div style="position: relative;">
+          <v-chip
+            class="ma-2"
+            color=""
+            text-color="blue darken-4"
+            outlined
+            style="border: 0.5px solid;"
+          >
+            {{ res.rows[0].price1 }}
+          </v-chip>
+          <p
+            class="caption blue--text text--darken-4 ma-0 pa-0 font-italic"
+            style="position: absolute; top: -15px; left: 10px;"
+          >
+            Розн
+          </p>
+        </div>
+        <div style="position: relative;">
+          <v-chip
+            class="ma-2"
+            color=""
+            text-color="blue darken-1"
+            outlined
+            style="border: 0.5px solid;"
+          >
+            {{ res.rows[0].price2 }}
+          </v-chip>
+          <p
+            class="caption blue--text text--darken-1 ma-0 pa-0 font-italic"
+            style="position: absolute; top: -15px; left: 10px;"
+          >
+            Мелк.опт
+          </p>
+        </div>
+        <div style="position: relative;">
+          <v-chip
+            class="ma-2"
+            color=""
+            text-color="blue lighten-2"
+            outlined
+            style="border: 0.5px solid;"
+          >
+            {{ res.rows[0].price3 }}
+          </v-chip>
+          <p
+            class="caption blue--text text--lighten-2 ma-0 pa-0 font-italic"
+            style="position: absolute; top: -15px; left: 10px;"
+          >
+            Круп.опт
+          </p>
+        </div>
+      </v-card-actions>
+
       <v-card-text>
         <v-row>
           <v-chip
@@ -41,9 +95,14 @@
           :src="photo.pic_path"
         ></v-carousel-item>
       </v-carousel>
-      <v-card-text class="title"
-        >Вес нетто: {{ parseFloat(res.rows[0].weight) }} кг. - 1
-        {{ res.rows[0].unit_name }}.
+      <v-card-text class="title">
+        <p class="ma-0">
+          Вес нетто: {{ parseFloat(res.rows[0].weight) }} кг. - 1
+          {{ res.rows[0].unit_name }}.
+        </p>
+        <p v-if="curItem.packing" class="ma-0">
+          Упаковка: {{ curItem.packing }} шт.
+        </p>
       </v-card-text>
       <v-card-text class="title" v-html="res.rows[0].describe"> </v-card-text>
     </v-card>
@@ -94,6 +153,9 @@ export default {
     }),
     photoMoreOne() {
       return this.res.rowsphoto.length > 1
+    },
+    curItem() {
+      return this.res.rows[0]
     },
   },
   mounted() {

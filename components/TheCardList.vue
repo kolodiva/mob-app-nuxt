@@ -43,33 +43,57 @@
           </v-list-item>
 
           <v-card-actions>
-            <v-chip
-              class="ma-2"
-              color=""
-              text-color="blue darken-4"
-              outlined
-              style="border: 0.5px solid;"
-            >
-              {{ item.price1 }}
-            </v-chip>
-            <v-chip
-              class="ma-2"
-              color=""
-              text-color="blue darken-1"
-              outlined
-              style="border: 0.5px solid;"
-            >
-              {{ item.price2 }}
-            </v-chip>
-            <v-chip
-              class="ma-2"
-              color=""
-              text-color="blue lighten-2"
-              outlined
-              style="border: 0.5px solid;"
-            >
-              {{ item.price3 }}
-            </v-chip>
+            <div style="position: relative;">
+              <v-chip
+                class="ma-2"
+                color=""
+                text-color="blue darken-4"
+                outlined
+                style="border: 0.5px solid;"
+              >
+                {{ item.price1 }}
+              </v-chip>
+              <p
+                class="caption blue--text text--darken-4 ma-0 pa-0 font-italic"
+                style="position: absolute; top: -15px; left: 10px;"
+              >
+                Розн
+              </p>
+            </div>
+            <div style="position: relative;">
+              <v-chip
+                class="ma-2"
+                color=""
+                text-color="blue darken-1"
+                outlined
+                style="border: 0.5px solid;"
+              >
+                {{ item.price2 }}
+              </v-chip>
+              <p
+                class="caption blue--text text--darken-1 ma-0 pa-0 font-italic"
+                style="position: absolute; top: -15px; left: 10px;"
+              >
+                Мелк.опт
+              </p>
+            </div>
+            <div style="position: relative;">
+              <v-chip
+                class="ma-2"
+                color=""
+                text-color="blue lighten-2"
+                outlined
+                style="border: 0.5px solid;"
+              >
+                {{ item.price3 }}
+              </v-chip>
+              <p
+                class="caption blue--text text--lighten-2 ma-0 pa-0 font-italic"
+                style="position: absolute; top: -15px; left: 10px;"
+              >
+                Круп.опт
+              </p>
+            </div>
             <v-spacer />
             <v-chip
               class="ma-2"
@@ -86,7 +110,7 @@
           </v-card-actions>
         </v-card>
       </v-window-item>
-      <v-window-item v-if="item.describe" key="2">
+      <v-window-item key="2">
         <v-container style="margin-right: 0;">
           <v-row no-gutters>
             <v-col
@@ -94,6 +118,13 @@
               cols="11"
               style="overflow: auto; height: 185px;"
             >
+              <p class="ma-0 mb-1">
+                Вес нетто: {{ parseFloat(item.weight) }} кг. - 1
+                {{ item.unit_name }}.
+              </p>
+              <p v-if="item.packing" class="ma-0 mb-1">
+                Упаковка: {{ item.packing }} шт.
+              </p>
               <span v-html="item.describe"></span>
             </v-col>
 
