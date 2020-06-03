@@ -389,6 +389,23 @@ function getBreadCrumbs(params) {
   }
 }
 
+//news
+function getNewsBlock() {
+
+  const textqry=`
+  select header, picture1 icon, path_pic2 pic, path_pdf  pdf
+  from new_blocks
+  where on_slider and on_public
+  order by id desc
+  `
+
+  return {
+    name: '',
+    text: textqry,
+    values: [],
+  }
+}
+
 //users
 function getUserByEmail({email}) {
 
@@ -434,4 +451,6 @@ module.exports = {
   getUserByEmail,
   addNewUser,
   userAuth,
+
+  getNewsBlock,
  };

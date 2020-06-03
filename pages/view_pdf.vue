@@ -1,21 +1,25 @@
 <template>
   <div class="mt-12">
     <client-only>
-      <vue-pdf
-        :src="$store.state.pdfFile"
-        @num-pages="pdfPageCount = $event"
-      ></vue-pdf>
+      <vue-pdf :src="pdfpath" @num-pages="pdfPageCount = $event"></vue-pdf>
     </client-only>
   </div>
 </template>
 
 <script>
 // import pdf from 'vue-pdf'
+import { mapGetters } from 'vuex'
 
 export default {
   // components: {
   //   pdf,
   // },
+  computed: {
+    ...mapGetters({
+      pdfpath: 'getPdfFile',
+    }),
+  },
+
   head() {
     return {
       meta: [

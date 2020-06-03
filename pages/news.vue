@@ -1,24 +1,40 @@
 <template>
-  <News />
+  <div>
+    <v-card v-for="(item, i) in newsBlock" :key="i" flat class="pa-0 px-5">
+      <v-card-title>
+        <v-chip outlined light large class="subtitle-1" @click="goToNewBlock(i)"
+          ><span>{{ item.header }}</span></v-chip
+        >
+      </v-card-title>
+
+      <v-img :src="`https://www.newfurnitura.ru/news/${item.pic}`"></v-img>
+    </v-card>
+  </div>
 </template>
 
 <script>
-import News from '@/components/News.vue'
+import { mapGetters } from 'vuex'
+
+// import News from '@/components/News.vue'
 // const consola = require('consola')
 export default {
   components: {
-    News,
+    //  News,
   },
   async asyncData({ store, app, params }) {
-    const url = '/api/db_news'
-    try {
-      const rows = await app.$axios.$get(url)
+    await store.dispatch('getNewsBlock')
+  },
+  computed: {
+    ...mapGetters({
+      newsBlock: 'getNewsBlock',
+    }),
+  },
+  methods: {
+    async goToNewBlock(i) {
+      await this.$store.commit('SET_PDF_FILE', i)
 
-      store.commit('setNewsRows', rows)
-    } catch (e) {
-      // consola.log(e)
-    } finally {
-    }
+      this.$router.push({ path: '/view_pdf' })
+    },
   },
 }
 </script>

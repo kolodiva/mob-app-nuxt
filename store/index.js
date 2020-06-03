@@ -7,7 +7,8 @@ export const state = () => ({
   user: undefined,
   headerName: 'МФ Комплект',
   showOverlay: false,
-  pdfFile: '/mf_komplekt_osoby_rezim_raboty.pdf',
+  pdfFile: '',
+  newsBlock: [],
 })
 
 export const mutations = {
@@ -20,10 +21,32 @@ export const mutations = {
   SET_BACKSPACE_BTN(state, value) {
     state.showBackSpace = value
   },
+  SET_NEWS_BLOCK(state, rows) {
+    state.newsBlock = rows
+  },
+  SET_PDF_FILE(state, i) {
+    if (i >= 0) {
+      state.pdfFile = 'https://newfurnitura.ru/news/' + state.newsBlock[i].pdf
+    }
+  },
+}
+
+export const getters = {
+  getNewsBlock: (state) => {
+    return state.newsBlock
+  },
+  getPdfFile: (state) => {
+    return state.pdfFile
+  },
 }
 
 export const actions = {
   async nuxtServerInit({ commit }, { req }) {
     await commit('nomenklator/SET_CONNECTION_ID', req.cookies.connectionid)
+  },
+  async getNewsBlock({ commit, dispatch, state }) {
+    const rows = await this.$api('news', 'getNewsBlock')
+
+    await commit('SET_NEWS_BLOCK', rows)
   },
 }
