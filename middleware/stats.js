@@ -11,7 +11,11 @@ export default function ({ route, store, redirect }) {
 
   if (route && route.fullPath && route.fullPath.includes('?itemcard=')) {
     const newPath = route.fullPath.replace('?itemcard=', '/')
-    // consola.info('1111111111111111111', newPath)
+    return redirect(newPath)
+  }
+
+  if (route && route.fullPath && route.fullPath.includes('//?utm_source=')) {
+    const newPath = route.fullPath.replace('//?utm_source=', '/?utm_source=')
     return redirect(newPath)
   }
 }
