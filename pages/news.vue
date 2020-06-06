@@ -2,9 +2,7 @@
   <div>
     <v-card v-for="(item, i) in newsBlock" :key="i" flat class="pa-0 px-5">
       <v-card-title>
-        <v-chip outlined light large class="subtitle-1" @click="goToNewBlock(i)"
-          ><span>{{ item.header }}</span></v-chip
-        >
+        <span class="headline" @click="goToNewBlock(i)">{{ item.header }}</span>
       </v-card-title>
 
       <v-img :src="`https://www.newfurnitura.ru/news/${item.pic}`"></v-img>
