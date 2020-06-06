@@ -7,7 +7,7 @@
         >
       </v-card-title>
 
-      <v-img :src="`/news/${item.pic}`"></v-img>
+      <v-img :src="`https://www.newfurnitura.ru/news/${item.pic}`"></v-img>
     </v-card>
   </div>
 </template>

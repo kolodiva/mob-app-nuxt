@@ -26,7 +26,7 @@ export const mutations = {
   },
   SET_PDF_FILE(state, i) {
     if (i >= 0) {
-      state.pdfFile = 'https://newfurnitura.ru/news/' + state.newsBlock[i].pdf
+      state.pdfFile = '/news/' + state.newsBlock[i].pdf
     }
   },
 }

@@ -18,7 +18,12 @@ export default function ({ route, store, redirect }) {
     const newPath = route.fullPath.replace('//?utm_source=', '/?utm_source=')
     return redirect(newPath)
   }
-  if (route && route.fullPath && route.fullPath.includes('/advs/') && !route.fullPath.includes('.html') ) {
+  if (
+    route &&
+    route.fullPath &&
+    route.fullPath.includes('/advs/') &&
+    !route.fullPath.includes('.html')
+  ) {
     const newPath = route.fullPath + '.html'
     return redirect(newPath)
   }
