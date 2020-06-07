@@ -39,6 +39,7 @@ export default {
     ...mapGetters({
       isGroup: 'nomenklator/isGroup',
       waitLoadNomenklator: 'nomenklator/getWaitLoadNomenklator',
+      getSearchText: 'nomenklator/getSearchText',
     }),
   },
   beforeCreate() {
@@ -47,6 +48,9 @@ export default {
   async mounted() {
     await this.$store.commit('nomenklator/SET_WAIT_LOAD_NOMENKLATOR', false)
     // consola.log(this.$route)
+    // if (this.getSearchText) {
+    // window.find('9378')
+    // }
   },
   methods: {},
 }

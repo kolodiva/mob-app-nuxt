@@ -14,6 +14,14 @@ async function getSubNomenklator( { parentguid, userid, connectionid } ) {
   return {rows, breadcrumb: breadcrumb.rows};
 }
 
+async function getSearchNomenklator( { searchtext } ) {
+
+  //Ищем номер Заказа без создания если его нет НЕ создаем новый
+  const {rows} = await db.queryApp('getSearchNomenklator', { searchtext  })
+
+  return {rows};
+}
+
 async function getGoodCard( { synonym, userid, connectionid } ) {
 
   const { orderid }  = await db.getConnectionOrder( userid, connectionid, false );
@@ -29,4 +37,4 @@ async function getGoodCard( { synonym, userid, connectionid } ) {
   return { rows: rows, rowsphoto: rowsPhotos250.rows, breadcrumb: breadcrumb.rows  };
 }
 
-export { getSubNomenklator, getGoodCard };
+export { getSubNomenklator, getGoodCard, getSearchNomenklator };

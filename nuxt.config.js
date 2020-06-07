@@ -167,6 +167,14 @@ module.exports = {
     hardSource: true,
     extend(config, ctx) {
 
+      config.module.rules.push({
+              test: /\.(ogg|mp3|wav|mpe?g)$/i,
+              loader: 'file-loader',
+              options: {
+                name: '[path][name].[ext]'
+              }
+            })      
+
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({

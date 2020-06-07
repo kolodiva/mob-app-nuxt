@@ -7,105 +7,107 @@
       disable-route-watcher
     >
       <v-list nav class="py-0">
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <v-img
-              :src="$auth.loggedIn ? 'avatar_user.jpg' : 'avatar_anonim.png'"
-            />
-          </v-list-item-avatar>
+        <v-list-item-group v-model="group">
+          <v-list-item two-line>
+            <v-list-item-avatar>
+              <v-img
+                :src="$auth.loggedIn ? 'avatar_user.jpg' : 'avatar_anonim.png'"
+              />
+            </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>Приветствуем Вас</v-list-item-title>
-            <v-list-item-subtitle>{{
-              $auth.loggedIn ? $auth.user.name : 'Anonimus'
-            }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Приветствуем Вас</v-list-item-title>
+              <v-list-item-subtitle>{{
+                $auth.loggedIn ? $auth.user.name : 'Anonimus'
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-divider></v-divider>
+          <v-divider></v-divider>
 
-        <v-list-item link href="/">
-          <v-list-item-action>
-            <v-icon>mdi-home-outline</v-icon>
-          </v-list-item-action>
+          <v-list-item nuxt to="/" @click="drawer = false">
+            <v-list-item-action>
+              <v-icon>mdi-home-outline</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              Домой
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link href="/news">
-          <v-list-item-action>
-            <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>
-          </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Домой
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item nuxt to="/news">
+            <v-list-item-action>
+              <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              Новости
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link href="/contacts">
-          <v-list-item-action>
-            <v-icon>mdi-contacts</v-icon>
-          </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Новости
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item nuxt to="/contacts">
+            <v-list-item-action>
+              <v-icon>mdi-contacts</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              Контакты
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                Контакты
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item ripple @click.native="logInOut">
-          <v-list-item-action>
-            <v-icon>{{
-              this.$auth.loggedIn ? 'mdi-logout' : 'mdi-login'
-            }}</v-icon>
-          </v-list-item-action>
+          <v-list-item ripple @click.native="logInOut">
+            <v-list-item-action>
+              <v-icon>{{
+                this.$auth.loggedIn ? 'mdi-logout' : 'mdi-login'
+              }}</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ this.$auth.loggedIn ? 'Выйти' : 'Войти' }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ this.$auth.loggedIn ? 'Выйти' : 'Войти' }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item link href="/about_company">
-          <v-list-item-action>
-            <v-icon>mdi-information-outline</v-icon>
-          </v-list-item-action>
+          <v-list-item nuxt to="/about_company">
+            <v-list-item-action>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              О компании
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                О компании
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item link href="/success_history">
-          <v-list-item-action>
-            <v-icon>mdi-wallet-outline</v-icon>
-          </v-list-item-action>
+          <v-list-item nuxt to="/success_history">
+            <v-list-item-action>
+              <v-icon>mdi-wallet-outline</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              Успехи
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item :disabled="!$auth.loggedIn" link href="/orderslist">
-          <v-list-item-action>
-            <v-icon>mdi-contacts</v-icon>
-          </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                Успехи
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :disabled="!$auth.loggedIn" link href="/orderslist">
+            <v-list-item-action>
+              <v-icon>mdi-contacts</v-icon>
+            </v-list-item-action>
 
-          <v-list-item-content>
-            <v-list-item-title>
-              Архив заказов
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                Архив заказов
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
@@ -120,12 +122,14 @@
       >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title style="" class="ml-0 pl-1">
-        <v-btn href="/" class="">{{ $store.state.headerName }}</v-btn>
+        <v-btn nuxt to="/" class="">{{ $store.state.headerName }}</v-btn>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn icon @click="test">
+
+      <v-btn icon nuxt to="/search">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
+
       <TheCart />
     </v-app-bar>
     <v-content>
@@ -170,10 +174,16 @@ export default {
     dialog: false,
     drawer: null,
     showBtn: false,
+    group: null,
   }),
   computed: {
     showFab() {
       return this.offsetTop > 180
+    },
+  },
+  watch: {
+    group() {
+      this.drawer = false
     },
   },
   beforeCreate() {
@@ -205,7 +215,7 @@ export default {
         this.$router.push({ path: '/login' })
       }
 
-      this.drawer = !this.drawer
+      // this.drawer = !this.drawer
     },
     onScroll() {
       this.offsetTop = window.pageYOffset || document.documentElement.scrollTop

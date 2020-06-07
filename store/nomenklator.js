@@ -19,6 +19,8 @@ export const state = () => ({
   goodCard: [],
   breadCrumb: [],
   ordersList: [],
+  searchNomenklator: [],
+  searchText: '',
 })
 
 export const mutations = {
@@ -60,6 +62,12 @@ export const mutations = {
   SET_ORDERS_LIST(state, rows) {
     state.ordersList = rows
   },
+  SET_SEARCH_NOMENKLATOR(state, rows) {
+    state.searchNomenklator = rows
+  },
+  SET_SEARCH_TEXT(state, searchtext) {
+    state.searchText = searchtext
+  },
 }
 
 export const getters = {
@@ -95,6 +103,12 @@ export const getters = {
   },
   getOrdersList: (state) => {
     return state.ordersList
+  },
+  getNomenklatorBySearchText: (state) => {
+    return state.searchNomenklator
+  },
+  getSearchText: (state) => {
+    return state.searchText
   },
 }
 
@@ -132,6 +146,14 @@ export const actions = {
     commit('SET_BREAD_CRUMB', breadcrumb)
 
     // consola.info(breadcrumb)
+  },
+  async loadSearchNumenklator({ commit, dispatch, state }, { searchtext }) {
+    const { rows } = await this.$api('nomenklator', 'getSearchNomenklator', {
+      searchtext,
+    })
+
+    commit('SET_SEARCH_NOMENKLATOR', rows)
+    commit('SET_SEARCH_TEXT', searchtext)
   },
   async loadGoodCard({ commit, dispatch, state }, { id2 }) {
     // commit('SET_WAIT_LOAD_NOMENKLATOR', true)

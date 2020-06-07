@@ -388,6 +388,80 @@ function getBreadCrumbs(params) {
     values: [],
   }
 }
+function getSearchNomenklator_old({searchtext}) {
+
+  const strQueryWhereExactly  = searchtext.split(' ').join('').toLowerCase()
+  const strQueryWhere         = '%' + searchtext.split(' ').join('%').toLowerCase() + '%'
+  const strQueryWhereArtikul  = searchtext.split(' ').join('%').toLowerCase() + '%'
+
+  const textqry = `
+
+  SELECT DISTINCT trim(nomenklators2.name) as name1, nomenklators2.guid, nomenklators2.parentguid,
+         min(case when (lower(nomenklators1.artikul) = '${strQueryWhereExactly}' or lower(nomenklators1.artikul_new) = '${strQueryWhereExactly}' ) then 0 else 1 end) as ord
+                   FROM
+                   nomenklators as nomenklators1
+                   inner join nomenklators as nomenklators2 on nomenklators1.parentguid = nomenklators2.guid
+
+               WHERE ( lower(nomenklators1.name) like '${strQueryWhere}'
+                 OR lower(nomenklators2.name)  like '${strQueryWhere}'
+                   OR lower(nomenklators1.synonym)  like '${strQueryWhere}'
+                   OR lower(nomenklators2.synonym)  like '${strQueryWhere}'
+                     OR lower(nomenklators1.artikul) like '${strQueryWhereArtikul}'
+                     OR lower(nomenklators1.artikul_new) like '${strQueryWhereArtikul}'
+                       AND NOT nomenklators1.itgroup and nomenklators2.guid!='yandexpagesecret' and nomenklators2.guid!='sekretnaya_papka'
+                               and case when nomenklators2.parentguid is null then true else nomenklators2.parentguid != 'yandexpagesecret' end
+                               and case when nomenklators2.parentguid is null then true else nomenklators2.parentguid != 'sekretnaya_papka' end
+                       ) group by nomenklators2.guid, nomenklators2.parentguid, nomenklators2.name
+                       having nomenklators2.guid != 'sekretnaya_papka'
+                       ORDER BY ord, trim(nomenklators2.name)
+                       limit 30
+
+                       `
+  return {
+    name: '',
+    text: textqry,
+    values: [],
+  }
+}
+function getSearchNomenklator({searchtext}) {
+
+  let whereStr = searchtext.toLowerCase().split(' ');
+  whereStr.forEach(function(el, i) {this[i] = "'" + el + "'"}, whereStr);
+
+  whereStr = `all(array[${whereStr.join(',')}])`
+
+  //console.log(whereStr)
+
+  const textqry = `
+
+  with r1 as (select parentguid, synonym, name, artikul, artikul_new from nomenklators
+  where not itgroup
+  and parentguid not in ('yandexpagesecret', 'sekretnaya_papka')
+  and
+  (lower(name) ~ ${whereStr} or lower(artikul) ~ ${whereStr} or lower(artikul_new) ~ ${whereStr} )
+  limit 50
+  )
+  select name, guid,
+  (
+        select array_to_json(array_agg(row_to_json(d)))
+        from (
+          select synonym, name, artikul, artikul_new
+          from r1
+          where r1.parentguid=t1.guid
+  		  order by artikul
+        ) d
+      ) as goods
+
+  from nomenklators t1
+  where guid in (select distinct parentguid from r1)
+  order by name
+                       `
+  return {
+    name: '',
+    text: textqry,
+    values: [],
+  }
+}
 
 //news
 function getNewsBlock() {
@@ -445,6 +519,7 @@ module.exports = {
   getOrdersList,
 
   getSubNomenklator,
+  getSearchNomenklator,
   getGoodCard,
   getPhotos250,
   getBreadCrumbs,
