@@ -41,9 +41,9 @@ export default function ({ route, store, redirect }) {
     }
 
     // consola.info(tmpPath0, tmpPath1)
-    if (tmpPath1) {
-      tmpPath0 = tmpPath0 + '/' + tmpPath1
-    }
+    // if (tmpPath1) {
+    //   tmpPath0 = tmpPath0 + '/' + tmpPath1
+    // }
 
     return redirect(tmpPath0)
   }
