@@ -14,10 +14,16 @@ export default function ({ route, store, redirect }) {
     return redirect(newPath)
   }
 
+  if (route && route.fullPath && route.fullPath.includes('///?utm_source=')) {
+    const newPath = route.fullPath.replace('//?utm_source=', '/?utm_source=')
+    return redirect(newPath)
+  }
+
   if (route && route.fullPath && route.fullPath.includes('//?utm_source=')) {
     const newPath = route.fullPath.replace('//?utm_source=', '/?utm_source=')
     return redirect(newPath)
   }
+
   if (
     route &&
     route.fullPath &&
