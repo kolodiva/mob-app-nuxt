@@ -39,7 +39,7 @@ export default {
         this.$router.push({ path: pathNewsBlock })
       } else {
         pathNewsBlock = '/' + pathNewsBlock + '.html'
-        this.$router.go(pathNewsBlock)
+        this.$router.push(pathNewsBlock)
       }
       // consola.info(pathNewsBlock)
     },
