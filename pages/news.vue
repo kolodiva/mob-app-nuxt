@@ -36,11 +36,13 @@ export default {
       if (pathNewsBlock.includes('.pdf')) {
         await this.$store.commit('SET_PDF_FILE', i)
         pathNewsBlock = '/view_pdf'
+        this.$router.push({ path: pathNewsBlock })
       } else {
         pathNewsBlock = '/' + pathNewsBlock + '.html'
+        this.$router.push({ path: pathNewsBlock })
+        this.$router.go(1)
       }
       consola.info(pathNewsBlock)
-      this.$router.push({ path: pathNewsBlock })
     },
   },
 }
