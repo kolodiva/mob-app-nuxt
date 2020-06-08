@@ -9,12 +9,13 @@
     <template v-for="(el, i) in breadcrumb">
       <v-btn
         :key="i"
-        :href="el.guid ? `/catalog/${el.guid}` : '/'"
+        :to="el.guid ? `/catalog/${el.guid}` : '/'"
         fab
         dark
         small
         color="green"
         ripple
+        nuxt
         style="justify-content: start;"
       >
         <v-chip>{{ el.name }}</v-chip>
