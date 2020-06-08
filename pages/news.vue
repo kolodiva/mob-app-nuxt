@@ -39,7 +39,8 @@ export default {
         this.$router.push({ path: pathNewsBlock })
       } else {
         pathNewsBlock = '/' + pathNewsBlock
-        this.$router.push({ path: pathNewsBlock })
+        window.location.href = pathNewsBlock
+        // this.$router.push({ path:  })
       }
       // consola.info(pathNewsBlock)
     },
