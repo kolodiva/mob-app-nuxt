@@ -32,16 +32,16 @@ export default {
   },
   methods: {
     async goToNewsBlock(i) {
+
       let pathNewsBlock = this.newsBlock[i].pdf
       if (pathNewsBlock.includes('.pdf')) {
         await this.$store.commit('SET_PDF_FILE', i)
-
-        this.$router.push({ path: '/view_pdf' })
+        pathNewsBlock = '/view_pdf'
       } else {
         pathNewsBlock = '/' + pathNewsBlock
-        consola.info( pathNewsBlock )
-        this.$router.push({ path: pathNewsBlock })
       }
+      consola.info(pathNewsBlock)
+      this.$router.push({ path: pathNewsBlock })
     },
   },
 }
