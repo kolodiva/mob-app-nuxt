@@ -37,7 +37,7 @@ export default function ({ route, store, redirect }) {
     tmpPath0 = '/' + aPath1.join('/')
 
     if (!tmpPath0.includes('.html')) {
-      tmpPath0 = tmpPath0 + '.html'
+      // tmpPath0 = tmpPath0 + '.html'
     }
 
     // consola.info(tmpPath0, tmpPath1)

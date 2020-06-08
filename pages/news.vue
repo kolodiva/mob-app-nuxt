@@ -35,14 +35,11 @@ export default {
       let pathNewsBlock = this.newsBlock[i].pdf
       if (pathNewsBlock.includes('.pdf')) {
         await this.$store.commit('SET_PDF_FILE', i)
-        pathNewsBlock = '/view_pdf'
-        this.$router.push({ path: pathNewsBlock })
+        this.$router.push({ path: '/view_pdf' })
       } else {
         pathNewsBlock = '/' + pathNewsBlock
         window.location.href = pathNewsBlock
-        // this.$router.push({ path:  })
       }
-      // consola.info(pathNewsBlock)
     },
   },
 }
