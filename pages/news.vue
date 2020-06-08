@@ -3,7 +3,7 @@
     <v-card v-for="(item, i) in newsBlock" :key="i" flat class="pa-0 px-5">
       <v-card-title>
         <span class="headline">{{ item.header }}</span>
-        <v-chip class="subtitle-1" light ripple @click="goToNewBlock(i)"
+        <v-chip class="subtitle-1" light ripple @click="goToNewsBlock(i)"
           >Подробнее...</v-chip
         >
       </v-card-title>
@@ -31,10 +31,15 @@ export default {
     }),
   },
   methods: {
-    async goToNewBlock(i) {
-      await this.$store.commit('SET_PDF_FILE', i)
+    async goToNewsBlock(i) {
+      const pathNewsBlock = this.newsBlock[i].pdf
+      if (pathNewsBlock.includes('.pdf')) {
+        await this.$store.commit('SET_PDF_FILE', i)
 
-      this.$router.push({ path: '/view_pdf' })
+        this.$router.push({ path: '/view_pdf' })
+      } else {
+        this.$router.push({ path: '/' + pathNewsBlock })
+      }
     },
   },
 }
