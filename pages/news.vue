@@ -17,7 +17,7 @@
 import { mapGetters } from 'vuex'
 
 // import News from '@/components/News.vue'
-const consola = require('consola')
+// const consola = require('consola')
 export default {
   components: {
     //  News,
@@ -38,8 +38,8 @@ export default {
         pathNewsBlock = '/view_pdf'
         this.$router.push({ path: pathNewsBlock })
       } else {
-        pathNewsBlock = '/' + pathNewsBlock + '.html'
-        this.$router.push(pathNewsBlock)
+        pathNewsBlock = '/' + pathNewsBlock
+        this.$router.push({ path: pathNewsBlock })
       }
       // consola.info(pathNewsBlock)
     },
