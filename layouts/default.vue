@@ -25,6 +25,29 @@
 
           <v-divider></v-divider>
 
+          <v-list-item href="/advs/dostavka-moskva">
+            <v-list-item-action>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-action>
+
+            <v-list-item-content>
+              <v-list-item-title>
+                Доставка (Москва)
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item href="/advs/about-company">
+            <v-list-item-action>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-action>
+
+            <v-list-item-content>
+              <v-list-item-title>
+                О компании
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-list-item nuxt to="/" @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-home-outline</v-icon>
@@ -92,28 +115,6 @@
             <v-list-item-content>
               <v-list-item-title>
                 Архив заказов
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item href="/advs/dostavka-moskva">
-            <v-list-item-action>
-              <v-icon>mdi-information-outline</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>
-                Доставка (Москва)
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item href="/advs/about-company">
-            <v-list-item-action>
-              <v-icon>mdi-information-outline</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>
-                О компании
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
