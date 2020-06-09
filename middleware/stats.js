@@ -26,7 +26,7 @@ export default function ({ route, store, redirect }) {
 
   if (route && route.path && route.path.includes('/advs/')) {
     let tmpPath0 = route.path
-    const tmpPath1 = route.fullPath.replace(tmpPath0, '').trim()
+    // const tmpPath1 = route.fullPath.replace(tmpPath0, '').trim()
 
     const aPath0 = tmpPath0.split('/')
 
