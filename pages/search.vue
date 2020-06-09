@@ -1,16 +1,25 @@
 <template>
   <v-card class="mx-4" flat>
-    <v-card-title class="pt-0 title">Страница поиска</v-card-title>
+    <v-card-title class="pa-0 pb-2 title">Страница поиска</v-card-title>
     <v-col cols="12" sm="6" class="py-0">
-      <v-text-field
-        v-model="searchtext"
-        :loading="isLoading"
-        class="pt-0 title"
-        label="Введите часть артикула или наименования. "
-        :rules="[rules.min]"
-        hint="Минимум 3 символа"
-        clearable
-      ></v-text-field>
+      <v-row>
+        <v-col cols="10" class="pa-0">
+          <v-text-field
+            v-model="searchtext"
+            :loading="isLoading"
+            class="pt-0 title"
+            label="Введите часть артикула или наименования. "
+            :rules="[rules.min]"
+            hint="Минимум 3 символа"
+            clearable
+          ></v-text-field>
+        </v-col>
+        <v-col cols="2" class="pa-0">
+          <v-row justify="center" class="pa-0">
+            <TheMicrophone @speechend="speechend" />
+          </v-row>
+        </v-col>
+      </v-row>
     </v-col>
     <v-col v-if="rowsSearchText" cols="12" sm="6" class="pt-0">
       <v-list>
@@ -39,7 +48,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import TheMicrophone from '@/components/TheMicrophone.vue'
+// const consola = require('consola')
 export default {
+  components: { TheMicrophone },
   data: () => ({
     isLoading: false,
     searchtext: '',
@@ -49,12 +61,6 @@ export default {
       min: (v) => (v && v.length >= 3) || 'Мин 3 символа',
     },
   }),
-
-  mounted() {
-    if (this.searchText) {
-      this.searchtext = this.searchText
-    }
-  },
   computed: {
     ...mapGetters({
       rowsSearchText: 'nomenklator/getNomenklatorBySearchText',
@@ -73,6 +79,19 @@ export default {
       })
 
       this.isLoading = false
+    },
+  },
+  mounted() {
+    if (this.searchText) {
+      this.searchtext = this.searchText
+    }
+  },
+  methods: {
+    speechend(speechtext) {
+      // consola.info(speechtext)
+      if (speechtext) {
+        this.searchtext = speechtext
+      }
     },
   },
 }
