@@ -110,6 +110,22 @@
     <v-dialog v-model="cartCalculator">
       <TheCalculator :item-info="itemInfo" @cartcalcpost="cartcalcpost" />
     </v-dialog>
+    <v-fab-transition>
+      <v-btn
+        color="blue"
+        ripple
+        dark
+        fab
+        fixed
+        bottom
+        x-small
+        right
+        class="mr-10"
+        @click="$router.go(-1)"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </div>
 </template>
 
@@ -201,4 +217,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="" scoped></style>

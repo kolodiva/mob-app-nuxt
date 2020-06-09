@@ -52,6 +52,15 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            <v-list-item href="/advs/vozvrat-obmen">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Возврат-Обмен
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
           </v-list-group>
           <v-list-item nuxt to="/news">
             <v-list-item-action>
@@ -102,7 +111,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item nuxt to="/success_history">
+          <v-list-item nuxt to="/success-history">
             <v-list-item-action>
               <v-icon>mdi-wallet-outline</v-icon>
             </v-list-item-action>
@@ -180,7 +189,7 @@ import TheSnackbar from '@/components/TheSnackbar.vue'
 import TheCart from '@/components/TheCart.vue'
 // import TheCucumbers from '@/components/TheCucumbers.vue'
 
-const consola = require('consola')
+// const consola = require('consola')
 export default {
   components: {
     TheSnackbar,
@@ -200,7 +209,7 @@ export default {
   },
   watch: {
     group(item) {
-      consola.info(item)
+      // consola.info(item)
       if (item && item !== 2) {
         this.drawer = false
       }
