@@ -25,29 +25,6 @@
 
           <v-divider></v-divider>
 
-          <v-list-item href="/advs/dostavka-moskva">
-            <v-list-item-action>
-              <v-icon>mdi-information-outline</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>
-                Доставка (Москва)
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item href="/advs/about-company">
-            <v-list-item-action>
-              <v-icon>mdi-information-outline</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>
-                О компании
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
           <v-list-item nuxt to="/" @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-home-outline</v-icon>
@@ -59,6 +36,23 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-group prepend-icon="mdi-cart" ripple>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>Как купить</v-list-item-title>
+              </v-list-item-content>
+            </template>
+
+            <v-list-item href="/advs/dostavka-moskva">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Москва)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
           <v-list-item nuxt to="/news">
             <v-list-item-action>
               <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>
@@ -92,6 +86,18 @@
             <v-list-item-content>
               <v-list-item-title>
                 {{ this.$auth.loggedIn ? 'Выйти' : 'Войти' }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item href="/advs/about-company">
+            <v-list-item-action>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-action>
+
+            <v-list-item-content>
+              <v-list-item-title>
+                О компании
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -174,7 +180,7 @@ import TheSnackbar from '@/components/TheSnackbar.vue'
 import TheCart from '@/components/TheCart.vue'
 // import TheCucumbers from '@/components/TheCucumbers.vue'
 
-// const consola = require('consola')
+const consola = require('consola')
 export default {
   components: {
     TheSnackbar,
@@ -193,8 +199,11 @@ export default {
     },
   },
   watch: {
-    group() {
-      this.drawer = false
+    group(item) {
+      consola.info(item)
+      if (item && item !== 2) {
+        this.drawer = false
+      }
     },
   },
   beforeCreate() {
