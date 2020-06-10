@@ -1,6 +1,24 @@
 <template>
   <v-row justify="center">
     <v-expansion-panels inset focusable>
+      <v-expansion-panel>
+        <v-expansion-panel-header ripple>
+          <v-list-item>
+            <v-list-item-avatar @click.stop="">
+              <a
+                href="https://wa.me/79166004290?text=У%20меня%20по%20товару"
+                style="text-decoration: none;"
+                ><v-img width="36" src="whatsapp.png"></v-img
+              ></a>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class="headline"
+                >Связаться через WhatsApp</v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+        </v-expansion-panel-header>
+      </v-expansion-panel>
       <v-expansion-panel v-for="address in addressess" :key="address.id">
         <v-expansion-panel-header ripple>
           <v-list-item>

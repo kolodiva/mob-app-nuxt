@@ -93,6 +93,7 @@
           v-for="(photo, i) in res.rowsphoto"
           :key="i"
           :src="photo.pic_path"
+          @click.stop="bigImg = true"
         ></v-carousel-item>
       </v-carousel>
       <v-card-text class="title">
@@ -109,6 +110,13 @@
     <TheCucumbers />
     <v-dialog v-model="cartCalculator">
       <TheCalculator :item-info="itemInfo" @cartcalcpost="cartcalcpost" />
+    </v-dialog>
+    <v-dialog v-model="bigImg">
+      <v-img
+        contain
+        src="https://newfurnitura.ru/upload/19402d5a-a1ec-4168-b05d-211ca996.jpg"
+        @click.stop="bigImg = false"
+      ></v-img>
     </v-dialog>
     <v-fab-transition>
       <v-btn
@@ -161,6 +169,7 @@ export default {
 
   data: () => ({
     cartCalculator: false,
+    bigImg: false,
     itemInfo: undefined,
   }),
   computed: {
