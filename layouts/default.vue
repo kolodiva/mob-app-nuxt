@@ -27,7 +27,7 @@
 
           <v-list-item nuxt to="/" @click="drawer = false">
             <v-list-item-action>
-              <v-icon>mdi-home-outline</v-icon>
+              <v-icon>{{ icons.mdiHomeOutline }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -36,7 +36,7 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-group prepend-icon="mdi-cart" ripple>
+          <v-list-group :prepend-icon="icons.mdiCart" ripple>
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>Как купить</v-list-item-title>
@@ -64,7 +64,7 @@
           </v-list-group>
           <v-list-item nuxt to="/news">
             <v-list-item-action>
-              <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>
+              <v-icon>{{ icons.mdiNewspaperVariantMultipleOutline }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -75,7 +75,7 @@
           </v-list-item>
           <v-list-item nuxt to="/contacts">
             <v-list-item-action>
-              <v-icon>mdi-contacts</v-icon>
+              <v-icon>{{ icons.mdiContacts }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -88,7 +88,7 @@
           <v-list-item ripple @click.native="logInOut">
             <v-list-item-action>
               <v-icon>{{
-                this.$auth.loggedIn ? 'mdi-logout' : 'mdi-login'
+                this.$auth.loggedIn ? `${icons.mdiLogout}` : `${icons.mdiLogin}`
               }}</v-icon>
             </v-list-item-action>
 
@@ -101,7 +101,7 @@
 
           <v-list-item href="/advs/about-company">
             <v-list-item-action>
-              <v-icon>mdi-information-outline</v-icon>
+              <v-icon>{{ icons.mdiInformationOutline }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -113,7 +113,7 @@
 
           <v-list-item nuxt to="/success-history">
             <v-list-item-action>
-              <v-icon>mdi-wallet-outline</v-icon>
+              <v-icon>{{ icons.mdiWalletOutline }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -124,7 +124,7 @@
           </v-list-item>
           <v-list-item :disabled="!$auth.loggedIn" link href="/orderslist">
             <v-list-item-action>
-              <v-icon>mdi-contacts</v-icon>
+              <v-icon>{{ icons.mdiContacts }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -143,8 +143,11 @@
       color="blue darken-3"
       dark
     >
-      <v-icon v-if="$store.state.showBackSpace" class="mr-2" @click.prevent="to"
-        >mdi-arrow-left-circle</v-icon
+      <v-icon
+        v-if="$store.state.showBackSpace"
+        class="mr-2"
+        @click.prevent="to"
+        >{{ icons.mdiArrowLeftCircle }}</v-icon
       >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title style="" class="ml-0 pl-1">
@@ -153,7 +156,7 @@
       <v-spacer />
 
       <v-btn icon nuxt to="/search">
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>{{ icons.mdiMagnify }}</v-icon>
       </v-btn>
 
       <TheCart />
@@ -178,13 +181,26 @@
         right
         @click="$vuetify.goTo('#app', { duration: 500, offset: 0 })"
       >
-        <v-icon>mdi-chevron-up</v-icon>
+        <v-icon>{{ icons.mdiChevronUp }}</v-icon>
       </v-btn>
     </v-fab-transition>
   </v-app>
 </template>
 
 <script>
+import {
+  mdiHomeOutline,
+  mdiNewspaperVariantMultipleOutline,
+  mdiContacts,
+  mdiInformationOutline,
+  mdiWalletOutline,
+  mdiArrowLeftCircle,
+  mdiMagnify,
+  mdiChevronUp,
+  mdiCart,
+  mdiLogout,
+  mdiLogin,
+} from '@mdi/js'
 import TheSnackbar from '@/components/TheSnackbar.vue'
 import TheCart from '@/components/TheCart.vue'
 // import TheCucumbers from '@/components/TheCucumbers.vue'
@@ -196,6 +212,19 @@ export default {
     TheCart,
   },
   data: () => ({
+    icons: {
+      mdiHomeOutline,
+      mdiNewspaperVariantMultipleOutline,
+      mdiContacts,
+      mdiInformationOutline,
+      mdiWalletOutline,
+      mdiArrowLeftCircle,
+      mdiMagnify,
+      mdiChevronUp,
+      mdiCart,
+      mdiLogout,
+      mdiLogin,
+    },
     offsetTop: 0,
     dialog: false,
     drawer: null,

@@ -9,7 +9,7 @@
         <v-row class="title">номер: {{ numOrder }} </v-row>
         <v-row class="title"
           >на сумму: {{ sumOrder }}
-          <v-icon small>mdi-currency-rub</v-icon></v-row
+          <v-icon small>{{ icons.mdiCurrencyRub }}</v-icon></v-row
         >
       </v-card-subtitle>
 
@@ -185,12 +185,16 @@
 <script>
 import { mapGetters } from 'vuex'
 // const consola = require('consola')
+import { mdiCurrencyRub } from '@mdi/js'
 
 export default {
   async asyncData({ app, params, query, store }) {
     await store.dispatch('nomenklator/refreshCountCart')
   },
   data: () => ({
+    icons: {
+      mdiCurrencyRub,
+    },
     defFil: 'Москва',
     sendOrderForm: false,
     questAnonymus: false,

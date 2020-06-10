@@ -27,7 +27,7 @@
               <a
                 :href="`callto:${address.phone_call}`"
                 style="text-decoration: none;"
-                ><v-icon large>mdi-phone-forward</v-icon></a
+                ><v-icon large>{{ icons.mdiPhoneForward }}</v-icon></a
               >
             </v-list-item-avatar>
             <v-list-item-content>
@@ -40,7 +40,7 @@
         <v-expansion-panel-content>
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-phone</v-icon>
+              <v-icon>{{ icons.mdiPhone }}</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="subtitle">{{
               address.phone
@@ -48,7 +48,7 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-mail</v-icon>
+              <v-icon>{{ icons.mdiMail }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content class="subtitle">{{
               address.address
@@ -63,6 +63,8 @@
 <script>
 // const consola = require('consola')
 import { mapGetters } from 'vuex'
+import { mdiMail, mdiPhone, mdiPhoneForward } from '@mdi/js'
+
 export default {
   name: 'ContactsPage',
   serverCacheKey() {
@@ -70,7 +72,7 @@ export default {
   },
   async asyncData({ app, params }) {},
   data() {
-    return {}
+    return { icons: { mdiMail, mdiPhone, mdiPhoneForward } }
   },
   computed: {
     ...mapGetters({
