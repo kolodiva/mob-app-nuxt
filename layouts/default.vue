@@ -149,7 +149,7 @@
         @click.prevent="to"
         >{{ icons.mdiArrowLeftCircle }}</v-icon
       >
-      <v-icon class="mr-1" @click.stop="drawer = !drawer">{{
+      <v-icon class="mr-2" @click.stop="drawer = !drawer">{{
         icons.mdiMenu
       }}</v-icon>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
