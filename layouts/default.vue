@@ -149,7 +149,10 @@
         @click.prevent="to"
         >{{ icons.mdiArrowLeftCircle }}</v-icon
       >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-icon class="mr-1" @click.stop="drawer = !drawer">{{
+        icons.mdiMenu
+      }}</v-icon>
+      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-toolbar-title style="" class="ml-0 pl-1">
         <v-btn nuxt to="/" class="">{{ $store.state.headerName }}</v-btn>
       </v-toolbar-title>
@@ -200,6 +203,7 @@ import {
   mdiCart,
   mdiLogout,
   mdiLogin,
+  mdiMenu,
 } from '@mdi/js'
 import TheSnackbar from '@/components/TheSnackbar.vue'
 import TheCart from '@/components/TheCart.vue'
@@ -224,6 +228,7 @@ export default {
       mdiCart,
       mdiLogout,
       mdiLogin,
+      mdiMenu,
     },
     offsetTop: 0,
     dialog: false,

@@ -9,11 +9,11 @@
           >
             <v-list-item>
               <v-list-item-avatar @click.stop="">
-                <v-img src="whatsapp.png"></v-img>
+                <v-icon dark color="green">{{ icons.mdiWhatsapp }}</v-icon>
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline">
-                  Спросить WhatsApp
+                  Что как - WhatsApp!
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -63,7 +63,7 @@
 <script>
 // const consola = require('consola')
 import { mapGetters } from 'vuex'
-import { mdiMail, mdiPhone, mdiPhoneForward } from '@mdi/js'
+import { mdiMail, mdiPhone, mdiPhoneForward, mdiWhatsapp } from '@mdi/js'
 
 export default {
   name: 'ContactsPage',
@@ -72,7 +72,7 @@ export default {
   },
   async asyncData({ app, params }) {},
   data() {
-    return { icons: { mdiMail, mdiPhone, mdiPhoneForward } }
+    return { icons: { mdiMail, mdiPhone, mdiPhoneForward, mdiWhatsapp } }
   },
   computed: {
     ...mapGetters({
