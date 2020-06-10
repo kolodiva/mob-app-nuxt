@@ -13,7 +13,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="headline"
-                >Связаться через WhatsApp</v-list-item-title
+                >Спросить WhatsApp</v-list-item-title
               >
             </v-list-item-content>
           </v-list-item>
