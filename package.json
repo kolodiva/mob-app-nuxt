@@ -48,6 +48,7 @@
     "vue-cryptojs": "^2.1.4",
     "vue-pdf": "^4.0.8",
     "vue-router-back-button": "^1.2.3",
+    "vue-zoomer": "^0.3.6",
     "vuex-map-fields": "^1.4.0"
   },
   "devDependencies": {

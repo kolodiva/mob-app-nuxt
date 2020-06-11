@@ -71,6 +71,7 @@ module.exports = {
    */
   plugins: [/*'~plugins/vuetify.js'*/
     {src: '~/plugins/vue-pdf.js', mode: 'client'},
+    {src: '~/plugins/vue-zoomer.js', mode: 'client'},
     {src: '~/plugins/vue-inject.js', mode: 'client'},
     {src: '~/plugins/crypto-js.js'},
     {src: '~/plugins/api-context.client.js', mode: 'client'},
@@ -173,7 +174,7 @@ module.exports = {
               options: {
                 name: '[path][name].[ext]'
               }
-            })      
+            })
 
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
