@@ -191,7 +191,9 @@ export default {
 
     if (el1) {
       el1.style.top = '25px'
+      el1.style.marginLeft = '0'
       el2.style.top = '25px'
+      el2.style.marginRight = '0'
     }
   },
   methods: {
