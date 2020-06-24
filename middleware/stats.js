@@ -1,4 +1,4 @@
-const consola = require('consola')
+// const consola = require('consola')
 export default function ({ route, store, redirect }) {
   // return axios.post('http://my-stats-api.com', {
   //   url: route.fullPath,
@@ -13,7 +13,8 @@ export default function ({ route, store, redirect }) {
     route &&
     route.fullPath &&
     route.fullPath.includes('&') &&
-    !route.fullPath.includes('/?')
+    !route.fullPath.includes('/?') &&
+    !route.fullPath.includes('?itemcard=')
   ) {
     const firstOf = route.fullPath.indexOf('&')
     const newPath =
@@ -21,7 +22,7 @@ export default function ({ route, store, redirect }) {
       route.fullPath.substr(1, firstOf - 1) +
       '/?' +
       route.fullPath.substr(firstOf + 1)
-    consola.info(newPath)
+    // consola.info(newPath)
 
     return redirect(newPath)
   }
