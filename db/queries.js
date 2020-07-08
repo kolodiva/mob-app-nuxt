@@ -130,6 +130,19 @@ function getOrdersList( userid ) {
   }
 }
 
+//nikolas
+function getNomenklatorY() {
+  return {
+    name: '',
+    text: `
+    select t1.filial, t2.artikul, t2.artikul_new, t2.name, t1.qty3 qty, t1.price3 price
+    from blnc_mob t1
+    left join nomenklators t2 on t1.guid = t2.guid
+    where price3<>0
+    order by t2.artikul`,
+    values: [],
+  }
+}
 
 //nomenklator
 function getSubNomenklator(params) {
@@ -517,6 +530,8 @@ module.exports = {
   chngSumOrder,
   unitOrders,
   getOrdersList,
+
+  getNomenklatorY,
 
   getSubNomenklator,
   getSearchNomenklator,

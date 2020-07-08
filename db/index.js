@@ -127,8 +127,9 @@ async function unitOrders( { userid }, connectionid ) {
 }
 
 module.exports = {
+  queryStat: (text, params) => dbpgStat.query( text, params ),
   queryApp: (text, params) => dbpgApp1.query( queries[text](params) ),
-  queryStat: (text, params) => dbpgStat.query(text, params),
+  queryStat1: (text, params) => dbpgStat.query( queries[text](params) ),
   getConnectionOrder,
   chngOrder,
   procOrder,
