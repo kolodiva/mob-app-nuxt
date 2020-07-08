@@ -135,11 +135,13 @@ function getNomenklatorY() {
   return {
     name: '',
     text: `
-    select t1.filial, t2.artikul, t2.artikul_new, t2.name, t1.qty3 qty, t1.price3 price
-    from blnc_mob t1
-    left join nomenklators t2 on t1.guid = t2.guid
-    where price3<>0
-    order by t2.artikul`,
+    SELECT JSON_AGG(src) AS res
+    FROM (
+      select t1.filial, t2.artikul, CONCAT(t2.name, ' (', t2.artikul_new, ')') as name, t1.qty1, t1.qty1-t1.qty2 qty1, t1.qty2 qty2, t1.qty3 qty3,t1.qty4 qty4, t1.price3 price
+      from blnc_mob t1
+      left join nomenklators t2 on t1.guid = t2.guid
+      where price3<>0
+    ) src    `,
     values: [],
   }
 }

@@ -4,7 +4,9 @@ async function getNomenklatorY() {
 
   const { rows } = await db.queryStat1( 'getNomenklatorY' )
 
-  return rows;
+  //console.log( rows[0].res[0] )
+
+  return rows[0].res ? rows[0].res : [];
 }
 
 export { getNomenklatorY };

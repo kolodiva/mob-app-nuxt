@@ -20,9 +20,9 @@ export const getters = {
 
 export const actions = {
   async getNomenklatorY({ commit, dispatch, state }) {
-    const rows = await this.$api('nikolas', 'getNomenklatorY')
+    const res = await this.$api('nikolas', 'getNomenklatorY')
 
-    commit('SET_NOMENKLATOR_Y', rows)
+    commit('SET_NOMENKLATOR_Y', res)
 
     // return rows
   },
