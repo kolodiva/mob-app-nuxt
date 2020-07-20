@@ -71,25 +71,15 @@ export default {
       ],
     }
   },
-<<<<<<< HEAD
-=======
-  mounted() {
-    this.$store.dispatch('nikolas/getNomenklatorY')
-    // consola.info('test LOGIN')
-  },
->>>>>>> 0832783720d30c173d946ffa28233571522d8a29
   computed: {
     ...mapGetters({
       nomenklatorY: 'nikolas/getNomenklatorY',
     }),
   },
-<<<<<<< HEAD
   mounted() {
     this.$store.dispatch('nikolas/getNomenklatorY')
     // consola.info('test LOGIN')
   },
-=======
->>>>>>> 0832783720d30c173d946ffa28233571522d8a29
 }
 </script>
 
