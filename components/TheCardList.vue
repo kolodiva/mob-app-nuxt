@@ -28,14 +28,22 @@
               <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
             </v-list-item-content>
             <div class="" style="position: relative;">
-              <v-list-item-avatar size="95" style="border: 0.5px solid grey;">
+              <v-list-item-avatar
+                size="95"
+                style="border: 0.5px solid grey;"
+                @click.stop="goToGoodCard"
+              >
                 <v-img :src="item.guid_picture_small" />
               </v-list-item-avatar>
               <v-icon
                 color="blue darken-4"
-                style="position: absolute; right: 24px; top: 7px; z-index: 10;"
-                @click.stop="window = 1"
-                >mdi-information</v-icon
+                style="
+                  position: absolute;
+                  right: 23px;
+                  top: 15px;
+                  background-color: white;
+                "
+                >{{ icons.mdiInformationOutline }}</v-icon
               >
               <v-chip
                 v-if="item.is_complect"
@@ -99,18 +107,9 @@
               </p>
             </div>
             <v-spacer />
-            <v-chip
-              class="ma-2"
-              color=""
-              text-color="blue darken-1"
-              outlined
-              style="border: 0.5px solid;"
-              right
-              ripple
-              @click="goToGoodCard"
-            >
-              <v-icon>mdi-arrow-right</v-icon>
-            </v-chip>
+            <v-icon color="blue darken-1" @click.stop="window = 1">{{
+              icons.mdiCog
+            }}</v-icon>
           </v-card-actions>
         </v-card>
       </v-window-item>
@@ -154,10 +153,16 @@
 </template>
 
 <script>
+import { mdiCog, mdiInformationOutline } from '@mdi/js'
+
 export default {
   props: ['item', 'indPos'],
   data: () => ({
     window: 0,
+    icons: {
+      mdiCog,
+      mdiInformationOutline,
+    },
   }),
   computed: {},
   methods: {

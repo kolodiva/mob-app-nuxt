@@ -1,7 +1,7 @@
 // const consola = require('consola')
 
 export default function ({ $auth, route, redirect, store }) {
-  if ($auth.loggedIn) {
+  if ($auth && $auth.loggedIn) {
     // consola.info($auth)
     // consola.info(store)
     // await store.dispatch('setSnackbar', {

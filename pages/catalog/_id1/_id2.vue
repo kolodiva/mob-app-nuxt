@@ -93,7 +93,7 @@
           v-for="(photo, i) in res.rowsphoto"
           :key="i"
           :src="photo.pic_path"
-          @click.stop="bigImg = true"
+          @click.stop="openBigImg(photo.pic_path)"
         ></v-carousel-item>
       </v-carousel>
       <v-card-text class="title">
@@ -111,12 +111,14 @@
     <v-dialog v-model="cartCalculator">
       <TheCalculator :item-info="itemInfo" @cartcalcpost="cartcalcpost" />
     </v-dialog>
-    <v-dialog v-model="bigImg">
-      <v-img
-        contain
-        src="https://newfurnitura.ru/upload/19402d5a-a1ec-4168-b05d-211ca996.jpg"
-        @click.stop="bigImg = false"
-      ></v-img>
+    <v-dialog v-model="bigImg.showBbigImg">
+      <v-zoomer style="width: 600px; height: 600px;">
+        <img
+          :src="bigImg.bigImgPath"
+          style="object-fit: contain;"
+          @click.stop="bigImg.showBbigImg = false"
+        />
+      </v-zoomer>
     </v-dialog>
     <v-fab-transition>
       <v-btn
@@ -169,7 +171,7 @@ export default {
 
   data: () => ({
     cartCalculator: false,
-    bigImg: false,
+    bigImg: { showBbigImg: false, bigImgPath: '' },
     itemInfo: undefined,
   }),
   computed: {
@@ -189,10 +191,19 @@ export default {
 
     if (el1) {
       el1.style.top = '25px'
+      el1.style.marginLeft = '0'
       el2.style.top = '25px'
+      el2.style.marginRight = '0'
     }
   },
   methods: {
+    openBigImg(picpath) {
+      const bigImgPath = picpath.replace('_250x250', '')
+      this.bigImg = {
+        showBbigImg: true,
+        bigImgPath,
+      }
+    },
     cartcalc(item, i) {
       // consola.info(item)
       this.itemInfo = {

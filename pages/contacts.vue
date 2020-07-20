@@ -48,6 +48,20 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-icon>
+              <v-icon>{{ icons.mdiEmail }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content class="subtitle">
+              <address>
+                <a
+                  :href="`mailto:${address.email}`"
+                  style="text-decoration: none;"
+                  >{{ address.email }}</a
+                >
+              </address>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
               <v-icon>{{ icons.mdiMail }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content class="subtitle">{{
@@ -63,7 +77,13 @@
 <script>
 // const consola = require('consola')
 import { mapGetters } from 'vuex'
-import { mdiMail, mdiPhone, mdiPhoneForward, mdiWhatsapp } from '@mdi/js'
+import {
+  mdiMail,
+  mdiPhone,
+  mdiPhoneForward,
+  mdiWhatsapp,
+  mdiEmail,
+} from '@mdi/js'
 
 export default {
   name: 'ContactsPage',
@@ -72,7 +92,9 @@ export default {
   },
   async asyncData({ app, params }) {},
   data() {
-    return { icons: { mdiMail, mdiPhone, mdiPhoneForward, mdiWhatsapp } }
+    return {
+      icons: { mdiMail, mdiPhone, mdiPhoneForward, mdiWhatsapp, mdiEmail },
+    }
   },
   computed: {
     ...mapGetters({

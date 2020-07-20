@@ -9,6 +9,24 @@ export default function ({ route, store, redirect }) {
     !(route.path === undefined || route.path === '/')
   )
 
+  if (
+    route &&
+    route.fullPath &&
+    route.fullPath.includes('&') &&
+    !route.fullPath.includes('/?') &&
+    !route.fullPath.includes('?itemcard=')
+  ) {
+    const firstOf = route.fullPath.indexOf('&')
+    const newPath =
+      '/' +
+      route.fullPath.substr(1, firstOf - 1) +
+      '/?' +
+      route.fullPath.substr(firstOf + 1)
+    // consola.info(newPath)
+
+    return redirect(newPath)
+  }
+
   if (route && route.fullPath && route.fullPath.includes('?itemcard=')) {
     const newPath = route.fullPath.replace('?itemcard=', '/')
     return redirect(newPath)

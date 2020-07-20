@@ -38,19 +38,6 @@ export default {
       min: (v) => (v && v.length >= 3) || 'Мин 3 символа',
     },
   }),
-
-  mounted() {
-    // consola.log(this.$store.showBackSpace)
-    if (this.searchText) {
-      this.searchtext = this.searchText
-    }
-  },
-  computed: {
-    ...mapGetters({
-      rowsSearchText: 'nomenklator/getNomenklatorBySearchText',
-      searchText: 'nomenklator/getNomenklatorBySearchText',
-    }),
-  },
   watch: {
     async searchtext(val) {
       // Items have already been requested
@@ -64,6 +51,19 @@ export default {
 
       this.isLoading = false
     },
+  },
+
+  computed: {
+    ...mapGetters({
+      rowsSearchText: 'nomenklator/getNomenklatorBySearchText',
+      searchText: 'nomenklator/getNomenklatorBySearchText',
+    }),
+  },
+  mounted() {
+    // consola.log(this.$store.showBackSpace)
+    if (this.searchText) {
+      this.searchtext = this.searchText
+    }
   },
 }
 </script>

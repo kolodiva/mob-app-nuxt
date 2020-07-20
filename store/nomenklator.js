@@ -114,7 +114,7 @@ export const getters = {
 
 export const actions = {
   async refreshCountCart({ commit, dispatch }) {
-    const userid = this.$auth.user ? this.$auth.user.id : 1
+    const userid = this.$auth && this.$auth.user ? this.$auth.user.id : 1
     const connectionid = state.connectionid
     const rows = await this.$api('orders', 'getCart', { userid, connectionid })
     // console.log(userid, conntoken)
@@ -130,7 +130,7 @@ export const actions = {
   },
   async loadSubNumenklator({ commit, dispatch, state }, { id }) {
     commit('SET_WAIT_LOAD_NOMENKLATOR', true)
-    const userid = this.$auth.user ? this.$auth.user.id : 1
+    const userid = this.$auth && this.$auth.user ? this.$auth.user.id : 1
     const { rows, breadcrumb } = await this.$api(
       'nomenklator',
       'getSubNomenklator',
@@ -181,7 +181,7 @@ export const actions = {
       qty: obj.qty2,
       price1: obj.price1,
       unit_type_id: obj.unit_type_id,
-      userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      userid: this.$auth && this.$auth.loggedIn ? this.$auth.user.id : 1,
       connectionid: state.connectionid,
     }
 
@@ -201,7 +201,7 @@ export const actions = {
       email,
       phone,
       info: info + '_mob',
-      userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      userid: this.$auth && this.$auth.loggedIn ? this.$auth.user.id : 1,
       connectionid: state.connectionid,
       mastercard,
     }
@@ -213,12 +213,12 @@ export const actions = {
 
   async getOrdersList({ commit, dispatch, state }) {
     // consola.info(this.$auth.user)
-    if (!this.$auth.loggedIn) {
+    if (this.$auth && !this.$auth.loggedIn) {
       commit('SET_ORDERS_LIST', [])
       return
     }
     const info = {
-      userid: this.$auth.loggedIn ? this.$auth.user.id : 1,
+      userid: this.$auth && this.$auth.loggedIn ? this.$auth.user.id : 1,
       connectionid: state.connectionid,
     }
 
