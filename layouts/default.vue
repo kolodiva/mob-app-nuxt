@@ -11,14 +11,14 @@
           <v-list-item two-line>
             <v-list-item-avatar>
               <v-img
-                :src="isLoggedIn ? 'avatar_user.jpg' : 'avatar_anonim.png'"
+                :src="$auth.loggedIn ? 'avatar_user.jpg' : 'avatar_anonim.png'"
               />
             </v-list-item-avatar>
 
             <v-list-item-content>
               <v-list-item-title>Приветствуем Вас</v-list-item-title>
               <v-list-item-subtitle>{{
-                isLoggedIn ? $auth.user.name : 'Anonimus'
+                $auth.loggedIn ? $auth.user.name : 'Anonimus'
               }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -88,13 +88,13 @@
           <v-list-item ripple @click.native="logInOut">
             <v-list-item-action>
               <v-icon>{{
-                isLoggedIn ? `${icons.mdiLogout}` : `${icons.mdiLogin}`
+                this.$auth.loggedIn ? `${icons.mdiLogout}` : `${icons.mdiLogin}`
               }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
               <v-list-item-title>
-                {{ isLoggedIn ? 'Выйти' : 'Войти' }}
+                {{ this.$auth.loggedIn ? 'Выйти' : 'Войти' }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -122,7 +122,7 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :disabled="!isLoggedIn" link href="/orderslist">
+          <v-list-item :disabled="!$auth.loggedIn" link href="/orderslist">
             <v-list-item-action>
               <v-icon>{{ icons.mdiContacts }}</v-icon>
             </v-list-item-action>
@@ -240,9 +240,6 @@ export default {
     showFab() {
       return this.offsetTop > 180
     },
-    isLoggedIn() {
-      return this.$auth && this.$auth.loggedIn
-    },
   },
   watch: {
     group(item) {
@@ -264,7 +261,7 @@ export default {
       // consola.info(this.$store.state.nomenklator.countCart)
     },
     async logInOut() {
-      if (this.$auth && this.$auth.loggedIn) {
+      if (this.$auth.loggedIn) {
         await this.$auth.logout()
 
         this.$cookies.remove('connectionid')
