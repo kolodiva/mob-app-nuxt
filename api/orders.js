@@ -27,6 +27,7 @@ async function chngeCart( { userid, guid, qty, connectionid, price1, unit_type_i
   // console.log( connid, orderid, remember_token )
 
   if (remember_token && remember_token != connectionid) {
+
       //res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
       res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
   }
