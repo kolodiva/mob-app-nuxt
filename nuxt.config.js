@@ -134,7 +134,7 @@ module.exports = {
     redirect: {
     home: false,
     callback: false,
-    logout: false
+    logout: false,
     }
   },
 
