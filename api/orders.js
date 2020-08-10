@@ -28,7 +28,7 @@ async function chngeCart( { userid, guid, qty, connectionid, price1, unit_type_i
 
   if (remember_token && remember_token != connectionid) {
       //res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
-      res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000 });
+      res.cookie('connectionid', remember_token, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
   }
 
   const resOk  = await db.chngOrder( orderid, guid, qty, price1, unit_type_id );
