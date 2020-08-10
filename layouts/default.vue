@@ -11,7 +11,9 @@
           <v-list-item two-line>
             <v-list-item-avatar>
               <v-img
-                :src="$auth.loggedIn ? 'avatar_user.jpg' : 'avatar_anonim.png'"
+                :src="
+                  $auth.loggedIn ? '/avatar_user.jpg' : '/avatar_anonim.png'
+                "
               />
             </v-list-item-avatar>
 
