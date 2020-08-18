@@ -12,21 +12,21 @@
     "city": "Санкт-Петербург",
     "phone": "+7 (812) 385-50-58",
     "address": "г. Санкт-Петербург, просп. Маршала Блюхера, д.78Д, оф.8",
-    "email" : "mf.StPeterburg@gmail.com"
+    "email" : "mf.stpeterburg@newfurnitura.ru"
   },
   {
     "id": 3,
     "city": "Екатеринбург",
     "phone": "+7 (343) 243-66-72",
     "address": "г. Екатеринбург, ул. Предельная, д. 57/3 оф. 209",
-    "email" : "mf-ural@list.ru"
+    "email" : "mf.ekb@newfurnitura.ru"
   },
   {
     "id": 4,
     "city": "Казань",
     "phone": "+7 (843) 212-26-45",
     "address": "г. Казань, ул. Гассара, д. 14",
-    "email" : "mf.kazan@gmail.com"
+    "email" : "mf.kazan@newfurnitura.ru"
   },
   {
     "id": 5,
@@ -47,7 +47,7 @@
     "city": "Ростов-на-Дону",
     "phone": "+7 (863) 320-00-86",
     "address": "г. Ростов-на-Дону, ул. Орская, д. 31м",
-    "email" : "mf.rostov@gmail.com"
+    "email" : "mfk.rostov@newfurnitura.ru"
   }
 ]
 }
