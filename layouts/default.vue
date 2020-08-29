@@ -54,6 +54,67 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+
+            <v-list-item href="/advs/dostavka-novosibirsk">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Новосибирск)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item href="/advs/dostavka-yekaterinburg">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Екатеринбург)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item href="/advs/dostavka-rostov-na-donu">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Ростов-на-Дону)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item href="/advs/dostavka-kazan">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Казань)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item href="/advs/dostavka-sankt-peterburg">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Санкт-Петербург)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item href="/advs/dostavka-krasnodar">
+              <v-list-item-action> </v-list-item-action>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Доставка (Краснодар)
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
             <v-list-item href="/advs/vozvrat-obmen">
               <v-list-item-action> </v-list-item-action>
 
