@@ -20,6 +20,25 @@
           </a>
         </v-expansion-panel-header>
       </v-expansion-panel>
+      <v-expansion-panel readonly>
+        <v-expansion-panel-header ripple>
+          <a
+            href="https://www.instagram.com/mf_komplekt_msk/"
+            style="text-decoration: none;"
+          >
+            <v-list-item>
+              <v-list-item-avatar @click.stop="">
+                <v-icon dark color="green">{{ icons.mdiInstagram }}</v-icon>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="headline">
+                  Инстаграмм!
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </a>
+        </v-expansion-panel-header>
+      </v-expansion-panel>
       <v-expansion-panel v-for="address in addressess" :key="address.id">
         <v-expansion-panel-header ripple>
           <v-list-item>
@@ -82,6 +101,7 @@ import {
   mdiPhone,
   mdiPhoneForward,
   mdiWhatsapp,
+  mdiInstagram,
   mdiEmail,
 } from '@mdi/js'
 
@@ -93,7 +113,14 @@ export default {
   async asyncData({ app, params }) {},
   data() {
     return {
-      icons: { mdiMail, mdiPhone, mdiPhoneForward, mdiWhatsapp, mdiEmail },
+      icons: {
+        mdiMail,
+        mdiPhone,
+        mdiPhoneForward,
+        mdiWhatsapp,
+        mdiInstagram,
+        mdiEmail,
+      },
     }
   },
   computed: {
