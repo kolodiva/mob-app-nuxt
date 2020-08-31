@@ -28,11 +28,11 @@
           >
             <v-list-item>
               <v-list-item-avatar @click.stop="">
-                <v-icon dark color="green">{{ icons.mdiInstagram }}</v-icon>
+                <v-img src="instagram-logo-icon.png" width="50" />
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline">
-                  Инстаграмм!
+                  <v-img src="instagram.png" width="200" />
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
