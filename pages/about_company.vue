@@ -23,7 +23,7 @@
         />
       </div>
       <meta itemprop="name" content="Мебельная Фурнитура" />
-      <meta itemprop="telephone" content="+7 (495) 925-26-27 (многокан.)"/>
+      <meta itemprop="telephone" content="+7 (495) 925-26-27 (многокан.)" />
       <div
         itemprop="address"
         itemscope
