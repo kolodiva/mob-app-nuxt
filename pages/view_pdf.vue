@@ -1,7 +1,13 @@
 <template>
   <div class="mt-12">
     <client-only>
-      <vue-pdf :src="pdfpath" @num-pages="pdfPageCount = $event"></vue-pdf>
+      <vue-pdf
+        v-for="i in 10"
+        :key="i"
+        :page="i"
+        :src="pdfpath"
+        @num-pages="pdfPageCount = $event"
+      ></vue-pdf>
     </client-only>
   </div>
 </template>
@@ -14,6 +20,9 @@ export default {
   // components: {
   //   pdf,
   // },
+  data: () => ({
+    pdfPageCount: undefined,
+  }),
   computed: {
     ...mapGetters({
       pdfpath: 'getPdfFile',
