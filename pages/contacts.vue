@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" style="margin-top: 55px">
     <v-expansion-panels inset focusable>
       <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="v-card__title pa-0 pa-2">
+    <h1 class="v-card__title pa-0 pa-2" style="margin-top: 55px">
       {{ breadcrumb[breadcrumb.length - 1].name }}
     </h1>
     <v-row style="" class="px-2">

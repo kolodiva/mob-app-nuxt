@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-0">
+  <v-container class="pa-0" style="margin-top: 55px">
     <v-col cols="12">
       <h1 class="v-card__title pa-0 pb-2">
         {{ breadcrumb[breadcrumb.length - 1].name }}
