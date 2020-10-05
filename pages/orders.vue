@@ -153,7 +153,7 @@
               Отмена
             </v-btn>
           </v-card-actions>
-          <v-card-title class="subtitle-1" style="word-break: break-word;">
+          <v-card-title class="subtitle-1" style="word-break: break-word">
             ВАШ ЗАКАЗ АНОНИМНЫЙ. ВЫ МОЖЕТЕ ПРОДОЛЖИТЬ, НО НУЖНО УКАЗАТЬ СПОСОБ
             СВЯЗИ С ВАМИ, ЛИБО ВОЙТИ В СИСТЕМУ ПОД СВОИМ АККАУНТОМ. ЕСЛИ ВЫ
             ОЧИСТИТЕ КУКИ ИЛИ ОТКРОЕТЕ САЙТ В ДРУГОМ БРАУЗЕРЕ В КАЧЕСТВЕ
@@ -161,12 +161,10 @@
             РЕКОМЕНДУЕМ ВАМ ВОЙТИ/ЗАРЕГИСТРИРОВАТЬСЯ ПОД СВОИМ ЛОГИНОМ.
           </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" text href="/login">
-              Войти
-            </v-btn>
+            <v-btn color="primary" text href="/login"> Войти </v-btn>
             <v-spacer />
             <v-btn
-              v-if="(notFullDataAnonim === true)"
+              v-if="notFullDataAnonim === true"
               color="primary"
               text
               @click="questAnonymus = false"

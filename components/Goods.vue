@@ -1,6 +1,9 @@
 <template>
   <v-container class="pa-0">
     <v-col cols="12">
+      <h1 class="v-card__title pa-0 pb-2">
+        {{ breadcrumb[breadcrumb.length - 1].name }}
+      </h1>
       <template v-for="(item, i) in nomenklator">
         <TheCardList :key="i" :item="item" :ind-pos="i" @cartcalc="cartcalc" />
       </template>
@@ -14,15 +17,9 @@
 <script>
 // import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
-import TheCardList from '@/components/TheCardList.vue'
-import TheCalculator from '@/components/TheCalculator.vue'
 
 // const consola = require('consola')
 export default {
-  components: {
-    TheCardList,
-    TheCalculator,
-  },
   data() {
     return {
       itemInfo: undefined,
@@ -46,6 +43,7 @@ export default {
   computed: {
     ...mapGetters({
       nomenklator: 'nomenklator/getSubNomenklator',
+      breadcrumb: 'nomenklator/getBreadCrumb',
     }),
   },
   watch: {

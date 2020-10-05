@@ -9,10 +9,12 @@ module.exports = {
   //       cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
   //     }
   //   },
+  components: true,
+
   env: {
     // PGUSER: 'postgres',
   },
-  mode: 'universal',
+  //mode: 'universal',
   //mode: 'spa',
   /*
    ** Headers of the page
@@ -90,22 +92,25 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
+   // ['@nuxtjs/yandex-metrika',
+   //   {
+   //     id: '51108848',
+   //     webvisor: true,
+   //     clickmap:true,
+   //     trackLinks:true,
+   //     accurateTrackBounce:true
+   //   }],
+
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
     '@nuxtjs/component-cache',
-    ['@nuxtjs/yandex-metrika',
-      {
-        id: '51108848',
-        webvisor: true,
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-      }],
+    '@nuxtjs/gtm',
     //'@nuxtjs/auth',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],
+  gtm: 'GTM-59444LN',
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

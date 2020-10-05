@@ -25,6 +25,8 @@ export default async (req, res, next) => {
 
   req.params.connectionid = req.cookies.connectionid;
 
+  // console.log(req.cookies.connectionid);
+
   let result = await api[ method ](req.params, res);
 
   //res.setHeader("Set-Cookie", "SameSite=None; Secure");

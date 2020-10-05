@@ -33,9 +33,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>
-                Домой
-              </v-list-item-title>
+              <v-list-item-title> Домой </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-group :prepend-icon="icons.mdiCart" ripple>
@@ -49,9 +47,7 @@
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>
-                  Доставка (Москва)
-                </v-list-item-title>
+                <v-list-item-title> Доставка (Москва) </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -59,9 +55,7 @@
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>
-                  Доставка (Новосибирск)
-                </v-list-item-title>
+                <v-list-item-title> Доставка (Новосибирск) </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -69,9 +63,7 @@
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>
-                  Доставка (Екатеринбург)
-                </v-list-item-title>
+                <v-list-item-title> Доставка (Екатеринбург) </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -89,9 +81,7 @@
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>
-                  Доставка (Казань)
-                </v-list-item-title>
+                <v-list-item-title> Доставка (Казань) </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -109,9 +99,7 @@
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>
-                  Доставка (Краснодар)
-                </v-list-item-title>
+                <v-list-item-title> Доставка (Краснодар) </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -119,9 +107,7 @@
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
-                <v-list-item-title>
-                  Возврат-Обмен
-                </v-list-item-title>
+                <v-list-item-title> Возврат-Обмен </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
@@ -131,9 +117,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>
-                Новости
-              </v-list-item-title>
+              <v-list-item-title> Новости </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item nuxt to="/contacts">
@@ -142,9 +126,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>
-                Контакты
-              </v-list-item-title>
+              <v-list-item-title> Контакты </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -168,32 +150,17 @@
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>
-                О компании
-              </v-list-item-title>
+              <v-list-item-title> О компании </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item nuxt to="/success-history">
-            <v-list-item-action>
-              <v-icon>{{ icons.mdiWalletOutline }}</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title>
-                Успехи
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
           <v-list-item :disabled="!$auth.loggedIn" link href="/orderslist">
             <v-list-item-action>
               <v-icon>{{ icons.mdiContacts }}</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>
-                Архив заказов
-              </v-list-item-title>
+              <v-list-item-title> Архив заказов </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -227,11 +194,11 @@
 
       <TheCart />
     </v-app-bar>
-    <v-content>
-      <v-container class="px-0" fluid>
+    <v-main>
+      <v-container class="pa-0" fluid>
         <Nuxt />
       </v-container>
-    </v-content>
+    </v-main>
     <TheSnackbar />
 
     <v-fab-transition>

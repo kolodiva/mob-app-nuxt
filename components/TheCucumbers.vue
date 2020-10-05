@@ -16,7 +16,7 @@
         color="green"
         ripple
         nuxt
-        style="justify-content: start;"
+        style="justify-content: start"
       >
         <v-chip>{{ el.name }}</v-chip>
       </v-btn>

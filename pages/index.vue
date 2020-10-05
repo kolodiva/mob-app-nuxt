@@ -6,7 +6,7 @@
       class="d-flex child-flex"
       cols="6"
     >
-      <n-link :to="`catalog/${pos.file_name}`" style="text-decoration: none;">
+      <n-link :to="`catalog/${pos.file_name}`" style="text-decoration: none">
         <v-card>
           <v-img
             eager
@@ -27,7 +27,7 @@
             </template>
           </v-img>
           <v-card-text class="text--primary pa-2">
-            <div class="text-center" style="height: 45px; overflow: hidden;">
+            <div class="text-center" style="height: 45px; overflow: hidden">
               {{ pos.name }}
             </div>
           </v-card-text>
