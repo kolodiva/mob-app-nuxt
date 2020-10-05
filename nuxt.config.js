@@ -41,9 +41,8 @@ module.exports = {
       },
     ],
     script: [
-      {src: "/src/gtm.js"}
+      {src: "/src/gtm.js"},
       ],
-    },
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
