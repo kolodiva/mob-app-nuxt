@@ -101,16 +101,25 @@ module.exports = {
    //     accurateTrackBounce:true
    //   }],
 
+   //'@nuxtjs/gtm',
+
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
     '@nuxtjs/component-cache',
-    '@nuxtjs/gtm',
+    ['@nuxtjs/yandex-metrika',
+      {
+        id: '51108848',
+        webvisor: true,
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+      }],
     //'@nuxtjs/auth',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],
-  gtm: 'GTM-59444LN',
+  //gtm: 'GTM-59444LN',
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
