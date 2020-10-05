@@ -40,6 +40,10 @@ module.exports = {
         content: process.env.npm_package_description || '',
       },
     ],
+    script: [
+      {src: "/src/gtm.js"},
+      ],
+    },
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
@@ -108,14 +112,6 @@ module.exports = {
     '@nuxtjs/auth-next',
     'cookie-universal-nuxt',
     '@nuxtjs/component-cache',
-    ['@nuxtjs/yandex-metrika',
-      {
-        id: '51108848',
-        webvisor: true,
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-      }],
     //'@nuxtjs/auth',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],
