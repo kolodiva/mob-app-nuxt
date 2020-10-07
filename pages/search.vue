@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-4" flat>
+  <v-card class="mx-4" flat style="margin-top: 55px">
     <v-card-title class="pa-0 pb-2 title">Страница поиска</v-card-title>
     <v-col cols="12" sm="6" class="py-0">
       <v-row>
