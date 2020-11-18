@@ -49,7 +49,7 @@ function addNewConnOrder( userid ) {
     values: [],
   }
 }
-function chngOrder( orderid, guid, qty, price, unit_type_id ) {
+function chngOrder_old( orderid, guid, qty, price, unit_type_id ) {
   return {
     name: '',
     text: `
@@ -60,6 +60,67 @@ function chngOrder( orderid, guid, qty, price, unit_type_id ) {
     		select ${orderid}, '${guid}', ${qty || 0}, ${price}, ${unit_type_id}, ${ qty*price } where ${qty || 0} > 0
     		RETURNING id, nomenklator_id, qty;
 
+    `,
+    values: [],
+  }
+}
+function chngOrder( orderid, guid, qty, price, unit_type_id ) {
+  return {
+    name: '',
+    text: `
+    with deleted as (delete from order_good_complects where order_good_id in
+      ( select id from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}'))
+        delete from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}';
+        insert into order_goods(order_id, nomenklator_id, qty, price, unit_type_id, sum )
+    		select ${orderid}, '${guid}', ${qty || 0}, ${price}, ${unit_type_id}, ${ qty*price } where ${qty || 0} > 0
+
+        with price_list_compl as (
+
+        						select *
+        						from crosstab(
+        						$$select nomenklator_id::text, price_type_id, round(price*coalesce(currencies.value, 1), 2)
+        						from prices
+        						left join currencies on prices.currency_id = currencies.code
+
+        						where nomenklator_id in (
+
+        						select distinct
+        								complects.guid_complect as guid
+
+        							from complects
+
+        						            where complects.nomenklator_id = '${guid}'
+
+        						)
+
+        						order by 1$$,
+        						$$ SELECT '000000004' UNION ALL SELECT '000000003' UNION ALL SELECT '000000005'$$
+        						)
+
+        						AS (guid text, price1 numeric, price2 numeric, price3 numeric)
+        						)
+
+        							insert into order_good_complects ( complect_id, unit_type_id, qty, koeff, price, order_good_id  )
+
+
+                                        select complects.guid_complect as complect_id,
+
+        								complects.unit_type_id,
+        								order_goods.qty*complects.qty  as qty,
+        								complects.qty as koeff,
+        								round(complects.qty*coalesce(price_list_compl.price1, 0) , 2) as price,
+        								order_goods.id as order_good_id
+
+                                        from order_goods
+
+                                         left join complects on complects.nomenklator_id = order_goods.nomenklator_id
+
+                                         left join price_list_compl on complects.guid_complect = price_list_compl.guid
+
+
+                                     where order_goods.order_id = ${orderid} AND order_goods.nomenklator_id = '${guid}' AND coalesce(complects.guid_complect, '') != '';
+
+                         select id, nomenklator_id, qty from order_goods where order_goods.order_id = ${orderid} AND order_goods.nomenklator_id = '${guid}'
     `,
     values: [],
   }
