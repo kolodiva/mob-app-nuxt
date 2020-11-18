@@ -72,7 +72,7 @@ function chngOrder( orderid, guid, qty, price, unit_type_id ) {
       ( select id from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}'))
         delete from order_goods where order_id = ${orderid} AND nomenklator_id = '${guid}';
         insert into order_goods(order_id, nomenklator_id, qty, price, unit_type_id, sum )
-    		select ${orderid}, '${guid}', ${qty || 0}, ${price}, ${unit_type_id}, ${ qty*price } where ${qty || 0} > 0
+    		select ${orderid}, '${guid}', ${qty || 0}, ${price}, ${unit_type_id}, ${ qty*price } where ${qty || 0} > 0;
 
         with price_list_compl as (
 
