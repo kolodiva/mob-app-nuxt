@@ -344,6 +344,10 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+body, html {
+    max-width: 100%;
+   overflow-x: hidden;
+}
 .clickable {
   cursor: pointer;
 }
