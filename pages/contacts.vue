@@ -4,7 +4,7 @@
       <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
           <a
-            href="https://wa.me/79166004290?text=У%20меня%20по%20товару%20вопрос."
+            href="https://wa.me/79169604255?text=У%20меня%20по%20товару%20вопрос."
             style="text-decoration: none"
           >
             <v-list-item>
