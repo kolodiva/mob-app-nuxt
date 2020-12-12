@@ -1,5 +1,5 @@
 <template>
-  <v-row class="px-2" style="margin-top: 55px">
+  <v-row class="px-2" style="">
     <v-col
       v-for="pos in nomenklator"
       :key="pos.id"
