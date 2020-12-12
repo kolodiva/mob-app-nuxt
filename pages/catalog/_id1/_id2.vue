@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="margin-top: 55px">
+  <div class="" style="">
     <v-card flat class="pa-5 py-0 mx-0">
       <h1 class="v-card__title">{{ res.rows[0].name }}</h1>
       <v-card-subtitle
