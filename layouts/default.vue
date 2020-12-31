@@ -201,6 +201,82 @@
     </v-main>
     <TheSnackbar />
 
+    <client-only>
+      <v-overlay :value="showMainDisclaimer == 1">
+        <v-card light width="700px">
+          <div class="pt-5">
+            <div
+              class="cyan white--text text-center pa-2 px-4 mx-auto"
+              style="width: 270px; top: 30px"
+            >
+              УВАЖАЕМЫЕ ПОКУПАТЕЛИ !
+            </div>
+          </div>
+          <div class="text-center mx-auto mt-5" style="width: 270px">
+            Компания "МФ-КОМПЛЕКТ"
+          </div>
+          <div
+            class="text-center mx-auto mt-1 red--text headline font-weight-medium"
+            style="width: 270px"
+          >
+            НЕ РАБОТАЕТ
+          </div>
+          <div
+            class="text-center mx-auto red--text subtitle-2 font-weight-medium"
+            style="width: 270px"
+          >
+            с 31 декабря - 10 января 2021 года!<br/>
+            (выходные праздничные дни)
+          </div>
+          <v-divider class="mx-auto my-3" style="width: 270px" />
+          <div class="text-center mx-auto subtitle-1 font-weight-bold" style="">
+            ВСЕ ВАШИ ЗАКАЗЫ ПОПАДУТ В НАШУ СИСТЕМУ ОБРАБОТКИ ЗАКАЗОВ,
+          </div>
+          <div class="text-center mx-auto subtitle-2" style="">
+            но будут обработаны 11 января 2021 года.
+          </div>
+          <div
+            class="text-center mx-auto subtitle-1 font-weight-bold mt-4"
+            style=""
+          >
+            ДОСТАВКА И САМОВЫВОЗ БУДУТ ТАК ЖЕ ОСУЩЕСТВЛЯТЬСЯ
+          </div>
+          <div class="text-center mx-auto subtitle-2" style="">
+            после Новогодних праздников с 11 января 2021 года.
+          </div>
+          <v-divider class="mx-auto my-3" style="width: 270px" />
+          <div class="text-center mx-auto mb-3" style="width: 270px">
+            С уважением Ваш, "МФ-КОМПЛЕКТ"<br />
+          </div>
+          <div class="text-center mx-auto mb-3 red--text" style="width: 700px">
+            Сайт обновлен. Во избежание возможных недоразумений,<br />
+            просьба Перезайти в Личный кабинет, если Вы давно этого НЕ делали<br />
+            и после этого продолжать набирать Заказ.
+          </div>
+
+          <v-divider />
+          <v-card-actions
+            ><v-spacer /><v-btn text @click="closeShowMainDisclaimer"
+              >Закрыть</v-btn
+            ></v-card-actions
+          >
+          <v-img
+            src="/logo_blue_na_fone.png"
+            max-width="80"
+            style="top: -2px; right: 30px; position: absolute"
+          />
+          <v-img
+            src="/Shariki_NG.png"
+            max-width="88"
+            style="top: -32px; left: -4px; position: absolute"
+          />
+        </v-card>
+      </v-overlay>
+    </client-only>
+
+
+
+
     <v-fab-transition>
       <v-btn
         v-show="showFab"
@@ -240,6 +316,9 @@ import TheCart from '@/components/TheCart.vue'
 // import TheCucumbers from '@/components/TheCucumbers.vue'
 
 // const consola = require('consola')
+
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     TheSnackbar,
@@ -267,6 +346,10 @@ export default {
     group: null,
   }),
   computed: {
+    ...mapGetters({
+          showMainDisclaimer: "snackbar/showMainDisclaimer",
+        }),
+
     showFab() {
       return this.offsetTop > 180
     },
@@ -290,6 +373,11 @@ export default {
       // this.$store.commit('nomenklator/SET_COUNT_CART', 10)
       // consola.info(this.$store.state.nomenklator.countCart)
     },
+
+    closeShowMainDisclaimer() {
+      this.$store.commit("snackbar/SET_SHOW_MAIN_DISCLAIMER", false);
+    },
+
     async logInOut() {
       if (this.$auth.loggedIn) {
         await this.$auth.logout()
