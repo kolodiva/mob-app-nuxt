@@ -15,7 +15,7 @@ export const getters = {
   showMainDisclaimer: (state) => {
     return state.showMainDisclaimer;
   },
-},
+};
 export const actions = {
   setSnackbar({ commit }, snackbar) {
     snackbar.showing = true
