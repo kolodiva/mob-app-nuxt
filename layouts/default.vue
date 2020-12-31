@@ -203,7 +203,7 @@
 
     <client-only>
       <v-overlay :value="showMainDisclaimer == 1">
-        <v-card light width="700px">
+        <v-card light width="300px">
           <div class="pt-5">
             <div
               class="cyan white--text text-center pa-2 px-4 mx-auto"
@@ -248,7 +248,7 @@
           <div class="text-center mx-auto mb-3" style="width: 270px">
             С уважением Ваш, "МФ-КОМПЛЕКТ"<br />
           </div>
-          <div class="text-center mx-auto mb-3 red--text" style="width: 700px">
+          <div class="text-center mx-auto mb-3 red--text" style="width: 270px">
             Сайт обновлен. Во избежание возможных недоразумений,<br />
             просьба Перезайти в Личный кабинет, если Вы давно этого НЕ делали<br />
             и после этого продолжать набирать Заказ.
@@ -260,16 +260,6 @@
               >Закрыть</v-btn
             ></v-card-actions
           >
-          <v-img
-            src="/logo_blue_na_fone.png"
-            max-width="80"
-            style="top: -2px; right: 30px; position: absolute"
-          />
-          <v-img
-            src="/Shariki_NG.png"
-            max-width="88"
-            style="top: -32px; left: -4px; position: absolute"
-          />
         </v-card>
       </v-overlay>
     </client-only>
