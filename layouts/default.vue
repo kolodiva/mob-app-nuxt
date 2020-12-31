@@ -248,12 +248,6 @@
           <div class="text-center mx-auto mb-3" style="width: 270px">
             С уважением Ваш, "МФ-КОМПЛЕКТ"<br />
           </div>
-          <div class="text-center mx-auto mb-3 red--text" style="width: 270px">
-            Сайт обновлен. Во избежание возможных недоразумений,<br />
-            просьба Перезайти в Личный кабинет, если Вы давно этого НЕ делали<br />
-            и после этого продолжать набирать Заказ.
-          </div>
-
           <v-divider />
           <v-card-actions
             ><v-spacer /><v-btn text @click="closeShowMainDisclaimer"
