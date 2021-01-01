@@ -201,7 +201,7 @@
     </v-main>
     <TheSnackbar />
 
-      <v-overlay v-if="showMainDisclaimer == 1" v-show="showMainDisclaimer == 1">
+      <v-overlay v-if="showMainDisclaimer == 1" :value="showMainDisclaimer == 1">
         <v-card light width="300px">
           <div class="pt-5">
             <div
