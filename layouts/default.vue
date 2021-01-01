@@ -201,7 +201,7 @@
     </v-main>
     <TheSnackbar />
 
-    <div v-if="showMainDisclaimer == 1">
+    <client-only>
       <v-overlay :value="showMainDisclaimer == 1">
         <v-card light width="300px">
           <div class="pt-5">
@@ -256,7 +256,7 @@
           >
         </v-card>
       </v-overlay>
-    </div>
+    </client-only>
 
     <v-fab-transition>
       <v-btn
