@@ -39,6 +39,7 @@ module.exports = {
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+      { name: 'google-site-verification', content: 'zYHlJzz8ftSxJgxT5pc4Fnq7thpCwbmn3bzu4knEnb4' },
     ],
     script: [
       {src: "/src/gtm.js"},
