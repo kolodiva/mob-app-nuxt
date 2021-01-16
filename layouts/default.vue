@@ -235,11 +235,13 @@ import {
   mdiLogin,
   mdiMenu,
 } from '@mdi/js'
+import { mapGetters } from 'vuex'
 import TheSnackbar from '@/components/TheSnackbar.vue'
 import TheCart from '@/components/TheCart.vue'
 // import TheCucumbers from '@/components/TheCucumbers.vue'
 
 // const consola = require('consola')
+
 export default {
   components: {
     TheSnackbar,
@@ -267,6 +269,10 @@ export default {
     group: null,
   }),
   computed: {
+    ...mapGetters({
+      showMainDisclaimer: 'snackbar/showMainDisclaimer',
+    }),
+
     showFab() {
       return this.offsetTop > 180
     },
@@ -290,6 +296,11 @@ export default {
       // this.$store.commit('nomenklator/SET_COUNT_CART', 10)
       // consola.info(this.$store.state.nomenklator.countCart)
     },
+
+    closeShowMainDisclaimer() {
+      this.$store.commit('snackbar/SET_SHOW_MAIN_DISCLAIMER', false)
+    },
+
     async logInOut() {
       if (this.$auth.loggedIn) {
         await this.$auth.logout()
@@ -344,9 +355,10 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-body, html {
-    max-width: 100%;
-   overflow-x: hidden;
+body,
+html {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 .clickable {
   cursor: pointer;
