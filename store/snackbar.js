@@ -8,14 +8,14 @@ export const mutations = {
     state.snackbars = state.snackbars.concat(snackbar)
   },
   SET_SHOW_MAIN_DISCLAIMER(state, val) {
-    state.showMainDisclaimer = val;
+    state.showMainDisclaimer = val
   },
 }
 export const getters = {
   showMainDisclaimer: (state) => {
-    return state.showMainDisclaimer;
+    return state.showMainDisclaimer
   },
-};
+}
 export const actions = {
   setSnackbar({ commit }, snackbar) {
     snackbar.showing = true
