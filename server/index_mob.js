@@ -19,7 +19,7 @@ async function start() {
     host = 'localhost'; port = 6000;
   } else {
     //const { host, port } = nuxt.options.server;
-    host = '192.168.1.41'; port = 3000;
+    host = '192.168.1.41'; port = 5000;
   }
 
   await nuxt.ready()
