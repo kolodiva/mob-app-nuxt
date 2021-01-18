@@ -1,5 +1,5 @@
 <template>
-  <n-link to="/orders">
+  <n-link to="/cart">
     <v-badge
       v-show="countCart > 0"
       color="green"
