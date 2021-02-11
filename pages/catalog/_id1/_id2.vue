@@ -92,9 +92,10 @@
         <v-carousel-item
           v-for="(photo, i) in res.rowsphoto"
           :key="i"
-          :src="photo.pic_path"
           @click.stop="openBigImg(photo.pic_path)"
-        ></v-carousel-item>
+        >
+          <img :src="photo.pic_path" style="width: 100%" />
+        </v-carousel-item>
       </v-carousel>
       <v-card-text class="title">
         <p class="ma-0">

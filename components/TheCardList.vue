@@ -33,7 +33,7 @@
                 style="border: 0.5px solid grey"
                 @click.stop="goToGoodCard"
               >
-                <v-img :src="item.guid_picture_small" />
+                <img :src="item.guid_picture_small" />
               </v-list-item-avatar>
               <v-icon
                 color="blue darken-4"
