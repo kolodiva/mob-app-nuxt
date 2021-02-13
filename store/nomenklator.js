@@ -110,6 +110,64 @@ export const getters = {
   getSearchText: (state) => {
     return state.searchText
   },
+  getSchemaBreadcrumb: (state) => {
+    const list = []
+
+    let path = ''
+
+    state.breadCrumb.forEach((item, i) => {
+      if (item.guid) {
+        path = path + '/' + item.guid
+        list.push({
+          '@type': 'ListItem',
+          name: item.name,
+          position: i,
+          item: `http://newfurnitura.ru/catalog${path}`,
+        })
+      }
+    })
+
+    const res = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: list,
+    }
+
+    return res
+  },
+  getSchemaProduct: (state) => {
+    const goodCardData = state.goodCard.rows[0].intrnt_microdata
+    const goodCardDataPics = state.goodCard.rowsphoto
+
+    const img = []
+    goodCardDataPics.forEach((item, i) => {
+      img.push(item.pic_path.replace('_250x250', ''))
+    })
+
+    const res = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      image: img,
+      name: goodCardData.title,
+      description: goodCardData.description,
+      sku: state.goodCard.rows[0].artikul_new,
+      mpn: state.goodCard.rows[0].artikul,
+      brand: {
+        '@type': 'Brand',
+        name: goodCardData.Product_manufacturer,
+      },
+      offers: {
+        '@type': 'Offer',
+        url: `https://www.newfurnitura.ru/catalog/${state.goodCard.rows[0].parentguid}/${state.goodCard.rows[0].synonym}`,
+        priceCurrency: 'RUR',
+        price: state.goodCard.rows[0].price1,
+        itemCondition: 'https://schema.org/UsedCondition',
+        availability: 'https://schema.org/InStock',
+      },
+    }
+
+    return res
+  },
 }
 
 export const actions = {

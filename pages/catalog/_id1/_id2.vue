@@ -178,6 +178,9 @@ export default {
   computed: {
     ...mapGetters({
       res: 'nomenklator/getGoodCard',
+      orgSchema: 'addresses/getSchemaOrganization',
+      orgSchemaBreadcrumb: 'nomenklator/getSchemaBreadcrumb',
+      orgSchemaProduct: 'nomenklator/getSchemaProduct',
     }),
     photoMoreOne() {
       return this.res.rowsphoto.length > 1
@@ -234,6 +237,88 @@ export default {
         // this.nomenklator[item.indPos].qty1 = item.q2
       }
     },
+  },
+  head() {
+    return {
+      title: `${this.curItem.intrnt_microdata.title} - Купить в Москва, Санкт-Петербург, Казань, Екатеринбург, Ростов-на-Дону, Краснодар | Описание, фото, характеристики, цены в Интернет магазине МФ-Комплект`,
+      description: `${this.curItem.intrnt_microdata.description}`,
+      meta: [
+        {
+          name: 'og:title',
+          content: `Лучшая цена 👍: ${this.curItem.intrnt_microdata.title} ⭐ ⭐ ⭐ ⭐ ⭐`,
+        },
+        {
+          name: 'og:description',
+          content: `Лучшая цена 👍: ${this.curItem.intrnt_microdata.description} ⭐ ⭐ ⭐ ⭐ ⭐`,
+        },
+        {
+          name: 'og:site_name',
+          content: `Мебельная фурнитура Подрезково`,
+        },
+        {
+          name: 'og:url',
+          content: `https://newfurnitura.ru/catalog/${this.curItem.parentguid}/${this.curItem.synonym}`,
+        },
+        {
+          name: 'og:type',
+          content: `website`,
+        },
+        {
+          name: 'og:image',
+          content: `${this.curItem.guid_picture.replace('_250x250', '')}`,
+        },
+        {
+          name: 'og:image:secure_url',
+          content: `${this.curItem.guid_picture.replace('_250x250', '')}`,
+        },
+        {
+          name: 'og:image:type',
+          content: `image/jpeg`,
+        },
+        {
+          name: 'og:image:width',
+          content: `600`,
+        },
+        {
+          name: 'og:image:height',
+          content: `600`,
+        },
+        {
+          name: 'og:image',
+          content: `${this.curItem.guid_picture}`,
+        },
+        {
+          name: 'og:image:secure_url',
+          content: `${this.curItem.guid_picture}`,
+        },
+        {
+          name: 'og:image:type',
+          content: `image/jpeg`,
+        },
+        {
+          name: 'og:image:width',
+          content: `250`,
+        },
+        {
+          name: 'og:image:height',
+          content: `250`,
+        },
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.orgSchema,
+        },
+        {
+          type: 'application/ld+json',
+          json: this.orgSchemaBreadcrumb,
+        },
+        {
+          type: 'application/ld+json',
+          json: this.orgSchemaProduct,
+        },
+      ],
+    }
   },
 }
 </script>

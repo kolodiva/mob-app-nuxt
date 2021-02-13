@@ -285,7 +285,7 @@ function getSubNomenklator(params) {
 
     round(COALESCE(price_list_total.price1, 0.00)*COALESCE(order_goods.qty, 0.0000), 2) as total,
 
-      nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title
+      nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title, nomenklators.intrnt_microdata
 
     from nomenklators
 
@@ -300,7 +300,7 @@ function getSubNomenklator(params) {
 
     ORDER BY  nomenklators.itgroup desc, nomenklators.sort_field, nomenklators.name, nomenklators.artikul
   `
-
+//console.log(textqry);
   return {
     name: '',
     text: textqry,
@@ -384,7 +384,7 @@ function getGoodCard(params) {
 
     round(COALESCE(price_list_total.price1, 0.00)*COALESCE(order_goods.qty, 0.0000), 2) as total,
 
-      nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title
+      nomenklators.intrnt_keyword, nomenklators.intrnt_title, nomenklators.intrnt_description, nomenklators.intrnt_og_title, nomenklators.intrnt_microdata
 
     from nomenklators
 
@@ -444,17 +444,17 @@ function getBreadCrumbs(params) {
 
   WITH RECURSIVE r AS (
 
-						select id, level_group, guid, parentguid, name, intrnt_keyword, intrnt_title, intrnt_description, intrnt_og_title
+						select id, level_group, guid, parentguid, name, intrnt_keyword, intrnt_title, intrnt_description, intrnt_og_title, intrnt_microdata
 						from nomenklators where guid='${params.parentguid}'
 
 						union all
 
-						select nom.id, nom.level_group, nom.guid, nom.parentguid, nom.name, nom.intrnt_keyword, nom.intrnt_title, nom.intrnt_description, nom.intrnt_og_title from nomenklators as nom join r on nom.guid = r.parentguid
+						select nom.id, nom.level_group, nom.guid, nom.parentguid, nom.name, nom.intrnt_keyword, nom.intrnt_title, nom.intrnt_description, nom.intrnt_og_title, nom.intrnt_microdata from nomenklators as nom join r on nom.guid = r.parentguid
 					)
 
-					select 0 as id, 'Дом' as name, null as guid,  0  as level_group, '' as intrnt_keyword, '' as intrnt_title, '' as intrnt_description, '' as intrnt_og_title
+					select 0 as id, 'Дом' as name, null as guid,  0  as level_group, '' as intrnt_keyword, '' as intrnt_title, '' as intrnt_description, '' as intrnt_og_title, '{}'::jsonb as intrnt_microdata
 					 union
-					select id, name, guid, level_group, intrnt_keyword, intrnt_title, intrnt_description, intrnt_og_title from r order by level_group
+					select id, name, guid, level_group, intrnt_keyword, intrnt_title, intrnt_description, intrnt_og_title, intrnt_microdata from r order by level_group
 
   `
 
