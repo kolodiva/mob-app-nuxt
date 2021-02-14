@@ -178,7 +178,7 @@ export default {
   computed: {
     ...mapGetters({
       res: 'nomenklator/getGoodCard',
-      orgSchema: 'addresses/getSchemaOrganization',
+      orgSchemaOrganization: 'addresses/getSchemaOrganization',
       orgSchemaBreadcrumb: 'nomenklator/getSchemaBreadcrumb',
       orgSchemaProduct: 'nomenklator/getSchemaProduct',
     }),
@@ -307,7 +307,7 @@ export default {
       script: [
         {
           type: 'application/ld+json',
-          json: this.orgSchema,
+          json: this.orgSchemaOrganization,
         },
         {
           type: 'application/ld+json',

@@ -163,6 +163,7 @@ export const getters = {
         price: state.goodCard.rows[0].price1,
         itemCondition: 'https://schema.org/UsedCondition',
         availability: 'https://schema.org/InStock',
+        priceValidUntil: '2030-12-31',
       },
     }
 

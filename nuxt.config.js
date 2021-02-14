@@ -122,6 +122,19 @@ module.exports = {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+   robots:[
+       {
+         UserAgent: 'Googlebot',
+         Sitemap: 'https://www.newfurnitura.ru/sitemap.xml',
+          Disallow:['/login*', '/orders*', '*?orderId*', '/cart', '/service*'],
+       },
+       {
+         UserAgent: 'Yandex',
+         Sitemap: 'https://www.newfurnitura.ru/sitemap.xml',
+          Disallow:['/login*', '/orders*', '*?orderId*', '/cart', '/service*'],
+       },
+     ],
+
   axios: {
     // proxyHeaders: false
     proxy: true,

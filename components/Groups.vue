@@ -43,13 +43,34 @@ export default {
     ...mapGetters({
       nomenklator: 'nomenklator/getSubNomenklator',
       breadcrumb: 'nomenklator/getBreadCrumb',
+      orgSchemaBreadcrumb: 'nomenklator/getSchemaBreadcrumb',
     }),
+    orgSchemaArticle() {
+      return this.$store.getters['addresses/getSchemaArticle']({
+        url: this.$route.fullPath,
+        headline: this.breadcrumb[this.breadcrumb.length - 1].name,
+      })
+    },
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
   },
   mounted() {
     this.$store.commit('nomenklator/SET_WAIT_LOAD_NOMENKLATOR', false)
+  },
+  head() {
+    return {
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.orgSchemaArticle,
+        },
+        {
+          type: 'application/ld+json',
+          json: this.orgSchemaBreadcrumb,
+        },
+      ],
+    }
   },
 }
 </script>

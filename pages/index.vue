@@ -38,9 +38,26 @@ export default {
     ...mapGetters({
       nomenklator: 'nomenklator/getNomenklTopLevel',
     }),
+    orgSchemaArticle() {
+      return this.$store.getters['addresses/getSchemaArticle']({
+        url: this.$route.fullPath,
+        headline: 'Главная страница',
+      })
+    },
   },
   beforeCreate() {
     this.$store.commit('SET_HEADER_NAME', 'МФ Комплект')
+  },
+
+  head() {
+    return {
+      script: [
+        {
+          type: 'application/ld+json',
+          json: this.orgSchemaArticle,
+        },
+      ],
+    }
   },
 }
 </script>
