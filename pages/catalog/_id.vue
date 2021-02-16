@@ -40,6 +40,7 @@ export default {
       isGroup: 'nomenklator/isGroup',
       waitLoadNomenklator: 'nomenklator/getWaitLoadNomenklator',
       getSearchText: 'nomenklator/getSearchText',
+      getDescription: 'nomenklator/getHeaderDescription',
     }),
   },
   beforeCreate() {
@@ -53,5 +54,43 @@ export default {
     // }
   },
   methods: {},
+  head() {
+    return {
+      title: `${this.getDescription.intrnt_microdata.title} - Купить в Москва, Санкт-Петербург, Казань, Екатеринбург, Ростов-на-Дону, Краснодар | Описание, фото, характеристики, цены в Интернет магазине МФ-Комплект`,
+      meta: [
+        {
+          name: 'description',
+          content: `${this.getDescription.intrnt_microdata.description}`,
+        },
+        {
+          name: 'og:title',
+          content: `Лучшая цена 👍: ${this.getDescription.intrnt_microdata.title} ⭐ ⭐ ⭐ ⭐ ⭐`,
+        },
+        {
+          name: 'og:description',
+          content: `Лучшая цена 👍: ${this.getDescription.intrnt_microdata.description} ⭐ ⭐ ⭐ ⭐ ⭐`,
+        },
+        {
+          name: 'og:site_name',
+          content: `Мебельная фурнитура Подрезково`,
+        },
+        {
+          name: 'og:url',
+          content: `https://newfurnitura.ru/catalog/${this.getDescription.guid}`,
+        },
+        {
+          name: 'og:type',
+          content: `website`,
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://newfurnitura.ru${this.$route.fullPath}`,
+        },
+      ],
+    }
+  },
 }
 </script>

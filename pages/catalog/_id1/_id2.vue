@@ -304,6 +304,13 @@ export default {
           content: `250`,
         },
       ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://newfurnitura.ru${this.$route.fullPath}`,
+        },
+      ],
       script: [
         {
           type: 'application/ld+json',

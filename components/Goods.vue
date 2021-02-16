@@ -45,6 +45,7 @@ export default {
       nomenklator: 'nomenklator/getSubNomenklator',
       breadcrumb: 'nomenklator/getBreadCrumb',
       orgSchemaBreadcrumb: 'nomenklator/getSchemaBreadcrumb',
+      orgSchemaProductList: 'nomenklator/getSchemaProductList',
     }),
     orgSchemaArticle() {
       return this.$store.getters['addresses/getSchemaArticle']({
@@ -102,6 +103,10 @@ export default {
         {
           type: 'application/ld+json',
           json: this.orgSchemaBreadcrumb,
+        },
+        {
+          type: 'application/ld+json',
+          json: this.orgSchemaProductList,
         },
       ],
     }

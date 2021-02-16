@@ -169,6 +169,55 @@ export const getters = {
 
     return res
   },
+  getSchemaProductList: (state) => {
+    const productList = state.subNomenklator
+
+    const itemList = []
+
+    productList.forEach((item, i) => {
+      if (item.itgroup) {
+        itemList.push(item.name)
+      } else {
+        itemList.push({
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: item.intrnt_microdata.title,
+          description: item.intrnt_microdata.description,
+          sku: item.artikul_new,
+          mpn: item.artikul,
+          brand: {
+            '@type': 'Brand',
+            name: item.intrnt_microdata.Product_manufacturer,
+          },
+          offers: {
+            '@type': 'Offer',
+            url: `https://www.newfurnitura.ru/catalog/${item.parentguid}/${item.synonym}`,
+            priceCurrency: 'RUR',
+            price: item.price1,
+            itemCondition: 'https://schema.org/UsedCondition',
+            availability: 'https://schema.org/InStock',
+            priceValidUntil: '2030-12-31',
+          },
+        })
+      }
+    })
+
+    const res = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      itemListElement: itemList,
+      name: 'Перечень товаров и категорий',
+    }
+
+    return res
+  },
+  getHeaderDescription: (state) => {
+    return (
+      state.breadCrumb &&
+      state.breadCrumb.length > 0 &&
+      state.breadCrumb[state.breadCrumb.length - 1]
+    )
+  },
 }
 
 export const actions = {
