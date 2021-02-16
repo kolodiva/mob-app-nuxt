@@ -181,6 +181,8 @@ export const getters = {
         itemList.push({
           '@context': 'https://schema.org',
           '@type': 'Product',
+          url: `https://www.newfurnitura.ru/catalog/${item.parentguid}/${item.synonym}`,
+          position: i,
           name: item.intrnt_microdata.title,
           description: item.intrnt_microdata.description,
           sku: item.artikul_new,
