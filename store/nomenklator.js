@@ -176,29 +176,41 @@ export const getters = {
 
     productList.forEach((item, i) => {
       if (item.itgroup) {
-        itemList.push(item.name)
+        itemList.push({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            url: `https://www.newfurnitura.ru/catalog/${item.guid}`,
+            name: item.name,
+          },
+        })
       } else {
         itemList.push({
-          '@context': 'https://schema.org',
-          '@type': 'Product',
-          url: `https://www.newfurnitura.ru/catalog/${item.parentguid}/${item.synonym}`,
-          position: i+1,
-          name: item.intrnt_microdata.title,
-          description: item.intrnt_microdata.description,
-          sku: item.artikul_new,
-          mpn: item.artikul,
-          brand: {
-            '@type': 'Brand',
-            name: item.intrnt_microdata.Product_manufacturer,
-          },
-          offers: {
-            '@type': 'Offer',
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            position: i + 1,
             url: `https://www.newfurnitura.ru/catalog/${item.parentguid}/${item.synonym}`,
-            priceCurrency: 'RUR',
-            price: item.price1,
-            itemCondition: 'https://schema.org/UsedCondition',
-            availability: 'https://schema.org/InStock',
-            priceValidUntil: '2030-12-31',
+            image: item.guid_picture.replace('_250x250', ''),
+            name: item.intrnt_microdata.title,
+            description: item.intrnt_microdata.description,
+            sku: item.artikul_new,
+            mpn: item.artikul,
+            brand: {
+              '@type': 'Brand',
+              name: item.intrnt_microdata.Product_manufacturer,
+            },
+            offers: {
+              '@type': 'Offer',
+              url: `https://www.newfurnitura.ru/catalog/${item.parentguid}/${item.synonym}`,
+              priceCurrency: 'RUR',
+              price: item.price1,
+              itemCondition: 'https://schema.org/UsedCondition',
+              availability: 'https://schema.org/InStock',
+              priceValidUntil: '2030-12-31',
+            },
           },
         })
       }
