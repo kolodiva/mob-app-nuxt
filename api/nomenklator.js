@@ -28,6 +28,10 @@ async function getGoodCard( { synonym, userid, connectionid } ) {
 
   const { rows } = await db.queryApp('getGoodCard', { synonym, orderid } )
 
+  if (rows.length === 0) {
+    return {status: 404, msg: "Товар с таким Кодом НЕ найден."};
+  }
+
   const rowsPhotos250 = await db.queryApp('getPhotos250', { synonym } )
 
   const parentguid = rows[0].parentguid

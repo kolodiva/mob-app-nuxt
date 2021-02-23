@@ -122,7 +122,7 @@ export const getters = {
           '@type': 'ListItem',
           name: item.name,
           position: i,
-          item: `http://newfurnitura.ru/catalog${path}`,
+          item: `https://www.newfurnitura.ru/catalog${path}`,
         })
       }
     })
@@ -268,6 +268,7 @@ export const actions = {
     commit('SET_BREAD_CRUMB', breadcrumb)
 
     // consola.info(breadcrumb)
+    return state.subNomenklator.length > 0
   },
   async loadSearchNumenklator({ commit, dispatch, state }, { searchtext }) {
     const { rows } = await this.$api('nomenklator', 'getSearchNomenklator', {
@@ -292,6 +293,8 @@ export const actions = {
 
     // consola.info(res)
     commit('SET_GOOD_CARD', { rows, rowsphoto, breadcrumb })
+
+    return rows && rows.length > 0
   },
   async chngeCart({ commit, dispatch, state }, ind) {
     // ind < 0 case chnge from cardGood

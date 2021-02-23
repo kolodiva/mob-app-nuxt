@@ -27,10 +27,13 @@ export default {
   //   return true
   // },
   components: { Groups, Goods, TheCucumbers },
-  async asyncData({ app, params, query, store }) {
+  async asyncData({ app, params, query, store, error }) {
     if (params && params.id) {
       // consola.info(params)
-      await store.dispatch('nomenklator/loadSubNumenklator', params)
+      const res = await store.dispatch('nomenklator/loadSubNumenklator', params)
+      if (!res) {
+        error({ statusCode: 404, message: 'Товарная позиция НЕ найдена' })
+      }
     }
   },
 
@@ -76,7 +79,7 @@ export default {
         },
         {
           name: 'og:url',
-          content: `https://newfurnitura.ru/catalog/${this.getDescription.guid}`,
+          content: `https://www.newfurnitura.ru/catalog/${this.getDescription.guid}`,
         },
         {
           name: 'og:type',
@@ -87,7 +90,7 @@ export default {
         {
           hid: 'canonical',
           rel: 'canonical',
-          href: `https://newfurnitura.ru${this.$route.fullPath}`,
+          href: `https://www.newfurnitura.ru${this.$route.fullPath}`,
         },
       ],
     }

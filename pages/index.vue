@@ -125,7 +125,7 @@ export default {
         {
           hid: 'canonical',
           rel: 'canonical',
-          href: 'https://newfurnitura.ru',
+          href: 'https://www.newfurnitura.ru',
         },
       ],
       script: [

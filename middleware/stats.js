@@ -17,29 +17,60 @@ export default function ({ route, store, redirect }) {
     !route.fullPath.includes('?itemcard=')
   ) {
     const firstOf = route.fullPath.indexOf('&')
-    const newPath =
+    let newPath =
       '/' +
       route.fullPath.substr(1, firstOf - 1) +
       '/?' +
       route.fullPath.substr(firstOf + 1)
     // consola.info(newPath)
 
-    return redirect(newPath)
+    if (newPath.slice(-1) === '/') {
+      newPath = newPath.slice(0, -1)
+    }
+    return redirect(newPath.toLowerCase())
   }
 
   if (route && route.fullPath && route.fullPath.includes('?itemcard=')) {
-    const newPath = route.fullPath.replace('?itemcard=', '/')
-    return redirect(newPath)
+    let newPath = route.fullPath.replace('?itemcard=', '/')
+    if (newPath.slice(-1) === '/') {
+      newPath = newPath.slice(0, -1)
+    }
+    return redirect(newPath.toLowerCase())
   }
 
   if (route && route.fullPath && route.fullPath.includes('///?utm_source=')) {
-    const newPath = route.fullPath.replace('///?utm_source=', '/?utm_source=')
-    return redirect(newPath)
+    let newPath = route.fullPath.replace('///?utm_source=', '/?utm_source=')
+    if (newPath.slice(-1) === '/') {
+      newPath = newPath.slice(0, -1)
+    }
+    return redirect(newPath.toLowerCase())
   }
 
   if (route && route.fullPath && route.fullPath.includes('//?utm_source=')) {
-    const newPath = route.fullPath.replace('//?utm_source=', '/?utm_source=')
+    let newPath = route.fullPath.replace('//?utm_source=', '/?utm_source=')
+    if (newPath.slice(-1) === '/') {
+      newPath = newPath.slice(0, -1)
+    }
+    return redirect(newPath.toLowerCase())
+  }
+
+  if (
+    route &&
+    route.fullPath &&
+    route.fullPath !== route.fullPath.toLowerCase()
+  ) {
+    let newPath = route.fullPath.toLowerCase()
+
+    if (newPath.slice(-1) === '/') {
+      newPath = newPath.slice(0, -1)
+    }
+
     return redirect(newPath)
+  }
+
+  if (route && route.fullPath && route.fullPath.slice(-1) === '/') {
+    const newPath = route.fullPath.slice(0, -1)
+    return redirect(newPath.toLowerCase())
   }
 
   if (route && route.path && route.path.includes('/advs/')) {

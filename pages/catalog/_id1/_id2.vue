@@ -162,11 +162,16 @@ export default {
   //   return true
   // },
   components: { TheCucumbers, TheCalculator },
-  async asyncData({ app, params, query, store }) {
+  async asyncData({ app, params, query, store, error }) {
     // consola.info(params)
     if (params && params.id2) {
       // consola.info(params)
-      await store.dispatch('nomenklator/loadGoodCard', params)
+      const res = await store.dispatch('nomenklator/loadGoodCard', params)
+
+      if (!res) {
+        // redirect("/error");
+        error({ statusCode: 404, message: 'Товарная позиция НЕ найдена' })
+      }
     }
   },
 
@@ -257,7 +262,7 @@ export default {
         },
         {
           name: 'og:url',
-          content: `https://newfurnitura.ru/catalog/${this.curItem.parentguid}/${this.curItem.synonym}`,
+          content: `https://www.newfurnitura.ru/catalog/${this.curItem.parentguid}/${this.curItem.synonym}`,
         },
         {
           name: 'og:type',
@@ -308,7 +313,7 @@ export default {
         {
           hid: 'canonical',
           rel: 'canonical',
-          href: `https://newfurnitura.ru${this.$route.fullPath}`,
+          href: `https://www.newfurnitura.ru${this.$route.fullPath}`,
         },
       ],
       script: [

@@ -1,12 +1,15 @@
 <template>
   <v-app dark>
     <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
+      <v-container class="pa-5" style="">
+        <NuxtLink to="/"
+          >404 Данный ресурс не найден. Перейти на главную страницу. 404
+        </NuxtLink>
+      </v-container>
     </h1>
     <h1 v-else>
       {{ otherError }}
     </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
   </v-app>
 </template>
 
@@ -21,7 +24,8 @@ export default {
   },
   data() {
     return {
-      pageNotFound: '404 Not Found',
+      pageNotFound:
+        'Купить в Москва, Санкт-Петербург, Казань, Екатеринбург, Ростов-на-Дону, Краснодар | Описание, фото, характеристики, цены в Интернет магазине МФ-Комплект',
       otherError: 'An error occurred',
     }
   },
