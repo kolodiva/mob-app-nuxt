@@ -499,6 +499,44 @@ function getSearchNomenklator_old({searchtext}) {
     values: [],
   }
 }
+function getSearchNomenklatorExactly({searchtext}) {
+
+  let whereStr = "'" + searchtext.toLowerCase().replace(/ /g,'') + "'";
+
+  const textqry = `
+
+  with r1 as (select parentguid, synonym, name, artikul, artikul_new from nomenklators
+  where not itgroup
+  and parentguid not in ('yandexpagesecret', 'sekretnaya_papka')
+  and
+  (lower(artikul) = ${whereStr} or lower(artikul_new) = ${whereStr} )
+  limit 50
+  )
+  select name, guid,
+  (
+        select array_to_json(array_agg(row_to_json(d)))
+        from (
+          select synonym, name, artikul, artikul_new
+          from r1
+          where r1.parentguid=t1.guid
+  		  order by artikul
+        ) d
+      ) as goods
+
+  from nomenklators t1
+  where guid in (select distinct parentguid from r1)
+  order by name
+  `;
+
+  //console.log(textqry)
+
+  return {
+    name: '',
+    text: textqry,
+    values: [],
+  }
+}
+
 function getSearchNomenklator({searchtext}) {
 
   let whereStr = searchtext.toLowerCase().split(' ');
@@ -597,6 +635,7 @@ module.exports = {
   getNomenklatorY,
 
   getSubNomenklator,
+  getSearchNomenklatorExactly,
   getSearchNomenklator,
   getGoodCard,
   getPhotos250,

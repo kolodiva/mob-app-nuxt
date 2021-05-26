@@ -7,10 +7,10 @@
           <v-text-field
             v-model="searchtext"
             :loading="isLoading"
-            class="pt-0 title"
+            class="pt-2 title"
             label="Введите часть артикула или наименования. "
             :rules="[rules.min]"
-            hint="Минимум 3 символа"
+            hint="Минимум 2 символа"
             clearable
           ></v-text-field>
         </v-col>
@@ -21,7 +21,12 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col v-if="rowsSearchText" cols="12" sm="6" class="pt-0">
+    <v-col
+      v-if="rowsSearchText && rowsSearchText.length > 1"
+      cols="12"
+      sm="6"
+      class="pt-0"
+    >
       <v-list>
         <v-list-group v-for="(item, i) in rowsSearchText" :key="i">
           <template v-slot:activator>
@@ -43,6 +48,25 @@
         </v-list-group>
       </v-list>
     </v-col>
+    <v-col
+      v-else-if="rowsSearchText && rowsSearchText.length == 1"
+      cols="12"
+      sm="6"
+      class="pt-0"
+    >
+      <v-list>
+        <v-list-item
+          v-for="(item2, i1) in rowsSearchText[0].goods"
+          :key="i1"
+          nuxt
+          :to="`/catalog/${item.guid}/${item2.synonym}`"
+        >
+          <v-list-item-title class="pl-3"
+            >{{ item2.artikul }}, {{ item2.name }}</v-list-item-title
+          >
+        </v-list-item>
+      </v-list>
+    </v-col>
   </v-card>
 </template>
 
@@ -58,7 +82,7 @@ export default {
     item: 1,
     rules: {
       required: (value) => !!value || 'Required.',
-      min: (v) => (v && v.length >= 3) || 'Мин 3 символа',
+      min: (v) => (v && v.length >= 2) || 'Мин 2 символа',
     },
   }),
   computed: {
@@ -70,7 +94,7 @@ export default {
   watch: {
     async searchtext(val) {
       // Items have already been requested
-      if (this.isLoading || !val || val.length < 3) return
+      if (this.isLoading || !val || val.length < 2) return
 
       this.isLoading = true
 

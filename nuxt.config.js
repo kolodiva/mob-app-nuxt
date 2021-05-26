@@ -33,12 +33,6 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { name: 'description', content: 'Мебельная фурнитура. Наша складская программа, насчитывающая более 5000 наименований продукции, постоянно пополняется с учетом ваших потребностей.' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
-      },
       { name: 'google-site-verification', content: 'zYHlJzz8ftSxJgxT5pc4Fnq7thpCwbmn3bzu4knEnb4' },
     ],
     script: [
@@ -188,6 +182,34 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+     // babel: {
+     //         presets() {
+     //           return [
+     //             [
+     //               '@nuxt/babel-preset-app',
+     //               {
+     //                 corejs: {
+     //                   version: 3,
+     //                 },
+     //               },
+     //             ],
+     //           ];
+     //         }
+     //         },
+     babel: {
+         presets({isServer}) {
+           const targets = isServer ? { node: 'current' } : { ie: 11 }
+           return [
+             [ require.resolve("@babel/preset-env"), { targets }  ]
+           ]
+         },
+         plugins: [
+           "@babel/syntax-dynamic-import",
+           "@babel/transform-runtime",
+           "@babel/transform-async-to-generator"
+         ]
+       },
+
     parallel: true,
     cache: true,
     hardSource: true,

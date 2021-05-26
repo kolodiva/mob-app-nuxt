@@ -246,8 +246,11 @@ export default {
   head() {
     return {
       title: `${this.curItem.intrnt_microdata.title} - Купить в Москва, Санкт-Петербург, Казань, Екатеринбург, Ростов-на-Дону, Краснодар | Описание, фото, характеристики, цены в Интернет магазине МФ-Комплект`,
-      description: `${this.curItem.intrnt_microdata.description}`,
       meta: [
+        {
+          name: 'description',
+          content: `${this.curItem.intrnt_microdata.description}`,
+        },
         {
           name: 'og:title',
           content: `Лучшая цена 👍: ${this.curItem.intrnt_microdata.title} ⭐ ⭐ ⭐ ⭐ ⭐`,

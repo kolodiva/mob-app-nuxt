@@ -59,7 +59,7 @@ export default {
   methods: {},
   head() {
     return {
-      title: `${this.getDescription.intrnt_microdata.title} - Купить в Москва, Санкт-Петербург, Казань, Екатеринбург, Ростов-на-Дону, Краснодар | Описание, фото, характеристики, цены в Интернет магазине МФ-Комплект`,
+      title: `${this.getDescription.intrnt_microdata.title} - Купить ${this.getDescription.intrnt_microdata.title} для мебели | МЕБЕЛЬНАЯ ФУРНИТУРА | ВСЕ ДЛЯ МЕБЕЛИ | МФ-КОМПЛЕКТ Москва, Санкт-Петербург, Казань, Екатеринбург, Ростов-на-Дону, Краснодар`,
       meta: [
         {
           name: 'description',

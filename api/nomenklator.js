@@ -16,8 +16,14 @@ async function getSubNomenklator( { parentguid, userid, connectionid } ) {
 
 async function getSearchNomenklator( { searchtext } ) {
 
-  //Ищем номер Заказа без создания если его нет НЕ создаем новый
-  const {rows} = await db.queryApp('getSearchNomenklator', { searchtext  })
+  //по просьбе трудячщихся сначала ищем ПОЛНОЕ совпадение, затем уже по аналогии
+  let res = await db.queryApp('getSearchNomenklatorExactly', { searchtext  })
+
+  if (res.rows.length === 0) {
+    res = await db.queryApp('getSearchNomenklator', { searchtext  })
+  }
+
+  const {rows} = res;
 
   return {rows};
 }

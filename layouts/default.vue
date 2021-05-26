@@ -195,7 +195,7 @@
       <TheCart />
     </v-app-bar>
     <v-main>
-      <v-container class="pa-0" fluid>
+      <v-container class="pa-0 mt-2" fluid>
         <Nuxt />
       </v-container>
     </v-main>
@@ -358,7 +358,7 @@ html {
 body,
 html {
   max-width: 100%;
-  overflow-x: hidden;
+  //overflow-x: hidden;
 }
 .clickable {
   cursor: pointer;
