@@ -132,10 +132,23 @@ async function unitOrders( { userid }, connectionid ) {
   return true
 }
 
-module.exports = {
-  queryStat: (text, params) => dbpgStat.query( text, params ),
-  queryApp: (text, params) => dbpgApp1.query( queries[text](params) ),
-  queryStat1: (text, params) => dbpgStat.query( queries[text](params) ),
+const  queryStat  = (text, params)  => dbpgStat.query( text, params );
+const  queryApp   =  (text, params) => dbpgApp1.query( queries[text](params) );
+const  queryStat1 = (text, params)  => dbpgStat.query( queries[text](params) );
+// module.exports = {
+//   queryStat: (text, params) => dbpgStat.query( text, params ),
+//   queryApp: (text, params) => dbpgApp1.query( queries[text](params) ),
+//   queryStat1: (text, params) => dbpgStat.query( queries[text](params) ),
+//   getConnectionOrder,
+//   chngOrder,
+//   procOrder,
+//   unitOrders
+// }
+
+export {
+  queryStat,
+  queryApp,
+  queryStat1,
   getConnectionOrder,
   chngOrder,
   procOrder,
