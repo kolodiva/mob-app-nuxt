@@ -40,8 +40,8 @@
     "lodash": "^4.17.19",
     "net": "^1.0.2",
     "nuxt": "^2.13.3",
-    "pg": "^8.3.0",
     "nuxt-ssr-cache": "^1.5.2",
+    "pg": "^8.3.0",
     "postcss-sass": "^0.4.4",
     "rsvp": "^4.8.5",
     "tls": "0.0.1",
@@ -67,6 +67,7 @@
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
+    "sass-loader": "^10.0.1",
     "stylelint": "^13.6.1"
   }
 }
