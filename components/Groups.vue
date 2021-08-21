@@ -12,7 +12,7 @@
       >
         <n-link
           :to="`/catalog/${
-            pos.itgroup ? pos.guid : pos.parentguid + '?itemcard=' + pos.synonym
+            pos.itgroup ? pos.guid : pos.parentguid + '/' + pos.synonym
           }`"
           style="text-decoration: none"
           exact
