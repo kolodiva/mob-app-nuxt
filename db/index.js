@@ -2,11 +2,6 @@
 const { Pool } = require('pg')
 const queries = require('./queries')
 
-// let conn_param  = null;
-// let conn_param_statistica = null;
-let connParam1   = null;
-let connParam2   = null;
-
 const connParam1 = process.env.API_URL_APP
 const connParam2 = process.env.API_URL_STAT
 
