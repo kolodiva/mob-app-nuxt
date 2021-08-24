@@ -179,6 +179,10 @@ module.exports = {
    ** Build configuration
    */
   build: {
+
+    terser: {
+          extractComments: /^\**!|@preserve|@license|@cc_on/i
+        },     
     // vendor: ['vuetify'],
     /*
      ** You can extend webpack config here
