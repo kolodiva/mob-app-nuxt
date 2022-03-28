@@ -5,7 +5,7 @@
         <v-expansion-panel-header ripple>
           <a
             href="https://wa.me/79169604255?text=У%20меня%20по%20товару%20вопрос."
-            style="text-decoration: none"
+            style="text-decoration: none;"
           >
             <v-list-item>
               <v-list-item-avatar @click.stop="">
@@ -22,9 +22,25 @@
       </v-expansion-panel>
       <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
+          <a href="https://t.me/Mfkomplekt_bot/" style="text-decoration: none;">
+            <v-list-item>
+              <v-list-item-avatar @click.stop="">
+                <v-icon dark color="blue">{{ icons.mdiTelegram }}</v-icon>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="headline">
+                  Telegram
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </a>
+        </v-expansion-panel-header>
+      </v-expansion-panel>
+      <v-expansion-panel readonly>
+        <v-expansion-panel-header ripple>
           <a
             href="https://www.instagram.com/mf_komplekt_msk/"
-            style="text-decoration: none"
+            style="text-decoration: none;"
           >
             <v-list-item>
               <v-list-item-avatar @click.stop="">
@@ -45,7 +61,7 @@
             <v-list-item-avatar @click.stop="">
               <a
                 :href="`callto:${address.phone_call}`"
-                style="text-decoration: none"
+                style="text-decoration: none;"
                 ><v-icon large>{{ icons.mdiPhoneForward }}</v-icon></a
               >
             </v-list-item-avatar>
@@ -73,7 +89,7 @@
               <address>
                 <a
                   :href="`mailto:${address.email}`"
-                  style="text-decoration: none"
+                  style="text-decoration: none;"
                   >{{ address.email }}</a
                 >
               </address>
@@ -102,6 +118,7 @@ import {
   mdiPhoneForward,
   mdiWhatsapp,
   mdiInstagram,
+  mdiTelegram,
   mdiEmail,
 } from '@mdi/js'
 
@@ -119,6 +136,7 @@ export default {
         mdiPhoneForward,
         mdiWhatsapp,
         mdiInstagram,
+        mdiTelegram,
         mdiEmail,
       },
     }
