@@ -22,6 +22,22 @@
       </v-expansion-panel>
       <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
+          <a href="https://t.me/mf_komplekt/" style="text-decoration: none;">
+            <v-list-item>
+              <v-list-item-avatar @click.stop="">
+                <v-icon dark color="blue">{{ icons.mdiTelegram }}</v-icon>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="headline">
+                  Telegram Новости
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </a>
+        </v-expansion-panel-header>
+      </v-expansion-panel>
+      <v-expansion-panel readonly>
+        <v-expansion-panel-header ripple>
           <a href="https://t.me/Mfkomplekt_bot/" style="text-decoration: none;">
             <v-list-item>
               <v-list-item-avatar @click.stop="">
@@ -29,7 +45,7 @@
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline">
-                  Telegram
+                  Telegram Бот
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
