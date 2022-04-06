@@ -45,7 +45,7 @@
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="headline">
-                  Telegram Бот
+                  Telegram Задать вопрос
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
