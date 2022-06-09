@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" style="">
     <v-expansion-panels inset focusable>
-      <v-expansion-panel readonly>
+      <!-- <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
           <a
             href="https://wa.me/79169604255?text=У%20меня%20по%20товару%20вопрос."
@@ -19,7 +19,7 @@
             </v-list-item>
           </a>
         </v-expansion-panel-header>
-      </v-expansion-panel>
+      </v-expansion-panel> -->
       <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
           <a href="https://t.me/mf_komplekt/" style="text-decoration: none;">
