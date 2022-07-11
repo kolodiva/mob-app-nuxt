@@ -52,7 +52,7 @@
           </a>
         </v-expansion-panel-header>
       </v-expansion-panel>
-      <v-expansion-panel readonly>
+      <!-- <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
           <a
             href="https://www.instagram.com/mf_komplekt_msk/"
@@ -70,7 +70,7 @@
             </v-list-item>
           </a>
         </v-expansion-panel-header>
-      </v-expansion-panel>
+      </v-expansion-panel> -->
       <v-expansion-panel v-for="address in addressess" :key="address.id">
         <v-expansion-panel-header ripple>
           <v-list-item>
