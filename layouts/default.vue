@@ -195,7 +195,7 @@
       <TheCart />
     </v-app-bar>
     <v-main>
-      <v-container class="pa-0 mt-2" fluid>
+      <v-container class="pa-0 mt-2" fluid style="overflow-x: hidden;">
         <Nuxt />
       </v-container>
     </v-main>
