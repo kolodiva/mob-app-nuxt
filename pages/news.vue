@@ -1,5 +1,5 @@
 <template>
-  <div style="">
+  <div  style="margin-top: 45px;">
     <v-card v-for="(item, i) in newsBlock" :key="i" flat class="pa-0 px-5">
       <v-card-title>
         <span class="headline">{{ item.header }}</span>

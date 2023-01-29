@@ -43,7 +43,7 @@
               </v-list-item-content>
             </template>
 
-            <v-list-item href="/advs/dostavka-moskva">
+            <v-list-item href="/advs/dostavka-moskva.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -51,7 +51,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/dostavka-novosibirsk">
+            <v-list-item href="/advs/dostavka-novosibirsk.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -59,7 +59,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/dostavka-yekaterinburg">
+            <v-list-item href="/advs/dostavka-yekaterinburg.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -67,7 +67,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/dostavka-rostov-na-donu">
+            <v-list-item href="/advs/dostavka-rostov-na-donu.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -77,7 +77,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/dostavka-kazan">
+            <v-list-item href="/advs/dostavka-kazan.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -85,7 +85,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/dostavka-sankt-peterburg">
+            <v-list-item href="/advs/dostavka-sankt-peterburg.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -95,7 +95,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/dostavka-krasnodar">
+            <v-list-item href="/advs/dostavka-krasnodar.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -103,7 +103,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/advs/vozvrat-obmen">
+            <v-list-item href="/advs/vozvrat-obmen.html">
               <v-list-item-action> </v-list-item-action>
 
               <v-list-item-content>
@@ -144,7 +144,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item href="/advs/about-company">
+          <v-list-item href="/advs/about-company.html">
             <v-list-item-action>
               <v-icon>{{ icons.mdiInformationOutline }}</v-icon>
             </v-list-item-action>
