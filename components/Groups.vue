@@ -14,15 +14,15 @@
           :to="`/catalog/${
             pos.itgroup ? pos.guid : pos.parentguid + '/' + pos.synonym
           }`"
-          style="text-decoration: none"
+          style="text-decoration: none;"
           exact
         >
           <v-card>
             <v-avatar tile class="grey lighten-2 ma-0" size="100%">
-              <img :src="pos.guid_picture" style="width: 85%" />
+              <img :src="pos.guid_picture" style="width: 85%;" />
             </v-avatar>
             <v-card-text class="text--primary pa-2">
-              <div class="text-center" style="height: 45px; overflow: hidden">
+              <div class="text-center" style="height: 45px; overflow: hidden;">
                 {{ pos.name }}
               </div>
             </v-card-text>

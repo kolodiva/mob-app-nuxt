@@ -19,7 +19,7 @@
           src="https://www.newfurnitura.ru/upload/emblems/mf.png"
           alt="Логотип МФ"
           title=""
-          style="display: none"
+          style="display: none;"
         />
       </div>
       <meta itemprop="name" content="Мебельная Фурнитура" />
@@ -47,7 +47,7 @@
         align="right"
         alt="Логотип компании Мебельная фурнитура"
         class="mt-2 ml-4 mb-3"
-        style="float: right; max-width: 100%; max-height: 200px"
+        style="float: right; max-width: 100%; max-height: 200px;"
       />
     </div>
     <div class="container">
@@ -65,7 +65,7 @@
           align="right"
           alt="Петля INTEGRA от FGV в интерьере"
           class="rounded mt-2 mr-4"
-          style="float: left; margin: 15px; max-width: 40%; max-height: 300px"
+          style="float: left; margin: 15px; max-width: 40%; max-height: 300px;"
         />
 
         <p align="justify">
@@ -101,7 +101,7 @@
               src="https://www.newfurnitura.ru/upload/site_imgs/about_icon_1.png"
               alt="Значок Мобильность"
             />
-            <p align="left" style="overflow-wrap: break-word">
+            <p align="left" style="overflow-wrap: break-word;">
               <b>МОБИЛЬНОСТЬ, ОПЕРАТИВНОСТЬ И КЛИЕНТООРИЕНТИРОВАННОСТЬ</b><br />
               являются важнейшими приоритетами MF в процессе взаимодействия со
               своими заказчиками.
@@ -113,7 +113,7 @@
               src="https://www.newfurnitura.ru/upload/site_imgs/about_icon_2.png"
               alt="Значок Склад"
             />
-            <p align="left" style="overflow-wrap: break-word">
+            <p align="left" style="overflow-wrap: break-word;">
               <b>СОВРЕМЕННЫЕ СКЛАДЫ</b><br />
               В центральном офисе, а также на территории филиалов функционируют
               высокотехнологичные складские комплексы компании. Мы обеспечиваем
@@ -127,7 +127,7 @@
               align="center"
               alt="Значок Профессионал"
               class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%"
+              style="float: left; margin: 15px; max-width: 40%;"
             />
           </div>
           <div class="col">
@@ -136,7 +136,7 @@
               align="center"
               alt="Значок Скидки"
               class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%"
+              style="float: left; margin: 15px; max-width: 40%;"
             />
           </div>
           <div class="w-100"></div>
@@ -163,7 +163,7 @@
               align="center"
               alt="Значок Доставка"
               class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%"
+              style="float: left; margin: 15px; max-width: 40%;"
             />
           </div>
           <div class="col">
@@ -172,7 +172,7 @@
               align="center"
               alt="Значок Подарки"
               class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%"
+              style="float: left; margin: 15px; max-width: 40%;"
             />
           </div>
           <div class="w-100"></div>
@@ -196,7 +196,7 @@
               align="center"
               alt="Значок Логистика"
               class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%"
+              style="float: left; margin: 15px; max-width: 40%;"
             />
           </div>
           <div class="col">
@@ -205,7 +205,7 @@
               align="center"
               alt="Значок Выставки"
               class="mt-2 ml-4 mb-3"
-              style="float: left; margin: 15px; max-width: 40%"
+              style="float: left; margin: 15px; max-width: 40%;"
             />
           </div>
           <div class="w-100"></div>
@@ -238,7 +238,7 @@
               align="center"
               alt="Карта России с филиалами компании &quotМебельная Фурнитура&quot"
               class="mt-2 ml-4 mb-3"
-              style="float: center; margin: 15px; max-width: 90%"
+              style="float: center; margin: 15px; max-width: 90%;"
             />
           </p>
           <meta

@@ -11,7 +11,7 @@ const dbpgApp1 = new Pool({
 
 dbpgApp1.connect( err => {
   if (err) {
-  console.log(err.stack)
+  console.error(err.stack)
   }
 })
 

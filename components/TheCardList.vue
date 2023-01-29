@@ -6,7 +6,7 @@
           <v-list-item three-line>
             <v-list-item-content>
               <div class="overline mb-2">
-                <span class="blue--text subtitle-2" style="white-space: nowrap"
+                <span class="blue--text subtitle-2" style="white-space: nowrap;"
                   >{{ item.artikul }}, {{ item.artikul_new }}</span
                 >
               </div>
@@ -17,7 +17,7 @@
                   text-color="blue darken-4"
                   ripple
                   outlined
-                  style="border: 0.5px solid"
+                  style="border: 0.5px solid;"
                   @click="$emit('cartcalc', item, indPos)"
                 >
                   <v-icon left class="pl-2">mdi-cart-plus</v-icon>
@@ -27,10 +27,10 @@
 
               <v-list-item-subtitle>{{ item.name }}</v-list-item-subtitle>
             </v-list-item-content>
-            <div class="" style="position: relative">
+            <div class="" style="position: relative;">
               <v-list-item-avatar
                 size="95"
-                style="border: 0.5px solid grey"
+                style="border: 0.5px solid grey;"
                 @click.stop="goToGoodCard"
               >
                 <img :src="item.guid_picture_small" />
@@ -48,60 +48,60 @@
               <v-chip
                 v-if="item.is_complect"
                 ripple
-                style="position: absolute; right: -4px; bottom: -7px"
+                style="position: absolute; right: -4px; bottom: -7px;"
                 >Компл.</v-chip
               >
             </div>
           </v-list-item>
 
           <v-card-actions>
-            <div style="position: relative">
+            <div style="position: relative;">
               <v-chip
                 class="ma-2"
                 color=""
                 text-color="blue darken-4"
                 outlined
-                style="border: 0.5px solid"
+                style="border: 0.5px solid;"
               >
                 {{ item.price1 }}
               </v-chip>
               <p
                 class="caption blue--text text--darken-4 ma-0 pa-0 font-italic"
-                style="position: absolute; top: -15px; left: 10px"
+                style="position: absolute; top: -15px; left: 10px;"
               >
                 Розн
               </p>
             </div>
-            <div style="position: relative">
+            <div style="position: relative;">
               <v-chip
                 class="ma-2"
                 color=""
                 text-color="blue darken-1"
                 outlined
-                style="border: 0.5px solid"
+                style="border: 0.5px solid;"
               >
                 {{ item.price2 }}
               </v-chip>
               <p
                 class="caption blue--text text--darken-1 ma-0 pa-0 font-italic"
-                style="position: absolute; top: -15px; left: 10px"
+                style="position: absolute; top: -15px; left: 10px;"
               >
                 Мелк.опт
               </p>
             </div>
-            <div style="position: relative">
+            <div style="position: relative;">
               <v-chip
                 class="ma-2"
                 color=""
                 text-color="blue lighten-2"
                 outlined
-                style="border: 0.5px solid"
+                style="border: 0.5px solid;"
               >
                 {{ item.price3 }}
               </v-chip>
               <p
                 class="caption blue--text text--lighten-2 ma-0 pa-0 font-italic"
-                style="position: absolute; top: -15px; left: 10px"
+                style="position: absolute; top: -15px; left: 10px;"
               >
                 Круп.опт
               </p>
@@ -114,9 +114,13 @@
         </v-card>
       </v-window-item>
       <v-window-item key="2">
-        <v-container style="margin-right: 0">
+        <v-container style="margin-right: 0;">
           <v-row no-gutters>
-            <v-col class="pl-2" cols="11" style="overflow: auto; height: 185px">
+            <v-col
+              class="pl-2"
+              cols="11"
+              style="overflow: auto; height: 185px;"
+            >
               <p class="ma-0 mb-1">
                 Вес нетто: {{ parseFloat(item.weight) }} кг. - 1
                 {{ item.unit_name }}.
@@ -134,7 +138,7 @@
                   small
                   outlined
                   color="blue darken-1"
-                  style="margin-top: -32px; margin-right: -10px"
+                  style="margin-top: -32px; margin-right: -10px;"
                   @click="window = 0"
                 >
                   <v-icon small>mdi-arrow-left</v-icon>

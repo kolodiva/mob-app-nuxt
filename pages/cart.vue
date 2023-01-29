@@ -153,7 +153,7 @@
               Отмена
             </v-btn>
           </v-card-actions>
-          <v-card-title class="subtitle-1" style="word-break: break-word">
+          <v-card-title class="subtitle-1" style="word-break: break-word;">
             ВАШ ЗАКАЗ АНОНИМНЫЙ. ВЫ МОЖЕТЕ ПРОДОЛЖИТЬ, НО НУЖНО УКАЗАТЬ СПОСОБ
             СВЯЗИ С ВАМИ, ЛИБО ВОЙТИ В СИСТЕМУ ПОД СВОИМ АККАУНТОМ. ЕСЛИ ВЫ
             ОЧИСТИТЕ КУКИ ИЛИ ОТКРОЕТЕ САЙТ В ДРУГОМ БРАУЗЕРЕ В КАЧЕСТВЕ

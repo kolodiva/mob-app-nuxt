@@ -5,54 +5,54 @@
       <v-card-subtitle
         >{{ res.rows[0].artikul }}, {{ res.rows[0].artikul_new }}
       </v-card-subtitle>
-      <v-card-actions style="justify-content: space-between">
-        <div style="position: relative">
+      <v-card-actions style="justify-content: space-between;">
+        <div style="position: relative;">
           <v-chip
             class="ma-2"
             color=""
             text-color="blue darken-4"
             outlined
-            style="border: 0.5px solid"
+            style="border: 0.5px solid;"
           >
             {{ res.rows[0].price1 }}
           </v-chip>
           <p
             class="caption blue--text text--darken-4 ma-0 pa-0 font-italic"
-            style="position: absolute; top: -15px; left: 10px"
+            style="position: absolute; top: -15px; left: 10px;"
           >
             Розн
           </p>
         </div>
-        <div style="position: relative">
+        <div style="position: relative;">
           <v-chip
             class="ma-2"
             color=""
             text-color="blue darken-1"
             outlined
-            style="border: 0.5px solid"
+            style="border: 0.5px solid;"
           >
             {{ res.rows[0].price2 }}
           </v-chip>
           <p
             class="caption blue--text text--darken-1 ma-0 pa-0 font-italic"
-            style="position: absolute; top: -15px; left: 10px"
+            style="position: absolute; top: -15px; left: 10px;"
           >
             Мелк.опт
           </p>
         </div>
-        <div style="position: relative">
+        <div style="position: relative;">
           <v-chip
             class="ma-2"
             color=""
             text-color="blue lighten-2"
             outlined
-            style="border: 0.5px solid"
+            style="border: 0.5px solid;"
           >
             {{ res.rows[0].price3 }}
           </v-chip>
           <p
             class="caption blue--text text--lighten-2 ma-0 pa-0 font-italic"
-            style="position: absolute; top: -15px; left: 10px"
+            style="position: absolute; top: -15px; left: 10px;"
           >
             Круп.опт
           </p>
@@ -67,7 +67,7 @@
             text-color="blue darken-4"
             ripple
             outlined
-            style="border: 0.5px solid"
+            style="border: 0.5px solid;"
             @click="cartcalc(res.rows[0], -1)"
           >
             <v-icon left class="pl-2">mdi-cart-plus</v-icon>
@@ -94,7 +94,7 @@
           :key="i"
           @click.stop="openBigImg(photo.pic_path)"
         >
-          <img :src="photo.pic_path" style="width: 100%" />
+          <img :src="photo.pic_path" style="width: 100%;" />
         </v-carousel-item>
       </v-carousel>
       <v-card-text class="title">
@@ -113,10 +113,10 @@
       <TheCalculator :item-info="itemInfo" @cartcalcpost="cartcalcpost" />
     </v-dialog>
     <v-dialog v-model="bigImg.showBbigImg">
-      <v-zoomer style="width: 600px; height: 600px">
+      <v-zoomer style="width: 600px; height: 600px;">
         <img
           :src="bigImg.bigImgPath"
-          style="object-fit: contain"
+          style="object-fit: contain;"
           @click.stop="bigImg.showBbigImg = false"
         />
       </v-zoomer>
