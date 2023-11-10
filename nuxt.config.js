@@ -48,7 +48,8 @@ module.exports = {
    ** Global CSS
    */
   css: [
-     'assets/main.css'
+     'assets/main.css',
+     'assets/roboto.css'
   ],
 
 // '~/api/index.js'
@@ -182,7 +183,7 @@ module.exports = {
 
     terser: {
           extractComments: /^\**!|@preserve|@license|@cc_on/i
-        },     
+        },
     // vendor: ['vuetify'],
     /*
      ** You can extend webpack config here
