@@ -38,7 +38,10 @@ module.exports = {
     script: [
       {src: "/src/gtm.js"},
       ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;display=swap' }
+  ],
   },
   /*
    ** Customize the progress-bar color
@@ -48,8 +51,8 @@ module.exports = {
    ** Global CSS
    */
   css: [
-     'assets/main.css',
-     'assets/roboto.css'
+     'assets/main.css'
+     //'assets/roboto.css'
   ],
 
 // '~/api/index.js'
