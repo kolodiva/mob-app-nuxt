@@ -72,7 +72,7 @@
                 Розн
               </p>
             </div>
-            <div style="position: relative;">
+            <!-- <div style="position: relative;">
               <v-chip
                 class="ma-2"
                 color=""
@@ -105,7 +105,7 @@
               >
                 Круп.опт
               </p>
-            </div>
+            </div> -->
             <v-spacer />
             <v-icon color="blue darken-1" @click.stop="window = 1">{{
               icons.mdiCog
