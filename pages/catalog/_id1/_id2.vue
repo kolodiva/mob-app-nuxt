@@ -23,7 +23,7 @@
             Розн
           </p>
         </div>
-        <div style="position: relative;">
+        <!-- <div style="position: relative;">
           <v-chip
             class="ma-2"
             color=""
@@ -56,7 +56,7 @@
           >
             Круп.опт
           </p>
-        </div>
+        </div> -->
       </v-card-actions>
 
       <v-card-text>
