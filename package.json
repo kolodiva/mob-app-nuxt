@@ -34,7 +34,7 @@
     "crypto-js": "^4.0.0",
     "dgram": "^1.0.1",
     "dns": "^0.2.2",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fs": "0.0.1-security",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.19",
