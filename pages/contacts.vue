@@ -36,6 +36,7 @@
           </a>
         </v-expansion-panel-header>
       </v-expansion-panel>
+      
       <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
           <a href="https://t.me/Mfkomplekt_bot/" style="text-decoration: none;">
@@ -52,6 +53,8 @@
           </a>
         </v-expansion-panel-header>
       </v-expansion-panel>
+
+
       <!-- <v-expansion-panel readonly>
         <v-expansion-panel-header ripple>
           <a
