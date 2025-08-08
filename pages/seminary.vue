@@ -1,11 +1,9 @@
 <template>
   
-  <section style="display: flex;
+<section style="display: flex;
                     align-items: center;
-                    justify-content: center;
-                    margin-top: 45px;">
-
-        <div style="max-width: 800px;">
+                    justify-content: center;">
+        <div style="max-width: 800px; padding: 20px;">
 
             <h1 align="center">Анонс предстоящих семинаров</h1>
             <p>
@@ -43,10 +41,9 @@
             <h2 align="center">Расписание семинаров:</h2>
 
             <a href="https://mf-docs.ru/unihopper_api/spb.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/spb.jpg" width="160" height="100" alt="Отель Санкт-Петербург"
-                    align="right" vspace="30" hspace="10" style="border-radius: 5px;">
+                <img src="https://mf-docs.ru/unihopper_api/spb.jpg" width="100%" alt="Отель Санкт-Петербург"
+                 style="border-radius: 5px;">
             </a>
-
 
             <h3>28 августа, Санкт-Петербург</h3>
             <p>
@@ -69,8 +66,8 @@
             </p>
 
             <a href="https://mf-docs.ru/unihopper_api/rostov.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/rostov.jpg" width="160" height="100" alt="КВЦ ДонЭкспоцентр"
-                    align="right" vspace="30" hspace="10" style="border-radius: 5px;">
+                <img src="https://mf-docs.ru/unihopper_api/rostov.jpg" width="100%" alt="КВЦ ДонЭкспоцентр"
+                 style="border-radius: 5px;">
             </a>
 
             <h3>3 сентября, Ростов-на-Дону</h3>
@@ -92,8 +89,8 @@
             </p>
 
             <a href="https://mf-docs.ru/unihopper_api/krd.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/krd.jpg" width="160" height="100" alt="Новокузнечная, 84"
-                    align="right" vspace="30" hspace="10" style="border-radius: 5px;">
+                <img src="https://mf-docs.ru/unihopper_api/krd.jpg" width="100%" alt="Новокузнечная, 84"
+                 style="border-radius: 5px;">
             </a>
 
             <h3>17 сентября, Краснодар</h3>
@@ -117,8 +114,8 @@
             </p>
 
             <a href="https://mf-docs.ru/unihopper_api/ekt.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/ekt.jpg" width="160" height="100"
-                    alt="Ельцин-центр-Екатеринбург" align="right" vspace="30" hspace="10" style="border-radius: 5px;">
+                <img src="https://mf-docs.ru/unihopper_api/ekt.jpg" width="100%"
+                 style="border-radius: 5px;">
             </a>
 
             <h3>24 сентября, Екатеринбург</h3>
@@ -151,6 +148,7 @@
 
         </div>
     </section>
+
 </template>
 
 <script>
