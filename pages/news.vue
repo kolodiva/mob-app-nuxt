@@ -36,6 +36,11 @@ export default {
       if (pathNewsBlock.includes('.pdf')) {
         await this.$store.commit('SET_PDF_FILE', i)
         this.$router.push({ path: '/view_pdf' })
+        
+      } else if (pathNewsBlock.includes('https://www.newfurnitura.ru/seminary')) {
+
+        window.location.href = 'https://www.newfurnitura.ru/seminary'
+        
       } else {
         pathNewsBlock = '/' + pathNewsBlock
         window.location.href = pathNewsBlock
