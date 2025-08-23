@@ -620,6 +620,16 @@ function userAuth({keyUser}) {
   }
 }
 
+function getQRPrint({id, pack}) {
+
+  return {
+    name: 'getQRPrint',
+    text: 'select * from qrprints where guid=$1 and unit_type_id=$2',
+    values: [id, pack],
+  }
+}
+
+
 module.exports = {
   getUsers,
   getCart,
@@ -645,4 +655,5 @@ module.exports = {
   userAuth,
 
   getNewsBlock,
+  getQRPrint,
  };
