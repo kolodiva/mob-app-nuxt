@@ -1,11 +1,11 @@
 <template>
   <v-card class="mx-auto mt-4" max-width="800px" v-if="posparams && posparams.length > 0">
-    <v-toolbar flat color="primary" dark extended>
+    <div flat color="primary" dark class="v-sheet v-sheet--tile">
       <v-toolbar-title style="font-size: 0.875rem; font-weight: 400; letter-spacing: 0.00714286em;">
         {{ posparams[0].artikul }}, {{ posparams[0].artikul_new }} <br /> 
         <span class='text-wrap mt-2 d-block'>{{ posparams[0].name }}</span>
       </v-toolbar-title>
-    </v-toolbar>
+    </div>
 
     <v-row>
       <v-col>
