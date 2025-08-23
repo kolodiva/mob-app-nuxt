@@ -1,8 +1,9 @@
 <template>
-  <v-card class="mx-auto mt-6" max-width="800px" v-if="posparams && posparams.length > 0">
-    <v-toolbar flat color="primary" dark>
-      <v-toolbar-title style="font-size: 0.875rem; font-weight: 400; height: 55px; letter-spacing: 0.00714286em;">
-        {{ posparams[0].artikul }}, {{ posparams[0].artikul_new }} <br /> {{ posparams[0].name }}
+  <v-card class="mx-auto mt-4" max-width="800px" v-if="posparams && posparams.length > 0">
+    <v-toolbar flat color="primary" dark extended>
+      <v-toolbar-title style="font-size: 0.875rem; font-weight: 400; letter-spacing: 0.00714286em;">
+        {{ posparams[0].artikul }}, {{ posparams[0].artikul_new }} <br /> 
+        <span class='text-wrap mt-2 d-block'>{{ posparams[0].name }}</span>
       </v-toolbar-title>
     </v-toolbar>
 
@@ -45,10 +46,10 @@
           <template v-slot:default>
             <tbody>
               <tr v-for="item in characts" :key="item.field">
-                <td style="border-bottom: 1px dotted #cccccc">
+                <td style="border-bottom: 1px dotted #cccccc; font-size: 1.1rem; ">
                   {{ item.field }}
                 </td>
-                <td style="border-bottom: 0px">
+                <td style="border-bottom: 0px; font-size: 1.1rem; ">
                   {{ posparams[0][item.val] }}
                 </td>
               </tr>
