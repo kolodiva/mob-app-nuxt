@@ -1,6 +1,6 @@
 <template>
   
-<section style="display: flex;
+    <section style="display: flex;
                     align-items: center;
                     justify-content: center;">
         <div style="max-width: 800px; padding: 20px;">
@@ -20,10 +20,6 @@
             </p>
             <ul>
                 <li>
-                    В Санкт-Петербурге — продукция компании <a href="https://tmf70.ru/" target="_blank"
-                        rel="noopener noreferrer">Томские мебельные фасады</a>
-                </li>
-                <li>
                     В Краснодаре — продукция компании <a href="https://afc23.ru/" target="_blank"
                         rel="noopener noreferrer">Альфацентр</a>
                 </li>
@@ -40,64 +36,16 @@
 
             <h2 align="center">Расписание семинаров:</h2>
 
-            <a href="https://mf-docs.ru/unihopper_api/spb.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/spb.jpg" width="100%" alt="Отель Санкт-Петербург"
-                 style="border-radius: 5px;">
-            </a>
-
-            <h3>28 августа, Санкт-Петербург</h3>
-            <p>
-                <b>Место:</b> Видовой зал <a href="https://hotel-spb.ru/conferencehalls/strelna" target="_blank"
-                    rel="noopener noreferrer">«Стрельня» отеля «Санкт-Петербург»</a>,<br>
-                Пироговская наб, 5/2 <br>
-                Совместно с <a href="https://tmf70.ru/" target="_blank" rel="noopener noreferrer">Томскими мебельными
-                    фасадами</a><br>
-                <b>Регистрация: </b><a href="https://forms.yandex.ru/u/6880d698068ff011bc679078" target="_blank"
-                    rel="noopener noreferrer">яндекс форма</a><br>
-                <b>Программа:</b> <br>
-                <b>09:30</b> Сбор гостей, приветственный кофе <br>
-                <b>10:00</b> Поговорим о новинках фурнитуры Unihopper <br>
-                <b>11:30</b> Кофе брейк <br>
-                <b>12:00</b> Расскажем о системе выдвижных ящиков Tango Slim, <br>
-                подъёмниках Prima Way и Prima Way Plus <br>
-                <b>13:00</b> Обсудим актуальные фасадные решения <br>
-                <b>14:00</b> Q&A, розыгрыш призов <br>
-                <b>14:30</b> Свободное общение <br>
-            </p>
-
-            <a href="https://mf-docs.ru/unihopper_api/rostov.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/rostov.jpg" width="100%" alt="КВЦ ДонЭкспоцентр"
-                 style="border-radius: 5px;">
-            </a>
-
-            <h3>3 сентября, Ростов-на-Дону</h3>
-            <p>
-                <b>Место:</b> КВЦ «ДонЭкспоцентр», <a href="https://donexpocentre-congress.ru/delta" target="_blank"
-                    rel="noopener noreferrer">зал
-                    «Дельта»</a><br>
-                пр-т М. Нагибина, 30, 3 этаж <br>
-                <b>Регистрация:</b><a href="https://forms.yandex.ru/u/68944ba2d0468836f63c91eb/"> яндекс форма</a><br>
-                <b>Программа:</b><br>
-                <b>10:30</b> Сбор гостей, приветственный кофе/ чай <br>
-                <b>11:00</b> Поговорим о фурнитуре Unihopper: ящики Magic Box,<br>
-                направляющих Unihopper 3D, наполнении для шкафов MOKA/MONIKA/COKA <br>
-                <b>12:30</b> Кофе-брейк. Вопросы и ответы по пройденному материалу <br>
-                <b>13:30</b> Расскажем о кухонном наполнении Unihopper LINA и NANO, <br>
-                петлях SETTON с доводчиком, петлях HUTTON с регулируемым доводчиком, <br>
-                ручках профильных <br>
-                <b>14:30</b> Розыгрыш призов. Викторина. Свободное общение. Q&A <br>
-            </p>
-
             <a href="https://mf-docs.ru/unihopper_api/krd.jpg" target="_blank" rel="noopener noreferrer">
                 <img src="https://mf-docs.ru/unihopper_api/krd.jpg" width="100%" alt="Новокузнечная, 84"
-                 style="border-radius: 5px;">
+                    style="border-radius: 5px;">
             </a>
 
             <h3>17 сентября, Краснодар</h3>
             <p>
                 <b>Место:</b> ул. Новокузнечная, д. 84, 3-й этаж <br>
                 Совместно с <a href="https://afc23.ru/" target="_blank" rel="noopener noreferrer">Альфацентром</a><br>
-                <b>Регистрация:</b><a href="https://forms.yandex.ru/u/689f0aec90fa7b0b67318221"> яндекс форма</a><br>
+                <b>Регистрация:</b> <a href="tel:+78612159111">+7 (861) 215-91-11</a><br>
                 <b>Программа:</b> <br>
                 <b>09:30</b> Приветственный кофе, регистрация <br>
                 <b>10:00</b> Презентация продукции UNIHOPPER: <br>
@@ -114,8 +62,7 @@
             </p>
 
             <a href="https://mf-docs.ru/unihopper_api/ekt.jpg" target="_blank" rel="noopener noreferrer">
-                <img src="https://mf-docs.ru/unihopper_api/ekt.jpg" width="100%"
-                 style="border-radius: 5px;">
+                <img src="https://mf-docs.ru/unihopper_api/ekt.jpg" width="100%" style="border-radius: 5px;">
             </a>
 
             <h3>24 сентября, Екатеринбург</h3>
@@ -123,7 +70,7 @@
                 <b>Место:</b> <a href="https://bycenter.ru/venues/media/" target="_blank"
                     rel="noopener noreferrer">медиазал</a>
                 Бизнес-центра «Ельцин-центр — Екатеринбург», 3-й этаж <br>
-                <b>Регистрация:</b><a href="https://forms.yandex.ru/u/689c78a8e010db57c2e2d307/"> яндекс форма</a><br>
+                <b>Регистрация:</b> <a href="tel:+73432729922">+7 (343) 272-99-22</a><br>
                 <b>Программа:</b><br>
                 <b>10:30</b> Сбор гостей, регистрация <br>
                 <b>11:00</b> Презентация продукции UNIHOPPER: <br>
@@ -131,6 +78,28 @@
                 петли Hutton и Setton, Ящики Magic Box, Наполнение шкафов, Кухонное наполнение <br>
                 <b>13:15</b> поговорим о лицевой фурнитуре <br>
                 <b>13:30</b> вопросы ответы, кофе брейк и розыгрыш призов <br>
+            </p>
+
+            <a href="https://mf-docs.ru/unihopper_api/kzn.jpg" target="_blank" rel="noopener noreferrer">
+                <img src="https://mf-docs.ru/unihopper_api/kzn.jpg" width="100%" style="border-radius: 5px;">
+            </a>
+
+            <h3>15 октября, Казань</h3>
+            <p>
+                <b>Место:</b> <a href="https://kazanriviera.ru/hotel/conference/lazurnyy-bereg/" target="_blank"
+                    rel="noopener noreferrer">конференц-зал "Лазурный берег"</a>
+                отеля "Ривьера" <br>
+                <b>Регистрация:</b> <a href="https://forms.yandex.ru/u/68baba1fd046887d31bd633d/">по ссылке</a><br>
+                <b>Программа:</b><br>
+                <b>10:30</b> Сбор гостей, регистрация <br>
+                <b>11:00</b> Презентация продукции UNIHOPPER: <br>
+                Направляющие скрытого монтажа полного выдвижения c 3D регулировкой,<br>
+                Ящики Magic Box, Петли Hutton, Кухонное наполнение <br>
+                <b>12:30</b> вопросы ответы, кофе брейк<br>
+                <b>13:30</b> Презентация продукции MF:<br>
+                Петли Prima Top, подъёмники Prima Way<br>
+                и лицевая фурнитура<br>
+                <b>14:30</b> Розыгрыш призов <br>
             </p>
 
             <p>
