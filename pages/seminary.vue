@@ -70,7 +70,7 @@
                 <b>Место:</b> <a href="https://bycenter.ru/venues/media/" target="_blank"
                     rel="noopener noreferrer">медиазал</a>
                 Бизнес-центра «Ельцин-центр — Екатеринбург», 3-й этаж <br>
-                <b>Регистрация:</b> <a href="tel:+73432729922">+7 (343) 272-99-22</a><br>
+                <b>Регистрация:</b><a href="https://forms.yandex.ru/u/689c78a8e010db57c2e2d307"> яндекс форма</a><br>
                 <b>Программа:</b><br>
                 <b>10:30</b> Сбор гостей, регистрация <br>
                 <b>11:00</b> Презентация продукции UNIHOPPER: <br>
