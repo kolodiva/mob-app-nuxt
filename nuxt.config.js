@@ -34,6 +34,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
       { name: 'google-site-verification', content: 'zYHlJzz8ftSxJgxT5pc4Fnq7thpCwbmn3bzu4knEnb4' },
+      { name: 'zen-verification', content: 'UkKIP3AhTQkqa7ZWwtvEohBthqufSzNbo5KXcWI4pXJp6HcVYcqCN3iT468HPOqr' },
     ],
     script: [
       {src: "/src/gtm.js"},
